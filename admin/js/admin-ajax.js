@@ -83,7 +83,7 @@ $(document).ready(function() {
         Swal.fire({
             title: 'Estás  seguro?',
             text: "Un registro eliminado no se puede recuperar",
-            icon: 'question',
+            type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

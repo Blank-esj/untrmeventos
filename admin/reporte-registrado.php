@@ -16,11 +16,10 @@
             $this->Ln(12);
             $this->SetFillColor(240,240,240);
             $this->Cell(10, 12, utf8_decode('Nº'), 1, 0, 'C', 1);
-            $this->Cell(75, 12, utf8_decode('NOMBRES Y APELLIDOS'), 1, 0, 'C', 1);
-            $this->Cell(60, 12, 'E-MAIL', 1, 0, 'C', 1);
-            $this->Cell(40, 12, utf8_decode('INSCRIPCIÓN'), 1, 0, 'C', 1);
-            $this->Cell(50, 12, utf8_decode('ARTÍCULOS'), 1, 0, 'C', 1);
-            $this->Cell(30, 12, 'REGALO', 1, 1, 'C', 1);
+            $this->Cell(80, 12, utf8_decode('NOMBRES Y APELLIDOS'), 1, 0, 'C', 1);
+            $this->Cell(75, 12, 'E-MAIL', 1, 0, 'C', 1);
+            $this->Cell(60, 12, utf8_decode('FECHA DE INSCRIPCIÓN'), 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'REGALO', 1, 1, 'C', 1);
         }
 
         // Page footer
@@ -42,7 +41,7 @@
     $resultado = $conn->query($consulta);
 
     // Instanciation of inherited class
-    //'L', 'mm', 'A4'
+    //'L o P , 'mm', 'A4'
     $pdf = new PDF('L', 'mm', 'A4');
     $pdf->SetMargins(15, 15 , 20);
     $pdf->SetAutoPageBreak(true,15); 
@@ -54,11 +53,10 @@
     While($row = $resultado->fetch_assoc()) {
         
         $pdf->Cell(10, 10, $numero, 1, 0, 'C', 0);
-        $pdf->Cell(75, 10, $row['nombre_registrado']. " " .$row['apellidopa_registrado']. " " .$row['apellidoma_registrado'], 1, 0, 'J', 0);
-        $pdf->Cell(60, 10, $row['email_registrado'], 1, 0, 'C', 0);
-        $pdf->Cell(40, 10, $row['fecha_registro'], 1, 0, 'C', 0);
-        $pdf->Cell(50, 10, $row['pases_articulos'], 1, 0, 'J', 0);
-        $pdf->Cell(30, 10, $row['nombre_regalo'], 1, 1, 'C', 0);
+        $pdf->Cell(80, 10, $row['nombre_registrado']. " " .$row['apellidopa_registrado']. " " .$row['apellidoma_registrado'], 1, 0, 'J', 0);
+        $pdf->Cell(75, 10, $row['email_registrado'], 1, 0, 'C', 0);
+        $pdf->Cell(60, 10, $row['fecha_registro'], 1, 0, 'C', 0);
+        $pdf->Cell(40, 10, $row['nombre_regalo'], 1, 1, 'C', 0);
         $numero++;
     }
     $pdf->Output();

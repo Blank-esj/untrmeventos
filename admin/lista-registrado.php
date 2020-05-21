@@ -64,25 +64,25 @@
                     <td> <?php echo $registrado['email_registrado']; ?> </td>
                     <td> <?php echo $registrado['fecha_registro']; ?> </td>
                     <td> <?php $articulos = json_decode($registrado['pases_articulos'], true);
-                          $arreglo_articulos = array(
-                            'un_dia' => '- Pase 1 día',
-                            'pase_2dias' => '- Pase 2 días',
-                            'pase_completo' => '- Pase Completo',
-                            'camisas' => '- Camisas',
-                            'etiquetas' => '- Etiquetas'
-                          );
+                           $arreglo_articulos = array(
+                              'un_dia' => '- Pase 1 día',
+                              'pase_2dias' => '- Pase 2 días',
+                              'pase_completo' => '- Pase Completo',
+                              'camisas' => '- Camisas',
+                              'etiquetas' => '- Etiquetas'
+                            );
                           /**
                            * Recibe el json, le adjunta un llave, y lo asigna a un variable 
                            * verifica si el array existe, si la llave exite en el array y lo  muestra
                            */
                           foreach ($articulos as $llave => $articulo) {  
-                            
                             if(is_array($articulo) && array_key_exists('cantidad', $articulo)) {
-                              echo  $articulo['cantidad'] . " " . $arreglo_articulos[$llave]. "<br>";
-                              } else {
-                              echo  $articulo . " " . $arreglo_articulos[$llave]. "<br>";
+                              echo $articulo['cantidad'] . " " . $arreglo_articulos[$llave]. "<br>";
+                            }else {
+                              echo $articulo . " " . $arreglo_articulos[$llave]. "<br>";
                             }
                           }
+                          
                         ?> </td>
                     <td> <?php $eventos_resultado = $registrado['taller_registrado'];
                             $talleres = json_decode($eventos_resultado, true);
