@@ -49,7 +49,7 @@ include_once '../../plantillas/cabecera-admin.php';
                     <td> <?php echo $numero; ?> </td>
                     <td><?php echo $invitado['nombre_invitado'] . " " . $invitado['apellidopa_invitado'] . " " . $invitado['apellidoma_invitado']; ?></td>
                     <td><?php echo $invitado['descripcion']; ?></td>
-                    <td><img src="../img/invitados/<?php echo $invitado['url_imagen']; ?>" width="150"></td>
+                    <td><img src="../../assets/img/invitados/<?php echo $invitado['url_imagen']; ?>" width="150"></td>
                     <td>
                       <a href="editar-invitado.php?id=<?php echo $invitado['id_invitado'] ?>" class="btn bg-orange btn-flat margin">
                         <i class="fa fa-pencil-alt"></i>
