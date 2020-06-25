@@ -14,4 +14,3 @@
       $arreglo_registros[] = $registro;
   }
   echo json_encode($arreglo_registros) ;
-?>

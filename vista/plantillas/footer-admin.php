@@ -21,7 +21,7 @@
   <script src="../../assets/js/adminlte.min.js"></script>
   <!-- Alerta correct 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->
-  <script src="../../assets/js/sweetalert2.min.js"></script> 
+  <script src="../../assets/js/sweetalert2.min.js"></script>
   <script src="../../assets/js/sweetalert2.all.min.js"></script>
 
   <!-- Admin insert y login -->
@@ -55,4 +55,5 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
   <script src="../../assets/js/fontawesome-iconpicker.min.js"></script>
   </body>
-</html>
+
+  </html>

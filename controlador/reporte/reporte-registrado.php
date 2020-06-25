@@ -1,5 +1,5 @@
 <?php
-    require('fpdf/fpdf.php');
+    require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
         // Page header
@@ -33,7 +33,7 @@
         }
     }
 
-    require_once('../includes/funciones/bd_conexion.php');
+    require_once('../bd_conexion.php');
 
     $consulta = "SELECT registrado.*, regalo.nombre_regalo FROM registrado ";
     $consulta .= " JOIN regalo ";

@@ -1,5 +1,5 @@
 <?php
-    require('fpdf/fpdf.php');
+    require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
         // Page header
@@ -32,7 +32,7 @@
         }
     }
 
-    require_once('../includes/funciones/bd_conexion.php');
+    require_once('../bd_conexion.php');
 
     $consulta = "SELECT nombre_evento, nombre_invitado, apellidopa_invitado, apellidoma_invitado, descripcion FROM evento "; 
     $consulta .= " INNER JOIN invitado ON evento.id_inv = invitado.id_invitado ";

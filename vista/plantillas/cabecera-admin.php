@@ -10,4 +10,3 @@
     include_once '../../plantillas/header-admin.php';
     include_once '../../plantillas/barra-admin.php';
     include_once '../../plantillas/navegacion-admin.php';
-?>

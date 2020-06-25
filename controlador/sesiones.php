@@ -1,7 +1,7 @@
 <?php
     function usuario_autenticado() {
         if(!revisar_usuario()) { //Si no se encuentra el usuario en SESSION.
-            header('location:../home/login.php'); //Redirige al login
+            header('location:../vista/admin/home/login.php'); //Redirige al login
             exit();
         }
     }
@@ -12,4 +12,3 @@
     }
     session_start();
     usuario_autenticado();
-?>

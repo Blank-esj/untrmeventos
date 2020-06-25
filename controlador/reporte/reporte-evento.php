@@ -1,5 +1,5 @@
 <?php
-    require('fpdf/fpdf.php');
+    require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
         // Page header
@@ -34,7 +34,7 @@
         }
     }
 
-    require_once('../includes/funciones/bd_conexion.php');
+    require_once('../bd_conexion.php');
 
     $consulta = "SELECT nombre_evento, fecha_evento, hora_evento, cat_evento, nombre_invitado, apellidopa_invitado, apellidoma_invitado FROM evento "; //Crea consulta SQL.
     $consulta .= " INNER JOIN categoria_evento ON evento.id_cat_evento = categoria_evento.id_categoria ";
@@ -61,4 +61,3 @@
         $numero++;
     }
     $pdf->Output();
-?>

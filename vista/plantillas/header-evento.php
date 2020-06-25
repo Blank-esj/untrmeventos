@@ -14,19 +14,19 @@
 
   <link rel="stylesheet" href="assets/css/normalize.css">
   <link rel="stylesheet" href="assets/css/all.css">
-  
+
   <link rel="stylesheet" href="assets/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
-  <?php 
-    $archivo = basename($_SERVER['PHP_SELF']);
-    $pagina = str_replace(".php", "", $archivo);
-    if($pagina == 'invitados' || $pagina == 'index'){
-      echo '<link rel="stylesheet" href="assets/css/colorbox.css">';
-    } else if($pagina == 'galeria') {
-      echo '<link rel="stylesheet" href="assets/css/lightbox.css">';
-    }
-  ?>  
+  <?php
+  $archivo = basename($_SERVER['PHP_SELF']);
+  $pagina = str_replace(".php", "", $archivo);
+  if ($pagina == 'invitados' || $pagina == 'index') {
+    echo '<link rel="stylesheet" href="assets/css/colorbox.css">';
+  } else if ($pagina == 'galeria') {
+    echo '<link rel="stylesheet" href="assets/css/lightbox.css">';
+  }
+  ?>
   <link rel="stylesheet" href="assets/css/main.css">
   <meta name="theme-color" content="#fafafa">
   <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
@@ -43,36 +43,47 @@
         <nav class="redes-sociales">
           <a href="https://www.facebook.com/untrmbagua/?hc_ref=ARSTU3fqVh1PflGUivyDqiLcy8_hBrql_F8oANIYxlHTenBxHaGXNIlzSgnwZrGsBVc&fref=nf&__tn__=kC-R"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
           <a href="admin/home/login.php"><i class="fas fa-user-cog" aria-hidden="true"></i></a>
-        </nav> <!--.redes-sociales-->
-      </div> <!--.contenido-header-->
+        </nav>
+        <!--.redes-sociales-->
+      </div>
+      <!--.contenido-header-->
       <div class="informacion-evento">
         <div class="clearfix">
           <p class="fecha"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 11-15 May</p>
           <p class="ciudad"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bagua, Peru</p>
         </div>
         <h1 class="nombre-sitio">UNTRM-Eventos</h1>
-        <p class="slogan">Curso Taller: DESARROLLO DE TESIS EN <spam> INGENIERÍA</spam></p>
-      </div><!--.informacion-evento-->
-    </div><!--.hero-->
-  </header><!--.site-header-->
-  
+        <p class="slogan">Curso Taller: DESARROLLO DE TESIS EN <spam> INGENIERÍA</spam>
+        </p>
+      </div>
+      <!--.informacion-evento-->
+    </div>
+    <!--.hero-->
+  </header>
+  <!--.site-header-->
+
   <div class="barra">
     <div class="contenedor clearfix">
       <div class="logo">
         <a href="http://localhost/eventos/vista/index.php">
-        <img src="assets/img/logo.svg" alt="untrmeventos">
+          <img src="assets/img/logo.svg" alt="untrmeventos">
         </a>
-      </div> <!--.logo-->
+      </div>
+      <!--.logo-->
       <div class="menu-movil">
         <span></span>
         <span></span>
         <span></span>
-      </div> <!--.menu-movil-->
+      </div>
+      <!--.menu-movil-->
       <nav class="navegacion-principal clearfix">
         <a href="galeria.php">Galería</a>
         <a href="calendario.php">Calendario</a>
         <a href="invitados.php">Invitados</a>
         <a href="registro.php">Registrate</a>
-      </nav> <!--.navegacion-principal-->
-    </div> <!--.contenedor-->
-  </div> <!--.barra-->
+      </nav>
+      <!--.navegacion-principal-->
+    </div>
+    <!--.contenedor-->
+  </div>
+  <!--.barra-->

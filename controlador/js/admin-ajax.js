@@ -23,9 +23,9 @@ $(document).ready(function () {
                         'Se guardó correctamente',
                         'success'
                     )
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location.href = '../home/admin-area.php';
-                        }, 2000);
+                    }, 2000);
                 } else {
                     Swal.fire(
                         'Error!',

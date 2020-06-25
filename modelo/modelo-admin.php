@@ -64,7 +64,7 @@
                 $hash_password = password_hash($password, PASSWORD_BCRYPT, $opciones);
                 $stmt = $conn->prepare("UPDATE admins SET usuario = ?, nombre = ?, password = ?, editado = NOW(), nivel = ? WHERE id_admin = ? ");
                 $stmt->bind_param("sssii", $usuario, $nombre, $hash_password, $nivel, $id_registro);
-            }            
+            }
             $stmt->execute();
             if($stmt->affected_rows) {
                 $respuesta = array(
@@ -112,4 +112,3 @@
         }
         die(json_encode($respuesta));
     }
-?>

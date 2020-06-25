@@ -6,7 +6,7 @@ $(function(){
     }
 
     //Agregar clase a Menu
-    $('body.conferencia .navegacion-principal a:contains("Galería")').addClass('activo');
+    $('body.galeria .navegacion-principal a:contains("Galería")').addClass('activo');
     $('body.calendario .navegacion-principal a:contains("Calendario")').addClass('activo');
     $('body.invitados .navegacion-principal a:contains("Invitados")').addClass('activo');
 

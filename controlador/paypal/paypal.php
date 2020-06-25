@@ -2,7 +2,7 @@
 
 require 'autoload.php';
 
-define('URL_SITIO', 'http://localhost:80/eventos');
+define('URL_SITIO', 'http://localhost:80/untrmeventos');
 
 $apiContext = new \PayPal\Rest\ApiContext(
       new \PayPal\Auth\OAuthTokenCredential(

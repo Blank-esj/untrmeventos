@@ -1,5 +1,5 @@
 <?php
-    require('fpdf/fpdf.php');
+    require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
         // Page header
@@ -32,7 +32,7 @@
         }
     }
 
-    require_once('../includes/funciones/bd_conexion.php');
+    require_once('../bd_conexion.php');
 
     $consulta = "SELECT * FROM admins ";
     $resultado = $conn->query($consulta);
@@ -61,4 +61,3 @@
         $numero++;
     }
     $pdf->Output();
-?>

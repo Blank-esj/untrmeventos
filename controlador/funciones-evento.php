@@ -62,4 +62,3 @@ function formatear_eventos_a_sql($eventos) {
    
    return $sql;
 }
-?>
