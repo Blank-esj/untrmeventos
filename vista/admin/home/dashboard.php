@@ -36,7 +36,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-user"></i>
           </div>
-          <a href="lista-registrado.php" class="small-box-footer">
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -59,7 +59,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-users"></i>
           </div>
-          <a href="lista-registrado.php" class="small-box-footer">
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -82,7 +82,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-user-times"></i>
           </div>
-          <a href="lista-registrado.php" class="small-box-footer">
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -104,7 +104,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fas fa-dollar-sign"></i>
           </div>
-          <a href="lista-registrado.php" class="small-box-footer">
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -130,7 +130,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-gift"></i>
           </div>
-          <a href="lista-registrado.php" class="small-box-footer">
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -152,7 +152,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-gift"></i>
           </div>
-          <a href="lista-registrado.php" class="small-box-footer">
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -175,7 +175,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-gift"></i>
           </div>
-          <a href="lista-registrado.php" class="small-box-footer">
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>

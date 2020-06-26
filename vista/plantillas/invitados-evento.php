@@ -33,4 +33,4 @@ try {
   <!--.lista-invitados-->
 </section>
 <!--.invitados contenedor seccion-->
-<?php $conn->close(); ?>
+<?php // $conn->close(); ?>

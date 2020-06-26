@@ -80,7 +80,7 @@ $(document).ready(function () {
 
   // Gráfica de usuario registrados por fecha usando morris(LINE CHART).
   // Usamos un servicio para obtener el json de usuarios registrados en la BD.
-  $.getJSON('servicio-registrados.php', function (data) {
+  $.getJSON('../../../controlador/servicio-registrados.php', function (data) {
     var line = new Morris.Line({
       element: 'grafica-registros',
       resize: true,

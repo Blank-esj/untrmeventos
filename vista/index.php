@@ -37,43 +37,45 @@
         <?php
         try {
           require_once('../controlador/bd_conexion.php');
-          $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombre_invitado, apellidopa_invitado, apellidoma_invitado ";
-          $sql .= "FROM evento ";
-          $sql .= "INNER JOIN categoria_evento ";
-          $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
-          $sql .= "INNER JOIN invitado ";
-          $sql .= "ON evento.id_inv = invitado.id_invitado ";
-          $sql .= "AND evento.id_cat_evento = 1 ";
-          $sql .= "ORDER BY id_evento LIMIT 2;";
-          $sql .= "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombre_invitado, apellidopa_invitado, apellidoma_invitado ";
-          $sql .= "FROM evento ";
-          $sql .= "INNER JOIN categoria_evento ";
-          $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
-          $sql .= "INNER JOIN invitado ";
-          $sql .= "ON evento.id_inv = invitado.id_invitado ";
-          $sql .= "AND evento.id_cat_evento = 2 ";
-          $sql .= "ORDER BY id_evento LIMIT 2;";
-          $sql .= "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombre_invitado, apellidopa_invitado, apellidoma_invitado ";
-          $sql .= "FROM evento ";
-          $sql .= "INNER JOIN categoria_evento ";
-          $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
-          $sql .= "INNER JOIN invitado ";
-          $sql .= "ON evento.id_inv = invitado.id_invitado ";
-          $sql .= "AND evento.id_cat_evento = 3 ";
-          $sql .= "ORDER BY id_evento LIMIT 2;";
+          /** guardamos en la variable "row" todos los IDs de categoria*/
+          $sql = "SELECT id_categoria FROM untrmeventos.categoria_evento ORDER BY id_categoria;";
+          $resultado = $conn->query($sql);
+          $row = $resultado->fetch_all(MYSQLI_ASSOC);
+          $i = 0;
+          /** Iteramos todas las categorias que tengamos */
+          $sql = "";
+          foreach ($row as $categoria) :
+            $sql .= "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombre_invitado, apellidopa_invitado, apellidoma_invitado ";
+            $sql .= "FROM evento ";
+            $sql .= "INNER JOIN categoria_evento ";
+            $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
+            $sql .= "INNER JOIN invitado ";
+            $sql .= "ON evento.id_inv = invitado.id_invitado ";
+            $sql .= "AND evento.id_cat_evento = " . $categoria["id_categoria"] . " ";
+            $sql .= "ORDER BY id_evento LIMIT 2;";
+            $i++;
+          endforeach;
         } catch (Exception $e) {
           $error = $e->getMessage();
         }
         ?>
         <?php $conn->multi_query($sql); ?>
         <?php
+        /** 
+         * Iteramos en cada resultado de la consulta anterior con un do-while
+         * Luego iteramos con un foreach para añadir los dos primeros resultados
+         * Si es el primera iteración que agregue el elemento "div padre"
+         * Dentro del "div padre" agrega los datos el evento
+         * Al final del loop que cierre el "div padre"
+         */
         do {
           $resultado = $conn->store_result();
           $row = $resultado->fetch_all(MYSQLI_ASSOC);
         ?>
           <?php $i = 0; ?>
+          <!-- 2 primeros detalles de este evento -->
           <?php foreach ($row as $evento) : ?>
-            <?php if ($i % 2 == 0) { ?>
+            <?php if ($i == 0) { ?>
               <div id="<?php echo strtolower($evento['cat_evento']) ?>" class="info-curso ocultar clearfix">
               <?php } ?>
               <div class="detalle-evento">
@@ -81,17 +83,18 @@
                 <p><i class="fas fa-clock" aria-hidden="true"></i> <?php echo $evento['hora_evento']; ?></p>
                 <p><i class="fas fa-calendar" aria-hidden="true"></i> <?php echo $evento['fecha_evento']; ?></p>
                 <p><i class="fas fa-user" aria-hidden="true"></i> <?php echo $evento['nombre_invitado'] . " " . $evento['apellidopa_invitado'] . " " . $evento['apellidoma_invitado']; ?></p>
+                <!--.detalle-evento-->
+                <?php if ($i == count($row) - 1) : ?>
               </div>
-              <!--.detalle-evento-->
-              <?php if ($i % 2 == 1) : ?>
-                <a href="calendario.php" class="button float-right">Ver todos</a>
+              <!-- boton ver todos -->
+              <a href="calendario.php" class="button float-right">Ver todos</a>
+            <?php endif; ?>
               </div>
               <!--#talleres-->
-            <?php endif; ?>
-            <?php $i++; ?>
-          <?php endforeach; ?>
-          <?php $resultado->free(); ?>
-        <?php } while ($conn->more_results() && $conn->next_result()); ?>
+              <?php $i++; ?>
+            <?php endforeach; ?>
+            <?php $resultado->free(); ?>
+          <?php } while ($conn->more_results() && $conn->next_result()); ?>
       </div>
       <!--.programa-evento-->
     </div>
@@ -107,15 +110,58 @@
 <div class="contador parallax">
   <div class="contenedor">
     <ul class="resumen-evento clearfix">
+      <!-- DIAS -->
       <li>
-        <p class="numero">0</p> Invitados
+        <p class="numero">
+          <?php
+          try {
+            $sql = "SELECT fecha_evento FROM evento GROUP BY (fecha_evento);";
+            $resultado = $conn->query($sql);
+          } catch (Exception $e) {
+            $error = $e->getMessage();
+          }
+          $row = $resultado->fetch_all(MYSQLI_ASSOC);
+          ?>
+          <?php echo count($row) ?>
+        </p> Dias
       </li>
+
+      <!-- Invitados -->
       <li>
-        <p class="numero">0</p> Talleres
+        <p class="numero">
+          <?php
+          try {
+            $sql = "SELECT count(*) AS cantidad FROM invitado";
+            $resultado = $conn->query($sql);
+          } catch (Exception $e) {
+            $error = $e->getMessage();
+          }
+          $row = $resultado->fetch_all(MYSQLI_ASSOC);
+          ?>
+          <?php echo $row[0]['cantidad'] ?>
+        </p> Invitados
       </li>
-      <li>
-        <p class="numero">0</p> Dias
-      </li>
+
+      <!-- Eventos -->
+      <?php
+      try {
+        $sql = "CALL sp_cantidad_categoria_evento();";
+        $resultado = $conn->query($sql);
+      } catch (Exception $e) {
+        $error = $e->getMessage();
+      }
+      $row = $resultado->fetch_all(MYSQLI_ASSOC);
+      ?>
+      <?php foreach ($row as $catego) : ?>
+        <?php if ($catego['cantidad'] > 0) : ?>
+          <li>
+            <p class="numero">
+              <?php echo $catego['cantidad'] ?>
+            </p> <?php echo $catego['nombre'] ?>
+          </li>
+        <?php endif; ?>
+      <?php endforeach; ?>
+      <?php $conn->close(); // Cerramos la conexion a la base de datos?>
     </ul>
     <!--.resumen-evento-->
   </div>

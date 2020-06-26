@@ -4,6 +4,7 @@
   <?php
   try {
     require_once('../controlador/bd_conexion.php');
+    /** Traemos todos los eventos */
     $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombre_invitado, apellidopa_invitado, apellidoma_invitado ";
     $sql .= "FROM evento ";
     $sql .= "INNER JOIN categoria_evento ";
@@ -11,6 +12,7 @@
     $sql .= "INNER JOIN invitado ";
     $sql .= "ON evento.id_inv = invitado.id_invitado ";
     $sql .= "ORDER BY fecha_evento ";
+    /** Y lo guardamos en la variable resultado */
     $resultado = $conn->query($sql);
   } catch (Exception $e) {
     $error = $e->getMessage();
@@ -19,21 +21,18 @@
   <div class="calendario">
     <?php
     //$calendario = array ();
+    /** iteramos en cada evento */
     while ($eventos = $resultado->fetch_all(MYSQLI_ASSOC)) { ?>
-      <?php $dias = array(); ?>
-      <?php foreach ($eventos as $evento) {
-        $dias[] = $evento['fecha_evento'];
-      } ?>
-      <?php $dias = array_values(array_unique($dias)) ?>
-      <?php $contador = 0; ?>
+    <?php $fechaAnterior = "" ?>
+    <?php $fecha = "" ?>
       <?php foreach ($eventos as $evento) : ?>
+        <?php $fecha =  $evento['fecha_evento'];?>
         <?php $dia_actual = $evento['fecha_evento']; ?>
-        <?php if ($dia_actual == $dias[$contador]) : ?>
+        <?php if ($fecha != $fechaAnterior) : ?>
           <h3>
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <?php echo $evento['fecha_evento']; ?>
           </h3>
-          <?php $contador++; ?>
         <?php endif; ?>
         <div class="dia">
           <p class="titulo"> <?php echo utf8_decode(utf8_encode($evento['nombre_evento'])); ?></p>
@@ -42,29 +41,14 @@
             <?php echo $evento['fecha_evento'] . " " . $evento['hora_evento'] . "hrs"; ?>
           </p>
           <p>
-            <?php $categoria_evento = $evento['cat_evento']; ?>
-            <?php
-            switch ($categoria_evento) {
-              case 'Talleres':
-                echo '<i class="fa fa-code" aria-hidden="true"></i> Taller';
-                break;
-              case 'Conferencias':
-                echo '<i class="fa fa-comment" aria-hidden="true"></i> Conferencias';
-                break;
-              case 'Seminario':
-                echo '<i class="fa fa-university" aria-hidden="true"></i> Seminarios';
-                break;
-              default:
-                echo "";
-                break;
-            }
-            ?>
+            <?php echo '<i class="fa ' . $evento['icono'] . '" aria-hidden="true"></i> ' . $evento['cat_evento']; ?>
           </p>
           <p>
             <i class="fa fa-user" aria-hidden="true"></i>
             <?php echo $evento['nombre_invitado'] . " " . $evento['apellidopa_invitado'] . " " . $evento['apellidoma_invitado']; ?>
           </p>
         </div>
+        <?php $fechaAnterior = $fecha ?>
       <?php endforeach; ?>
       <!--fin foreach eventos-->
   </div>

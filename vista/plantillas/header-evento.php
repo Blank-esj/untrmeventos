@@ -65,7 +65,7 @@
   <div class="barra">
     <div class="contenedor clearfix">
       <div class="logo">
-        <a href="http://localhost/eventos/vista/index.php">
+        <a href="index.php">
           <img src="assets/img/logo.svg" alt="untrmeventos">
         </a>
       </div>

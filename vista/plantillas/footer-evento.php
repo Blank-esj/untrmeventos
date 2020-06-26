@@ -102,7 +102,7 @@ if ($pagina == 'invitados' || $pagina == 'index') {
 }
 ?>
 <script src="../controlador/js/cotizador.js"></script>
-<script src="../controlador/js/main.js"></script>
+<script src="assets/js/main.js"></script>
 
 <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
 

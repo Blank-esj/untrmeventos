@@ -43,9 +43,9 @@ $(function(){
     });
 
     //Animaciones para los numeros
-    $('.resumen-evento li:nth-child(1) p').animateNumber({ number: 3}, 1500);
+    /*$('.resumen-evento li:nth-child(1) p').animateNumber({ number: 3}, 1500);
     $('.resumen-evento li:nth-child(2) p').animateNumber({ number: 5}, 1500);
-    $('.resumen-evento li:nth-child(3) p').animateNumber({ number: 5}, 1500);
+    $('.resumen-evento li:nth-child(3) p').animateNumber({ number: 5}, 1500);*/
 
     //Colorbox
     if($('.invitado-info').length) {
