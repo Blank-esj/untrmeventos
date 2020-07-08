@@ -1,5 +1,7 @@
 <?php
 
+include_once '../controlador/debug_to_console.php';
+
 if (!isset($_POST['submit'])) {
       exit("Hubo un error");
 }
@@ -36,7 +38,7 @@ if (isset($_POST['submit'])) :
       $registro = eventos_json($eventos);
       try {
             require_once('../controlador/bd_conexion.php');
-            $stmt = $conn->prepare("INSERT INTO registrado (nombre_registrado, apellidopa_registrado, apellidoma_registrado, email_registrado, fecha_registro, pases_articulos, taller_registrado, regalo, total_pagado) VALUES (?,?,?,?,?,?,?,?,?) ");
+            $stmt = $conn->prepare("CALL sp_crear_registrado (?,?,?,?,NULL,NULL,NULL,NULL,?,?,?,?,?,0) ");
             $stmt->bind_param("sssssssis", $nombre, $apellidopa, $apellidoma, $email, $fecha, $pedido, $registro, $regalo, $total);
             $stmt->execute();
             $id_registro = $stmt->insert_id;
@@ -51,10 +53,12 @@ $compra = new Payer();
 $compra->setPaymentMethod('paypal');
 
 $articulo = new Item();
-$articulo->setName($producto)
+$articulo->setName('producto')
       ->setCurrency('MXN')
       ->setQuantity(1)
       ->setPrice($precio);
+
+debug_to_console($articulo);
 
 $i = 0;
 $arreglo_pedido = array();

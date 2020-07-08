@@ -1,4 +1,5 @@
 <?php include_once 'plantillas/header-evento.php'; ?>
+<?php include_once '../controlador/debug_to_console.php'; ?>
 <section class="seccion contenedor">
   <h2>Registro de Usuarios</h2>
   <form id="registro" class="registro" action="pagar.php" method="POST">
@@ -96,13 +97,7 @@
         <?php
         try {
           require_once('../controlador/bd_conexion.php');
-          $sql = "SELECT evento.*, categoria_evento.cat_evento, invitado.nombre_invitado, invitado.apellidopa_invitado, invitado.apellidoma_invitado FROM evento ";
-          $sql .= " JOIN categoria_evento ";
-          $sql .= " ON evento.id_cat_evento = categoria_evento.id_categoria ";
-          $sql .= " JOIN invitado ";
-          $sql .= " ON evento.id_inv = invitado.id_invitado ";
-          $sql .= " ORDER BY evento.fecha_evento, evento.id_cat_evento, evento.hora_evento ";
-          //echo $sql;
+          $sql = "SELECT * FROM v_detalle_evento;";
           $resultado = $conn->query($sql);
         } catch (Exception $e) {
           echo $e->getMessage();
@@ -117,9 +112,9 @@
             'nombre_evento' => $evento['nombre_evento'],
             'hora' => $evento['hora_evento'],
             'id' => $evento['id_evento'],
-            'nombre_invitado' => $evento['nombre_invitado'],
-            'apellidopa_invitado' => $evento['apellidopa_invitado'],
-            'apellidoma_invitado' => $evento['apellidoma_invitado']
+            'nombres' => $evento['nombres'],
+            'apellidopa' => $evento['apellidopa'],
+            'apellidoma' => $evento['apellidoma']
           );
           $eventos_dias[$dia_semana]['eventos'][$categoria][] = $dia;
         }
@@ -136,7 +131,7 @@
                     <input type="checkbox" name="registro[]" id="<?php echo $evento['id']; ?>" value="<?php echo $evento['id']; ?>">
                     <time> <?php echo $evento['hora']; ?> </time> <?php echo $evento['nombre_evento']; ?>
                     <br>
-                    <span class="autor"> <?php echo $evento['nombre_invitado'] . " "  . $evento['apellidopa_invitado'] . " "  . $evento['apellidoma_invitado']; ?> </span>
+                    <span class="autor"> <?php echo $evento['nombres'] . " "  . $evento['apellidopa'] . " "  . $evento['apellidoma']; ?> </span>
                   </label>
                 <?php } ?>
               </div>
@@ -169,9 +164,9 @@
             <label for="regalo">Seleccione un regalo</label> <br>
             <select id="regalo" name="regalo" required>
               <option value="">--Seleccione un regalo--</option>
-              <option value="2">Etiquetas</option>
-              <option value="1">Pulsera</option>
-              <option value="3">Plumas</option>
+              <option value="4">Etiquetas</option>
+              <option value="5">Pulsera</option>
+              <option value="6">Plumas</option>
             </select>
             <!--#regalo-->
           </div>

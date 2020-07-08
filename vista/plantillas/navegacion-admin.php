@@ -102,16 +102,6 @@
           </li>
         <?php endif;
         ?>
-        <!--<li class="treeview">
-          <a href="#">
-            <i class="fa fa-comments"></i>
-            <span>Testimoniales</span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
-            <li><a href="#"><i class="fa fa-plus-circle"></i> Agregar </a></li>
-          </ul>
-        </li> -->
       </ul>
     </section>
     <!-- /.sidebar -->

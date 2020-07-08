@@ -24,17 +24,16 @@
 
     $fecha_registro = $_POST['fecha_registro'];
     $id_registro = $_POST['id_registro'];
-
     if($_POST['registro'] == 'nuevo'){
         try {
-            $stmt = $conn->prepare("INSERT INTO registrado (nombre_registrado, apellidopa_registrado, apellidoma_registrado, email_registrado, fecha_registro, pases_articulos,     taller_registrado, regalo, total_pagado, pagado ) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, 1 ) ");
+            $stmt = $conn->prepare("CALL sp_crear_registrado (?, ?, ?, ?, NULL, NULL, NULL, NULL, NOW(), ?, ?, ?, ?, 1 ) ");
             $stmt->bind_param("ssssssis", $nombre, $apellidopa, $apellidoma, $email, $pedido, $registro_eventos, $regalo, $total);
             $stmt->execute();
             $id_insertado = $stmt->insert_id;
             if($stmt->affected_rows) {
                 $respuesta = array(
                     'respuesta' => 'exito',
-                    'id_insertado' => $id_insertado,
+                    'id_insertado' => $id_insertado,3
                 );
             } else {
                 $respuesta = array(
