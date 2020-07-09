@@ -2,11 +2,16 @@
     error_reporting(E_ALL^E_NOTICE);
     include_once '../controlador/funciones-admin.php';
     
-    $nombre = $_POST['nombre_invitado'];
-    $apellidopa = $_POST['apellidopa_invitado'];
-    $apellidoma = $_POST['apellidoma_invitado'];
+    $id_registro = $_POST['id_registro'];          // idpersona
+    $nombre = $_POST['nombre_invitado'];           // nombres
+    $apellidopa = $_POST['apellidopa_invitado'];   // apellidopa
+    $apellidoma = $_POST['apellidoma_invitado'];   // apellidoma
+    $email = $_POST['email'];                      // email
+    $direccion = $_POST['direccion'];              // direccion
+    $telefono = $_POST['telefono'];                // telefono
+    $celular = $_POST['celular'];                  // celular
+    $nacimiento = $_POST['nacimiento'];            // nacimiento
     $biografia = $_POST['biografia_invitado'];
-    $id_registro = $_POST['id_registro'];
 
     //Código para insertar evento a la BD.
     if($_POST['registro'] == 'nuevo') {
@@ -25,8 +30,8 @@
         }
 
         try {
-            $stmt = $conn->prepare("INSERT INTO invitado (nombre_invitado, apellidopa_invitado, apellidoma_invitado, descripcion, url_imagen) VALUES (?, ?, ?, ?, ?) ");
-            $stmt->bind_param("sssss", $nombre, $apellidopa, $apellidoma, $biografia, $imagen_url);
+            $stmt = $conn->prepare("CALL sp_crear_invitado (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW()); ");
+            $stmt->bind_param("ssssssssss", $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $biografia, $imagen_url);
             $stmt->execute();
             $id_insertado = $stmt->insert_id;
             if($stmt->affected_rows) {
@@ -71,12 +76,12 @@
         try {
             if($_FILES['archivo_imagen']['size'] > 0) {
                 //con imagen
-                $stmt = $conn->prepare("UPDATE invitado SET nombre_invitado = ?, apellidopa_invitado = ?, apellidoma_invitado = ?, descripcion = ?, url_imagen = ? WHERE id_invitado = ? ");
-                $stmt->bind_param("sssssi", $nombre, $apellidopa, $apellidoma, $biografia, $imagen_url, $id_registro);
+                $stmt = $conn->prepare("CALL sp_actualizar_invitado(?,?,?,?,?,?,?,?,?,?,?,NOW())");
+                $stmt->bind_param("issssssssss", $id_registro, $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $biografia, $imagen_url);
             } else {
                 //sin imagen 
-                $stmt = $conn->prepare("UPDATE invitado SET nombre_invitado = ?, apellidopa_invitado = ?, apellidoma_invitado = ?, descripcion = ? WHERE id_invitado = ? ");
-                $stmt->bind_param("ssssi", $nombre, $apellidopa, $apellidoma, $biografia, $id_registro);
+                $stmt = $conn->prepare("CALL sp_actualizar_invitado_simagen(?,?,?,?,?,?,?,?,?,?,NOW())");
+                $stmt->bind_param("isssssssss", $id_registro, $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $biografia);
             }         
             $estado = $stmt->execute();
 
@@ -104,7 +109,7 @@
     if($_POST['registro'] == 'eliminar') {
         $id_borrar = $_POST['id'];
         try {
-            $stmt = $conn->prepare("DELETE FROM invitado WHERE id_invitado = ? ");
+            $stmt = $conn->prepare("DELETE FROM persona WHERE idpersona = ? ");
             $stmt->bind_param('i', $id_borrar);
             $stmt->execute();            
             if($stmt->affected_rows) {

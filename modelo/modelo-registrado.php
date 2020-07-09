@@ -2,11 +2,15 @@
     error_reporting(E_ALL^E_NOTICE);
     include_once '../controlador/funciones-admin.php';
     
-    $nombre = $_POST['nombre'];
-    $apellidopa = $_POST['apellidopa'];
-    $apellidoma = $_POST['apellidoma'];
-    $email = $_POST['email'];
-
+    $nombre = $_POST['nombre'];          // nombres
+    $apellidopa = $_POST['apellidopa'];  // apellidopa
+    $apellidoma = $_POST['apellidoma'];  // apellidoma
+    $email = $_POST['email'];            // email
+    $direccion = $_POST['direccion'];    // direccion
+    $telefono = $_POST['telefono'];      // telefono
+    $celular = $_POST['celular'];        // celular
+    $nacimiento = $_POST['nacimiento'];  // nacimiento
+    
     // boletos
     $boletos_adquiridos = $_POST['boletos'];
 
@@ -14,20 +18,20 @@
     $camisas = $_POST['pedido_extra']['camisas']['cantidad'];
     $etiquetas = $_POST['pedido_extra']['etiquetas']['cantidad'];
 
-    $pedido = productos_json($boletos_adquiridos, $camisas, $etiquetas);
+    $pedido = productos_json($boletos_adquiridos, $camisas, $etiquetas); // pases_articulos
 
-    $total = $_POST['total_pedido'];
-    $regalo = $_POST['regalo'];
+    $total = $_POST['total_pedido'];     // total_pagado
+    $regalo = $_POST['regalo'];          // regalo
 
     $eventos = $_POST['registro_evento'];
-    $registro_eventos = eventos_json($eventos);
+    $registro_eventos = eventos_json($eventos); // taller_registrado
 
-    $fecha_registro = $_POST['fecha_registro'];
+    $fecha_registro = $_POST['fecha_registro']; // fecha_registro
     $id_registro = $_POST['id_registro'];
     if($_POST['registro'] == 'nuevo'){
         try {
-            $stmt = $conn->prepare("CALL sp_crear_registrado (?, ?, ?, ?, NULL, NULL, NULL, NULL, NOW(), ?, ?, ?, ?, 1 ) ");
-            $stmt->bind_param("ssssssis", $nombre, $apellidopa, $apellidoma, $email, $pedido, $registro_eventos, $regalo, $total);
+            $stmt = $conn->prepare("CALL sp_crear_registrado (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, 1 ) ");
+            $stmt->bind_param("ssssssssssis", $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $pedido, $registro_eventos, $regalo, $total);
             $stmt->execute();
             $id_insertado = $stmt->insert_id;
             if($stmt->affected_rows) {
@@ -52,8 +56,8 @@
 
     if($_POST['registro'] == 'actualizar'){  
         try {
-            $stmt = $conn->prepare("UPDATE registrado SET nombre_registrado = ?, apellidopa_registrado = ?, apellidoma_registrado = ?,email_registrado = ?, fecha_registro = ?,     pases_articulos = ?, taller_registrado = ?, regalo = ?, total_pagado = ?, pagado = 1 WHERE id_registrado = ? " );
-            $stmt->bind_param('sssssssisi', $nombre, $apellidopa, $apellidoma, $email, $fecha_registro, $pedido, $registro_eventos, $regalo, $total, $id_registro );
+            $stmt = $conn->prepare("CALL sp_actualizar_registrado (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, 1 ) ");
+            $stmt->bind_param("issssssssssis", $id_registro, $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $pedido, $registro_eventos, $regalo, $total);
             $stmt->execute();
             if($stmt->affected_rows) {
                 $respuesta = array(
@@ -78,7 +82,7 @@
     if($_POST['registro'] == 'eliminar'){
         $id_borrar = $_POST['id'];
         try {
-            $stmt = $conn->prepare("DELETE FROM registrado WHERE id_registrado = ? ");
+            $stmt = $conn->prepare("DELETE FROM persona WHERE idpersona = ? ");
             $stmt->bind_param('i', $id_borrar);
             $stmt->execute();
             if($stmt->affected_rows) {

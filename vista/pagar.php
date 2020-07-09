@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) :
       $email = $_POST['email'];
       $regalo = $_POST['regalo'];
       $total = $_POST['total_pedido'];
+
       $fecha = date('Y-m-d H:i:s');
       $boletos = $_POST['boletos'];
       $numero_boletos = $boletos;
@@ -32,6 +33,7 @@ if (isset($_POST['submit'])) :
       $precioCamisa = $_POST['pedido_extra']['camisas']['precio'];
       $etiquetas = $_POST['pedido_extra']['etiquetas']['cantidad'];
       $precioEtiquetas = $_POST['pedido_extra']['etiquetas']['precio'];
+
       include_once '../controlador/funciones-evento.php';
       $pedido = productos_json($boletos, $camisas, $etiquetas);
       $eventos = $_POST['registro'];

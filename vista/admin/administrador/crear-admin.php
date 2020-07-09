@@ -23,20 +23,39 @@ include_once '../../plantillas/cabecera-admin.php';
           <div class="box-body">
             <!-- form start -->
             <form role="form" id="guardar-registro" method="post" action="../../../modelo/modelo-admin.php">
-
+ 
+              <!-- Usuario -->
               <div class="box-body">
                 <div class="form-group">
                   <label for="usuario">Usuario: </label>
                   <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingresar usuario">
                 </div>
+
+                <!-- Nombres -->
                 <div class="form-group">
-                  <label for="nombre">Nombres y Apellidos: </label>
+                  <label for="nombre">Nombres</label>
                   <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresar nombre completo">
                 </div>
+
+                <!-- Apellido paterno -->
+                <div class="form-group">
+                  <label for="nombre">Nombres</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresar nombre completo">
+                </div>
+
+                <!-- Apellido materno -->
+                <div class="form-group">
+                  <label for="nombre">Nombres</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresar nombre completo">
+                </div>
+
+                <!-- Password -->
                 <div class="form-group">
                   <label for="password">Password: </label>
                   <input type="password" class="form-control" id="password" name="password" placeholder="Ingresar password">
                 </div>
+
+                <!-- Password Verificación -->
                 <div class="form-group">
                   <label for="repetir_password">Repetir Password: </label>
                   <input type="password" class="form-control" id="repetir_password" name="repetir_password" placeholder="Repetir password">

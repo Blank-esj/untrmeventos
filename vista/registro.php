@@ -4,24 +4,45 @@
   <h2>Registro de Usuarios</h2>
   <form id="registro" class="registro" action="pagar.php" method="POST">
     <div id="datos_usuario" class="registro caja clearfix">
+
       <div class="campo">
         <label for="nombre">Nombres:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+        <input required type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre">
       </div>
-      <!--.campo-->
+      <!--.Apellido Paterno-->
       <div class="campo">
         <label for="apellido">Apellido Paterno:</label>
-        <input type="text" id="apellidopa" name="apellidopa" placeholder="Tu apellido paterno">
+        <input required type="text" id="apellidopa" name="apellidopa" placeholder="Escribe tu apellido paterno">
       </div>
-      <!--.campo-->
+      <!--.Apellido Materno-->
       <div class="campo">
         <label for="apellido">Apellido Materno:</label>
-        <input type="text" id="apellidoma" name="apellidoma" placeholder="Tu apellido materno">
+        <input required type="text" id="apellidoma" name="apellidoma" placeholder="Escribe tu apellido materno">
       </div>
-      <!--.campo-->
+      <!--.Email-->
       <div class="campo">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Tu email">
+        <input required type="email" id="email" name="email" placeholder="Escribe tu email">
+      </div>
+      <!--.Dirección-->
+      <div class="campo">
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" placeholder="Escribe tu Dirección">
+      </div>
+      <!--.Teléfono-->
+      <div class="campo">
+        <label for="telefono">Teléfono:</label>
+        <input type="number" id="telefono" name="telefono" placeholder="Escribe tu Teléfono">
+      </div>
+      <!--.Celular-->
+      <div class="campo">
+        <label for="celular">Celular:</label>
+        <input type="number" id="celular" name="celular" placeholder="Escribe tu Celular">
+      </div>
+      <!--.Fecha Nacimiento-->
+      <div class="campo">
+        <label for="nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="nacimiento" name="nacimiento" placeholder="Escribe tu Fecha Nacimiento">
       </div>
       <!--.campo-->
       <div id="error"></div>
@@ -92,7 +113,7 @@
     <!--paquetes-->
 
     <div id="eventos" class="eventos clearfix">
-      <h3>Elige tus talleres</h3>
+      <h3>Elige Escribe tus talleres</h3>
       <div class="caja">
         <?php
         try {

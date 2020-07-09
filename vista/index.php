@@ -45,12 +45,12 @@
           /** Iteramos todas las categorias que tengamos */
           $sql = "";
           foreach ($row as $categoria) :
-            $sql .= "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombre_invitado, apellidopa_invitado, apellidoma_invitado ";
+            $sql .= "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombres AS nombre_invitado, apellidopa AS apellidopa_invitado, apellidoma AS apellidoma_invitado ";
             $sql .= "FROM evento ";
             $sql .= "INNER JOIN categoria_evento ";
             $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
-            $sql .= "INNER JOIN invitado ";
-            $sql .= "ON evento.id_inv = invitado.id_invitado ";
+            $sql .= "INNER JOIN persona ";
+            $sql .= "ON evento.id_inv = persona.idpersona ";
             $sql .= "AND evento.id_cat_evento = " . $categoria["id_categoria"] . " ";
             $sql .= "ORDER BY id_evento LIMIT 2;";
             $i++;

@@ -60,11 +60,8 @@ if ($_POST['registro'] == 'actualizar') { //Si existe.
     try {
         if (empty($_POST['password'])) { //Valida si el campo CONTRASEÑA está vacío.
             //Si está vacío ACTUALIZAREMOS SOLAMENTE los  campos usuario y nombre.
-            $stmt = $conn->prepare("UPDATE admins SET usuario = ?, editado = NOW(), nivel = ?  WHERE id_admin = ? ");
-            $stmt->bind_param("sii", $usuario, $nivel, $id_registro);
-
-            $stmt1 = $conn->prepare("UPDATE persona SET nombres = ?, apellidopa = ?, apellidoma = ?  WHERE id_admin = ? ");
-            $stmt->bind_param("sssi", $nombres, $apellidopa, $apellidoma, $id_registro);
+            $stmt = $conn->prepare("CALL sp_actualizar_admins_sin(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)");
+            $stmt->bind_param("isssssssssi", $id_registro, $nombres, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $usuario, $nivel);
         } else {
             //Si el campo CONTRASEÑA tiene algo. ACTUALIZAREMOS TODOS LOS CAMPOS.
             $opciones = array(
@@ -72,9 +69,8 @@ if ($_POST['registro'] == 'actualizar') { //Si existe.
             );
 
             $hash_password = password_hash($password, PASSWORD_BCRYPT, $opciones);
-            $stmt = $conn->prepare("CALL sp_actualizar_admins()");
-            $stmt = $conn->prepare("UPDATE admins SET usuario = ?, nombre = ?, password = ?, editado = NOW(), nivel = ? WHERE id_admin = ? ");
-            $stmt->bind_param("sssii", $usuario, $nombres, $hash_password, $nivel, $id_registro);
+            $stmt = $conn->prepare("CALL sp_actualizar_admins_sin(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)");
+            $stmt->bind_param("issssssssssi", $id_registro, $nombres, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $usuario, $hash_password, $nivel);
         }
         $stmt->execute();
         if ($stmt->affected_rows) {
@@ -101,7 +97,7 @@ if ($_POST['registro'] == 'actualizar') { //Si existe.
 if ($_POST['registro'] == 'eliminar') {
     $id_borrar = $_POST['id'];
     try {
-        $stmt = $conn->prepare("DELETE FROM admins WHERE id_admin = ? ");
+        $stmt = $conn->prepare("DELETE FROM persona WHERE idpersona = ? ");
         $stmt->bind_param('i', $id_borrar);
         $stmt->execute();
         if ($stmt->affected_rows) {
