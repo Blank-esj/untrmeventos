@@ -24,22 +24,61 @@ include_once '../../plantillas/cabecera-admin.php';
             <!-- form start -->
             <form role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="../../../modelo/modelo-invitado.php" enctype="multipart/form-data">
               <div class="box-body">
+                <!-- Nombres -->
                 <div class="form-group">
                   <label for="nombre_invitado">Nombres: </label>
                   <input type="text" class="form-control" id="nombre_invitado" name="nombre_invitado" placeholder="Ingresar nombres del invitado">
                 </div>
+
+                <!-- Apellido Paterno -->
                 <div class="form-group">
                   <label for="apellidopa_invitado">Apellido Paterno: </label>
                   <input type="text" class="form-control" id="apellidopa_invitado" name="apellidopa_invitado" placeholder="Ingresar apellido paterno">
                 </div>
+
+                <!-- Apellido Materno -->
                 <div class="form-group">
                   <label for="apellidoma_invitado">Apellido Materno: </label>
                   <input type="text" class="form-control" id="apellidoma_invitado" name="apellidoma_invitado" placeholder="Ingresar apellido materno">
                 </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="email">Email: </label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Ingresar un email">
+                </div>
+
+                <!-- Dirección -->
+                <div class="form-group">
+                  <label for="direccion">Dirección: </label>
+                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresar una dirección">
+                </div>
+
+                <!-- Telefono -->
+                <div class="form-group">
+                  <label for="telefono">Teléfono: </label>
+                  <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingresar un teléfono">
+                </div>
+
+                <!-- Celular -->
+                <div class="form-group">
+                  <label for="apellidoma_invitado">Apellido Materno: </label>
+                  <input type="text" class="form-control" id="apellidoma_invitado" name="apellidoma_invitado" placeholder="Ingresar apellido materno">
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="form-group">
+                  <label for="nacimiento">Apellido Materno: </label>
+                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresar una fecha">
+                </div>
+
+                <!-- Descripcion / Biografia -->
                 <div class="form-group">
                   <label for="biografia_invitado">Biografía: </label>
                   <textarea class="form-control" name="biografia_invitado" id="biografia_invitado" rows="8" placeholder="Presentación profesional"></textarea>
                 </div>
+
+                <!-- url_imagen / imagen_invitado -->
                 <div class="form-group">
                   <label for="imagen_invitado">Imagen:</label>
                   <input type="file" id="imagen_invitado" name="archivo_imagen">

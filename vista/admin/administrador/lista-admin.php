@@ -35,7 +35,7 @@ include_once '../../plantillas/cabecera-admin.php';
               <tbody>
                 <?php
                 try {
-                  $sql = "SELECT id_admin, usuario, nombre, nivel FROM admins"; //Crea consulta SQL
+                  $sql = "SELECT idpersona, usuario, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre, nivel FROM v_admins"; //Crea consulta SQL
                   $resultado = $conn->query($sql); //Ejecuta consulta SQL
                 } catch (Exception $e) {
                   $error = $e->getMessage();
@@ -57,10 +57,10 @@ include_once '../../plantillas/cabecera-admin.php';
                         ?>
                     </td>
                     <td>
-                      <a href="editar-admin.php?id=<?php echo $admin['id_admin']; ?>" class="btn bg-orange btn-flat margin">
+                      <a href="editar-admin.php?id=<?php echo $admin['idpersona']; ?>" class="btn bg-orange btn-flat margin">
                         <i class="fa fa-pencil-alt"></i>
                       </a>
-                      <a href="#" data-id="<?php echo $admin['id_admin']; ?>" data-tipo="admin" class="btn bg-maroon btn-flat margin borrar_registro">
+                      <a href="#" data-id="<?php echo $admin['idpersona']; ?>" data-tipo="admin" class="btn bg-maroon btn-flat margin borrar_registro">
                         <i class="fa fa-trash"></i>
                       </a>
                     </td>

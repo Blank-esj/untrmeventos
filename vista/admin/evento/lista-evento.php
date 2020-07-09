@@ -38,9 +38,9 @@ include_once '../../plantillas/cabecera-admin.php';
               <tbody>
                 <?php
                 try {
-                  $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, nombre_invitado, apellidopa_invitado, apellidoma_invitado FROM evento "; //Crea consulta SQL.
+                  $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_completo_invitado FROM evento "; //Crea consulta SQL.
                   $sql .= " INNER JOIN categoria_evento ON evento.id_cat_evento = categoria_evento.id_categoria ";
-                  $sql .= " INNER JOIN invitado ON evento.id_inv = invitado.id_invitado ";
+                  $sql .= " INNER JOIN persona ON evento.id_inv = persona.idpersona ";
                   $sql .= " ORDER BY id_evento ";
                   $resultado = $conn->query($sql); //Ejecuta consulta SQL
                 } catch (Exception $e) {
@@ -56,7 +56,7 @@ include_once '../../plantillas/cabecera-admin.php';
                     <td><?php echo $evento['fecha_evento']; ?></td>
                     <td><?php echo $evento['hora_evento']; ?> </td>
                     <td><?php echo $evento['cat_evento']; ?> </td>
-                    <td><?php echo $evento['nombre_invitado'] . " " . $evento['apellidopa_invitado'] . " " . $evento['apellidoma_invitado']; ?> </td>
+                    <td><?php echo $evento['nombre_completo_invitado']; ?> </td>
                     <td>
                       <a href="editar-evento.php?id=<?php echo $evento['id_evento']; ?>" class="btn bg-orange btn-flat margin">
                         <i class="fa fa-pencil-alt"></i>

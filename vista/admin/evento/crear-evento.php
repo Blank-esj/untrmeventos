@@ -84,11 +84,11 @@ include_once '../../plantillas/cabecera-admin.php';
                     <option value="0"> -- Seleccione -- </option>
                     <?php
                     try {
-                      $sql = "SELECT id_invitado, nombre_invitado, apellidopa_invitado, apellidoma_invitado FROM invitado ";
+                      $sql = "SELECT idpersona, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_completo FROM v_invitado";
                       $resultado = $conn->query($sql);
                       while ($invitado = $resultado->fetch_assoc()) { ?>
-                        <option value="<?php echo $invitado['id_invitado']; ?>">
-                          <?php echo $invitado['nombre_invitado'] . " " . $invitado['apellidopa_invitado'] . " " . $invitado['apellidoma_invitado']; ?>
+                        <option value="<?php echo $invitado['idpersona']; ?>">
+                          <?php echo $invitado['nombre_completo']; ?>
                         </option>
                     <?php }
                     } catch (Exception $e) {

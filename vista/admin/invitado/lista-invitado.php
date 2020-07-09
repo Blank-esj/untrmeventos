@@ -35,7 +35,7 @@ include_once '../../plantillas/cabecera-admin.php';
               <tbody>
                 <?php
                 try {
-                  $sql = "SELECT * FROM invitado ";
+                  $sql = "SELECT * FROM v_invitado ";
                   $resultado = $conn->query($sql);
                 } catch (Exception $e) {
                   $error = $e->getMessage();
@@ -47,14 +47,14 @@ include_once '../../plantillas/cabecera-admin.php';
                 ?>
                   <tr>
                     <td> <?php echo $numero; ?> </td>
-                    <td><?php echo $invitado['nombre_invitado'] . " " . $invitado['apellidopa_invitado'] . " " . $invitado['apellidoma_invitado']; ?></td>
+                    <td><?php echo $invitado['nombres'] . " " . $invitado['apellidopa'] . " " . $invitado['apellidoma']; ?></td>
                     <td><?php echo $invitado['descripcion']; ?></td>
                     <td><img src="../../assets/img/invitados/<?php echo $invitado['url_imagen']; ?>" width="150"></td>
                     <td>
-                      <a href="editar-invitado.php?id=<?php echo $invitado['id_invitado'] ?>" class="btn bg-orange btn-flat margin">
+                      <a href="editar-invitado.php?id=<?php echo $invitado['idpersona'] ?>" class="btn bg-orange btn-flat margin">
                         <i class="fa fa-pencil-alt"></i>
                       </a>
-                      <a href="#" data-id="<?php echo $invitado['id_invitado']; ?>" data-tipo="invitado" class="btn bg-maroon btn-flat margin borrar_registro">
+                      <a href="#" data-id="<?php echo $invitado['idpersona']; ?>" data-tipo="invitado" class="btn bg-maroon btn-flat margin borrar_registro">
                         <i class="fa fa-trash"></i>
                       </a>
                     </td>

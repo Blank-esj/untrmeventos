@@ -103,19 +103,15 @@ else :
                       <?php
                       try {
                         $invitado_actual = $evento['id_inv'];
-                        $sql = "SELECT id_invitado, nombre_invitado, apellidopa_invitado, apellidoma_invitado FROM invitado ";
+                        $sql = "SELECT idpersona, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_completo FROM v_invitado";
                         $resultado = $conn->query($sql);
-                        while ($invitado = $resultado->fetch_assoc()) {
-                          if ($invitado['id_invitado'] == $invitado_actual) { ?>
-                            <option value="<?php echo $invitado['id_invitado']; ?>" selected>
-                              <?php echo $invitado['nombre_invitado'] . " " . $invitado['apellidopa_invitado'] . " " . $invitado['apellidoma_invitado']; ?>
-                            </option>
-                          <?php } else { ?>
-                            <option value="<?php echo $invitado['id_invitado']; ?>">
-                              <?php echo $invitado['nombre_invitado'] . " " . $invitado['apellidopa_invitado'] . " " . $invitado['apellidoma_invitado']; ?>
-                            </option>
+                        while ($invitado = $resultado->fetch_assoc()) {  ?>
+                          <option value="<?php echo $invitado['id_invitado']; ?>" <?php if ($invitado['id_invitado'] == $invitado_actual) {
+                                                                                    echo "selected";
+                                                                                  } ?>>
+                            <?php echo $invitado['nombre_completo']; ?>
+                          </option>
                       <?php }
-                        }
                       } catch (Exception $e) {
                         echo "Error: " . $e->getMessage();
                       }

@@ -21,9 +21,10 @@ include_once '../../plantillas/cabecera-admin.php';
     </div>
     <h2 class="page-header">Resumen de Registros</h2>
     <div class="row">
+      <!-- Total Registrado -->
       <div class="col-lg-3 col-xs-6">
         <?php
-        $sql = "SELECT COUNT(id_registrado) AS registros FROM registrado ";
+        $sql = "SELECT COUNT(idpersona) AS registros FROM registrado ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -42,9 +43,32 @@ include_once '../../plantillas/cabecera-admin.php';
         </div>
       </div>
 
+      <!-- Edad Promedio de registrados -->
       <div class="col-lg-3 col-xs-6">
         <?php
-        $sql = "SELECT COUNT(id_registrado) AS registros FROM registrado WHERE pagado = 1 ";
+        $sql = "SELECT ROUND(AVG(YEAR(CURDATE())-YEAR(nacimiento))) AS `edad_promedio` FROM persona, invitado WHERE persona.idpersona = invitado.idpersona; ";
+        $resultado = $conn->query($sql);
+        $registrados = $resultado->fetch_assoc();
+        ?>
+        <div class="small-box bg-aqua">
+          <!-- small box -->
+          <div class="inner">
+            <h3><?php echo $registrados['edad_promedio']; ?></h3>
+            <p>Edad Promedio de Registrados</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-user"></i>
+          </div>
+          <a href="../registrado/lista-registrado.php" class="small-box-footer">
+            Más Información <i class="fa fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Total Pagados -->
+      <div class="col-lg-3 col-xs-6">
+        <?php
+        $sql = "SELECT COUNT(idpersona) AS registros FROM registrado WHERE pagado = 1 ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
 
@@ -65,9 +89,10 @@ include_once '../../plantillas/cabecera-admin.php';
         </div>
       </div>
 
+      <!-- Total Sin Pagar -->
       <div class="col-lg-3 col-xs-6">
         <?php
-        $sql = "SELECT COUNT(id_registrado) AS registros FROM registrado WHERE pagado = 0 ";
+        $sql = "SELECT COUNT(idpersona) AS registros FROM registrado WHERE pagado = 0 ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
 
@@ -88,6 +113,7 @@ include_once '../../plantillas/cabecera-admin.php';
         </div>
       </div>
 
+      <!-- Total Ganancias -->
       <div class="col-lg-3 col-xs-6">
         <?php
         $sql = "SELECT SUM(total_pagado) AS ganancias FROM registrado WHERE pagado = 1 ";
@@ -113,73 +139,35 @@ include_once '../../plantillas/cabecera-admin.php';
 
     <h2 class="page-header">Regalos</h2>
 
+    <!-- Total regalos -->
     <div class="row">
-      <div class="col-lg-3 col-xs-6">
-        <?php
-        $sql = "SELECT COUNT(total_pagado) AS pulseras FROM registrado WHERE regalo = 1 ";
-        $resultado = $conn->query($sql);
-        $regalo = $resultado->fetch_assoc();
-        ?>
-        <!-- small box -->
-        <div class="small-box bg-teal">
-          <div class="inner">
-            <h3><?php echo $regalo['pulseras']; ?></h3>
+      <?php
+      try {
+        $sql = "SELECT r.nombre_regalo regalo, COUNT(total_pagado) total FROM registrado re, regalo r WHERE re.regalo = r.id_regalo GROUP BY regalo ORDER BY total DESC;";
+        $resultado = $conn->query($sql); //Ejecuta consulta SQL
+      } catch (Exception $e) {
+        $error = $e->getMessage();
+        echo $error;
+      }
+      $numero = 1;
+      while ($regalo = $resultado->fetch_assoc()) { ?>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-teal">
+            <div class="inner">
+              <h3><?php echo $regalo['total']; ?></h3>
 
-            <p>Pulseras</p>
+              <p><?php echo $regalo['regalo']; ?></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-gift"></i>
+            </div>
+            <a href="../registrado/lista-registrado.php" class="small-box-footer">
+              Más Información <i class="fa fa-arrow-circle-right"></i>
+            </a>
           </div>
-          <div class="icon">
-            <i class="fa fa-gift"></i>
-          </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
         </div>
-      </div>
-
-      <div class="col-lg-3 col-xs-6">
-        <?php
-        $sql = "SELECT COUNT(total_pagado) AS etiquetas FROM registrado WHERE regalo = 2 ";
-        $resultado = $conn->query($sql);
-        $regalo = $resultado->fetch_assoc();
-        ?>
-        <!-- small box -->
-        <div class="small-box bg-maroon">
-          <div class="inner">
-            <h3><?php echo $regalo['etiquetas']; ?></h3>
-
-            <p>Etiquetas</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-gift"></i>
-          </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-xs-6">
-        <?php
-        $sql = "SELECT COUNT(total_pagado) AS plumas FROM registrado WHERE regalo = 3 ";
-        $resultado = $conn->query($sql);
-        $regalo = $resultado->fetch_assoc();
-
-        ?>
-        <!-- small box -->
-        <div class="small-box bg-purple-active">
-          <div class="inner">
-            <h3><?php echo $regalo['plumas']; ?></h3>
-
-            <p>Plumas</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-gift"></i>
-          </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
+      <?php } ?>
     </div>
   </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
