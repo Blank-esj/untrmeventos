@@ -23,13 +23,13 @@
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="hidden-xs">Hola: <?php echo $_SESSION['nombres']; ?></span>
+                <span class="hidden-xs">Hola: <?php echo $_SESSION['nombre']; ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="../../admin/administrador/editar-admin.php?id=<?php echo $_SESSION['idpersona']; ?>" class="btn btn-success btn-flat">Ajustes</a>
+                    <a href="../../admin/administrador/editar-admin.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success btn-flat">Ajustes</a>
                   </div>
                   <div class="pull-right">
                     <a href="login.php?cerrar_sesion=true" class="btn btn-success btn-flat">Cerrar Sesión</a>

@@ -1,4 +1,11 @@
 <?php
+/**
+ * descripción: corregí el nombre de los ids de persona de "id_invitado" a "idpersona"
+ * editado el 10/07/2020
+ * N° edición: 01
+ */
+?>
+<?php
 $id = $_GET['id'];
 if (!filter_var($id, FILTER_VALIDATE_INT)) :
   die("Error");
@@ -106,7 +113,7 @@ else :
                         $sql = "SELECT idpersona, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_completo FROM v_invitado";
                         $resultado = $conn->query($sql);
                         while ($invitado = $resultado->fetch_assoc()) {  ?>
-                          <option value="<?php echo $invitado['id_invitado']; ?>" <?php if ($invitado['id_invitado'] == $invitado_actual) {
+                          <option value="<?php echo $invitado['idpersona']; ?>" <?php if ($invitado['idpersona'] == $invitado_actual) {
                                                                                     echo "selected";
                                                                                   } ?>>
                             <?php echo $invitado['nombre_completo']; ?>

@@ -1,7 +1,7 @@
 <?php
 try {
   require_once('../controlador/bd_conexion.php');
-  $sql = "SELECT * FROM invitado ";
+  $sql = "SELECT * FROM v_invitado ";
   $resultado = $conn->query($sql);
 } catch (Exception $e) {
   $error = $e->getMessage();
@@ -13,16 +13,16 @@ try {
     <?php while ($invitado = $resultado->fetch_assoc()) { ?>
       <li>
         <div class="invitado">
-          <a class="invitado-info" href="#invitado<?php echo $invitado['id_invitado']; ?>">
+          <a class="invitado-info" href="#invitado<?php echo $invitado['idpersona']; ?>">
             <img src="assets/img/invitados/<?php echo $invitado['url_imagen'] ?>" alt="imagen invitado">
-            <p><?php echo $invitado['nombre_invitado'] . " " . $invitado['apellidopa_invitado'] . " " . $invitado['apellidoma_invitado']; ?></p>
+            <p><?php echo $invitado['nombres'] . " " . $invitado['apellidopa'] . " " . $invitado['apellidoma']; ?></p>
           </a>
         </div>
         <!--.invitado-->
       </li>
       <div style="display:none;">
         <div class="invitado-info" id="invitado<?php echo $invitado['id_invitado']; ?>">
-          <h2><?php echo $invitado['nombre_invitado'] . " " . $invitado['apellidopa_invitado'] . " " . $invitado['apellidoma_invitado']; ?></h2>
+          <h2><?php echo $invitado['nombres'] . " " . $invitado['apellidopa'] . " " . $invitado['apellidoma']; ?></h2>
           <img src="assets/img/invitados/<?php echo $invitado['url_imagen'] ?>" alt="imagen invitado">
           <p><?php echo $invitado['descripcion'] ?></p>
         </div>

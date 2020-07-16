@@ -1,4 +1,9 @@
 <?php
+/**
+ * editado el 10/07/2020
+ */
+?>
+<?php
 include_once '../../plantillas/cabecera-admin.php';
 ?>
 
@@ -27,49 +32,49 @@ include_once '../../plantillas/cabecera-admin.php';
               <div class="box-body">
                 <!-- Nombres -->
                 <div class="form-group">
-                  <label for="nombre">Nombres</label>
+                  <label for="nombre">Nombres: </label>
                   <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese los nombres">
                 </div>
 
                 <!-- Apellido paterno -->
                 <div class="form-group">
-                  <label for="apellidopa">Apellido Paterno</label>
+                  <label for="apellidopa">Apellido Paterno: </label>
                   <input type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Ingrese un apellido paterno">
                 </div>
 
                 <!-- Apellido materno -->
                 <div class="form-group">
-                  <label for="apellidoma">Apellido Materno</label>
+                  <label for="apellidoma">Apellido Materno: </label>
                   <input type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Ingrese un apellido materno">
                 </div>
 
                 <!-- Email -->
                 <div class="form-group">
-                  <label for="email">Apellido Materno</label>
+                  <label for="email">Email: </label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el email">
                 </div>
 
                 <!-- Dirección -->
                 <div class="form-group">
-                  <label for="direccion">Apellido Materno</label>
+                  <label for="direccion">Dirección: </label>
                   <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese una dirección">
                 </div>
 
                 <!-- Teléfono -->
                 <div class="form-group">
-                  <label for="telefono">Apellido Materno</label>
+                  <label for="telefono">Teléfono: </label>
                   <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un teléfono">
                 </div>
 
                 <!-- Celular -->
                 <div class="form-group">
-                  <label for="celular">Apellido Materno</label>
+                  <label for="celular">Celular: </label>
                   <input type="text" class="form-control" id="celular" name="celular" placeholder="Ingrese un celular">
                 </div>
 
                 <!-- Fecha Nacimiento -->
                 <div class="form-group">
-                  <label for="nacimiento">Apellido Materno</label>
+                  <label for="nacimiento">Fecha Nacimiento: </label>
                   <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingrese una Fecha">
                 </div>
 

@@ -1,3 +1,8 @@
+<?php
+/**
+ * Editado: 10/07/2020
+ */
+?>
 <?php include_once 'plantillas/header-evento.php'; ?>
 <section class="seccion contenedor">
   <h2>Calendario de Eventos</h2>
@@ -5,7 +10,7 @@
   try {
     require_once('../controlador/bd_conexion.php');
     /** Traemos todos los eventos */
-    $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombres AS nombre_invitado, apellidopa AS apellidopa_invitado, apellidoma AS apellidoma_invitado ";
+    $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombres, apellidopa, apellidoma";
     $sql .= "FROM evento ";
     $sql .= "INNER JOIN categoria_evento ";
     $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
@@ -45,7 +50,7 @@
           </p>
           <p>
             <i class="fa fa-user" aria-hidden="true"></i>
-            <?php echo $evento['nombre_invitado'] . " " . $evento['apellidopa_invitado'] . " " . $evento['apellidoma_invitado']; ?>
+            <?php echo $evento['nombres'] . " " . $evento['apellidopa'] . " " . $evento['apellidoma']; ?>
           </p>
         </div>
         <?php $fechaAnterior = $fecha ?>

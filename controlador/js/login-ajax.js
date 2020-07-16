@@ -12,7 +12,7 @@ $(document).ready(function () {
             url: $(this).attr('action'),
             dataType: 'json',
             success: function (data) {
-                console.log(data);
+                console.log('data');
                 var resultado = data;
                 if (resultado.respuesta == 'exitoso') {
                     Swal.fire(
@@ -31,6 +31,6 @@ $(document).ready(function () {
                     )
                 }
             }
-        })
+        });
     });
 });

@@ -1,52 +1,8 @@
 <?php include_once 'plantillas/header-evento.php'; ?>
 <?php include_once '../controlador/debug_to_console.php'; ?>
 <section class="seccion contenedor">
-  <h2>Registro de Usuarios</h2>
+  <h2>Registro de Asistentes</h2>
   <form id="registro" class="registro" action="pagar.php" method="POST">
-    <div id="datos_usuario" class="registro caja clearfix">
-
-      <div class="campo">
-        <label for="nombre">Nombres:</label>
-        <input required type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre">
-      </div>
-      <!--.Apellido Paterno-->
-      <div class="campo">
-        <label for="apellido">Apellido Paterno:</label>
-        <input required type="text" id="apellidopa" name="apellidopa" placeholder="Escribe tu apellido paterno">
-      </div>
-      <!--.Apellido Materno-->
-      <div class="campo">
-        <label for="apellido">Apellido Materno:</label>
-        <input required type="text" id="apellidoma" name="apellidoma" placeholder="Escribe tu apellido materno">
-      </div>
-      <!--.Email-->
-      <div class="campo">
-        <label for="email">Email:</label>
-        <input required type="email" id="email" name="email" placeholder="Escribe tu email">
-      </div>
-      <!--.Dirección-->
-      <div class="campo">
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" placeholder="Escribe tu Dirección">
-      </div>
-      <!--.Teléfono-->
-      <div class="campo">
-        <label for="telefono">Teléfono:</label>
-        <input type="number" id="telefono" name="telefono" placeholder="Escribe tu Teléfono">
-      </div>
-      <!--.Celular-->
-      <div class="campo">
-        <label for="celular">Celular:</label>
-        <input type="number" id="celular" name="celular" placeholder="Escribe tu Celular">
-      </div>
-      <!--.Fecha Nacimiento-->
-      <div class="campo">
-        <label for="nacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="nacimiento" name="nacimiento" placeholder="Escribe tu Fecha Nacimiento">
-      </div>
-      <!--.campo-->
-      <div id="error"></div>
-    </div>
     <!--#datos_usuario-->
 
     <div id="paquetes" class="paquetes">
@@ -110,6 +66,52 @@
       </ul>
       <!--.lista-precios-->
     </div>
+
+    <h3>Ingrese sus datos</h3>
+    <div id="datos_usuario" class="registro caja clearfix">
+      <div class="campo">
+        <label for="nombre">Nombres:</label>
+        <input required type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre">
+      </div>
+      <!--.Apellido Paterno-->
+      <div class="campo">
+        <label for="apellido">Apellido Paterno:</label>
+        <input required type="text" id="apellidopa" name="apellidopa" placeholder="Escribe tu apellido paterno">
+      </div>
+      <!--.Apellido Materno-->
+      <div class="campo">
+        <label for="apellido">Apellido Materno:</label>
+        <input required type="text" id="apellidoma" name="apellidoma" placeholder="Escribe tu apellido materno">
+      </div>
+      <!--.Email-->
+      <div class="campo">
+        <label for="email">Email:</label>
+        <input required type="email" id="email" name="email" placeholder="Escribe tu email">
+      </div>
+      <!--.Dirección-->
+      <div class="campo">
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" placeholder="Escribe tu Dirección">
+      </div>
+      <!--.Teléfono-->
+      <div class="campo">
+        <label for="telefono">Teléfono:</label>
+        <input type="number" id="telefono" name="telefono" placeholder="Escribe tu Teléfono">
+      </div>
+      <!--.Celular-->
+      <div class="campo">
+        <label for="celular">Celular:</label>
+        <input type="number" id="celular" name="celular" placeholder="Escribe tu Celular">
+      </div>
+      <!--.Fecha Nacimiento-->
+      <div class="campo">
+        <label for="nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="nacimiento" name="nacimiento" placeholder="Escribe tu Fecha Nacimiento">
+      </div>
+      <!--.campo-->
+      <div id="error"></div>
+    </div>
+
     <!--paquetes-->
 
     <div id="eventos" class="eventos clearfix">

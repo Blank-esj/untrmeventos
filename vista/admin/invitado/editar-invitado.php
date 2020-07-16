@@ -1,8 +1,8 @@
 <?php
 $id = $_GET['id'];
-if (!filter_var($id, FILTER_VALIDATE_INT)) {
-  die("Error");
-}
+/*if (!filter_var($id, FILTER_VALIDATE_INT)) {
+  die("Error el id: {$id} no es un entero.");
+}*/
 include_once '../../plantillas/cabecera-admin.php';
 ?>
 

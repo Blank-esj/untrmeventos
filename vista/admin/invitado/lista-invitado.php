@@ -51,7 +51,7 @@ include_once '../../plantillas/cabecera-admin.php';
                     <td><?php echo $invitado['descripcion']; ?></td>
                     <td><img src="../../assets/img/invitados/<?php echo $invitado['url_imagen']; ?>" width="150"></td>
                     <td>
-                      <a href="editar-invitado.php?id=<?php echo $invitado['idpersona'] ?>" class="btn bg-orange btn-flat margin">
+                      <a href="editar-invitado.php?id=<?php echo $invitado['idpersona'] ?>" data-id="<?php echo $invitado['idpersona']; ?>" class="btn bg-orange btn-flat margin">
                         <i class="fa fa-pencil-alt"></i>
                       </a>
                       <a href="#" data-id="<?php echo $invitado['idpersona']; ?>" data-tipo="invitado" class="btn bg-maroon btn-flat margin borrar_registro">

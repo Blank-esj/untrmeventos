@@ -1,3 +1,8 @@
+<?php
+/**
+ * Editado: 10/07/2020
+ */
+?>
 <?php include_once 'plantillas/header-evento.php'; ?>
 <section class="seccion contenedor">
   <h2>Curso Taller - Objetivo</h2>
@@ -45,7 +50,7 @@
           /** Iteramos todas las categorias que tengamos */
           $sql = "";
           foreach ($row as $categoria) :
-            $sql .= "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombres AS nombre_invitado, apellidopa AS apellidopa_invitado, apellidoma AS apellidoma_invitado ";
+            $sql .= "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_invitado ";
             $sql .= "FROM evento ";
             $sql .= "INNER JOIN categoria_evento ";
             $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
@@ -82,7 +87,7 @@
                 <h3><?php echo html_entity_decode($evento['nombre_evento']) ?></h3>
                 <p><i class="fas fa-clock" aria-hidden="true"></i> <?php echo $evento['hora_evento']; ?></p>
                 <p><i class="fas fa-calendar" aria-hidden="true"></i> <?php echo $evento['fecha_evento']; ?></p>
-                <p><i class="fas fa-user" aria-hidden="true"></i> <?php echo $evento['nombre_invitado'] . " " . $evento['apellidopa_invitado'] . " " . $evento['apellidoma_invitado']; ?></p>
+                <p><i class="fas fa-user" aria-hidden="true"></i> <?php echo $evento['nombre_invitado']; ?></p>
                 <!--.detalle-evento-->
                 <?php if ($i == count($row) - 1) : ?>
               </div>
