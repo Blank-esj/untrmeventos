@@ -1,4 +1,5 @@
 <?php
+    // Modificado: 16/07/2020 13:38
     require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
@@ -18,7 +19,7 @@
             $this->Cell(10, 12, utf8_decode('Nº'), 1, 0, 'C', 1);
             $this->Cell(75, 12, 'NOMBRES Y APELLIDOS', 1, 0, 'C', 1);
             $this->Cell(90, 12, 'DESCRIPCION', 1, 0, 'C', 1);
-            $this->Cell(92, 12, 'CONFERENCIA', 1, 1, 'C', 1);
+            $this->Cell(92, 12, 'EVENTO', 1, 1, 'C', 1);
         }
 
         // Page footer
@@ -34,8 +35,10 @@
 
     require_once('../bd_conexion.php');
 
-    $consulta = "SELECT nombre_evento, nombre_invitado, apellidopa_invitado, apellidoma_invitado, descripcion FROM evento "; 
-    $consulta .= " INNER JOIN invitado ON evento.id_inv = invitado.id_invitado ";
+    $consulta = "SELECT p.nombres, p.apellidopa, p.apellidopa, p.apellidoma, i.descripcion, e.nombre_evento FROM evento e "; 
+    $consulta .= " INNER JOIN persona p ON e.id_inv = p.idpersona ";
+    $consulta .= " INNER JOIN invitado i ON e.id_inv = i.idpersona ";
+    $consulta .= " WHERE e.id_inv = p.idpersona AND e.id_inv = i.persona ";
     $resultado = $conn->query($consulta);
 
     // Instanciation of inherited class
@@ -50,7 +53,7 @@
     $numero=1;
     While($row = $resultado->fetch_assoc()) {
         $pdf->Cell(10, 10, $numero, 1, 0, 'C', 0);
-        $pdf->Cell(75, 10, utf8_decode($row['nombre_invitado']. " " .$row['apellidopa_invitado']. " " .$row['apellidoma_invitado']), 1, 0, 'J', 0);
+        $pdf->Cell(75, 10, utf8_decode($row['nombres']. " " .$row['apellidopa']. " " .$row['apellidoma']), 1, 0, 'J', 0);
         $pdf->Cell(90, 10, $row['descripcion'], 1, 0, 'J', 0);
         $pdf->Cell(92, 10, utf8_decode($row['nombre_evento']), 1, 1, 'J', 0);
         $numero++;

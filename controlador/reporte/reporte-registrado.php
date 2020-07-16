@@ -1,4 +1,5 @@
 <?php
+    // Modificado: 16/07/2020 14:05
     require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
@@ -35,9 +36,9 @@
 
     require_once('../bd_conexion.php');
 
-    $consulta = "SELECT registrado.*, regalo.nombre_regalo FROM registrado ";
-    $consulta .= " JOIN regalo ";
-    $consulta .= " ON registrado.regalo = regalo.id_regalo ";
+    $consulta = "SELECT p.nombres, p.apellidopa, p.apellidoma, p.email, b.fecha_creacion, r.nombre_regalo FROM boleto b ";
+    $consulta .= " JOIN regalo r ON b.idregalo = r.idregalo ";
+    $consulta .= " JOIN persona p ON b.idpersona = p.idpersona; ";
     $resultado = $conn->query($consulta);
 
     // Instanciation of inherited class
@@ -53,9 +54,9 @@
     While($row = $resultado->fetch_assoc()) {
         
         $pdf->Cell(10, 10, $numero, 1, 0, 'C', 0);
-        $pdf->Cell(80, 10, $row['nombre_registrado']. " " .$row['apellidopa_registrado']. " " .$row['apellidoma_registrado'], 1, 0, 'J', 0);
-        $pdf->Cell(75, 10, $row['email_registrado'], 1, 0, 'C', 0);
-        $pdf->Cell(60, 10, $row['fecha_registro'], 1, 0, 'C', 0);
+        $pdf->Cell(80, 10, $row['nombres']. " " .$row['apellidopa']. " " .$row['apellidoma'], 1, 0, 'J', 0);
+        $pdf->Cell(75, 10, $row['email'], 1, 0, 'C', 0);
+        $pdf->Cell(60, 10, $row['fecha_creacion'], 1, 0, 'C', 0);
         $pdf->Cell(40, 10, $row['nombre_regalo'], 1, 1, 'C', 0);
         $numero++;
     }

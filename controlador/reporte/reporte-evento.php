@@ -1,4 +1,5 @@
 <?php
+    // Modificado: 16/07/2020 13:30
     require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
@@ -36,9 +37,10 @@
 
     require_once('../bd_conexion.php');
 
-    $consulta = "SELECT nombre_evento, fecha_evento, hora_evento, cat_evento, nombre_invitado, apellidopa_invitado, apellidoma_invitado FROM evento "; //Crea consulta SQL.
-    $consulta .= " INNER JOIN categoria_evento ON evento.id_cat_evento = categoria_evento.id_categoria ";
-    $consulta .= " INNER JOIN invitado ON evento.id_inv = invitado.id_invitado ";
+    $consulta = "SELECT e.nombre_evento, e.fecha_evento, e.hora_evento, ce.cat_evento, p.nombres, p.apellidopa, p.apellidoma FROM evento e "; //Crea consulta SQL.
+    $consulta .= " INNER JOIN categoria_evento ce ON e.id_cat_evento = ce.id_categoria ";
+    $consulta .= " INNER JOIN persona p ON e.id_inv = p.idpersona ";
+    $consulta .= " WHERE e.id_cat_evento = ce.id_categoria AND i.idpersona = e.id_inv; ";
     $resultado = $conn->query($consulta);
 
     // Instanciation of inherited class
@@ -57,7 +59,7 @@
         $pdf->Cell(25, 10, $row['fecha_evento'], 1, 0, 'C', 0);
         $pdf->Cell(25, 10, $row['hora_evento'], 1, 0, 'C', 0);
         $pdf->Cell(35, 10, $row['cat_evento'], 1, 0, 'C', 0);
-        $pdf->Cell(72, 10, $row['nombre_invitado']. " " .$row['apellidopa_invitado']. " " .$row['apellidoma_invitado'], 1, 1, 'J', 0);
+        $pdf->Cell(72, 10, $row['nombres']. " " .$row['apellidopa']. " " .$row['apellidoma'], 1, 1, 'J', 0);
         $numero++;
     }
     $pdf->Output();

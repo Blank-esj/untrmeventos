@@ -1,8 +1,9 @@
 <?php
+// Modificado: 16/07/2020 13:17
 include_once 'sesiones.php';
 include_once 'funciones-admin.php';
 
-$sql = "SELECT fecha_registro, COUNT(*) AS resultado FROM v_registrado GROUP BY DATE(fecha_registro) ORDER BY fecha_registro ";
+$sql = "SELECT DAY(fecha_creacion) fecha_registro, COUNT(*) AS resultado FROM boleto GROUP BY DATE(fecha_registro) ORDER BY fecha_registro;";
 $resultado = $conn->query($sql);
 
 $arreglo_registros = array();

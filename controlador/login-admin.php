@@ -1,6 +1,5 @@
 <?php
-require_once '../controlador/debug_to_console.php';
-debug_to_console('Hola');
+// Modificado: 16/07/2020 13:08
 //Código para login de los administradores
 if (isset($_POST['login-admin'])) {
     $usuario = $_POST['usuario'];
@@ -8,7 +7,7 @@ if (isset($_POST['login-admin'])) {
 
     try {
         include_once 'funciones-admin.php';
-        $stmt = $conn->prepare("SELECT idpersona, usuario, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre, password, editado, nivel FROM v_admins WHERE usuario = ?;");
+        $stmt = $conn->prepare("SELECT idpersona, usuario, nombre_completo, password, editado, nivel FROM v_admins WHERE usuario = ?;");
         $stmt->bind_param("s", $usuario);
         $stmt->execute();
         $stmt->bind_result($id_admin, $usuario_admin, $nombre_admin, $password_admin, $editado, $nivel);

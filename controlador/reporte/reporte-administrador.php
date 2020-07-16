@@ -1,4 +1,5 @@
 <?php
+    // Modificado: 16/07/2020 13:19
     require('../fpdf/fpdf.php');
 
     class PDF extends FPDF {
@@ -34,7 +35,7 @@
 
     require_once('../bd_conexion.php');
 
-    $consulta = "SELECT * FROM admins ";
+    $consulta = "SELECT * FROM v_admins ";
     $resultado = $conn->query($consulta);
 
     // Instanciation of inherited class
@@ -56,7 +57,7 @@
         }
         $pdf->Cell(10, 10, $numero, 1, 0, 'C', 0);
         $pdf->Cell(40, 10, $row['usuario'], 1, 0, 'C', 0);
-        $pdf->Cell(80, 10, $row['nombre'], 1, 0, 'J', 0);
+        $pdf->Cell(80, 10, $row['nombre_completo'], 1, 0, 'J', 0);
         $pdf->Cell(50, 10, $nivel, 1, 1, 'C', 0);
         $numero++;
     }
