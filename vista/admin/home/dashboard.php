@@ -1,4 +1,5 @@
 <?php
+// Modificado: 16/07/2020 16:24
 include_once '../../plantillas/cabecera-admin.php';
 ?>
 
@@ -24,7 +25,7 @@ include_once '../../plantillas/cabecera-admin.php';
       <!-- Total Registrado -->
       <div class="col-lg-3 col-xs-6">
         <?php
-        $sql = "SELECT COUNT(idpersona) AS registros FROM registrado ";
+        $sql = "SELECT COUNT(*) AS registros FROM persona p, boleto b WHERE b.idpersona = p.idpersona";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -54,7 +55,7 @@ include_once '../../plantillas/cabecera-admin.php';
           <!-- small box -->
           <div class="inner">
             <h3><?php echo $registrados['edad_promedio']; ?></h3>
-            <p>Edad Promedio de Registrados</p>
+            <p>Edad Promedio de Invitados</p>
           </div>
           <div class="icon">
             <i class="fa fa-user"></i>
@@ -68,7 +69,7 @@ include_once '../../plantillas/cabecera-admin.php';
       <!-- Total Pagados -->
       <div class="col-lg-3 col-xs-6">
         <?php
-        $sql = "SELECT COUNT(idpersona) AS registros FROM registrado WHERE pagado = 1 ";
+        $sql = "SELECT COUNT(*) AS registros FROM persona p, boleto b WHERE p.idpersona = b.idpersona";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
 
@@ -89,34 +90,10 @@ include_once '../../plantillas/cabecera-admin.php';
         </div>
       </div>
 
-      <!-- Total Sin Pagar -->
-      <div class="col-lg-3 col-xs-6">
-        <?php
-        $sql = "SELECT COUNT(idpersona) AS registros FROM registrado WHERE pagado = 0 ";
-        $resultado = $conn->query($sql);
-        $registrados = $resultado->fetch_assoc();
-
-        ?>
-        <!-- small box -->
-        <div class="small-box bg-red">
-          <div class="inner">
-            <h3><?php echo $registrados['registros']; ?></h3>
-
-            <p>Total Sin Pagar</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-user-times"></i>
-          </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
-
       <!-- Total Ganancias -->
       <div class="col-lg-3 col-xs-6">
         <?php
-        $sql = "SELECT SUM(total_pagado) AS ganancias FROM registrado WHERE pagado = 1 ";
+        $sql = "SELECT SUM(total) AS ganancias FROM v_boleto";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -143,7 +120,7 @@ include_once '../../plantillas/cabecera-admin.php';
     <div class="row">
       <?php
       try {
-        $sql = "SELECT r.nombre_regalo regalo, COUNT(total_pagado) total FROM registrado re, regalo r WHERE re.regalo = r.id_regalo GROUP BY regalo ORDER BY total DESC;";
+        $sql = "SELECT r.nombre_regalo regalo, COUNT(*) total FROM v_boleto vb, boleto b, regalo r WHERE b.idregalo = r.idregalo AND b.idboleto = vb.idboleto GROUP BY r.idregalo ORDER BY total DESC;";
         $resultado = $conn->query($sql); //Ejecuta consulta SQL
       } catch (Exception $e) {
         $error = $e->getMessage();

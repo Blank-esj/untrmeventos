@@ -7,8 +7,6 @@
   <title>UNTRM-Eventos | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -25,7 +23,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../../assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the ../../assets/css/skins
-        folder instead of downloading all of them to reduce the load. -->
+  folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../../assets/css/skins/_all-skins.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="../../assets/css/icheck.css">
@@ -33,6 +31,8 @@
   <!-- Morris charts -->
   <link rel="stylesheet" href="../../assets/css/morris.css">
   <link rel="stylesheet" href="../../assets/css/admin.css">
+  <!-- Bootstrap 4.5 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

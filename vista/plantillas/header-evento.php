@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="assets/css/main.css">
   <meta name="theme-color" content="#fafafa">
   <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+  <!-- Bootstrap 4.5 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
 <body class="<?php echo $pagina; ?>">

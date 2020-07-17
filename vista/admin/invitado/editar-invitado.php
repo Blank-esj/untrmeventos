@@ -57,30 +57,18 @@ include_once '../../plantillas/cabecera-admin.php';
                   <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa un email" value="<?php echo $invitado['email']; ?>">
                 </div>
                 
-                <!-- Dirección -->
-                <div class="form-group">
-                  <label for="direccion">Dirección: </label>
-                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa dirección" value="<?php echo $invitado['direccion']; ?>">
-                </div>
-                
                 <!-- Teléfono -->
                 <div class="form-group">
                   <label for="telefono">Apellido Materno: </label>
                   <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingresa un teléfono" value="<?php echo $invitado['telefono']; ?>">
                 </div>
-                
-                <!-- Celular -->
-                <div class="form-group">
-                  <label for="celular">Apellido Materno: </label>
-                  <input type="number" class="form-control" id="celular" name="celular" placeholder="Ingresa un celular" value="<?php echo $invitado['celular']; ?>">
-                </div>
-                
-                <!-- Fecha de Nacimiento -->
-                <div class="form-group">
-                  <label for="nacimiento">Apellido Materno: </label>
-                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresa una fecha" value="<?php echo $invitado['nacimiento']; ?>">
-                </div>
 
+                <!-- Documento de Identidad -->
+                <div class="form-group">
+                  <label for="doc_identidad">Documento de Identidad: </label>
+                  <input type="number" class="form-control" id="doc_identidad" name="doc_identidad" placeholder="Ingresa un documento" value="<?php echo $invitado['doc_identidad']; ?>">
+                </div>
+                
                 <!-- Descripción / Biografía -->
                 <div class="form-group">
                   <label for="biografia_invitado">Biografía: </label>
@@ -99,6 +87,42 @@ include_once '../../plantillas/cabecera-admin.php';
                   <label for="imagen_invitado">Imagen:</label>
                   <input type="file" id="imagen_invitado" name="archivo_imagen">
                   <p class="help-block">Agregue la nueva imagen del invitado aquí.</p>
+                </div>
+
+                <!-- Institucion de Procedencia -->
+                <div class="form-group">
+                  <label for="institucion_procedencia">Institucion de Procedencia: </label>
+                  <input type="date" class="form-control" id="institucion_procedencia" name="institucion_procedencia" placeholder="Ingresa una institución" value="<?php echo $invitado['institucion_procedencia']; ?>">
+                </div>
+
+                <!-- Grado Instruccion -->
+                <?php
+                  try {
+                    $sql = "SELECT * FROM grado_instruccion";
+                    $resultado = $conn->query($sql);
+                  } catch (Exception $e) {
+                    $error = $e->getMessage();
+                    echo $error;
+                  }
+
+                  while ($grado = $resultado->fetch_assoc()) {
+                  ?>
+                    <div class="orden">
+                      <label for="grado_instruccion">Seleccione un Grado</label> <br>
+                      <select id="grado_instruccion" name="grado_instruccion">
+                        <option value="">--Seleccione--</option>
+                        <option value="<? echo $grado['idgrado_instruccion'] ?>" >
+                          <? echo $grado['grado'] ?>
+                        </option>
+                      </select>
+                    <?php
+                  }
+                ?>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="form-group">
+                  <label for="nacimiento">Fecha de Nacimiento: </label>
+                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresa una fecha" value="<?php echo $invitado['nacimiento']; ?>">
                 </div>
               </div> <!-- /.box-body -->
 

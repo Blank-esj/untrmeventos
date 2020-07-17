@@ -48,28 +48,16 @@ include_once '../../plantillas/cabecera-admin.php';
                   <input type="email" class="form-control" id="email" name="email" placeholder="Ingresar un email">
                 </div>
 
-                <!-- Dirección -->
-                <div class="form-group">
-                  <label for="direccion">Dirección: </label>
-                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresar una dirección">
-                </div>
-
                 <!-- Telefono -->
                 <div class="form-group">
                   <label for="telefono">Teléfono: </label>
                   <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingresar un teléfono">
                 </div>
 
-                <!-- Celular -->
+                <!-- Documento de Identidad -->
                 <div class="form-group">
-                  <label for="apellidoma_invitado">Apellido Materno: </label>
-                  <input type="text" class="form-control" id="apellidoma_invitado" name="apellidoma_invitado" placeholder="Ingresar apellido materno">
-                </div>
-
-                <!-- Fecha de Nacimiento -->
-                <div class="form-group">
-                  <label for="nacimiento">Apellido Materno: </label>
-                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresar una fecha">
+                  <label for="doc_identidad">Documento de Identidad: </label>
+                  <input type="text" class="form-control" id="doc_identidad" name="doc_identidad" placeholder="Ingresar un documento de identidad">
                 </div>
 
                 <!-- Descripcion / Biografia -->
@@ -84,12 +72,60 @@ include_once '../../plantillas/cabecera-admin.php';
                   <input type="file" id="imagen_invitado" name="archivo_imagen">
                   <p class="help-block">Agregar la imagen del invitado aquí.</p>
                 </div>
-              </div> <!-- /.box-body -->
 
-              <div class="box-footer">
-                <input type="hidden" name="registro" value="nuevo">
-                <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
-              </div>
+                <!-- Institución de Procedencia -->
+                <div class="form-group">
+                  <label for="institucion_procedencia">Institución de Procedencia: </label>
+                  <input type="text" class="form-control" id="institucion_procedencia" name="institucion_procedencia" placeholder="Ingresar la Institución de Procedencia">
+                </div>
+
+                <!-- Grado Instruccion -->
+                <?php
+                try {
+                  $sql = "SELECT * FROM grado_instruccion";
+                  $resultado = $conn->query($sql);
+                } catch (Exception $e) {
+                  $error = $e->getMessage();
+                  echo $error;
+                }
+
+                while ($grado = $resultado->fetch_assoc()) {
+                ?>
+                  <div class="orden">
+                    <label for="grado_instruccion">Seleccione un Grado</label> <br>
+                    <select id="grado_instruccion" name="grado_instruccion">
+                      <option value="">--Seleccione--</option>
+                      <option value="<? echo $grado['idgrado_instruccion'] ?>" >
+                        <? echo $grado['grado'] ?>
+                      </option>
+                    </select>
+                  <?php
+                }
+                  ?>
+
+                  <!-- Fecha de Nacimiento -->
+                  <div class="form-group">
+                    <label for="nacimiento">Fecha de Nacimiento: </label>
+                    <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresar un fecha">
+                  </div>
+                  
+                  <!-- Sexo -->
+                  <div class="form-group">
+                    <label for="sexo">Sexo: </label>
+                    <select id="sexo" name="sexo">
+                      <option value="">--Seleccione--</option>
+                      <option value="H"> Hombre </option>
+                      <option value="M"> Mujer </option>
+                      <option value="P"> Prefiero no decirlo </option>
+                    </select>
+                  </div>
+
+                  </div> <!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <input type="hidden" name="registro" value="nuevo">
+                    <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
+                  </div>
             </form>
           </div> <!-- /.box-body -->
         </div> <!-- /.box -->

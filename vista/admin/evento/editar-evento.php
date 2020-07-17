@@ -1,7 +1,8 @@
 <?php
+
 /**
  * descripción: corregí el nombre de los ids de persona de "id_invitado" a "idpersona"
- * editado el 10/07/2020
+ * editado el 17/07/2020 15:20
  * N° edición: 01
  */
 ?>
@@ -110,12 +111,12 @@ else :
                       <?php
                       try {
                         $invitado_actual = $evento['id_inv'];
-                        $sql = "SELECT idpersona, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_completo FROM v_invitado";
+                        $sql = "SELECT idpersona, nombre_completo FROM v_invitado";
                         $resultado = $conn->query($sql);
                         while ($invitado = $resultado->fetch_assoc()) {  ?>
                           <option value="<?php echo $invitado['idpersona']; ?>" <?php if ($invitado['idpersona'] == $invitado_actual) {
-                                                                                    echo "selected";
-                                                                                  } ?>>
+                                                                                  echo "selected";
+                                                                                } ?>>
                             <?php echo $invitado['nombre_completo']; ?>
                           </option>
                       <?php }
