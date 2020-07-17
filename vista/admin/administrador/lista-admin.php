@@ -26,8 +26,11 @@ include_once '../../plantillas/cabecera-admin.php';
               <thead>
                 <tr>
                   <th>Nº</th>
-                  <th>Usuario</th>
                   <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>Doc. de Identidad</th>
+                  <th>Usuario</th>
                   <th>Nivel de Usuario</th>
                   <th>Acciones</th>
                 </tr>
@@ -73,8 +76,11 @@ include_once '../../plantillas/cabecera-admin.php';
               <tfoot>
                 <tr>
                   <th>Nº</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>Doc. de Identidad</th>
                   <th>Usuario</th>
-                  <th>Nombres y Apellidos</th>
                   <th>Nivel de Usuario</th>
                   <th>Acciones</th>
                 </tr>

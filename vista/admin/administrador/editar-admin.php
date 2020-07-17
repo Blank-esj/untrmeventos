@@ -34,64 +34,52 @@ include_once '../../plantillas/cabecera-admin.php';
             <!-- form start -->
             <form role="form" name="guardar-registro" id="guardar-registro" method="post" action="../../../modelo/modelo-admin.php">
               <div class="box-body">
-                
+
                 <!-- Nombres -->
                 <div class="form-group">
                   <label for="nombre">Nombres: </label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escribe un nombre" value="<?php echo $admin['nombres']; ?>">
+                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese los nombres" value="<?php echo $admin['nombres']; ?>">
                 </div>
 
                 <!-- Apellido Paterno -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Apellido Paterno: </label>
-                  <input type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Escribe un apellido paterno" value="<?php echo $admin['apellidopa']; ?>">
+                  <label for="apellidopa">Apellido Paterno: </label>
+                  <input type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Ingrese el apellido paterno" value="<?php echo $admin['apellidopa']; ?>">
                 </div>
 
                 <!-- Apellido Materno -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Apellido Materno: </label>
-                  <input type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Escribe un apellido materno" value="<?php echo $admin['apellidoma']; ?>">
+                  <label for="apellidoma">Apellido Materno: </label>
+                  <input type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Escribe el apellido materno" value="<?php echo $admin['apellidoma']; ?>">
                 </div>
 
                 <!-- Email -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email: </label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Escribe un email" value="<?php echo $admin['email']; ?>">
-                </div>
-
-                <!-- Dirección -->
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Dirección: </label>
-                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Escribe una dirección" value="<?php echo $admin['direccion']; ?>">
+                  <label for="email">Email: </label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el email" value="<?php echo $admin['email']; ?>">
                 </div>
 
                 <!-- Teléfono -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Teléfono: </label>
-                  <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Escribe un teléfono" value="<?php echo $admin['telefono']; ?>">
+                  <label for="telefono">Teléfono: </label>
+                  <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el teléfono o celular" value="<?php echo $admin['telefono']; ?>">
                 </div>
 
-                <!-- Celular -->
+                <!-- Documento de identidad -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Celular: </label>
-                  <input type="text" class="form-control" id="celular" name="celular" placeholder="Escribe un celular" value="<?php echo $admin['celular']; ?>">
-                </div>
-
-                <!-- Fecha de Nacimiento -->
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Fecha de Nacimiento: </label>
-                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Escribe una fecha nacimiento" value="<?php echo $admin['nombre']; ?>">
+                  <label for="doc_ident">Documento de Identidad: </label>
+                  <input type="text" class="form-control" id="doc_ident" name="doc_ident" placeholder="Ingrese el documento de identidad" value="<?php echo $admin['nombre']; ?>">
                 </div>
 
                 <!-- Usuario -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Usuario: </label>
+                  <label for="usuario">Usuario: </label>
                   <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="<?php echo $admin['usuario']; ?>">
                 </div>
 
                 <!-- Password -->
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password: </label>
+                  <label for="password">Password: </label>
                   <input type="password" class="form-control" id="password" name="password" placeholder="Password para iniciar sesion">
                 </div>
 

@@ -1,6 +1,8 @@
 <?php
+
 /**
  * editado el 10/07/2020
+ * editado el 16/07/2020 01:10
  */
 ?>
 <?php
@@ -39,13 +41,13 @@ include_once '../../plantillas/cabecera-admin.php';
                 <!-- Apellido paterno -->
                 <div class="form-group">
                   <label for="apellidopa">Apellido Paterno: </label>
-                  <input type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Ingrese un apellido paterno">
+                  <input type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Ingrese el apellido paterno">
                 </div>
 
                 <!-- Apellido materno -->
                 <div class="form-group">
                   <label for="apellidoma">Apellido Materno: </label>
-                  <input type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Ingrese un apellido materno">
+                  <input type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Ingrese el apellido materno">
                 </div>
 
                 <!-- Email -->
@@ -54,28 +56,16 @@ include_once '../../plantillas/cabecera-admin.php';
                   <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el email">
                 </div>
 
-                <!-- Dirección -->
-                <div class="form-group">
-                  <label for="direccion">Dirección: </label>
-                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese una dirección">
-                </div>
-
                 <!-- Teléfono -->
                 <div class="form-group">
                   <label for="telefono">Teléfono: </label>
-                  <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un teléfono">
+                  <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el teléfono o celular">
                 </div>
 
-                <!-- Celular -->
+                <!-- Documento de identidad -->
                 <div class="form-group">
-                  <label for="celular">Celular: </label>
-                  <input type="text" class="form-control" id="celular" name="celular" placeholder="Ingrese un celular">
-                </div>
-
-                <!-- Fecha Nacimiento -->
-                <div class="form-group">
-                  <label for="nacimiento">Fecha Nacimiento: </label>
-                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingrese una Fecha">
+                  <label for="doc_ident">Documento de Identidad: </label>
+                  <input type="text" class="form-control" id="doc_ident" name="doc_ident" placeholder="Ingrese el documento de identidad">
                 </div>
 
                 <!-- Usuario -->
@@ -97,6 +87,7 @@ include_once '../../plantillas/cabecera-admin.php';
                   <span id="resultado_password" class="help-block"></span>
                 </div>
 
+                <!-- Nivel -->
                 <div class="form-group">
                   <label for="nivel">Nivel de usuario </label>
                   <select name="nivel" id="nivel" class="form-control">
