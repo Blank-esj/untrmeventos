@@ -79,10 +79,10 @@
       </div>
       <!--.menu-movil-->
       <nav class="navegacion-principal clearfix">
-        <a href="galeria.php">Galería</a>
-        <a href="calendario.php">Calendario</a>
-        <a href="invitados.php">Invitados</a>
-        <a href="registro.php">Registrate</a>
+        <a class="rounded" href="galeria.php">Galería</a>
+        <a class="rounded" href="calendario.php">Calendario</a>
+        <a class="rounded" href="invitados.php">Invitados</a>
+        <a class="rounded" href="registro.php">Registrate</a>
       </nav>
       <!--.navegacion-principal-->
     </div>
