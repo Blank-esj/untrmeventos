@@ -9,7 +9,7 @@
     //Código para insertar evento a la BD.
     if($_POST['registro'] == 'nuevo') {
         try {
-            $stmt = $conn->prepare("INSERT INTO categoria_evento (cat_evento, icono, editado) VALUES (?, ?, NOW()) ");
+            $stmt = $conn->prepare("INSERT INTO categoria_evento (cat_evento, icono) VALUES (?, ?) ");
             $stmt->bind_param("ss", $nombre_categoria, $icono);
             $stmt->execute();
             

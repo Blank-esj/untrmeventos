@@ -20,54 +20,35 @@
 
         if (document.getElementById('calcular')) {
 
+            let idplan;
+            let idArticulos = {};
+
             var regalo = document.getElementById('regalo');
+
+            var errorDiv = document.getElementById('error');
+
+            var lista_productos = document.getElementById('fila-resumen-articulo');
 
             //Campos datos usuario
             var nombre = document.getElementById('nombre');
             var apellidopa = document.getElementById('apellidopa');
             var apellidoma = document.getElementById('apellidoma');
             var email = document.getElementById('email');
+            var telefono = document.getElementById('telefono');
+            var doc_identidad = document.getElementById('doc_identidad');
+            var descripcion = document.getElementById('descripcion');
 
-            //Campos pases
-            var pase_dia = document.getElementById('pase_dia');
-            var pase_dosdias = document.getElementById('pase_dosdias');
-            var pase_completo = document.getElementById('pase_completo');
-
-            //mostrar en editar
-            var formulario_editar = document.getElementsByClassName('editar-registrado');
-            if (formulario_editar.length > 0) {
-                if (pase_dia.value || pase_dosdias.value || pase_completo.value) {
-                    mostrarDias();
-                }
-            }
-
-            //Botones y divs
-            var calcular = document.getElementById('calcular');
-            var errorDiv = document.getElementById('error');
-            var botonRegistro = document.getElementById('btnRegistro');
-
-            var lista_productos = document.getElementById('lista-productos');
-            var suma = document.getElementById('suma-total');
-
-            //Extras
-            var camisas = document.getElementById('camisa_evento');
-            var etiquetas = document.getElementById('etiquetas');
-
-            botonRegistro.disabled = true;
-
-
-            calcular.addEventListener('click', calcularMontos);
-
-            pase_dia.addEventListener('input', mostrarDias);
-            pase_dosdias.addEventListener('input', mostrarDias);
-            pase_completo.addEventListener('input', mostrarDias);
-
+            // Cuando se pierde el foco (evento "blur") de los siguientes elementos
+            // y no están validados mostrará una advertencia
             nombre.addEventListener('blur', validarCampos);
             apellidopa.addEventListener('blur', validarCampos);
             apellidoma.addEventListener('blur', validarCampos);
             email.addEventListener('blur', validarCampos);
+            telefono.addEventListener('blur', validarCampos);
+            doc_identidad.addEventListener('blur', validarCampos);
             email.addEventListener('blur', validarEmail);
 
+            // Se validarán los campos
             function validarCampos() {
                 if (this.value == '') {
                     errorDiv.style.display = 'block';
@@ -92,86 +73,153 @@
                 }
             }
 
-            function calcularMontos(event) {
-                event.preventDefault();
-                if (regalo.value === '') {
-                    alert('Debes elegir un regalo');
-                    regalo.focus();
+            // Hover con la sombra para los planes
+            $(".tabla-precio").hover(function () {
+                $(this).addClass("shadow-lg");
+            }, function () {
+                $(this).removeClass("shadow-lg");
+            });
+
+            // Si se selecciona un plan se obtiene el id de la etiqueta y cambia su color
+            $(".tabla-precio").click(function () {
+                $(".tabla-precio").css("background-color", "#fff"); // pone a todos de color blanco
+                $(this).css("background-color", "#dededf");
+                idplan = $(this).get(0).id;
+            });
+
+            $("#calcular").click(() => {
+                if (validarTodosCampos() == '') {
+                    calcularTotal();
                 } else {
-                    var boletosDia = parseInt(pase_dia.value, 10) || 0,
-                        boletos2Dias = parseInt(pase_dosdias.value, 10) || 0,
-                        boletoCompleto = parseInt(pase_completo.value, 10) || 0,
-                        cantCamisas = parseInt(camisas.value, 10) || 0,
-                        cantEtiquetas = parseInt(etiquetas.value, 10) || 0;
+                    alert('Completa ' + validarTodosCampos());
+                }
+            });
 
-                    var totalPagar = (boletosDia * 20) + (boletos2Dias * 40) + (boletoCompleto * 60) + ((cantCamisas * 10) * .93) + (cantEtiquetas * 2);
+            $('#btnRegistro').click(() => {
+                if (validarTodosCampos() == '') {
+                    calcularTotal();
+                    let regalo = ($('#regalo').get(0).value != '') ? $('#regalo').get(0).value : null;
 
-                    var listadoProductos = [];
+                    let resServidor; // varialbe a que almacena la respuesta del servidor
+                    $.post(
+                        "//localhost:8080/untrmeventos/modelo/modelo-registrado.php",
+                        {
+                            registro: 'nuevo',
+                            nombres: nombre.value,
+                            apellidopa: apellidopa.value,
+                            apellidoma: apellidoma.value,
+                            email: email.value,
+                            telefono: telefono.value,
+                            doc_identidad: doc_identidad.value,
+                            idplan: idplan,
+                            idregalo: regalo,
+                            descripcion: descripcion.value,
+                            articulos: idArticulos
+                        },
+                        (data, status) => {
+                            try {
+                                resServidor = JSON.parse(data);
+                                console.log(resServidor.otro);
+                            } catch (e) {
+                                resServidor = data;
+                            }
+                            console.log(resServidor);
+                            console.log(status);
+                            if (resServidor.respuesta == 'exito') {
+                                Swal.fire(
+                                    'Se registró correctamente',
+                                    'Id insertado: ' + resServidor,
+                                    status
+                                );
+                                /*setTimeout(function () {
+                                    window.location.href = '../home/admin-area.php';
+                                }, 2000);*/
+                            } else {
+                                Swal.fire(
+                                    'Lo siento, no se pudo registrar',
+                                    resServidor,
+                                    'error'
+                                )
+                            }
+                        }
+                    );
+                } else {
+                    alert('Completa ' + validarTodosCampos());
+                }
+            });
 
-                    if (boletosDia >= 1) {
-                        listadoProductos.push(boletosDia + ' Pases por día');
-                    }
-                    if (boletos2Dias >= 1) {
-                        listadoProductos.push(boletos2Dias + ' Pases por 2 días');
-                    }
-                    if (boletoCompleto >= 1) {
-                        listadoProductos.push(boletoCompleto + ' Pases Completos');
-                    }
-                    if (cantCamisas >= 1) {
-                        listadoProductos.push(cantCamisas + ' Camisas');
-                    }
-                    if (cantEtiquetas >= 1) {
-                        listadoProductos.push(cantEtiquetas + ' Etiquetas');
+            /*$.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: success,
+                dataType: dataType
+            });*/
+
+            /**
+             * Calcula el total a pagar sin que se pidan los datos al servidor.
+             * - Añade las filas a la tabla de resumen
+             */
+            function calcularTotal() {
+                let listadoProductos = [];
+                let listaArticulos = {}; // ID articulo y cantidad
+                try {
+                    let total = 0;
+                    for (let i = 0; i < $('.nombre-articulo').get().length; i++) {
+                        let fila = '';
+                        if (i == 0) {
+                            fila += '<tr> <td> 1 </td>' +
+                                '<td>' + $('.nombre-plan-' + idplan).get(i).innerHTML + '</td>' +
+                                '<td>' + $('.precio-plan-' + idplan).get(i).innerHTML + '</td> </tr>';
+                            total += $('.precio-plan-' + idplan).get(i).innerHTML * 1;
+                        }
+                        if ($('.cantidad-articulo').get(i).value > 0) {
+                            fila += '<tr> <td>' + $('.cantidad-articulo').get(i).value + '</td>' +
+                                '<td>' + $('.nombre-articulo').get(i).innerHTML + '</td>' +
+                                '<td>' + ' S/ ' + ($('.cantidad-articulo').get(i).value * $('.precio-articulo').get(i).innerHTML) + '</td> </tr>';
+
+                            total += $('.cantidad-articulo').get(i).value * $('.precio-articulo').get(i).innerHTML;
+
+                            // obtiene los IDs y cantidades de los articulos que tengan alguna cantidad
+                            listaArticulos[$('.cantidad-articulo').get(i).id] = $('.cantidad-articulo').get(i).value;
+                        }
+                        if (i == $('.nombre-articulo').get().length - 1) {
+                            fila += '<td style="text-align: center;" colspan="2"> <strong>Total</strong> </td>';
+                            fila += '<td> S/ ' + total + '</td>';
+                        }
+                        listadoProductos.push(fila);
                     }
 
-                    lista_productos.style.display = "block";
                     lista_productos.innerHTML = '';
-                    for (var i = 0; i < listadoProductos.length; i++) {
-                        lista_productos.innerHTML += listadoProductos[i] + '</br>';
-                    }
-                    suma.innerHTML = "S/ " + totalPagar.toFixed(2);
-
-                    botonRegistro.disabled = false;
-
-                    document.getElementById('total_pedido').value = totalPagar;
+                    listadoProductos.forEach(element => {
+                        lista_productos.innerHTML += element;
+                    });
+                    idArticulos = listaArticulos; // Le pasamos a la variable lo que tenga listaArticulos
+                } catch (e) {
+                    alert(e);
                 }
             }
 
-            function mostrarDias() {
-                var boletosDia = parseInt(pase_dia.value, 10) || 0,
-                    boletos2Dias = parseInt(pase_dosdias.value, 10) || 0,
-                    boletoCompleto = parseInt(pase_completo.value, 10) || 0;
+            /**
+             * Retorna el nombre del campo no válido.
+             * Si todos son válidos retorna un String vacío ''
+             */
+            function validarTodosCampos() {
+                if (idplan == null) return 'idPlan';
+                if (nombre.value == null || nombre.value == '') return 'Nombre';
+                if (apellidopa.value == null || apellidopa.value == '') return 'Apellido Paterno';
+                if (apellidoma.value == null || apellidoma.value == '') return 'Apellido Materno';
+                if (email.value == null || email.value == '') return 'Email';
+                if (telefono.value == null || telefono.value == '') return 'Telefono';
+                if (doc_identidad.value == null || doc_identidad.value == '') return 'Documento de Identidad';
+                return '';
+            }
 
-                console.log(boletoCompleto);
+            /**
+             * Obtine los hijos de la etiqueta y retorna sus IDs en un JSON
+             */
+            function obtenerArticulos() {
 
-                var diasElegidos = [];
-
-                if (boletosDia > 0) {
-                    diasElegidos.push('viernes');
-                    console.log(diasElegidos);
-                }
-                if (boletos2Dias > 0) {
-                    diasElegidos.push('viernes', 'sabado');
-                    console.log(diasElegidos);
-                }
-                if (boletoCompleto > 0) {
-                    diasElegidos.push('viernes', 'sabado', 'domingo');
-                    console.log(diasElegidos);
-                }
-                console.log(diasElegidos.length);
-
-                //Muestra los seleccionados
-                for (var i = 0; i < diasElegidos.length; i++) {
-                    document.getElementById(diasElegidos[i]).style.display = 'block';
-                }
-
-                //los oculta si vuelven a 0
-                if (diasElegidos.length == 0) {
-                    var todosDias = document.getElementsByClassName('contenido-dia');
-                    for (var i = 0; i < todosDias.length; i++) {
-                        todosDias[i].style.display = 'none';
-                    }
-                }
             }
         }
     }); //DOM CONTENT LOADED
