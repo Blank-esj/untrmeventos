@@ -178,7 +178,7 @@ include_once '../../../controlador/debug_to_console.php'
                           </div>
                           <div class="card-body">
                             <label for="regalo">Seleccione un regalo</label> <br>
-                            <select id="regalo" name="regalo" class="form-control m-6">
+                            <select id="regalo" name="regalo" required class="form-control m-6">
                               <option value="">-- Seleccione un regalo --</option>
                               <?php
                               try {
@@ -224,7 +224,7 @@ include_once '../../../controlador/debug_to_console.php'
 
                           </div>
                           <div class="box-footer">
-                            <button type="button" class="btn btn-primary" id="btnRegistro">Agregar</button>
+                            <button type="submit" class="btn btn-primary" id="btnRegistro">Agregar</button>
                           </div>
                         </div>
                       </div>

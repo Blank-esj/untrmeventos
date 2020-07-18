@@ -12,48 +12,46 @@ $doc_identidad = $_POST['doc_identidad'];
 $idplan = $_POST['idplan'];
 $idregalo = $_POST['idregalo'];
 $descripcion = $_POST['descripcion'];
-$articulos = json_encode($_POST['articulos']);
+$articulos = $_POST['articulos'];
 
 if ($_POST['registro'] == 'nuevo') {
     try {
-        $datos = array(
-            'nombres' => $nombres,
-            'apellidopa' => $apellidopa,
-            'apellidoma' => $apellidoma,
-            'email' => $email,
-            'telefono' => $telefono,
-            'doc_identidad' => $doc_identidad,
-            'idplan' => $idplan,
-            'idregalo' => $idregalo,
-            'descripcion' => $descripcion,
-            'articulos' => $articulos
-        );
+        /* crear una sentencia preparada */
+        $stmt = $conn->prepare("CALL sp_crear_boleto (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
-        // Especifica si se ha seleccionado un regalo
-        if (intval($idregalo)) {
-            // Se llama al procedimiento que crea un boleto
-            $stmt = $conn->prepare("CALL sp_crear_boleto (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
-
-            /* ligar parámetros para marcadores */
-            $stmt->bind_param("ssssssiis", $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad, $idplan, $idregalo, $descripcion);
-        } else {
-            // Se llama al procedimiento que crea un boleto SIN REGALO
-            $stmt = $conn->prepare("CALL sp_crear_boleto_sinregalo (?, ?, ?, ?, ?, ?, ?, ?) ");
-
-            /* ligar parámetros para marcadores */
-            $stmt->bind_param("ssssssis", $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad, $idplan, $descripcion);
-        }
+        /* ligar parámetros para marcadores */
+        $stmt->bind_param("ssssssiis", $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad, $idplan, $idregalo, $descripcion);
 
         /* ejecutar la consulta */
-        if ($stmt->execute()) {
+        $stmt->execute();
+
+        $id_insertado = $stmt->insert_id;
+
+        $temporal = $stmt->affected_rows;
+
+        if ($stmt->affected_rows) {
             $respuesta = array(
                 'respuesta' => 'exito',
-                'datos' => $datos
+                'id_insertado' => $id_insertado,
+                'otro' => $stmt,
+                'temporal' => $temporal,
+                'idregalo' => $idregalo,
+                'datos' => array(
+                    'nombres' => $nombres,
+                    'apellidopa' => $apellidopa,
+                    'apellidoma' => $apellidoma,
+                    'email' => $email,
+                    'telefono' => $telefono,
+                    'doc_identidad' => $doc_identidad,
+                    'idplan' => $idplan,
+                    'idregalo' => $idregalo,
+                    'descripcion' => $descripcion,
+                    'articulos' => $articulos
+                )
             );
         } else {
             $respuesta = array(
-                'respuesta' => 'error',
-                'datos' => $datos
+                'respuesta' => 'error'
             );
         }
         $stmt->close();
