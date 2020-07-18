@@ -98,8 +98,6 @@
             $('#btnRegistro').click(() => {
                 if (validarTodosCampos() == '') {
                     calcularTotal();
-                    let regalo = ($('#regalo').get(0).value != '') ? $('#regalo').get(0).value : null;
-
                     let resServidor; // varialbe a que almacena la respuesta del servidor
                     $.post(
                         "//localhost:8080/untrmeventos/modelo/modelo-registrado.php",
@@ -112,7 +110,7 @@
                             telefono: telefono.value,
                             doc_identidad: doc_identidad.value,
                             idplan: idplan,
-                            idregalo: regalo,
+                            idregalo: regalo.value,
                             descripcion: descripcion.value,
                             articulos: idArticulos
                         },
@@ -123,28 +121,17 @@
                             } catch (e) {
                                 resServidor = data;
                             }
+                            if (resServidor.respuesta == 'exito') {
+                                Swal.fire('Se registró correctamente', '', 'success');
+                            } else {
+                                Swal.fire('Lo siento, no se pudo registrar', '', 'error');
+                            }
                             console.log(resServidor);
                             console.log(status);
-                            if (resServidor.respuesta == 'exito') {
-                                Swal.fire(
-                                    'Se registró correctamente',
-                                    'Id insertado: ' + resServidor,
-                                    status
-                                );
-                                /*setTimeout(function () {
-                                    window.location.href = '../home/admin-area.php';
-                                }, 2000);*/
-                            } else {
-                                Swal.fire(
-                                    'Lo siento, no se pudo registrar',
-                                    resServidor,
-                                    'error'
-                                )
-                            }
                         }
                     );
                 } else {
-                    alert('Completa ' + validarTodosCampos());
+                    Swal.fire('Aviso', 'Completa ' + validarTodosCampos(), 'warning');
                 }
             });
 
@@ -213,13 +200,6 @@
                 if (telefono.value == null || telefono.value == '') return 'Telefono';
                 if (doc_identidad.value == null || doc_identidad.value == '') return 'Documento de Identidad';
                 return '';
-            }
-
-            /**
-             * Obtine los hijos de la etiqueta y retorna sus IDs en un JSON
-             */
-            function obtenerArticulos() {
-
             }
         }
     }); //DOM CONTENT LOADED
