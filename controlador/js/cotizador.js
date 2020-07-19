@@ -47,6 +47,7 @@
             telefono.addEventListener('blur', validarCampos);
             doc_identidad.addEventListener('blur', validarCampos);
             email.addEventListener('blur', validarEmail);
+            descripcion.addEventListener('blur', validarCampos);
 
             // Se validarán los campos
             function validarCampos() {
@@ -117,21 +118,20 @@
                         (data, status) => {
                             try {
                                 resServidor = JSON.parse(data);
-                                console.log(resServidor.otro);
                             } catch (e) {
                                 resServidor = data;
                             }
                             if (resServidor.respuesta == 'exito') {
-                                Swal.fire('Se registró correctamente', '', 'success');
+                                Swal.fire(resServidor.respuesta, resServidor.mensaje, 'success');
                             } else {
-                                Swal.fire('Lo siento, no se pudo registrar', '', 'error');
+                                Swal.fire(resServidor.respuesta, resServidor, 'error');
                             }
                             console.log(resServidor);
                             console.log(status);
                         }
                     );
                 } else {
-                    Swal.fire('Aviso', 'Completa ' + validarTodosCampos(), 'warning');
+                    Swal.fire('Aviso', validarTodosCampos(), 'warning');
                 }
             });
 
@@ -192,13 +192,14 @@
              * Si todos son válidos retorna un String vacío ''
              */
             function validarTodosCampos() {
-                if (idplan == null) return 'idPlan';
-                if (nombre.value == null || nombre.value == '') return 'Nombre';
-                if (apellidopa.value == null || apellidopa.value == '') return 'Apellido Paterno';
-                if (apellidoma.value == null || apellidoma.value == '') return 'Apellido Materno';
-                if (email.value == null || email.value == '') return 'Email';
-                if (telefono.value == null || telefono.value == '') return 'Telefono';
-                if (doc_identidad.value == null || doc_identidad.value == '') return 'Documento de Identidad';
+                if (idplan == null) return 'Selecciona un Plan';
+                if (nombre.value == null || nombre.value == '') return 'Completa el campo Nombre';
+                if (apellidopa.value == null || apellidopa.value == '') return 'Completa el campo Apellido Paterno';
+                if (apellidoma.value == null || apellidoma.value == '') return 'Completa el campo Apellido Materno';
+                if (email.value == null || email.value == '') return 'Completa el campo Email';
+                if (telefono.value == null || telefono.value == '') return 'Completa el campo Telefono';
+                if (doc_identidad.value == null || doc_identidad.value == '') return 'Completa el campo Documento de Identidad';
+                if (descripcion.value == null || descripcion.value == '') return 'Completa el campo Documento de Identidad';
                 return '';
             }
         }

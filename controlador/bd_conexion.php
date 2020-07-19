@@ -1,8 +1,10 @@
 <?php
- $conn = new mysqli('localhost', 'root', '1234', 'untrmeventos');
- 
- if ($conn->connect_error) {
-     echo $error -> $conn->connect_error;
- }
+include_once 'keys.php';
 
- $conn->set_charset("utf8");
+$conn = new mysqli($host, $user, $password, $database);
+
+if ($conn->connect_error) {
+    echo $error->$conn->connect_error;
+}
+
+$conn->set_charset("utf8");
