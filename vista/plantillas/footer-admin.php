@@ -19,8 +19,8 @@
   <script src="../../assets/js/fastclick.js"></script>
   <!-- AdminLTE App -->
   <script src="../../assets/js/adminlte.min.js"></script>
-  <!-- Alerta correct 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->
+  <!-- Alerta correct -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="../../assets/js/sweetalert2.min.js"></script>
   <script src="../../assets/js/sweetalert2.all.min.js"></script>
 

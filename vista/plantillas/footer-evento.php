@@ -82,5 +82,10 @@
       var $mcj = jQuery.noConflict(true);
     </script>
     <!--End mc_embed_signup-->
+
+    <!-- Alerta correct -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="vista/assets/js/sweetalert2.min.js"></script>
+    <script src="vista/assets/js/sweetalert2.all.min.js"></script>
   </div>
 </footer>
