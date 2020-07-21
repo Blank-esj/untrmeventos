@@ -23,10 +23,19 @@
           ?>
 
             <li>
-              <div style="cursor: pointer;" class="tabla-precio card  p-3 mb-5 rounded">
-                <h3><?php echo $plan['nombre']; ?></h3>
+              <div id="<?php echo $plan['idplan'] ?>" style="cursor: pointer;" class="tabla-precio card  p-3 mb-5 rounded">
+                <!-- Nombre del Plan -->
+                <h3 class="nombre-plan-<?php echo $plan['idplan'] ?>"><?php echo $plan['nombre']; ?></h3>
+
                 <p><?php echo $plan['descripcion']; ?></p>
-                <p class="numero">S/ <?php echo $plan['precio']; ?></p>
+
+                <!-- Precio del Plan -->
+                <p class="numero">
+                  S/
+                  <span class="precio-plan-<?php echo $plan['idplan'] ?>">
+                    <?php echo $plan['precio']; ?>
+                  </span>
+                </p>
                 <ul>
 
                   <?php
@@ -81,80 +90,117 @@
       <!--.Teléfono-->
       <div class="campo">
         <label for="telefono">Teléfono:</label>
-        <input class="form-control" type="number" id="telefono" name="telefono" placeholder="Escribe tu Teléfono">
+        <input class="form-control" type="text" id="telefono" name="telefono" placeholder="Escribe tu Teléfono">
       </div>
       <!--.Documento de Identidad-->
       <div class="campo">
         <label for="doc_identidad">Documento de Identidad:</label>
         <input class="form-control" type="text" id="doc_identidad" name="doc_identidad" placeholder="Escribe tu documento de identidad">
       </div>
+      <!--.Comentario-->
+      <div class="campo">
+        <label for="descripcion">Comentario:</label>
+        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Comentario">
+      </div>
       <!--.campo-->
       <div id="error"></div>
     </div>
 
-    <div id="resumen" class="resumen">
-      <h3>Pago y Extras</h3>
-      <div class="caja clearfix">
-        <div class="extras">
-          <!-- Articulos -->
-          <?php
-          try {
-            $sql = "SELECT * FROM articulo WHERE stock > 0";
-            $resul = $conn->query($sql);
-          } catch (Exception $e) {
-            $error = $e->getMessage();
-            echo $error;
-          }
-
-          while ($articulo = $resul->fetch_assoc()) {
-          ?>
-            <div class="orden">
-              <label for="<?php echo $articulo['idarticulo'] ?>"><?php echo $articulo['nombre_articulo'] . ' S/ ' . $articulo['precio'] . ', ' ?><small><?php echo $articulo['descripcion'] ?></small></label>
-              <input type="number" class="form-control" min="0" id="<?php echo $articulo['idarticulo'] ?>" size="3" placeholder="0">
+    <div id="resumen" class="resumen ">
+      <div class="box-header with-border">
+        <h3 class="box-title">Pagos y Extras</h3>
+      </div>
+      <br>
+      <div class="caja clearfix row">
+        <div class="extras col-md-4">
+          <div id="articulos" class="card">
+            <div class="card-header">
+              Articulos
             </div>
-          <?php
-          }
-          ?>
-
-          <!--.Regalos -->
-          <div class="orden">
-            <label for="regalo">Seleccione un regalo</label> <br>
-            <select id="regalo" name="regalo" required class="form-control seleccionar">
-              <option value="">-- Seleccione un regalo --</option>
+            <!-- Articulos -->
+            <div class="card-body">
               <?php
               try {
-                $sql = "SELECT * FROM regalo WHERE stock > 0";
+                $sql = "SELECT * FROM articulo WHERE stock > 0";
                 $resul = $conn->query($sql);
               } catch (Exception $e) {
                 $error = $e->getMessage();
                 echo $error;
               }
 
-              while ($regalo = $resul->fetch_assoc()) {
+              while ($articulo = $resul->fetch_assoc()) {
               ?>
-                <option value="<?php echo $regalo['idregalo'] ?>"><?php echo $regalo['nombre_regalo'] ?></option>
+                <div class="orden">
+                  <label for="<?php echo $articulo['idarticulo'] ?>">
+                    <small class="nombre-articulo"> <?php echo $articulo['nombre_articulo'] ?> </small>
+                    <small>S/</small>
+                    <small class="precio-articulo"> <?php echo $articulo['precio'] ?> </small>
+                    <small><?php echo $articulo['descripcion'] ?></small>
+                  </label>
+                  <input type="number" class="form-control m6 cantidad-articulo" min="0" id="<?php echo $articulo['idarticulo'] ?>" size="3" placeholder="0">
+                </div>
               <?php
               }
               ?>
-            </select>
+            </div>
+          </div>
+
+          <!--.Regalos -->
+          <div class="card orden">
+            <div class="card-header">
+              Regalo
+            </div>
+            <div class="card-body">
+              <label for="regalo">Seleccione un regalo</label> <br>
+              <select id="regalo" name="regalo" class="form-control m-6">
+                <option value="">-- Seleccione un regalo --</option>
+                <?php
+                try {
+                  $sql = "SELECT * FROM regalo WHERE stock > 0";
+                  $resul = $conn->query($sql);
+                } catch (Exception $e) {
+                  $error = $e->getMessage();
+                  echo $error;
+                }
+
+                while ($regalo = $resul->fetch_assoc()) {
+                ?>
+                  <option value="<?php echo $regalo['idregalo'] ?>"><?php echo $regalo['nombre_regalo'] ?></option>
+                <?php
+                }
+                ?>
+              </select>
+            </div>
           </div>
           <!--.Regalos-->
-
+          <br>
           <input type="button" id="calcular" class="button rounded" value="Calcular">
         </div>
         <!--.extras-->
-        <div class="total">
-          <p>Resumen:</p>
-          <div id="lista-productos">
+
+        <div class="total col-md-8">
+          <div class="card">
+            <div class="card-header">
+              Resumen
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Pedido</th>
+                    <th scope="col">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody id="fila-resumen-articulo">
+                </tbody>
+              </table>
+
+            </div>
+            <div class="box-footer">
+              <button type="button" class="button rounded" id="btnRegistro" value="pagar">Agregar</button>
+            </div>
           </div>
-          <!--#lista-productos-->
-          <p>Total:</p>
-          <div id="suma-total">
-          </div>
-          <!--#suma-total-->
-          <input class="form-control" type="hidden" name="total_pedido" id="total_pedido">
-          <input class="form-control" type="hidden" name="total_descuento" id="total_descuento" value="total_descuento">
-          <input id="btnRegistro" type="submit" name="submit" class="button rounded" value="Pagar">
         </div>
         <!--.total-->
       </div>

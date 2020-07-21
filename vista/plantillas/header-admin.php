@@ -7,6 +7,7 @@
   <title>UNTRM-Eventos | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
   <!-- Ionicons -->

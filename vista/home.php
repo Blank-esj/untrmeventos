@@ -26,7 +26,7 @@
                 ?>
                 <nav class="menu-programa">
                     <?php while ($cat = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
-                        <?php $categoria = $cat['cat_evento']; ?>
+                        <?php $categoria = $cat['categoria_evento']; ?>
                         <a href="#<?php echo strtolower($categoria) ?>">
                             <i class="fa <?php echo $cat['icono'] ?>" aria-hidden="true"></i> <?php echo $categoria ?>
                         </a>
@@ -144,7 +144,7 @@
             <!-- Eventos -->
             <?php
             try {
-                $sql = "CALL sp_cantidad_categoria_evento();";
+                $sql = "SELECT * FROM v_categoria_cantidad_evento;";
                 $resultado = $conn->query($sql);
             } catch (Exception $e) {
                 $error = $e->getMessage();
@@ -152,11 +152,11 @@
             $row = $resultado->fetch_all(MYSQLI_ASSOC);
             ?>
             <?php foreach ($row as $catego) : ?>
-                <?php if ($catego['cantidad'] > 0) : ?>
+                <?php if ($catego['categoria_evento'] > 0) : ?>
                     <li>
                         <p class="numero">
                             <?php echo $catego['cantidad'] ?>
-                        </p> <?php echo $catego['nombre'] ?>
+                        </p> <?php echo $catego['categoria_evento'] ?>
                     </li>
                 <?php endif; ?>
             <?php endforeach; ?>

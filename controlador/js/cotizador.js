@@ -92,7 +92,7 @@
                 if (validarTodosCampos() == '') {
                     calcularTotal();
                 } else {
-                    alert('Completa ' + validarTodosCampos());
+                    Swal.fire('Aviso', validarTodosCampos(), 'warning');
                 }
             });
 
@@ -103,7 +103,7 @@
                     $.post(
                         "//localhost:8080/untrmeventos/modelo/modelo-registrado.php",
                         {
-                            registro: 'nuevo',
+                            registro: $('#btnRegistro').get(0).value,
                             nombres: nombre.value,
                             apellidopa: apellidopa.value,
                             apellidoma: apellidoma.value,
@@ -124,7 +124,7 @@
                             if (resServidor.respuesta == 'exito') {
                                 Swal.fire(resServidor.respuesta, resServidor.mensaje, 'success');
                             } else {
-                                Swal.fire(resServidor.respuesta, resServidor, 'error');
+                                Swal.fire(resServidor.respuesta, resServidor.mensaje, 'error');
                             }
                             console.log(resServidor);
                             console.log(status);
@@ -183,7 +183,7 @@
                     });
                     idArticulos = listaArticulos; // Le pasamos a la variable lo que tenga listaArticulos
                 } catch (e) {
-                    alert(e);
+                    Swal.fire('Aviso', idplan, 'error');
                 }
             }
 

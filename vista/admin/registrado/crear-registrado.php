@@ -93,9 +93,16 @@ include_once '../../../controlador/debug_to_console.php'
 
                           <div id="<?php echo $plan['idplan'] ?>" class="card tabla-precio mb-5 rounded" style="cursor: pointer;">
                             <div class="card-header">
+
                               <h5 class="card-title nombre-plan-<?php echo $plan['idplan'] ?>"><?php echo $plan['nombre']; ?></h5>
+
                               <span class="badge badge-pill badge-primary">
-                                S/ <span class="precio-plan-<?php echo $plan['idplan'] ?>"><?php echo $plan['precio']; ?></span>
+                                S/
+
+                                <span class="precio-plan-<?php echo $plan['idplan'] ?>">
+                                  <?php echo $plan['precio']; ?>
+
+                                </span>
                               </span>
                             </div>
                             <div class="card-body">
@@ -224,7 +231,7 @@ include_once '../../../controlador/debug_to_console.php'
 
                           </div>
                           <div class="box-footer">
-                            <button type="button" class="btn btn-primary" id="btnRegistro">Agregar</button>
+                            <button type="button" class="btn btn-primary" id="btnRegistro" value="nuevo">Agregar</button>
                           </div>
                         </div>
                       </div>

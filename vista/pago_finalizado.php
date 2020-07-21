@@ -1,6 +1,5 @@
-<?php include_once '/plantillas/header-evento.php';
+<?php include_once 'plantillas/header-evento.php';
 
-use PayPal\Rest\ApiContext;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Payment;
 
@@ -46,4 +45,4 @@ require_once '../controlador/paypal/paypal.php';
   }
   ?>
 </section>
-<?php include_once '/plantillas/footer-evento.php'; ?>
+<?php include_once 'plantillas/footer-evento.php'; ?>
