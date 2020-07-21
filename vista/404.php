@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Page Not Found</title>
+    <title>Error</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -64,7 +64,7 @@
 <body>
     <h1>Página No Encontrada</h1>
     <img src="//localhost:8080/untrmeventos/vista/assets/img/logo.svg" alt="untrmeventos">
-    <p><a href="//localhost:8080/untrmeventos/vista/index.php"> Regresar al sitio </a></p>
+    <p><a href="home"> Regresar al sitio </a></p>
 </body>
 
 </html>

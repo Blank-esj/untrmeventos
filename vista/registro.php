@@ -1,5 +1,4 @@
-<?php include_once 'plantillas/header-evento.php'; ?>
-<?php include_once '../controlador/debug_to_console.php'; ?>
+<?php include_once 'controlador/debug_to_console.php'; ?>
 <section class="seccion container-fluid">
   <h2>Registro de Asistentes</h2>
   <form id="registro" class="registro" action="pagar.php" method="POST">
@@ -12,7 +11,7 @@
 
           <?php
           try {
-            require_once('../controlador/bd_conexion.php');
+            require_once('controlador/bd_conexion.php');
             $sql = "SELECT * FROM plan ORDER BY precio ASC;";
             $resultado = $conn->query($sql);
           } catch (Exception $e) {
@@ -166,4 +165,3 @@
   <!--#registro-->
 </section>
 <!--.seccion contenedor-->
-<?php include_once 'plantillas/footer-evento.php'; ?>

@@ -13,7 +13,7 @@ include_once '../../plantillas/header-admin.php';
 
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index.php"><b>UNTRM</b> - Eventos</a>
+      <a href="../../../index.php"><b>UNTRM</b> - Eventos</a>
     </div> <!-- /.login-logo -->
 
     <div class="login-box-body">

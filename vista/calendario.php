@@ -1,14 +1,8 @@
-<?php
-/**
- * Editado: 10/07/2020
- */
-?>
-<?php include_once 'plantillas/header-evento.php'; ?>
 <section class="seccion contenedor">
   <h2>Calendario de Eventos</h2>
   <?php
   try {
-    require_once('../controlador/bd_conexion.php');
+    require_once('controlador/bd_conexion.php');
     /** Traemos todos los eventos */
     $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombres, apellidopa, apellidoma";
     $sql .= "FROM evento ";
@@ -28,10 +22,10 @@
     //$calendario = array ();
     /** iteramos en cada evento */
     while ($eventos = $resultado->fetch_all(MYSQLI_ASSOC)) { ?>
-    <?php $fechaAnterior = "" ?>
-    <?php $fecha = "" ?>
+      <?php $fechaAnterior = "" ?>
+      <?php $fecha = "" ?>
       <?php foreach ($eventos as $evento) : ?>
-        <?php $fecha =  $evento['fecha_evento'];?>
+        <?php $fecha =  $evento['fecha_evento']; ?>
         <?php $dia_actual = $evento['fecha_evento']; ?>
         <?php if ($fecha != $fechaAnterior) : ?>
           <h3>
@@ -61,4 +55,3 @@
 <?php $conn->close(); ?>
 </section>
 <!--.seccion-->
-<?php include_once 'plantillas/footer-evento.php'; ?>

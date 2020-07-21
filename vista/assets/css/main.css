@@ -148,7 +148,7 @@ h2 {
 h2::after {
   content: "";
   margin: 0 auto;
-  background-image: url(../img/separador.png);
+  background-image: url(../assets/img/separador.png);
   height: 30px;
   width: 100px;
   display: block;
@@ -316,6 +316,7 @@ nav.navegacion-principal a {
   text-align: center;
   margin-bottom: 20px;
   clear: both;
+  position: relative;
 }
 nav.navegacion-principal a:hover {
   background-color: #fe4918;
@@ -528,7 +529,7 @@ div.contador {
   height: auto;
 }
 div.contador::before {
-  background-image: url(../img/bg-resumen.jpg);
+  background-image: url(vista/assets/img/bg-resumen.jpg);
   content: "";
 }
 ul.resumen-evento {
@@ -619,7 +620,7 @@ div.newsletter {
   height: auto;
 }
 div.newsletter::before {
-  background-image: url(../img/bg-newsletter.jpg);
+  background-image: url(../assets/img/bg-newsletter.jpg);
   content: "";
 }
 div.newsletter .contenido {
@@ -702,15 +703,18 @@ p.copyright {
   display: flex;
   flex-wrap: wrap;
 }
+.galeria1 lu {
+  margin: 100% auto;
+}
 .galeria1 li {
-  margin: 8px;
+  margin: 8px auto;
   flex-wrap: nowrap;
 }
 .galeria1 img {
   width: 196px;
   height: 150px;
-  border-radius: 4px;
-  border: 2px solid #ffffff;
+  border-radius: 5px;
+  border: 2px solid #f7f5f5;
 }
 
 /** Registro **/
