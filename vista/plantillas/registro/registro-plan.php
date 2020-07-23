@@ -84,9 +84,9 @@
 
                             <form action="" method="post">
 
-                                <input type="hidden" name="id" id="idplan" value="<?php echo openssl_encrypt($plan['idplan'], COD, KEY) ?>">
-                                <input type="hidden" name="nombre" id="nombreplan" value="<?php echo openssl_encrypt($plan['nombre'], COD, KEY) ?>">
-                                <input type="hidden" name="precio" id="precioplan" value="<?php echo openssl_encrypt($plan['precio'], COD, KEY) ?>">
+                                <input type="hidden" name="id" value="<?php echo openssl_encrypt($plan['idplan'], COD, KEY) ?>">
+                                <input type="hidden" name="nombre" value="<?php echo openssl_encrypt($plan['nombre'], COD, KEY) ?>">
+                                <input type="hidden" name="precio" value="<?php echo openssl_encrypt($plan['precio'], COD, KEY) ?>">
 
                                 <div class="text-center">
                                     <button class="btn btn-outline-light" type="submit" name="registrarAsistente" value="seleccionaPlan">

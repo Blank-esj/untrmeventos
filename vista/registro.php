@@ -1,19 +1,13 @@
 <?php
 include 'modelo/modelo-registrado.php';
 include 'controlador/bd_conexion.php';
+//$sesion = new Sesion(); // Instanciamos la clase Sesion
 ?>
 
 <section class="seccion container-fluid">
   <h2>Registro de Asistentes</h2>
 
-  <?php echo var_dump($_SESSION); ?>
-
-  <?php include_once 'plantillas/registro/registro-plan.php' ?>
-  <?php include_once 'plantillas/registro/registro-asistentes.php' ?>
-  <?php include_once 'plantillas/registro/registro-extras.php' ?>
-  <?php include_once 'plantillas/registro/registro-pago.php' ?>
-
-  <!--<ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+  <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <a class="nav-link active" id="tab-planes" data-toggle="pill" href="#pill-planes" role="tab" aria-controls="pill-planes" aria-selected="true">
         <i class="material-icons">psychology</i>
@@ -41,17 +35,17 @@ include 'controlador/bd_conexion.php';
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active container-fluid" id="pill-planes" role="tabpanel" aria-labelledby="tab-planes">
-      
+      <?php include_once 'plantillas/registro/registro-plan.php' ?>
     </div>
     <div class="tab-pane fade container-fluid" id="pills-asistentes" role="tabpanel" aria-labelledby="tab-asistentes">
-    
+      <?php include_once 'plantillas/registro/registro-extras.php' ?>
     </div>
     <div class="tab-pane fade container-fluid" id="pills-extras" role="tabpanel" aria-labelledby="tab-extras">
-      
+      <?php include_once 'plantillas/registro/registro-asistentes.php' ?>
     </div>
     <div class="tab-pane fade container-fluid" id="pills-pago" role="tabpanel" aria-labelledby="tab-pago">
-      
+      <?php include_once 'plantillas/registro/registro-pago.php' ?>
     </div>
-  </div>-->
+  </div>
 
 </section>

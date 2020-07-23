@@ -18,7 +18,6 @@
 
                     <?php
                     // Card para mostrar los card con los planes seleccionados
-                    $sesion = new Sesion();
                     // Pregunta si existe algún plan en la sesión
                     if ($sesion->leerPlanes() !== null) {
                         foreach ($sesion->leerPlanes() as $idPlan => $arrayPlan) { ?>
