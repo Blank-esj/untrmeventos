@@ -978,7 +978,7 @@ section.admin nav a:hover,
 
 /* TABLA REGISTRADOS */
 table td {
-  border: 1px solid #999999;
+  /*border: 1px solid #999999; Para que no se muestren los bordes en la tabla en carrito*/
   border-collapse: collapse;
   padding: 20px;
 }
