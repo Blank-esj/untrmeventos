@@ -10,5 +10,4 @@
         return isset($_SESSION['usuario']); //Revisa que exista el usuario en SESSION.
         //Si existe retorna TRUE sino FALSE.
     }
-    session_start();
     usuario_autenticado();

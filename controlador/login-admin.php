@@ -17,7 +17,6 @@ if (isset($_POST['login-admin'])) {
                 //Compara el password con el hash
                 if (password_verify($password, $password_admin)) {
                     //Si es correcto, iniciamos sesión.
-                    session_start();
                     $_SESSION['usuario'] = $usuario_admin;
                     $_SESSION['nombre'] = $nombre_admin;
                     $_SESSION['nivel'] = $nivel;

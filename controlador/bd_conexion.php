@@ -1,7 +1,7 @@
 <?php
-include_once 'keys.php';
+include_once 'global/config.php';
 
-$conn = new mysqli($host, $user, $password, $database);
+$conn = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
 
 if ($conn->connect_error) {
     echo $error->$conn->connect_error;

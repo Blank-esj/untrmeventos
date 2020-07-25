@@ -36,7 +36,6 @@
             var email = document.getElementById('email');
             var telefono = document.getElementById('telefono');
             var doc_identidad = document.getElementById('doc_identidad');
-            var descripcion = document.getElementById('descripcion');
 
             // Cuando se pierde el foco (evento "blur") de los siguientes elementos
             // y no están validados mostrará una advertencia
@@ -47,7 +46,6 @@
             telefono.addEventListener('blur', validarCampos);
             doc_identidad.addEventListener('blur', validarCampos);
             email.addEventListener('blur', validarEmail);
-            descripcion.addEventListener('blur', validarCampos);
 
             // Se validarán los campos
             function validarCampos() {
@@ -112,7 +110,6 @@
                             doc_identidad: doc_identidad.value,
                             idplan: idplan,
                             idregalo: regalo.value,
-                            descripcion: descripcion.value,
                             articulos: idArticulos
                         },
                         (data, status) => {
@@ -199,7 +196,6 @@
                 if (email.value == null || email.value == '') return 'Completa el campo Email';
                 if (telefono.value == null || telefono.value == '') return 'Completa el campo Telefono';
                 if (doc_identidad.value == null || doc_identidad.value == '') return 'Completa el campo Documento de Identidad';
-                if (descripcion.value == null || descripcion.value == '') return 'Completa el campo Documento de Identidad';
                 return '';
             }
         }

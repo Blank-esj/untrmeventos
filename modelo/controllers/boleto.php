@@ -58,16 +58,15 @@ class ControladorBoleto
             $post['telefono'],
             $post['doc_identidad'],
             $post['idplan'],
-            $post['idregalo'],
-            $post['descripcion']
+            $post['idregalo']
         );
 
-        $consulta = "CALL sp_crear_boleto (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $consulta = "CALL sp_crear_boleto (?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Si $idregalo no es entero cambiamos de procedimiento almacenado y quitamos del array $datos el elemento $idregalo
         if (!intval($post['idregalo'])) {
-            $consulta = "CALL sp_crear_boleto_sinregalo (?, ?, ?, ?, ?, ?, ?, ?)";
-            array_splice($datos, 7, 1); // eliminamos el idregalo del array $datos
+            $consulta = "CALL sp_crear_boleto_sinregalo (?, ?, ?, ?, ?, ?, ?)";
+            array_splice($datos, 6, 1); // eliminamos el idregalo del array $datos
         }
 
         $sentenciaBoleto =  $conexion->prepare($consulta); // Preparamos la consulta

@@ -62,11 +62,6 @@ include_once '../../../controlador/debug_to_console.php'
                     <input data-toggle="tooltip" data-placement="top" title="Tooltip on top" type="text" class="form-control m6" id="doc_identidad" name="doc_identidad" placeholder="Documento de Identidad">
                   </div>
 
-                  <!-- Comentario -->
-                  <div class="form-group col-md-6">
-                    <label for="descripcion">Comentario:</label>
-                    <input data-toggle="tooltip" data-placement="top" title="Tooltip on top" type="text" class="form-control m6" id="descripcion" name="descripcion" placeholder="Comentario">
-                  </div>
                   <div id="error"></div>
                 </div>
 
@@ -106,8 +101,7 @@ include_once '../../../controlador/debug_to_console.php'
                               </span>
                             </div>
                             <div class="card-body">
-                              <p class="card-text"><?php echo $plan['descripcion']; ?></p>
-
+                              
                               <?php
                               try {
                                 $sql = "SELECT nombre FROM plan_beneficio pb, beneficio b WHERE pb.idplan = " . $plan['idplan'] . " AND pb.idbeneficio = b.idbeneficio ORDER BY nombre ASC;";
@@ -168,7 +162,6 @@ include_once '../../../controlador/debug_to_console.php'
                                   <small class="nombre-articulo"> <?php echo $articulo['nombre_articulo'] ?> </small>
                                   <small>S/</small>
                                   <small class="precio-articulo"> <?php echo $articulo['precio'] ?> </small>
-                                  <small><?php echo $articulo['descripcion'] ?></small>
                                 </label>
                                 <input type="number" class="form-control m6 cantidad-articulo" min="0" id="<?php echo $articulo['idarticulo'] ?>" size="3" placeholder="0">
                               </div>

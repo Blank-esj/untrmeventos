@@ -31,6 +31,30 @@
   <script src="vista/assets/js/vendor/modernizr-3.7.1.min.js"></script>
   <!-- Bootstrap 4.5 -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <!-- Boton Paypal -->
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+  <style>
+    /* Media query for mobile viewport */
+    @media screen and (max-width: 400px) {
+      #paypal-button-container {
+        width: 100%;
+      }
+    }
+
+    /* Media query for desktop viewport */
+    @media screen and (min-width: 400px) {
+      #paypal-button-container {
+        width: 250px;
+        display: inline-block;
+      }
+    }
+  </style>
+  <!-- Boton Paypal -->
+
+  <!-- Material Desing Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <?php
