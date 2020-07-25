@@ -11,7 +11,7 @@
 </button>
 
 <!-- Modal -->
-<div class="modal-dialog modal-dialog-scrollable modal-sm">
+<div class="modal-dialog modal-dialog-scrollable modal-sm" style="margin: 0;">
     <div class="modal fade" id="staticBackdropResumen" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropResumenLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -51,7 +51,7 @@
                             // Card para mostrar los card con los planes seleccionados
                             // Pregunta si existe algún plan en la sesión
                             //$sesion = new Sesion();
-                            if ($sesion->leerPlanes() !== null) {
+                            if ($sesion->leerPlanes() !== null && count($sesion->leerPlanes()) > 0) {
                                 foreach ($sesion->leerPlanes() as $idPlan => $arrayPlan) { ?>
 
                                     <!-- Cards de los planes -->
@@ -68,37 +68,45 @@
 
                                         <!-- Asistentes -->
                                         <?php
-                                        $sesion = new Sesion();
                                         if ($sesion->leerAsistentesPlan($idPlan) !== null) {
+
+                                            $regalos = $regalo->arrayNombres($conexion); // traemos una array ordenado en clave (idregalo) y valor (nombre_regalo)
+
                                             foreach ($sesion->leerAsistentesPlan($idPlan) as $indice => $arrayAsistente) { ?>
 
+                                                <?php if ($arrayAsistente[N_DOC_IDENTIDAD_ASISTENTE] != "" || $arrayAsistente[N_DOC_IDENTIDAD_ASISTENTE] != null) { ?>
 
-                                                <a class="btn btn-light text-left" data-toggle="collapse" href="#coll-<?php echo $idPlan . "-" . $indice ?>" role="button" aria-expanded="false" aria-controls="coll-<?php echo $idPlan . "-" . $indice ?>">
-                                                    <?php echo $arrayAsistente[N_NOMBRE_ASISTENTE] . " " . $arrayAsistente[N_APELLIDOPA_ASISTENTE] . " " . $arrayAsistente[N_APELLIDOMA_ASISTENTE] ?>
-                                                </a>
+                                                    <a class="btn btn-light text-left" data-toggle="collapse" href="#coll-<?php echo $idPlan . "-" . $indice ?>" role="button" aria-expanded="false" aria-controls="coll-<?php echo $idPlan . "-" . $indice ?>">
+                                                        <?php echo $arrayAsistente[N_NOMBRE_ASISTENTE] . " " . $arrayAsistente[N_APELLIDOPA_ASISTENTE] . " " . $arrayAsistente[N_APELLIDOMA_ASISTENTE] ?>
+                                                    </a>
 
-                                                <div class="collapse" id="coll-<?php echo $idPlan . "-" . $indice ?>">
-                                                    <ul class="list-group list-group-flush">
+                                                    <div class="collapse" id="coll-<?php echo $idPlan . "-" . $indice ?>">
+                                                        <ul class="list-group list-group-flush">
 
-                                                        <li class="list-group-item text-muted">
-                                                            <?php echo $arrayAsistente[N_EMAIL_ASISTENTE] ?>
-                                                        </li>
+                                                            <li class="list-group-item text-muted align-middle">
+                                                                <i class="material-icons" style="color: #fe4918;">contact_mail</i>
+                                                                <?php echo $arrayAsistente[N_EMAIL_ASISTENTE] ?>
+                                                            </li>
 
-                                                        <li class="list-group-item text-muted">
-                                                            <?php echo $arrayAsistente[N_TELEFONO_ASISTENTE] ?>
-                                                        </li>
+                                                            <li class="list-group-item text-muted">
+                                                                <i class="material-icons" style="color: #fe4918;">contact_phone</i>
+                                                                <?php echo $arrayAsistente[N_TELEFONO_ASISTENTE] ?>
+                                                            </li>
 
-                                                        <li class="list-group-item text-muted">
-                                                            <?php echo $arrayAsistente[N_DOC_IDENTIDAD_ASISTENTE] ?>
-                                                        </li>
+                                                            <li class="list-group-item text-muted align-middle">
+                                                                <i class="material-icons" style="color: #fe4918;">perm_identity</i>
+                                                                <?php echo $arrayAsistente[N_DOC_IDENTIDAD_ASISTENTE] ?>
+                                                            </li>
 
-                                                        <li class="list-group-item text-muted">
-                                                            <?php echo $regalo->leerNombreRegalo($conexion, (int)$arrayAsistente[N_REGALO_ASISTENTE][N_ID_REGALO]); ?>
-                                                        </li>
+                                                            <li class="list-group-item text-muted">
+                                                                <i class="material-icons" style="color: #fe4918;">redeem</i>
+                                                                <?php echo $regalos[(int)$arrayAsistente[N_REGALO_ASISTENTE][N_ID_REGALO]]; ?>
+                                                            </li>
 
-                                                    </ul>
-                                                </div>
+                                                        </ul>
+                                                    </div>
 
+                                                <?php } ?>
 
                                             <?php }
                                         } else { ?>
@@ -131,11 +139,11 @@
                             <?php
                             // Card para mostrar los card con los extras seleccionados
                             // Pregunta si existe algún extra en la sesión
-                            if ($sesion->leerArticulos() !== null) {
+                            if ($sesion->leerArticulos() !== null && count($sesion->leerArticulos()) > 0) {
                                 foreach ($sesion->leerArticulos() as $idArticulo => $arrayArticulo) { ?>
 
                                     <!-- Cards de los planes -->
-                                    <div class="card" style="margin-top: .2rem;">
+                                    <div class="card border-0" style="margin-top: .2rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">
                                                 <?php echo $sesion->leerNombreArticulo($idArticulo) ?>

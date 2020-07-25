@@ -97,33 +97,52 @@ if (isset($_POST['registro'])) {
         case 'disminuirUnArticulo':
             // Desencriptamos el id
             $id = (int)openssl_decrypt($_POST['id'], COD, KEY);
+            $nombre = openssl_decrypt($_POST['nombre'], COD, KEY);
+            $stock = (int)openssl_decrypt($_POST['stock'], COD, KEY);
 
             // Verificamos que sea válido
+            // Si es válido se disminuirá o eliminará del carrito
+            // Sino se mostrará un mensaje
             if (is_numeric($id)) {
+
+                // Si el articulo ya ha sido agregado solo se restará la cantidad
+                // Sino mostrará un mensaje indicando que el articulo no existe
                 if ($sesion->existeArticulo($id)) {
 
+                    // Leemos la cantidad guardada en la sesión
                     $cantidad = (float)$sesion->leerCantidadArticulo($id);
 
-                    /**
-                     * Evaluamos si la cantidad de stock es menor a la cantidad que le estamos pasando
-                     * Si es menor se sumará "1" a la cantidad del articulo
-                     * Sino no hará nada y mostrará un mensaje informando esto
-                     */
-
-                    if ($cantidad <=  $stock) {
-                        $sesion->sumarCantidadArticulo($id, 1);
-                        $mensaje = "Se agregó 1 <strong>" . $nombre . "</strong> a su carrito";
+                    if ($cantidad > 0 && $stock > 0 && $stock >= $cantidad) {
+                        if ($cantidad > 1) {
+                            $sesion->sumarCantidadArticulo($id, -1);
+                            $mensaje = "Ha disminuido un <strong>" . $nombre . "</strong> de su carrito";
+                        } else {
+                            $sesion->eliminarArticulo($id);
+                            $mensaje = "Se ha borrado <strong>" . $nombre . "</strong> de su carrito";
+                        }
                     } else {
-                        $mensaje = "Lo siento ya no hay <strong>" . $nombre . "</strong>";
+                        // Sabiendo que: f(x) = y + x;
+                        // Donde; "x" es el sumando e "y" es cantidad
+                        // Entonces...
+                        if (0 >= $cantidad || $stock < $cantidad) {
+                            // cantidad se iguala a la stock
+                            // f(x) = y + (x-y);
+                            $sesion->sumarCantidadArticulo($id, ($stock - $cantidad));
+                            $mensaje = "Se igualó su cantidad a la del stock actual";
+                        } else if (0 >= $stock) {
+                            // Cantidad se iguala a 0
+                            // f(x) = y + (-y);
+                            $sesion->sumarCantidadArticulo($id, -$cantidad);
+                            $mensaje = "<strong>" . $nombre .  "</strong> se igualó su cantidad a 0";
+                        }
                     }
                 } else {
-                    $sesion->agregarArticulo($id, $nombre, $precio, 1);
-                    $mensaje = "Se agregó <strong>" . $nombre . "</strong> a su carrito";
+                    $mensaje = "Este articulo aún no ha sido agregado";
                 }
             } else {
                 $mensaje .= "Upps... algo pasa con el id <br/>";
             }
-            echo var_dump($_SESSION[SESION]);
+            // echo var_dump($_SESSION[SESION]);
             break;
         case 'actualizarAsistente':
             // Desencriptamos los datos
@@ -166,11 +185,12 @@ if (isset($_POST['registro'])) {
             break;
 
         case 'borrarAsistente':
-            $id = openssl_decrypt($_POST['indice'], COD, KEY);
+            $indice = openssl_decrypt($_POST['indice'], COD, KEY);
             $id = openssl_decrypt($_POST['id'], COD, KEY);
 
             if (validaActualizarAsistente($id, $indice, $mensaje)) {
                 $sesion->eliminarAsistente($id, $indice);
+                $mensaje = "Asistente tachado";
             }
 
             break;

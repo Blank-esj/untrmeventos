@@ -31,11 +31,16 @@ include 'modelo/modelo-registrado.php';
       </a>
     </li>
 
-    <?php if ($sesion->existeAsistentes()) { ?>
+    <?php
+    $totalPedidos = $sesion->cantidadTotal();
+    if ($sesion->existeAsistentes() || $totalPedidos > 0) { ?>
       <li class="nav-item" role="presentation">
         <a class="nav-link" id="tab-pago" data-toggle="pill" href="#pills-pago" role="tab" aria-controls="pills-pago" aria-selected="false">
           <i class="material-icons">shopping_cart</i>
           Carrito
+          <span class="rounded-circle badge badge-success">
+            <?php echo $totalPedidos ?>
+          </span>
         </a>
       </li>
     <?php } ?>

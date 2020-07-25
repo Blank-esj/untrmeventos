@@ -13,30 +13,31 @@
 
                         <div class="col mb-4">
                             <div class="card">
-                                <form action="" method="post">
 
-                                    <div class="card-header">
-                                        <?php echo $arrayAsistente[N_NOMBRE_ASISTENTE] ?>
+                                <?php
+                                $idFormActualizar = openssl_encrypt($indice . "" . $idPlan, COD, KEY);
+                                $idFormEliminar = openssl_encrypt($indice, COD, KEY);
+                                ?>
 
-                                        <button class="btn btn-outline-light text-right" type="submit" name="registrarAsistente" value="actualizarAsistente" data-toggle="tooltip" data-placement="bottom" title="Actualizar Asistente">
-                                            <i class="material-icons" style="color: #fe4918;">update</i>
-                                        </button>
-                                        <!--
-                                    <form action="" method="post">
+                                <div class="card-header">
 
-                                        
-                                        <input type="hidden" name="indice" value="<?php //openssl_encrypt($indice, COD, KEY) 
-                                                                                    ?>">
-                                        <input type="hidden" name="id" value="<?php //openssl_encrypt($idPlan, COD, KEY) 
-                                                                                ?>">
+                                    <?php echo $arrayAsistente[N_NOMBRE_ASISTENTE] ?>
 
-                                        <button class="btn btn-outline-light" type="submit" name="registrarAsistente" value="borrarAsistente" data-toggle="tooltip" data-placement="bottom" title="Borrar Asistente">
-                                            <i class="material-icons" style="color: #fe4918;">delete</i>
+                                    <button form="<?php echo $idFormEliminar ?>" class="btn btn-outline-light" type="submit" name="registrarAsistente" value="borrarAsistente" data-toggle="tooltip" data-placement="bottom" title="Borrar Asistente">
+                                        <i class="material-icons" style="color: #fe4918;">delete</i>
+                                    </button>
 
-                                        </button>
-                                    </form>
-                                        -->
-                                    </div>
+                                    <button form="<?php echo $idFormActualizar ?>" class="btn btn-outline-light text-right" type="submit" name="registrarAsistente" value="actualizarAsistente" data-toggle="tooltip" data-placement="bottom" title="Actualizar Asistente">
+                                        <i class="material-icons" style="color: #fe4918;">update</i>
+                                    </button>
+
+                                </div>
+                                <form id="<?php echo $idFormEliminar ?>" action="" method="post">
+                                    <input type="hidden" name="indice" value="<?php echo openssl_encrypt($indice, COD, KEY) ?>">
+                                    <input type="hidden" name="id" value="<?php echo openssl_encrypt($idPlan, COD, KEY) ?>">
+                                </form>
+
+                                <form id="<?php echo $idFormActualizar ?>" action="" method="post">
 
                                     <div class="card-body">
                                         <div class="campo">
@@ -103,6 +104,7 @@
                                     </div>
 
                                 </form>
+
                             </div>
                         </div>
 

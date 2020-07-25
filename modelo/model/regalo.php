@@ -20,11 +20,11 @@ class RegaloModelo
     {
         $idsRegalos = [];
         $sentencia = $conexion->query('SELECT idregalo FROM regalo;');
-        
+
         foreach ($sentencia->fetchAll(PDO::FETCH_ASSOC) as $indice => $arreglo) {
             $idsRegalos[$indice] = $arreglo['idregalo'];
         }
-        
+
         $sentencia->closeCursor();
 
         return $idsRegalos;
@@ -38,11 +38,27 @@ class RegaloModelo
         return in_array($this->leerIdsRegalo($conexion), $idsRegalo);
     }
 
-    public function leerNombreRegalo($conexion, $idsRegalo){
+    /**
+     * Hace una consulta a la base de datos solicitando el nombre por el id que le pases por parámetro
+     */
+    public function leerNombreRegalo($conexion, $idsRegalo)
+    {
         $sentencia = $conexion->prepare('SELECT nombre_regalo FROM regalo WHERE idregalo = :idregalo;');
         $sentencia->bindParam(':idregalo', $idsRegalo, PDO::PARAM_INT);
         $sentencia->execute();
-        
+
         return $sentencia->fetchAll(PDO::FETCH_ASSOC)[0]['nombre_regalo'];
+    }
+
+    /**
+     * 
+     */
+    public function arrayNombres($conexion)
+    {
+        $nombres = [];
+        foreach ($this->leerRegalos($conexion) as $indice => $arreglo) {
+            $nombres[$arreglo['idregalo']] = $arreglo['nombre_regalo'];
+        }
+        return $nombres;
     }
 }

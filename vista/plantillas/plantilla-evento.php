@@ -127,6 +127,10 @@ if ($pagina == 'invitados' || $pagina == 'home') {
 <script>
   $(function() {
     $('[data-toggle="tooltip"]').tooltip()
+  });
+
+  $(function() {
+    $('[data-toggle="popover"]').popover()
   })
 </script>
 

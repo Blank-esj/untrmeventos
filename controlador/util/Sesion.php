@@ -350,7 +350,11 @@ class Sesion
      */
     public function eliminarPlan($idPlan)
     {
-        unset($_SESSION[SESION][N_PLANES][$idPlan]);
+        if (count($_SESSION[SESION][N_PLANES]) === 1) {
+            unset($_SESSION[SESION][N_PLANES]);
+        } else {
+            unset($_SESSION[SESION][N_PLANES][$idPlan]);
+        }
     }
 
     /**
@@ -360,7 +364,19 @@ class Sesion
      */
     public function eliminarAsistente($idPlan, $indice)
     {
-        array_splice($this->leerAsistentesPlan($idPlan), $indice, 1);
+        if (count($this->leerAsistentesPlan($idPlan)) <= 1) {
+            $this->eliminarPlan($idPlan);
+        } else {
+            array_splice($_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN], $indice, 1);
+        }
+    }
+
+    /**
+     * Devuelve true si hay articulos agregados de lo contrario retorna false
+     */
+    public function existeArticulos()
+    {
+        return ($this->leerArticulos() !== null) ? true : false;
     }
 
     /**
@@ -371,7 +387,6 @@ class Sesion
     public function eliminarRegalo($idPlan, $indice)
     {
         unset($_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_REGALO_ASISTENTE]);
-        //$this->leerAsistente($idPlan, $indice)[N_REGALO_ASISTENTE];
     }
 
     /**
@@ -381,6 +396,70 @@ class Sesion
      */
     public function eliminarArticulo($idArticulo)
     {
-        unset($this->leerArticulos()[$idArticulo]);
+        unset($_SESSION[SESION][N_ARTICULOS][$idArticulo]);
+    }
+
+
+    /**
+     * 
+     * Devuelve un array con los subtotales de plan y articulos, un ejemplo a continuación
+     * ```
+     * [0] => [
+     *  "nombre" => "Todos los días + combo",
+     *  "tipo" => "Plan",
+     *  "cantidad" => 4,
+     *  "precio" => 350,
+     *  "subtotal" => 1400,
+     * ],
+     * [1] => [
+     *  "nombre" => "Camisa",
+     *  "tipo" => "Articulo",
+     *  "cantidad" => 8,
+     *  "precio" => 50,
+     *  "subtotal" => 400,
+     * ];
+     * ```
+     * 
+     */
+    public function subtotal()
+    {
+        $subtotal = [];
+        $indice = 0;
+        if ($this->existePlanes()) {
+            foreach ($this->leerPlanes() as $idPlan => $arrayPlan) {
+                $subtotal[$indice] = [
+                    "nombre" => $arrayPlan[N_NOMBRE_PLAN],
+                    "tipo" => N_PLANES,
+                    "cantidad" => count($arrayPlan[N_ASISTENTES_PLAN]),
+                    "precio" => $arrayPlan[N_PRECIO_PLAN],
+                    "subtotal" => ($arrayPlan[N_PRECIO_PLAN] * count($arrayPlan[N_ASISTENTES_PLAN]))
+                ];
+                $indice++;
+            }
+        }
+
+        if ($this->existeArticulos()) {
+            foreach ($this->leerArticulos() as $idArticulo => $arrayArticulo) {
+                $subtotal[$indice] = [
+                    "nombre" => $arrayArticulo[N_NOMBRE_ARTICULO],
+                    "tipo" => N_ARTICULOS,
+                    "cantidad" => $arrayArticulo[N_CANTIDAD_ARTICULO],
+                    "precio" => $arrayArticulo[N_PRECIO_ARTICULO],
+                    "subtotal" => ($arrayArticulo[N_PRECIO_ARTICULO] * $arrayArticulo[N_CANTIDAD_ARTICULO])
+                ];
+                $indice++;
+            }
+        }
+
+        return $subtotal;
+    }
+
+    public function cantidadTotal()
+    {
+        $total = 0;
+        foreach (array_column($this->subtotal(), "cantidad") as $key => $value) {
+            $total += $value;
+        }
+        return $total;
     }
 }

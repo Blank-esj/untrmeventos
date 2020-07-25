@@ -1,4 +1,4 @@
-<div class="barra">
+<div class="barra" style="z-index: 3;">
     <div class="contenedor clearfix">
         <div class="logo">
             <a href="home">

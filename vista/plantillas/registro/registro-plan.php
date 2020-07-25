@@ -81,7 +81,7 @@
 
                                 <div class="text-center">
                                     <button class="btn btn-outline-light" type="submit" name="registrarAsistente" value="seleccionaPlan" data-toggle="tooltip" data-placement="bottom" title="Añadir un Asistente">
-                                        <i class="material-icons" style="color: #fe4918;">add_shopping_cart</i>
+                                        <i class="material-icons" style="color: #fe4918;">person_add_alt_1</i>
                                     </button>
                                 </div>
                             </form>

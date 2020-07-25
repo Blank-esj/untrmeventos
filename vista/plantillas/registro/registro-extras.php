@@ -23,26 +23,26 @@
         while ($articulo = $resul->fetch_assoc()) {
         ?>
             <div class="col mb-2">
-                <div class="card h-100 tabla-precio">
-                    <img title="Camisa" alt="Camisa" class="card-img-top" src="https://www.dhresource.com/0x0/f2/albu/g7/M00/CA/73/rBVaSVuvjaKAR-lMAAHTwIMKsmw793.jpg" data-toggle="popover" data-trigger="hover" data-content="<?php echo $articulo['descripcion'] ?>">
+
+                <div class="card h-100 tabla-precio" style="padding: 0;">
+
+                    <img title="<?php echo $articulo['nombre_articulo'] ?>" alt="<?php echo $articulo['nombre_articulo'] ?>" class="card-img-top" src="https://http2.mlstatic.com/pc-gamer-i7-8-nucleos-16gb-video-4gb-ggdr6-480ssd-D_NQ_NP_861621-MPE42305674906_062020-V.webp" data-toggle="popover" data-trigger="hover" data-content="<?php echo $articulo['descripcion'] ?>">
+
                     <div class="card-body">
 
-                        <h5 class="card-title">$ <?php echo $articulo['precio'] ?></h5>
+                        <h5 class="card-title text-left">$ <?php echo $articulo['precio'] ?></h5>
 
-                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $articulo['nombre_articulo'] ?></h6>
+                        <h6 class="card-subtitle mb-2 text-muted text-left"><?php echo $articulo['nombre_articulo'] ?></h6>
 
-                        <p class="card-text"><?php echo $articulo['descripcion'] ?></p>
-                    </div>
-                    <div class="card-footer">
+                        <div class="text-right">
 
-                        <form action="" method="post">
+                            <form action="" method="post">
 
-                            <input type="hidden" name="id" value="<?php echo openssl_encrypt($articulo['idarticulo'], COD, KEY) ?>">
-                            <input type="hidden" name="nombre" value="<?php echo openssl_encrypt($articulo['nombre_articulo'], COD, KEY) ?>">
-                            <input type="hidden" name="precio" value="<?php echo openssl_encrypt($articulo['precio'], COD, KEY) ?>">
-                            <input type="hidden" name="stock" value="<?php echo openssl_encrypt($articulo['stock'], COD, KEY) ?>">
+                                <input type="hidden" name="id" value="<?php echo openssl_encrypt($articulo['idarticulo'], COD, KEY) ?>">
+                                <input type="hidden" name="nombre" value="<?php echo openssl_encrypt($articulo['nombre_articulo'], COD, KEY) ?>">
+                                <input type="hidden" name="precio" value="<?php echo openssl_encrypt($articulo['precio'], COD, KEY) ?>">
+                                <input type="hidden" name="stock" value="<?php echo openssl_encrypt($articulo['stock'], COD, KEY) ?>">
 
-                            <div class="text-center">
                                 <?php
                                 /**
                                  * Almacenamos la cantidad del articulo actual en la variable $cantidadArticuloSesion
@@ -52,45 +52,50 @@
                                  */
                                 $cantidadArticuloSesion = $sesion->leerCantidadArticulo($articulo['idarticulo']);
                                 if ($cantidadArticuloSesion === null || $cantidadArticuloSesion <= 0) { ?>
-                                    <button class="btn btn-outline-light" type="button" disabled>
-                                        <i class="material-icons" style="color: #fe4918;">remove_shopping_cart</i>
-                                    </button>
-                                <?php } else { ?>
-                                    <button class="btn btn-outline-light" type="submit" name="registrarAsistente" value="disminuirUnArticulo">
-                                        <i class="material-icons" style="color: #fe4918;">remove_shopping_cart</i>
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="No puedo quitar más">
+                                        <button class="btn" style="padding: 0px; border: 0; pointer-events: none;" type="button" disabled>
+                                            <i class="material-icons" style="color: #fe4918; font-size: initial;">remove_shopping_cart</i>
                                         </button>
-                                    <?php } ?>
-
-                                    <span class="badge badge-light">
-                                        <?php
-                                        /**
-                                         * Si la cantidad del articulo en la sesion es nula o menor o igual a 0 se mostrará 0
-                                         * Sino se imprimirá el valor de la variable
-                                         */
-
-                                        echo ($cantidadArticuloSesion === null || $cantidadArticuloSesion <= 0) ? 0 : $cantidadArticuloSesion
-                                        ?>
                                     </span>
+                                <?php } else { ?>
+                                    <button class="btn" type="submit" style="padding: 0px; border: 0; " name="registrarAsistente" value="disminuirUnArticulo" data-toggle="tooltip" data-placement="bottom" title="Quitar del carrito">
+                                        <i class="material-icons" style="color: #fe4918; font-size: initial;" style="color: #fe4918;">remove_shopping_cart</i>
+                                    </button>
+                                <?php } ?>
 
+                                <span class=" text-nowrap badge badge-light">
                                     <?php
                                     /**
-                                     * Preguntamos si la cantidad del articulo es menor que el stock actual del articulo
-                                     * Si lo es mostrorá el botón para que pueda realizar la petición POST
-                                     * Sino mostrará un boton simple y desactivado
+                                     * Si la cantidad del articulo en la sesion es nula o menor o igual a 0 se mostrará 0
+                                     * Sino se imprimirá el valor de la variable
                                      */
-                                    if ($cantidadArticuloSesion < $articulo['stock']) { ?>
-                                        <button class="btn btn-outline-light" type="submit" name="registrarAsistente" value="aumentarUnArticulo">
-                                            <i class="material-icons" style="color: #fe4918;">add_shopping_cart</i>
-                                        </button>
-                                    <?php } else { ?>
-                                        <button class="btn btn-outline-light" type="button" disabled>
-                                            <i class="material-icons" style="color: #fe4918;">add_shopping_cart</i>
-                                        </button>
-                                    <?php } ?>
 
-                            </div>
-                        </form>
+                                    echo ($cantidadArticuloSesion === null || $cantidadArticuloSesion <= 0) ? 0 : $cantidadArticuloSesion
+                                    ?>
+                                </span>
 
+                                <?php
+                                /**
+                                 * Preguntamos si la cantidad del articulo es menor que el stock actual del articulo
+                                 * Si lo es mostrorá el botón para que pueda realizar la petición POST
+                                 * Sino mostrará un boton simple y desactivado
+                                 */
+                                if ($cantidadArticuloSesion < $articulo['stock']) { ?>
+                                    <button class="btn" style="padding: 0px; border: 0;" type="submit" name="registrarAsistente" value="aumentarUnArticulo" data-toggle="tooltip" data-placement="bottom" title="Agrega al carrito">
+                                        <i class="material-icons" style="color: #fe4918; font-size: initial;" style="color: #fe4918;">add_shopping_cart</i>
+                                    </button>
+                                <?php } else { ?>
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="No hay stock">
+                                        <button class="btn" style="padding: 0px; border: 0; pointer-events: none;" type="button" disabled>
+                                            <i class="material-icons" style="color: #fe4918; font-size: initial;" style="color: #fe4918;">add_shopping_cart</i>
+                                        </button>
+                                    </span>
+                                <?php } ?>
+
+
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>

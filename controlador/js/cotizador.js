@@ -18,7 +18,8 @@
                 .openTooltip()*/;
         }
 
-        if (document.getElementById('datos_usuario')) {
+        if (document.getElementsByClassName('doc_identidad')) {
+
             //Campos datos usuario
             var nombre = document.getElementsByClassName('nombre');
             var apellidopa = document.getElementsByClassName('apellidopa');

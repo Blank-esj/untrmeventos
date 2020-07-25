@@ -8,7 +8,7 @@
 
 <section class="programa">
     <div class="contenedor-img">
-        <img src="vista/assets/img/bg-talleres.jpg">
+        <img style="width: 100%;" src="vista/assets/img/bg-talleres.jpg">
     </div>
     <!--.contenedor-img-->
     <div class="contenido-programa">
