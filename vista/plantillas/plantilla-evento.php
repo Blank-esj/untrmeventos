@@ -18,13 +18,12 @@
   <link rel="stylesheet" href="vista/assets/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
-  <link rel="stylesheet" href="vista/assets/css/lightbox.min.css">
+  <link rel="stylesheet" href="vista/assets/css/lightbox.css">
   <?php
-  $archivo = basename($_SERVER['PHP_SELF']);
+  $archivo = basename($_SERVER['REQUEST_URI']);
   $pagina = str_replace(".php", "", $archivo);
-  if ($pagina == 'invitados' || $pagina == 'home') {
-    echo '
-  <link rel="stylesheet" href="vista/assets/css/colorbox.css">';
+  if ($pagina == 'invitados' || $pagina == 'home' || $pagina == 'untrmeventos') {
+    echo '<link rel="stylesheet" href="vista/assets/css/colorbox.css">';
   }
   ?>
   <link rel="stylesheet" href="vista/assets/css/main.css">
@@ -59,12 +58,11 @@ include 'vista/plantillas/footer-evento.php';
 </script>
 <script src="vista/assets/js/plugins.js"></script>
 <script src="vista/assets/js/jquery.animateNumber.min.js"></script>
-<script src="vista/assets/js/lightbox-plus-jquery.min.js"></script>
-<script src="vista/assets/js/lightbox.min.js"></script>
+<script src="vista/assets/js/lightbox.js"></script>
 <?php
-$archivo = basename($_SERVER['PHP_SELF']);
+$archivo = basename($_SERVER['REQUEST_URI']);
 $pagina = str_replace(".php", "", $archivo);
-if ($pagina == 'invitados' || $pagina == 'index') {
+if ($pagina == 'invitados' || $pagina == 'home') {
   echo '<script src="vista/assets/js/jquery.colorbox-min.js"></script>';
   echo '<script src="vista/assets/js/jquery.waypoints.min.js"></script>';
 }

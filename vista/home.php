@@ -18,7 +18,7 @@
                 <?php
                 try {
                     require_once('controlador/bd_conexion.php');
-                    $sql = "SELECT * FROM v_categoria_cantidad_evento ";
+                    $sql = "SELECT * FROM  v_detalle_evento; ";
                     $resultado = $conn->query($sql);
                 } catch (Exception $e) {
                     $error = $e->getMessage();
@@ -26,7 +26,7 @@
                 ?>
                 <nav class="menu-programa">
                     <?php while ($cat = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
-                        <?php $categoria = $cat['categoria_evento']; ?>
+                        <?php $categoria = $cat['cat_evento']; ?>
                         <a href="#<?php echo strtolower($categoria) ?>">
                             <i class="fa <?php echo $cat['icono'] ?>" aria-hidden="true"></i> <?php echo $categoria ?>
                         </a>
@@ -37,7 +37,7 @@
                 try {
                     require_once('controlador/bd_conexion.php');
                     /** guardamos en la variable "row" todos los IDs de categoria*/
-                    $sql = "SELECT id_categoria FROM untrmeventos.categoria_evento ORDER BY id_categoria;";
+                    $sql = "SELECT id_categoria FROM categoria_evento ORDER BY id_categoria; ";
                     $resultado = $conn->query($sql);
                     $row = $resultado->fetch_all(MYSQLI_ASSOC);
                     $i = 0;

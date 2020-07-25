@@ -4,17 +4,12 @@
   try {
     require_once('controlador/bd_conexion.php');
     /** Traemos todos los eventos */
-    $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, icono, nombres, apellidopa, apellidoma";
-    $sql .= "FROM evento ";
-    $sql .= "INNER JOIN categoria_evento ";
-    $sql .= "ON evento.id_cat_evento = categoria_evento.id_categoria ";
-    $sql .= "INNER JOIN persona ";
-    $sql .= "ON evento.id_inv = persona.idpersona ";
-    $sql .= "ORDER BY fecha_evento ";
+    $sql = "SELECT * FROM v_detalle_evento ORDER BY fecha_evento ASC; ";
     /** Y lo guardamos en la variable resultado */
     $resultado = $conn->query($sql);
   } catch (Exception $e) {
     $error = $e->getMessage();
+    echo $error;
   }
   ?>
   <div class="calendario">

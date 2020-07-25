@@ -148,7 +148,7 @@ h2 {
 h2::after {
   content: "";
   margin: 0 auto;
-  background-image: url(../assets/img/separador.png);
+  background-image: url(../../assets/img/separador.png);
   height: 30px;
   width: 100px;
   display: block;
@@ -428,7 +428,7 @@ nav.menu-programa a.activo::after {
   margin-right: auto;
   height: 20px;
   width: 30px;
-  background-image: url(../img/talleres-flecha.jpg);
+  background-image: url(../../assets/img/talleres-flecha.jpg);
   background-position: top center;
   background-repeat: no-repeat;
   bottom: -20px;
@@ -529,7 +529,7 @@ div.contador {
   height: auto;
 }
 div.contador::before {
-  background-image: url(vista/assets/img/bg-resumen.jpg);
+  background-image: url(../../assets/img/bg-resumen.jpg);
   content: "";
 }
 ul.resumen-evento {
@@ -620,7 +620,7 @@ div.newsletter {
   height: auto;
 }
 div.newsletter::before {
-  background-image: url(../assets/img/bg-newsletter.jpg);
+  background-image: url(../../assets/img/bg-newsletter.jpg);
   content: "";
 }
 div.newsletter .contenido {
@@ -695,9 +695,9 @@ p.copyright {
 }
 
 /** INTERNAS **/
-/** Conferencia **/
+/** Galeria **/
 .navegacion-principal .activo {
-  border-bottom: 2px solid #fe4918;
+  border-bottom: 3px solid #fe4918;
 }
 .galeria1 {
   display: flex;
