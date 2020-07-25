@@ -69,31 +69,33 @@
                  */
                 do {
                     $resultado = $conn->store_result();
-                    $row = $resultado->fetch_all(MYSQLI_ASSOC);
+                    if ($resultado !== false) {
+                        $row = $resultado->fetch_all(MYSQLI_ASSOC);
                 ?>
-                    <?php $i = 0; ?>
-                    <!-- 2 primeros detalles de este evento -->
-                    <?php foreach ($row as $evento) : ?>
-                        <?php if ($i == 0) { ?>
-                            <div id="<?php echo strtolower($evento['cat_evento']) ?>" class="info-curso ocultar clearfix">
-                            <?php } ?>
-                            <div class="detalle-evento">
-                                <h3><?php echo html_entity_decode($evento['nombre_evento']) ?></h3>
-                                <p><i class="fas fa-clock" aria-hidden="true"></i> <?php echo $evento['hora_evento']; ?></p>
-                                <p><i class="fas fa-calendar" aria-hidden="true"></i> <?php echo $evento['fecha_evento']; ?></p>
-                                <p><i class="fas fa-user" aria-hidden="true"></i> <?php echo $evento['nombre_invitado']; ?></p>
-                                <!--.detalle-evento-->
-                                <?php if ($i == count($row) - 1) : ?>
-                            </div>
-                            <!-- boton ver todos -->
-                            <a href="calendario.php" class="button float-right">Ver todos</a>
-                        <?php endif; ?>
-                            </div>
-                            <!--#talleres-->
-                            <?php $i++; ?>
-                        <?php endforeach; ?>
-                        <?php $resultado->free(); ?>
-                    <?php } while ($conn->more_results() && $conn->next_result()); ?>
+                        <?php $i = 0; ?>
+                        <!-- 2 primeros detalles de este evento -->
+                        <?php foreach ($row as $evento) : ?>
+                            <?php if ($i == 0) { ?>
+                                <div id="<?php echo strtolower($evento['cat_evento']) ?>" class="info-curso ocultar clearfix">
+                                <?php } ?>
+                                <div class="detalle-evento">
+                                    <h3><?php echo html_entity_decode($evento['nombre_evento']) ?></h3>
+                                    <p><i class="fas fa-clock" aria-hidden="true"></i> <?php echo $evento['hora_evento']; ?></p>
+                                    <p><i class="fas fa-calendar" aria-hidden="true"></i> <?php echo $evento['fecha_evento']; ?></p>
+                                    <p><i class="fas fa-user" aria-hidden="true"></i> <?php echo $evento['nombre_invitado']; ?></p>
+                                    <!--.detalle-evento-->
+                                    <?php if ($i == count($row) - 1) : ?>
+                                </div>
+                                <!-- boton ver todos -->
+                                <a href="calendario.php" class="button float-right">Ver todos</a>
+                            <?php endif; ?>
+                                </div>
+                                <!--#talleres-->
+                                <?php $i++; ?>
+                            <?php endforeach; ?>
+                            <?php $resultado->free(); ?>
+                    <?php }
+                } while ($conn->more_results() && $conn->next_result()); ?>
             </div>
             <!--.programa-evento-->
         </div>
