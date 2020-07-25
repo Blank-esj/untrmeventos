@@ -7,10 +7,10 @@ if (isset($_POST['login-admin'])) {
 
     try {
         include_once 'funciones-admin.php';
-        $stmt = $conn->prepare("SELECT idpersona, usuario, nombre_completo, password, editado, nivel FROM v_admins WHERE usuario = ?;");
+        $stmt = $conn->prepare("SELECT idpersona, usuario, nombre_completo, password, fecha_actualizacion, nivel FROM v_admins WHERE usuario = ?;");
         $stmt->bind_param("s", $usuario);
         $stmt->execute();
-        $stmt->bind_result($id_admin, $usuario_admin, $nombre_admin, $password_admin, $editado, $nivel);
+        $stmt->bind_result($id_admin, $usuario_admin, $nombre_admin, $password_admin, $fecha_actualizacion, $nivel);
         if ($stmt->affected_rows) {
             $existe = $stmt->fetch(); //imprime los resultados y almacena en la variable.
             if ($existe) { //Validamos si existe contenido de la variable.

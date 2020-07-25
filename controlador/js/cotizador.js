@@ -18,24 +18,16 @@
                 .openTooltip()*/;
         }
 
-        if (document.getElementById('calcular')) {
-
-            let idplan;
-            let idArticulos = {};
-
-            var regalo = document.getElementById('regalo');
+        if (document.getElementById('datos_usuario')) {
+            //Campos datos usuario
+            var nombre = document.getElementsByClassName('nombre');
+            var apellidopa = document.getElementsByClassName('apellidopa');
+            var apellidoma = document.getElementsByClassName('apellidoma');
+            var email = document.getElementsByClassName('email');
+            var telefono = document.getElementsByClassName('telefono');
+            var doc_identidad = document.getElementsByClassName('doc_identidad');
 
             var errorDiv = document.getElementById('error');
-
-            var lista_productos = document.getElementById('fila-resumen-articulo');
-
-            //Campos datos usuario
-            var nombre = document.getElementById('nombre');
-            var apellidopa = document.getElementById('apellidopa');
-            var apellidoma = document.getElementById('apellidoma');
-            var email = document.getElementById('email');
-            var telefono = document.getElementById('telefono');
-            var doc_identidad = document.getElementById('doc_identidad');
 
             // Cuando se pierde el foco (evento "blur") de los siguientes elementos
             // y no están validados mostrará una advertencia
@@ -71,6 +63,21 @@
                     errorDiv.style.border = '1px solid red';
                 }
             }
+
+        }
+
+
+        if (document.getElementById('calcular')) {
+
+            let idplan;
+            let idArticulos = {};
+
+            var regalo = document.getElementById('regalo');
+
+
+            var lista_productos = document.getElementById('fila-resumen-articulo');
+
+
 
             // Hover con la sombra para los planes
             $(".tabla-precio").hover(function () {

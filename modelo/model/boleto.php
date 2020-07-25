@@ -1,6 +1,6 @@
 <?php
 
-class ControladorBoleto
+class BoletoModelo
 {
     /**
      * Guarda un boleto considerando los articulos
@@ -127,7 +127,7 @@ class ControladorBoleto
         foreach ($arrayArticulo as $idarticulo => $cantidad) {
             $sentenciaArticulos->execute(array((string)$idarticulo));
             array_push(
-                $nombresPrecios, 
+                $nombresPrecios,
                 ($sentenciaArticulos->fetchAll(PDO::FETCH_ASSOC))[0]
             );
             $sentenciaArticulos->closeCursor();
@@ -135,6 +135,7 @@ class ControladorBoleto
 
         return $nombresPrecios;
     }
+
 }
 
 /*

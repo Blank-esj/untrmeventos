@@ -16,7 +16,7 @@ class PagarBoleto
             require 'paypal.php';
             $conn = $conexionBD->conectarPDO();
             try {
-                  $boleto = new ControladorBoleto();
+                  $boleto = new BoletoModelo();
                   $compra = new Payer();
                   $pedidoPlan = new Item(); // creamos un objeto Item para el Plan
                   $pedidoArticulo = new Item();

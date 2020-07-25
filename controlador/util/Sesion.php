@@ -1,0 +1,386 @@
+<?php
+class Sesion
+{
+    public function __construct()
+    {
+    }
+
+    private function sesion()
+    {
+        return $_SESSION[SESION];
+    }
+
+    /**
+     * Retorna TRUE si existe el array raiz creado
+     * Sino retorna FALSE
+     */
+    public function existe(): bool
+    {
+        return isset($_SESSION[SESION]);
+    }
+
+    /**Leer todos los planes */
+    public function leerPlanes()
+    {
+        return $this->sesion()[N_PLANES];
+    }
+
+    /** Lee un plan pasandole su ID */
+    public function leerPlan($idPlan)
+    {
+        return $this->leerPlanes()[$idPlan];
+    }
+
+    /** lee el nombre de un plan pasandole su ID */
+    public function leerNombrePlan($idPlan)
+    {
+        return $this->leerPlan($idPlan)[N_NOMBRE_PLAN];
+    }
+
+    /** lee el precio de un plan pasandole su ID */
+    public function leerPrecioPlan($idPlan)
+    {
+        return $this->leerPlan($idPlan)[N_PRECIO_PLAN];
+    }
+
+    /** lee todos los asistentes de un plan pasandole su ID */
+    public function leerAsistentesPlan($idPlan)
+    {
+        return $this->leerPlan($idPlan)[N_ASISTENTES_PLAN];
+    }
+
+    /** lee el asistente de un plan pasandole su ID */
+    public function leerAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistentesPlan($idPlan)[$indice];
+    }
+
+    /** lee el indice que contiene al array asistente de un plan pasandole su ID del plan y el indice
+     * que contiene ese asistente
+     */
+    public function leerDocIdentidadAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistente($idPlan, $indice)[N_DOC_IDENTIDAD_ASISTENTE];
+    }
+
+    /** lee el nombre de asistente de un plan pasandole su ID del plan y el indice
+     * que contiene ese asistente
+     */
+    public function leerNombreAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistente($idPlan, $indice)[N_NOMBRE_ASISTENTE];
+    }
+
+    /** lee el Apellido Paterno de asistente de un plan pasandole su 
+     * ID del plan y el indice que contiene al array asistente
+     */
+    public function leerApellidoPaAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistente($idPlan, $indice)[N_APELLIDOPA_ASISTENTE];
+    }
+
+    /** lee el Apellido Materno de asistente de un plan pasandole su 
+     * ID del plan y el indice que contiene al array asistente
+     */
+    public function leerApellidoMaAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistente($idPlan, $indice)[N_APELLIDOMA_ASISTENTE];
+    }
+
+    /** lee el Email de asistente de un plan pasandole su 
+     * ID del plan y el indice que contiene al array asistente
+     */
+    public function leerEmailAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistente($idPlan, $indice)[N_EMAIL_ASISTENTE];
+    }
+
+    /** lee el Telefono de asistente de un plan pasandole su 
+     * ID del plan y el indice que contiene al array asistente
+     */
+    public function leerTelefonoAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistente($idPlan, $indice)[N_TELEFONO_ASISTENTE];
+    }
+
+    /** lee el Regalo de un asistente de un plan pasandole su 
+     * ID del plan y el indice que contiene al array asistente
+     */
+    public function leerRegaloAsistente($idPlan, $indice)
+    {
+        return $this->leerAsistente($idPlan, $indice)[N_REGALO_ASISTENTE];
+    }
+
+    /** lee el Id de un regalo pasandole su 
+     * ID del plan y el indice que contiene al array asistente
+     */
+    public function leerIdRegalo($idPlan, $indice)
+    {
+        return $this->leerRegaloAsistente($idPlan, $indice)[N_ID_REGALO];
+    }
+
+    /** lee todos los articulos
+     */
+    public function leerArticulos()
+    {
+        return $this->sesion()[N_ARTICULOS];
+    }
+
+    /** lee un articulo pasandole su Id
+     */
+    public function leerArticulo($idArticulo)
+    {
+        return $this->leerArticulos()[$idArticulo];
+    }
+
+    /** lee nombre de un articulo pasandole si Id
+     */
+    public function leerNombreArticulo($idArticulo)
+    {
+        return $this->leerArticulo($idArticulo)[N_NOMBRE_ARTICULO];
+    }
+
+    /** lee cantidad de un articulo pasandole si Id
+     */
+    public function leerCantidadArticulo($idArticulo)
+    {
+        return $this->leerArticulo($idArticulo)[N_CANTIDAD_ARTICULO];
+    }
+
+    /** lee precio de un articulo pasandole si Id
+     */
+    public function leerPrecioArticulo($idArticulo)
+    {
+        return $this->leerArticulo($idArticulo)[N_PRECIO_ARTICULO];
+    }
+
+    //  ----------------------------------------------------------
+
+    /** agrega un plan a la lista pasandole el idPlan. Cuando el usuario le da click al card plan.
+     * @param string $idPlan id del plan
+     * @param string $nombre nombre del plan
+     * @param float $precio precio del plan
+     * @param array $asistentes asistentes del plan
+     * ```
+     * // Ejemplo
+     * "idPlan" => array (
+     *      "nombre" => nombre,
+     *      "precio" => precio,
+     *      "asistentes" => array ()
+     * )
+     * ```
+     */
+    public function agregarPlan($idPlan, $nombre, $precio)
+    {
+        $_SESSION[SESION][N_PLANES][$idPlan][N_NOMBRE_PLAN] = $nombre;
+        $_SESSION[SESION][N_PLANES][$idPlan][N_PRECIO_PLAN] = $precio;
+
+        if ($this->existeAsistentesPlan($idPlan)) {
+            $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][count($_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN])] =
+                [
+                    N_DOC_IDENTIDAD_ASISTENTE => "",
+                    N_NOMBRE_ASISTENTE => "",
+                    N_APELLIDOPA_ASISTENTE => "",
+                    N_APELLIDOMA_ASISTENTE => "",
+                    N_EMAIL_ASISTENTE => "",
+                    N_TELEFONO_ASISTENTE => ""
+                ];
+        } else {
+            $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][0] =
+                [
+                    N_DOC_IDENTIDAD_ASISTENTE => "",
+                    N_NOMBRE_ASISTENTE => "",
+                    N_APELLIDOPA_ASISTENTE => "",
+                    N_APELLIDOMA_ASISTENTE => "",
+                    N_EMAIL_ASISTENTE => "",
+                    N_TELEFONO_ASISTENTE => ""
+                ];
+        }
+    }
+
+    /** 
+     * Agrega un asistente a un plan a la lista pasandole el id del plan y el indice que contiene al array asistente
+     * @param string $idPlan id del plan
+     * @param string $indice Documento de identidad del asisitente
+     * @param string $nombre Nombre del Asistente
+     * @param string $apellidopa Apellido Paterno
+     * @param string $apellidoma Apellido Materno
+     * @param string $email Email del asistente
+     * @param string $telefono Telefono del asistente
+     * @param array $regalo Array del regalo
+     * ```
+     * // Ejemplo
+     * "64392348" => (
+     *     "nombre" => "Jhon Doe",
+     *     "apellidopa" => "Cupertino",
+     *     "apellidoma" => "Davez",
+     *     "email" => "jhondoecuper@gmail.com",
+     *     "telefono" => "965785432",
+     *     "regalo" => array()
+     * )
+     * ```
+     */
+    public function agregarAsistente(
+        $idPlan,
+        $indice,
+        $doc_identidad,
+        $nombre,
+        $apellidopa,
+        $apellidoma,
+        $email,
+        $telefono
+    ) {
+        $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_DOC_IDENTIDAD_ASISTENTE] = $doc_identidad;
+        $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_NOMBRE_ASISTENTE] = $nombre;
+        $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_APELLIDOPA_ASISTENTE] = $apellidopa;
+        $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_APELLIDOMA_ASISTENTE] = $apellidoma;
+        $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_EMAIL_ASISTENTE] = $email;
+        $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_TELEFONO_ASISTENTE] = $telefono;
+    }
+
+
+    /** agrega un regalo al asistente pasandole el idPlan y indice que contiene al array asistente
+     * @param string $idPlan id del plan
+     * @param string $indice Documento de identidad del asisitente
+     * @param int $id id del regalo
+     * @param string $nombre nombre del regalo
+     * ```
+     * // Ejemplo
+     * "regalo" => array (
+     *     "id" => 4,
+     *     "nombre" => "stickes"
+     * )
+     * ```
+     */
+    public function agregarRegalo($idPlan, $indice, $id)
+    {
+        $_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_REGALO_ASISTENTE][N_ID_REGALO] = $id;
+    }
+
+    /** Agrega un nuevo articulo tomando como el ID del nodo el id del articulo.
+     * Si el nodo ya existe se reemplazarán los datos existentes
+     */
+    public function agregarArticulo($idArticulo, $nombre, $precio, $cantidad)
+    {
+        $_SESSION[SESION][N_ARTICULOS][$idArticulo] = [];
+        $_SESSION[SESION][N_ARTICULOS][$idArticulo][N_NOMBRE_ARTICULO] = $nombre;
+        $_SESSION[SESION][N_ARTICULOS][$idArticulo][N_PRECIO_ARTICULO] = $precio;
+        $_SESSION[SESION][N_ARTICULOS][$idArticulo][N_CANTIDAD_ARTICULO] = $cantidad;
+    }
+
+    /** Suma la cantidad que le pases por paramentro a la cantidad que ya tiene el articulo */
+    public function sumarCantidadArticulo($idArticulo, $cantidad)
+    {
+        $_SESSION[SESION][N_ARTICULOS][$idArticulo][N_CANTIDAD_ARTICULO] =
+            $this->leerCantidadArticulo($idArticulo) + $cantidad;
+    }
+
+    /**
+     * Devuelve true si hay planes agregados existe de lo contrario false
+     */
+    public function existePlanes()
+    {
+        return ($this->leerPlanes() !== null) ? true : false;
+    }
+
+    /**
+     * Devuelve true si el plan existe de lo contrario false
+     * @param mixed $idPlan id del articulo a evaluar
+     */
+    public function existePlan($idPlan)
+    {
+        return ($this->leerPlan($idPlan) !== null) ? true : false;
+    }
+
+    /**
+     * Devuelve true si el articulo existe de lo contrario false
+     * @param mixed $idArticulo id del articulo a evaluar
+     */
+    public function existeArticulo($idArticulo)
+    {
+        return ($this->leerArticulo($idArticulo) !== null) ? true : false;
+    }
+
+    /**
+     * Evalúa todos los planes y busca y existe algún asistente en estos.
+     * Devuelve true si existe algún asiste en alguno de todos
+     */
+    public function existeAsistentes()
+    {
+        if ($this->existePlanes()) {
+            foreach ($this->leerPlanes() as $idPlan => $arrayPlan) {
+                if ($this->existeAsistentesPlan($idPlan))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Devuelve true si el plan tiene asistentes de lo contrario devuelve false
+     * @param mixed $idPlan id del plan que se desea evaluar
+     */
+    public function existeAsistentesPlan($idPlan)
+    {
+        return ($this->leerPlan($idPlan)[N_ASISTENTES_PLAN] !== null) ? true : false;
+    }
+
+    /**
+     * Devuelve true si el plan tiene asistentes de lo contrario devuelve false
+     * @param mixed $idPlan id del plan que se desea evaluar
+     */
+    public function existeAsistentePlan($idPlan, $indice)
+    {
+        return ($this->leerPlanes($idPlan)[$indice] !== null) ? true : false;
+    }
+
+    /**
+     * Devuelve true si el asistente tiene algún regalo sino retornará false
+     * @param mixed $idPlan id del plan que se desea evaluar
+     * @param mixed $indice indice o id que contiene al asistente
+     */
+    public function existeRegalo($idPlan, $indice)
+    {
+        return ($this->leerRegaloAsistente($idPlan, $indice) !== null) ? true : false;
+    }
+
+    /**
+     * Elimina un plan del array de planes
+     * @param mixed $idPlan id del plan a elimnar
+     */
+    public function eliminarPlan($idPlan)
+    {
+        unset($_SESSION[SESION][N_PLANES][$idPlan]);
+    }
+
+    /**
+     * Elimina un asistente del array del plan según el idPlan que le pases por parámetro
+     * @param mixed $idPlan id del plan a elimnar
+     * @param mixed $indice indice que contiene al array asistente
+     */
+    public function eliminarAsistente($idPlan, $indice)
+    {
+        array_splice($this->leerAsistentesPlan($idPlan), $indice, 1);
+    }
+
+    /**
+     * Elimina un regalo del array asistente del plan según el idPlan que le pases por parámetro
+     * @param mixed $idPlan id del plan a elimnar
+     * @param mixed $indice indice que contiene al array asistente
+     */
+    public function eliminarRegalo($idPlan, $indice)
+    {
+        unset($_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_REGALO_ASISTENTE]);
+        //$this->leerAsistente($idPlan, $indice)[N_REGALO_ASISTENTE];
+    }
+
+    /**
+     * Elimina un articulo del array de sesión según el idArticulo que le pases por parámetro
+     * @param mixed $idPlan id del plan a elimnar
+     * @param mixed $indice indice que contiene al array asistente
+     */
+    public function eliminarArticulo($idArticulo)
+    {
+        unset($this->leerArticulos()[$idArticulo]);
+    }
+}

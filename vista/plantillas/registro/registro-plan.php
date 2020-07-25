@@ -19,15 +19,6 @@
  */
 ?>
 
-<?php if ($mensaje != "") { ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?php echo $mensaje ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-<?php } ?>
-
 <h3 class="text-center">Elije un plan</h3>
 <ul class="lista-precios clearfix">
     <div id="planes" class="row row-cols-1 row-cols-md-4 ">
@@ -46,7 +37,7 @@
 
             <li>
                 <div class="col mb-4">
-                    <div id="<?php echo $plan['idplan'] ?>" style="cursor: pointer;" class="tabla-precio card h-100 rounded">
+                    <div id="<?php echo $plan['idplan'] ?>" style="cursor: pointer;" class="tabla-precio card h-100 rounded card-registro">
                         <div class="card-body">
                             <!-- Nombre del Plan -->
                             <h3><?php echo $plan['nombre']; ?></h3>
@@ -89,7 +80,7 @@
                                 <input type="hidden" name="precio" value="<?php echo openssl_encrypt($plan['precio'], COD, KEY) ?>">
 
                                 <div class="text-center">
-                                    <button class="btn btn-outline-light" type="submit" name="registrarAsistente" value="seleccionaPlan">
+                                    <button class="btn btn-outline-light" type="submit" name="registrarAsistente" value="seleccionaPlan" data-toggle="tooltip" data-placement="bottom" title="Añadir un Asistente">
                                         <i class="material-icons" style="color: #fe4918;">add_shopping_cart</i>
                                     </button>
                                 </div>
