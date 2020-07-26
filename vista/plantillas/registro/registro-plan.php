@@ -93,8 +93,6 @@
             </li>
         <?php
         }
-        $resul->close();
-        $resultado->close();
         ?>
     </div>
 </ul>

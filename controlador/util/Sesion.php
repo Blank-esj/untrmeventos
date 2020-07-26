@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Clase para manejar las sesion
+ */
 class Sesion
 {
     public function __construct()
@@ -280,7 +284,7 @@ class Sesion
      */
     public function existePlanes()
     {
-        return ($this->leerPlanes() !== null) ? true : false;
+        return isset($_SESSION[SESION][N_PLANES]) ? true : false;
     }
 
     /**
@@ -341,7 +345,7 @@ class Sesion
      */
     public function existeRegalo($idPlan, $indice)
     {
-        return ($this->leerRegaloAsistente($idPlan, $indice) !== null) ? true : false;
+        return isset($_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN][$indice][N_REGALO_ASISTENTE]) ? true : false;
     }
 
     /**
@@ -376,7 +380,7 @@ class Sesion
      */
     public function existeArticulos()
     {
-        return ($this->leerArticulos() !== null) ? true : false;
+        return isset($_SESSION[SESION][N_ARTICULOS]) ? true : false;
     }
 
     /**
@@ -454,11 +458,27 @@ class Sesion
         return $subtotal;
     }
 
+    /**
+     * Retorna la cantidad de pepido que tiene en el carrito
+     */
     public function cantidadTotal()
     {
         $total = 0;
         foreach (array_column($this->subtotal(), "cantidad") as $key => $value) {
             $total += $value;
+        }
+        return $total;
+    }
+
+    /**
+     * Retorna el total a pagar
+     */
+    public function total()
+    {
+        $total = 0;
+        // Obtenemos el total
+        foreach ($this->subtotal() as $indice => $subtotales) {
+            $total += $subtotales['subtotal'];
         }
         return $total;
     }

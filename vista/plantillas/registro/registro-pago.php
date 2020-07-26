@@ -49,11 +49,23 @@
 
             </div>
         </div>
-        <div style="border-top: 1px solid #f4f4f4; padding: 10px; text-align: center;">
-            <div style="padding-bottom: 5px;" class="box-footer">
-                <button style="padding-bottom: 5px;" type="button" class="button rounded" id="btnRegistro" value="pagar">Agregar</button>
-            </div>
-            <div id="paypal-button-container"></div>
+        <div style="padding-bottom: 5px;" class="box-footer">
+
+            <form action="" method="post">
+
+                <div class="alert alert-success" role="alert">
+
+                    <div class="form-group">
+                        <label for="email">Correo de contacto</label>
+                        <input required class="form-control rounded-pill" type="email" name="email" placeholder="Porfavor escribe tu correo" >
+                        <small class="form-text text-muted">Los detalles de tu compra se enviarán a éste correo</small>
+                    </div>
+
+                    <button style="padding-bottom: 5px;" type="submit" class="button btn-lg btn-block rounded-pill col mb-12" name="registrarAsistente" value="procederPagar">Proceder a pagar >></button>
+
+            </form>
+
         </div>
+        <!-- <div id="paypal-button-container"></div> -->
     </div>
 </div>

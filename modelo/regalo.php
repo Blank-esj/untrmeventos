@@ -1,5 +1,5 @@
 <?php
-class RegaloModelo
+class Regalo
 {
     /**
      * Devuelve un array con todos los regalos existentes en la base de datos

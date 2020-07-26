@@ -88,55 +88,5 @@
     <script src="vista/assets/js/sweetalert2.min.js"></script>
     <script src="vista/assets/js/sweetalert2.all.min.js"></script>
 
-    <!-- Boton Paypal -->
-
-    <script>
-      paypal.Button.render({
-        env: 'sandbox', // sandbox | production
-        style: {
-          label: 'checkout', // checkout | credit | pay | buynow | generic
-          size: 'small', // small | medium | large | responsive
-          shape: 'pill', // pill | rect
-          color: 'gold' // gold | blue | silver | black
-        },
-
-        // PayPal Client IDs - replace with your own
-        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-
-        client: {
-          sandbox: 'Ad3BzvK8xD2dM0ZsVLJWFjKITqLEYEStaSxe3zGH7eZ8NykLhTlLzR4aaiEHApGyek7TM5pcbfw3zrJj',
-          production: 'AU8No8letaH5k1ttuvQGsd7ctvemsYR0hTn6QbKdSccz60X_ZnLJtg9QoAZyXOF99bYnBA6dHqc_Cq-k'
-        },
-
-        // Wait for the PayPal button to be clicked
-
-        payment: function(data, actions) {
-          return actions.payment.create({
-            payment: {
-              transactions: [{
-                amount: {
-                  total: '50',
-                  currency: 'USD'
-                },
-                description: "Compra de productos a UNTRM:$50.00",
-                custom: "Codigo"
-              }]
-            }
-          });
-        },
-
-        // Wait for the payment to be authorized by the customer
-
-        onAuthorize: function(data, actions) {
-          return actions.payment.execute().then(function() {
-            console.log(data);
-            window.location = "home?paymentToken=" + data.paymentToken + "&paymentID=" + data.paymentID;
-          });
-        }
-
-      }, '#paypal-button-container');
-    </script>
-    <!-- Boton Paypal -->
-
   </div>
 </footer>

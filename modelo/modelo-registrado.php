@@ -5,13 +5,13 @@ include_once 'controlador/bd_conexion_pdo.php';
 include_once 'controlador/util/Sesion.php';
 include_once 'controlador/debug_to_console.php';
 
-include_once 'model/boleto.php'; // Es utilizado por este archivo
-include_once 'model/regalo.php'; // Es utilizado por este archivo
+include_once 'boleto.php'; // Es utilizado por este archivo
+include_once 'regalo.php'; // Es utilizado por este archivo
 
 $conexion = (new Conexion())->conectarPDO();    // Conexión a la base de datos
 $sesion = new Sesion();        // Instanciamos la sesión
-$boleto = new BoletoModelo();  // Controlador de boleto
-$regalo = new RegaloModelo();  // Controlador de regalo
+$boleto = new Boleto();  // Modelo boleto
+$regalo = new Regalo();  // Modelo regalo
 $mensaje = "";
 
 if (isset($_POST['registro'])) {

@@ -1,88 +1,24 @@
 <?php
-include 'controlador/bd_conexion.php';
-include 'modelo/modelo-registrado.php';
-//$sesion = new Sesion(); // Instanciamos la clase Sesion
-?>
+if (isset($_GET['paymentToken']) && isset($_GET['paymentID'])) {
+  include_once 'controlador/global/config.php';
+  include_once 'controlador/bd_conexion_pdo.php';
+  include_once 'modelo/venta.php';
+  include_once 'plantillas/registro/registro-pago-verificador.php';
+} elseif (procederPagar()) {
+  include_once 'plantillas/registro/registro-pago-proceder.php'; // Proceder el pago
+} else {
+  include_once 'plantillas/registro/registro-inicio.php'; // Página de inicio de Registro
+}
 
-<section class="seccion container-fluid">
-  <h2>Registro de Asistentes</h2>
+function procederPagar()
+{
+  if (!$_POST) return false; // Si no se ha solicitado datos por POST
 
-  <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <a class="nav-link active" id="tab-planes" data-toggle="pill" href="#pill-planes" role="tab" aria-controls="pill-planes" aria-selected="true">
-        <i class="material-icons">psychology</i>
-        Planes
-      </a>
-    </li>
+  // Si en el array de POST no hay ninguno que tenga por clave 'registrarAsistente'
+  if (!isset($_POST['registrarAsistente'])) return false;
 
-    <?php if ($sesion->existePlanes()) { ?>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="tab-asistentes" data-toggle="pill" href="#pills-asistentes" role="tab" aria-controls="pills-asistentes" aria-selected="false">
-          <i class="material-icons">people</i>
-          Asistente
-        </a>
-      </li>
-    <?php } ?>
-
-    <li class="nav-item" role="presentation">
-      <a class="nav-link" id="tab-extras" data-toggle="pill" href="#pills-extras" role="tab" aria-controls="pills-extras" aria-selected="false">
-        <i class="material-icons">shopping_bag</i>
-        Extra
-      </a>
-    </li>
-
-    <?php
-    $totalPedidos = $sesion->cantidadTotal();
-    if ($sesion->existeAsistentes() || $totalPedidos > 0) { ?>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="tab-pago" data-toggle="pill" href="#pills-pago" role="tab" aria-controls="pills-pago" aria-selected="false">
-          <i class="material-icons">shopping_cart</i>
-          Carrito
-          <span class="rounded-circle badge badge-success">
-            <?php echo $totalPedidos ?>
-          </span>
-        </a>
-      </li>
-    <?php } ?>
-
-  </ul>
-
-  <?php
-  //Botón para mostrar algún mensaje
-  if ($mensaje != "") { ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <?php echo $mensaje ?>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <?php }
-  // Boton modal (emergente) para mostrar el resumen
-  include 'plantillas/registro/registro-modal-resumen.php';
-  ?>
-
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active container-fluid" id="pill-planes" role="tabpanel" aria-labelledby="tab-planes">
-      <?php include_once 'plantillas/registro/registro-plan.php' ?>
-    </div>
-
-    <?php
-    if ($sesion->existePlanes()) { ?>
-      <div class="tab-pane fade container-fluid" id="pills-asistentes" role="tabpanel" aria-labelledby="tab-asistentes">
-        <?php include_once 'plantillas/registro/registro-asistentes.php' ?>
-      </div>
-    <?php } ?>
-
-    <div class="tab-pane fade container-fluid" id="pills-extras" role="tabpanel" aria-labelledby="tab-extras">
-      <?php include_once 'plantillas/registro/registro-extras.php' ?>
-    </div>
-
-    <?php if ($sesion->existeAsistentes()) { ?>
-      <div class="tab-pane fade container-fluid" id="pills-pago" role="tabpanel" aria-labelledby="tab-pago">
-        <?php include_once 'plantillas/registro/registro-pago.php' ?>
-      </div>
-    <?php } ?>
-
-  </div>
-
-</section>
+  // Si se está solicitando datos por POST para registrar el asistente
+  // pero no es para proceder a pagar vamos a inicio
+  // Sino iremos a la página para proceder con el pago
+  return ($_POST['registrarAsistente'] == 'procederPagar') ? true : false;
+}
