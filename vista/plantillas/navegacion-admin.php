@@ -52,8 +52,8 @@
             <span>Categoria Eventos</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="vista/admin/categoria/lista-categoria.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-            <li><a href="vista/admin/categoria/crear-categoria.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           </ul>
         </li>
 
@@ -63,8 +63,8 @@
             <span>Invitados</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="vista/admin/invitado/lista-invitado.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-            <li><a href="vista/admin/invitado/crear-invitado.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li><a href="dashboard?dashboard=lista-invitado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-invitado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           </ul>
         </li>
 
@@ -74,8 +74,8 @@
             <span>Registrados</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="vista/admin/registrado/lista-registrado.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-            <li><a href="vista/admin/registrado/crear-registrado.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li><a href="dashboard?dashboard=lista-registrado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-registrado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           </ul>
         </li>
         <?php
@@ -87,8 +87,8 @@
               <span>Administradores</span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="vista/admin/administrador/lista-admin.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
-              <li><a href="vista/admin/administrador/crear-admin.php"><i class="fa fa-plus-circle"></i> Agregar </a></li>
+              <li><a href="dashboard?dashboard=lista-admin"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-admin"><i class="fa fa-plus-circle"></i> Agregar </a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -97,7 +97,7 @@
               <span>Reportes</span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="vista/admin/home/generar-reportes.php"><i class="far fa-file-pdf"></i> Generar</a></li>
+              <li><a href="dashboard?dashboard=generar-reportes"><i class="far fa-file-pdf"></i> Generar</a></li>
             </ul>
           </li>
         <?php endif;
