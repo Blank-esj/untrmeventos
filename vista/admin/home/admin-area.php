@@ -1,5 +1,5 @@
 <?php
-include_once '../../plantillas/cabecera-admin.php';
+include_once 'vista/plantillas/cabecera-admin.php';
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -21,7 +21,7 @@ include_once '../../plantillas/cabecera-admin.php';
         <h3 class="box-title">Administrador de Eventos El acceso sólo está permitido a personal autorizado.</h3>
       </div>
       <div class="box-body">
-        <img src="../../assets/img/admin_fisme.jpg">
+        <img src="vista/assets/img/admin_fisme.jpg">
       </div> <!-- /.box-body -->
       <div class="box-footer">
         FISME - Bagua
@@ -32,5 +32,5 @@ include_once '../../plantillas/cabecera-admin.php';
 </div> <!-- /.content-wrapper -->
 
 <?php
-include_once '../../plantillas/footer-admin.php';
+include_once 'vista/plantillas/footer-admin.php';
 ?>

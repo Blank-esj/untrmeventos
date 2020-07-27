@@ -1,5 +1,5 @@
 <?php
-include_once '../../plantillas/cabecera-admin.php';
+include_once 'vista/plantillas/cabecera-admin.php';
 ?>
 
 <!-- Content Wrapper. Contains page content -->

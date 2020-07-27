@@ -14,27 +14,7 @@ $boleto = new Boleto();  // Modelo boleto
 $regalo = new Regalo();  // Modelo regalo
 $mensaje = "";
 
-if (isset($_POST['registro'])) {
-    switch ($_POST['registro']) {
-        case 'nuevo':
-            die($boleto->guardarBoleto($conexion, $_POST));
-            break;
-        case 'actualizar':
-
-            break;
-        case 'eliminar':
-
-            break;
-        case 'pagar':
-            $pagar = new PagarBoleto();
-            die($pagar->evaluarPago($conexion, $_POST));
-            break;
-
-        default:
-            die(json_encode(array("respuesta" => "error", "mensaje" => "No entiendo tu petición")));
-            break;
-    }
-} elseif (isset($_POST['registrarAsistente'])) {
+if (isset($_POST['registrarAsistente'])) {
     switch ($_POST['registrarAsistente']) {
 
             // Selecciona un Plan

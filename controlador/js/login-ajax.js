@@ -20,10 +20,9 @@ $(document).ready(function () {
                         'Bienveid@ ' + resultado.usuario + ' !! ',
                         'success'
                     )
-                    setTimeout(function () {
-                        window.location.href = '../home/admin-area.php';
-                    }, 2000);
-                } else {
+                    /*setTimeout(function () {
+                        window.location.href = '';
+                    }, 2000);*/
                     Swal.fire(
                         'Error!',
                         'Usuario o Password Incorrecto',

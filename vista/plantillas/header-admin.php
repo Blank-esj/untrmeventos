@@ -9,29 +9,29 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="vista/assets/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../assets/css/ionicons.min.css">
+  <link rel="stylesheet" href="vista/assets/css/ionicons.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="vista/assets/css/dataTables.bootstrap.min.css">
   <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="../../assets/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="vista/assets/css/bootstrap-datepicker.min.css">
   <!-- Select2 -->
-  <link rel="stylesheet" href="../../assets/css/select2.min.css">
+  <link rel="stylesheet" href="vista/assets/css/select2.min.css">
   <!-- Bootstrap time Picker -->
-  <link rel="stylesheet" href="../../assets/css/bootstrap-timepicker.min.css">
-  <link rel="stylesheet" href="../../assets/css/fontawesome-iconpicker.min.css">
+  <link rel="stylesheet" href="vista/assets/css/bootstrap-timepicker.min.css">
+  <link rel="stylesheet" href="vista/assets/css/fontawesome-iconpicker.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../assets/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the ../../assets/css/skins
+  <link rel="stylesheet" href="vista/assets/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the vista/assets/css/skins
   folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../assets/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="vista/assets/css/skins/_all-skins.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="../../assets/css/icheck.css">
-  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css">
+  <link rel="stylesheet" href="vista/assets/css/icheck.css">
+  <link rel="stylesheet" href="vista/assets/css/sweetalert2.min.css">
   <!-- Morris charts -->
-  <link rel="stylesheet" href="../../assets/css/morris.css">
-  <link rel="stylesheet" href="../../assets/css/admin.css">
+  <link rel="stylesheet" href="vista/assets/css/morris.css">
+  <link rel="stylesheet" href="vista/assets/css/admin.css">
   <!-- Bootstrap 4.5 -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 

@@ -64,7 +64,7 @@
 <body>
     <h1>Página No Encontrada</h1>
     <img src="//localhost:8080/untrmeventos/vista/assets/img/logo.svg" alt="untrmeventos">
-    <p><a href="home"> Regresar al sitio </a></p>
+    <p><a href="/untrmeventos"> Regresar al sitio </a></p>
 </body>
 
 </html>

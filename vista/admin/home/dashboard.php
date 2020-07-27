@@ -1,6 +1,6 @@
 <?php
 // Modificado: 16/07/2020 16:24
-include_once '../../plantillas/cabecera-admin.php';
+include_once 'vistas/plantillas/cabecera-admin.php';
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -149,5 +149,5 @@ include_once '../../plantillas/cabecera-admin.php';
   </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
 <?php
-include_once '../../plantillas/footer-admin.php';
+include_once 'vistas/plantillas/footer-admin.php';
 ?>

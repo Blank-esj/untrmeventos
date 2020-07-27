@@ -22,7 +22,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"><a href="../home/admin-area.php">MENU DE ADMINISTRACION</a></li>
+        <li class="header"><a href="dashboard?dashboard=area-admin">MENU DE ADMINISTRACION</a></li>
         <li class="treeview">
           <a href="#">
             <i class="fas fa-tachometer-alt" aria-hidden="true"></i> <span>Dashboard</span>
@@ -31,7 +31,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../home/dashboard.php"><i class="fas fa-chart-line" aria-hidden="true"></i> Dashboard </a></li>
+            <li><a href="dashboard?dashboard=dashboard"><i class="fas fa-chart-line" aria-hidden="true"></i> Dashboard </a></li>
           </ul>
         </li>
 
@@ -41,8 +41,8 @@
             <span>Eventos</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../evento/lista-evento.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-            <li><a href="../evento/crear-evento.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           </ul>
         </li>
 
@@ -52,8 +52,8 @@
             <span>Categoria Eventos</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../categoria/lista-categoria.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-            <li><a href="../categoria/crear-categoria.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li><a href="vista/admin/categoria/lista-categoria.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="vista/admin/categoria/crear-categoria.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           </ul>
         </li>
 
@@ -63,8 +63,8 @@
             <span>Invitados</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../invitado/lista-invitado.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-            <li><a href="../invitado/crear-invitado.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li><a href="vista/admin/invitado/lista-invitado.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="vista/admin/invitado/crear-invitado.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           </ul>
         </li>
 
@@ -74,8 +74,8 @@
             <span>Registrados</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../registrado/lista-registrado.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-            <li><a href="../registrado/crear-registrado.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li><a href="vista/admin/registrado/lista-registrado.php"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="vista/admin/registrado/crear-registrado.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           </ul>
         </li>
         <?php
@@ -87,8 +87,8 @@
               <span>Administradores</span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="../administrador/lista-admin.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
-              <li><a href="../administrador/crear-admin.php"><i class="fa fa-plus-circle"></i> Agregar </a></li>
+              <li><a href="vista/admin/administrador/lista-admin.php"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+              <li><a href="vista/admin/administrador/crear-admin.php"><i class="fa fa-plus-circle"></i> Agregar </a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -97,7 +97,7 @@
               <span>Reportes</span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="../home/generar-reportes.php"><i class="far fa-file-pdf"></i> Generar</a></li>
+              <li><a href="vista/admin/home/generar-reportes.php"><i class="far fa-file-pdf"></i> Generar</a></li>
             </ul>
           </li>
         <?php endif;

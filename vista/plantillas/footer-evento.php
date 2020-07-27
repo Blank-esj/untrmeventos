@@ -90,3 +90,75 @@
 
   </div>
 </footer>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  window.jQuery || document.write('<script src="vista/assets/js/vendor/jquery-3.4.1.min.js"><\/script>')
+</script>
+<script src="vista/assets/js/plugins.js"></script>
+<script src="vista/assets/js/jquery.animateNumber.min.js"></script>
+<script src="vista/assets/js/lightbox.js"></script>
+<?php
+$archivo = basename($_SERVER['REQUEST_URI']);
+$pagina = str_replace(".php", "", $archivo);
+if ($pagina == 'invitados' || $pagina == 'home') {
+  echo '<script src="vista/assets/js/jquery.colorbox-min.js"></script>';
+  echo '<script src="vista/assets/js/jquery.waypoints.min.js"></script>';
+}
+?>
+<script src="controlador/js/cotizador.js"></script>
+<script src="vista/assets/js/main.js"></script>
+
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+  window.ga = function() {
+    ga.q.push(arguments)
+  };
+  ga.q = [];
+  ga.l = +new Date;
+  ga('create', 'UA-XXXXX-Y', 'auto');
+  ga('set', 'transport', 'beacon');
+  ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async></script>
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+  window.dojoRequire(["mojo/signup-forms/Loader"], function(L) {
+    L.start({
+      "baseUrl": "mc.us4.list-manage.com",
+      "uuid": "407e005e2f49e226a66d0eaa6",
+      "lid": "b4c0599042",
+      "uniqueMethods": true
+    })
+  })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<!-- toggle -->
+<script>
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
+  $(function() {
+    $('[data-toggle="popover"]').popover()
+  })
+</script>
+
+</body>
+
+</html>
