@@ -1,8 +1,3 @@
-<?php
-error_reporting(0);
-include_once '../../plantillas/cabecera-admin.php';
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -89,6 +84,3 @@ include_once '../../plantillas/cabecera-admin.php';
     </div> <!-- /.row -->
   </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

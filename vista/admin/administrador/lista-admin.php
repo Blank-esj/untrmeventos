@@ -1,8 +1,3 @@
-<?php
-error_reporting(0);
-include_once '../../plantillas/cabecera-admin.php';
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -38,40 +33,44 @@ include_once '../../plantillas/cabecera-admin.php';
               <tbody>
                 <?php
                 try {
-                  $sql = "SELECT idpersona, usuario, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre, nivel FROM v_admins"; //Crea consulta SQL
+                  $sql = "SELECT idpersona, usuario, nombre_completo, nivel FROM v_admins"; //Crea consulta SQL
                   $resultado = $conn->query($sql); //Ejecuta consulta SQL
                 } catch (Exception $e) {
                   $error = $e->getMessage();
                   echo $error;
                 }
                 $numero = 1;
-                while ($admin = $resultado->fetch_assoc()) {
+                if ($resultado != false) {
+                  while ($admin = $resultado->fetch_assoc()) {
                 ?>
-                  <tr>
-                    <td> <?php echo $numero; ?> </td>
-                    <td><?php echo $admin['usuario']; ?></td>
-                    <td><?php echo $admin['nombre']; ?></td>
-                    <td><?php
-                        if ($admin['nivel'] == 1) {
-                          echo 'Administrador';
-                        } else {
-                          echo 'Usuario Estándar';
-                        }
-                        ?>
-                    </td>
-                    <td>
-                      <a href="editar-admin.php?id=<?php echo $admin['idpersona']; ?>" class="btn bg-orange btn-flat margin">
-                        <i class="fa fa-pencil-alt"></i>
-                      </a>
-                      <a href="#" data-id="<?php echo $admin['idpersona']; ?>" data-tipo="admin" class="btn bg-maroon btn-flat margin borrar_registro">
-                        <i class="fa fa-trash"></i>
-                      </a>
-                    </td>
-                  </tr>
-                <?php
-                  $numero++;
-                }
-                ?>
+                    <tr>
+                      <td> <?php echo $numero; ?> </td>
+                      <td><?php echo $admin['usuario']; ?></td>
+                      <td><?php echo $admin['nombre_completo']; ?></td>
+                      <td><?php
+                          if ($admin['nivel'] == 1) {
+                            echo 'Administrador';
+                          } else {
+                            echo 'Usuario Estándar';
+                          }
+                          ?>
+                      </td>
+                      <td>
+                        <a href="editar-admin.php?id=<?php echo $admin['idpersona']; ?>" class="btn bg-orange btn-flat margin">
+                          <i class="fa fa-pencil-alt"></i>
+                        </a>
+                        <a href="#" data-id="<?php echo $admin['idpersona']; ?>" data-tipo="admin" class="btn bg-maroon btn-flat margin borrar_registro">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  <?php
+                    $numero++;
+                  }
+                } else { ?>
+
+                  <h1>No hay administradores</h1>
+                <?php } ?>
               </tbody>
               <tfoot>
                 <tr>
@@ -92,6 +91,3 @@ include_once '../../plantillas/cabecera-admin.php';
     </div> <!-- /.row -->
   </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
 include_once '../controlador/funciones-admin.php';
 
 $id_registro = $_POST['id_registro']; // idpersona

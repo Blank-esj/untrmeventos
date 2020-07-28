@@ -1,3 +1,6 @@
+<?php 
+$sesion = new Sesion();
+?>
   <!-- Left side column. contains the sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -5,7 +8,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="info">
-          <p><?php echo $_SESSION['nombre']; ?></p>
+          <p><?php echo $sesion->leerNombreUsuario(); ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -79,7 +82,7 @@
           </ul>
         </li>
         <?php
-        if ($_SESSION['nivel'] == 1) :
+        if ($sesion->leerNivelUsuario() == 1) :
         ?>
           <li class="treeview">
             <a href="#">

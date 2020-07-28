@@ -1,5 +1,5 @@
 <?php
-    error_reporting(E_ALL^E_NOTICE);
+
     include_once '../controlador/funciones-admin.php';
     
     $nombre_categoria = $_POST['nombre_categoria'];

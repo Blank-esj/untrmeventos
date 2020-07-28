@@ -16,6 +16,8 @@ $sesion = new Sesion();
 // Sino te redirige a la página del login
 if ($sesion->existeUsuario()) {
 
+    include_once 'vista/plantillas/cabecera-admin.php';
+
     if (isset($_POST['dashboard'])) { // Si hay alguna petición por POST
         switch ($_POST['dashboard']) {
             case 'login':
@@ -90,12 +92,12 @@ if ($sesion->existeUsuario()) {
                 include_once 'vista/admin/registrado/crear-registrado.php';
                 break;
 
-            case 'lista-administrador':
+            case 'lista-admin':
                 echo 'vamos a lista-admin';
                 include_once 'vista/admin/administrador/lista-admin.php';
                 break;
 
-            case 'crear-administrador':
+            case 'crear-admin':
                 echo 'vamos a crear-admin';
                 include_once 'vista/admin/administrador/crear-admin.php';
                 break;
@@ -114,6 +116,7 @@ if ($sesion->existeUsuario()) {
         echo 'vamos a ELSE login';
         include_once 'vista/admin/home/admin-area.php';
     }
+    include_once 'vista/plantillas/footer-admin.php';
 } else {
     echo 'vamos login, no hay usuario logeado';
     include_once 'vista/admin/home/login.php';

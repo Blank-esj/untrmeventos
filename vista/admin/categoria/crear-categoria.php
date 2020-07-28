@@ -1,7 +1,3 @@
-<?php
-include_once '../../plantillas/cabecera-admin.php';
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <section class="content-header">
@@ -22,7 +18,7 @@ include_once '../../plantillas/cabecera-admin.php';
           </div>
           <div class="box-body">
             <!-- form start -->
-            <form role="form" id="guardar-registro" method="post" action="../../../modelo/modelo-categoria.php">
+            <form role="form" id="guardar-registro" method="post" action="modelo/modelo-categoria.php">
 
               <div class="box-body">
                 <div class="form-group">
@@ -52,7 +48,3 @@ include_once '../../plantillas/cabecera-admin.php';
     </div>
   </div>
 </div> <!-- /.content-wrapper -->
-
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

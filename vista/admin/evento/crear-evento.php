@@ -1,7 +1,3 @@
-<?php
-include_once '../../plantillas/cabecera-admin.php';
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -22,7 +18,7 @@ include_once '../../plantillas/cabecera-admin.php';
           </div>
           <div class="box-body">
             <!-- form start -->
-            <form role="form" name="guardar-registro" id="guardar-registro" method="post" action="../../../modelo/modelo-evento.php">
+            <form role="form" name="guardar-registro" id="guardar-registro" method="post" action="modelo/modelo-evento.php">
               <div class="box-body">
                 <div class="form-group">
                   <label for="tituloevento">Título Evento: </label>
@@ -86,11 +82,13 @@ include_once '../../plantillas/cabecera-admin.php';
                     try {
                       $sql = "SELECT idpersona, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_completo FROM v_invitado";
                       $resultado = $conn->query($sql);
-                      while ($invitado = $resultado->fetch_assoc()) { ?>
-                        <option value="<?php echo $invitado['idpersona']; ?>">
-                          <?php echo $invitado['nombre_completo']; ?>
-                        </option>
+                      if ($resultado != false) {
+                        while ($invitado = $resultado->fetch_assoc()) { ?>
+                          <option value="<?php echo $invitado['idpersona']; ?>">
+                            <?php echo $invitado['nombre_completo']; ?>
+                          </option>
                     <?php }
+                      }
                     } catch (Exception $e) {
                       echo "Error: " . $e->getMessage();
                     }
@@ -109,6 +107,3 @@ include_once '../../plantillas/cabecera-admin.php';
     </div>
   </div>
 </div> <!-- /.content-wrapper -->
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

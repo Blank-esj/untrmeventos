@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
 $cerrar_sesion = $_GET['cerrar_sesion'];
 if ($cerrar_sesion) {
   session_destroy();

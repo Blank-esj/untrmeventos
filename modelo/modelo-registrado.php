@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
 include_once 'controlador/funciones-evento.php';
 include_once 'controlador/bd_conexion_pdo.php';
 include_once 'controlador/Sesion.php';

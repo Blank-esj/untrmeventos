@@ -1,8 +1,3 @@
-<?php
-include_once '../../plantillas/cabecera-admin.php';
-include_once '../../../controlador/debug_to_console.php'
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -242,6 +237,3 @@ include_once '../../../controlador/debug_to_console.php'
     </div>
   </div>
 </div> <!-- /.content-wrapper -->
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

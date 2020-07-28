@@ -1,14 +1,3 @@
-<?php
-
-/**
- * editado el 10/07/2020
- * editado el 16/07/2020 01:10
- */
-?>
-<?php
-include_once '../../plantillas/cabecera-admin.php';
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <section class="content-header">
@@ -29,7 +18,7 @@ include_once '../../plantillas/cabecera-admin.php';
           </div>
           <div class="box-body">
             <!-- form start -->
-            <form role="form" id="guardar-registro" method="post" action="../../../modelo/modelo-admin.php">
+            <form role="form" id="guardar-registro" method="post" action="modelo/modelo-admin.php">
 
               <div class="box-body">
                 <!-- Nombres -->
@@ -111,7 +100,3 @@ include_once '../../plantillas/cabecera-admin.php';
     </div>
   </div>
 </div> <!-- /.content-wrapper -->
-
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

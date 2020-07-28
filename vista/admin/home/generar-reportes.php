@@ -1,7 +1,3 @@
-<?php
-include_once 'vista/plantillas/cabecera-admin.php';
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <section class="content-header">
@@ -27,28 +23,28 @@ include_once 'vista/plantillas/cabecera-admin.php';
                 <div class="form-group">
                   <i class="fa fa-user"></i>
                   <label class="gen-reportes">Reporte de Administradores.</label>
-                  <button type="button" class="btn btn-primary" onclick="location.href='../../../controlador/reporte/reporte-administrador.php'">
+                  <button type="button" class="btn btn-primary" onclick="location.href='controlador/reporte/reporte-administrador.php'">
                     <i class="fas fa-print"></i>
                   </button>
                 </div>
                 <div class="form-group">
                   <i class="fa fa-address-card"></i>
                   <label class="gen-reportes">Reporte de Registrados.</label>
-                  <button type="button" class="btn btn-primary" onclick="location.href='../../../controlador/reporte/reporte-registrado.php'">
+                  <button type="button" class="btn btn-primary" onclick="location.href='controlador/reporte/reporte-registrado.php'">
                     <i class="fas fa-print"></i>
                   </button>
                 </div>
                 <div class="form-group">
                   <i class="fa fa-user-circle"></i>
                   <label class="gen-reportes">Reporte de Invitados.</label>
-                  <button type="button" class="btn btn-primary" onclick="location.href='../../../controlador/reporte/reporte-invitado.php'">
+                  <button type="button" class="btn btn-primary" onclick="location.href='controlador/reporte/reporte-invitado.php'">
                     <i class="fas fa-print"></i>
                   </button>
                 </div>
                 <div class="form-group">
                   <i class="fa fa-calendar"></i>
                   <label class="gen-reportes">Reporte de Eventos.</label>
-                  <button type="button" class="btn btn-primary" onclick="location.href='../../../controlador/reporte/reporte-evento.php'">
+                  <button type="button" class="btn btn-primary" onclick="location.href='controlador/reporte/reporte-evento.php'">
                     <i class="fas fa-print"></i>
                   </button>
                 </div>
@@ -63,7 +59,3 @@ include_once 'vista/plantillas/cabecera-admin.php';
     </div>
   </div>
 </div> <!-- /.content-wrapper -->
-
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

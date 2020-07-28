@@ -1,6 +1,6 @@
 <?php
 // Modificado: 16/07/2020 16:24
-include_once 'vistas/plantillas/cabecera-admin.php';
+include_once 'vista/plantillas/cabecera-admin.php';
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -38,7 +38,7 @@ include_once 'vistas/plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-user"></i>
           </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
+          <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -60,7 +60,7 @@ include_once 'vistas/plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-user"></i>
           </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
+          <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -84,7 +84,7 @@ include_once 'vistas/plantillas/cabecera-admin.php';
           <div class="icon">
             <i class="fa fa-users"></i>
           </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
+          <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
             Más Información <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
@@ -95,24 +95,29 @@ include_once 'vistas/plantillas/cabecera-admin.php';
         <?php
         $sql = "SELECT SUM(total) AS ganancias FROM v_boleto";
         $resultado = $conn->query($sql);
-        $registrados = $resultado->fetch_assoc();
-        ?>
-        <!-- small box -->
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3>$<?php echo round($registrados['ganancias']); ?></h3>
+        if ($resultado != false) {
 
-            <p>Ganancias Totales</p>
+          $registrados = $resultado->fetch_assoc();
+        ?>
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>$<?php echo round($registrados['ganancias']); ?></h3>
+
+              <p>Ganancias Totales</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
+              Más Información <i class="fa fa-arrow-circle-right"></i>
+            </a>
           </div>
-          <div class="icon">
-            <i class="fas fa-dollar-sign"></i>
-          </div>
-          <a href="../registrado/lista-registrado.php" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
+        <?php } ?>
       </div>
+
     </div>
+
 
     <h2 class="page-header">Regalos</h2>
 
@@ -139,7 +144,7 @@ include_once 'vistas/plantillas/cabecera-admin.php';
             <div class="icon">
               <i class="fa fa-gift"></i>
             </div>
-            <a href="../registrado/lista-registrado.php" class="small-box-footer">
+            <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
               Más Información <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -149,5 +154,5 @@ include_once 'vistas/plantillas/cabecera-admin.php';
   </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
 <?php
-include_once 'vistas/plantillas/footer-admin.php';
+include_once 'vista/plantillas/footer-admin.php';
 ?>
