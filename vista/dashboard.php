@@ -1,18 +1,19 @@
 <?php
 
-include 'controlador/Sesion.php';
+include_once 'controlador/Sesion.php';
 include_once 'controlador/login-admin.php';
 include_once 'controlador/global/config.php';
+include_once 'controlador/bd_conexion_pdo.php';
 
 $sesion = new Sesion();
-
+$connPDO = (new Conexion())->conectarPDO();
 
 // Si hay un usuario legeado evaluamos las peticiones
 // Sino te redirige a la página del login
 
 $verificador = false;
 
-if (isset($_SESSION[N_USUARIO][N_USUARIO_USUARIO]) && isset($_SESSION[N_USUARIO][N_CONTRASENA_USUARIO])) {
+if (isset($_SESSION[SESION][N_USUARIO][N_USUARIO_USUARIO]) && isset($_SESSION[SESION][N_USUARIO][N_CONTRASENA_USUARIO])) {
 
     $verificador = verificarUsuarioPassword(
         $sesion->leerUsuarioUsuario(),
@@ -21,7 +22,6 @@ if (isset($_SESSION[N_USUARIO][N_USUARIO_USUARIO]) && isset($_SESSION[N_USUARIO]
 }
 
 if ($verificador) {
-
     if (isset($_POST['dashboard'])) { // Si hay alguna petición por POST
         switch ($_POST['dashboard']) {
             case 'login':
@@ -33,6 +33,7 @@ if ($verificador) {
                 break;
         }
     } elseif (isset($_GET['dashboard'])) { // Si hay alguna petición por GET
+        include_once 'vista/plantillas/cabecera-admin.php';
         switch ($_GET['dashboard']) {
             case 'area-admin':
                 include_once 'vista/admin/home/admin-area.php';
@@ -85,8 +86,48 @@ if ($verificador) {
                 include_once 'vista/admin/home/generar-reportes.php';
                 break;
 
+            case 'lista-plan':
+                include_once 'vista/admin/plan/lista-plan.php';
+                break;
+
+            case 'crear-plan':
+                include_once 'vista/admin/plan/crear-plan.php';
+                break;
+
+            case 'lista-beneficio':
+                include_once 'vista/admin/beneficio/lista-beneficio.php';
+                break;
+
+            case 'crear-beneficio':
+                include_once 'vista/admin/beneficio/crear-beneficio.php';
+                break;
+
+            case 'lista-articulo':
+                include_once 'vista/admin/articulo/lista-articulo.php';
+                break;
+
+            case 'crear-articulo':
+                include_once 'vista/admin/articulo/crear-articulo.php';
+                break;
+
+            case 'lista-grado':
+                include_once 'vista/grado/admin-instruccion/lista-grado.php';
+                break;
+
+            case 'crear-grado':
+                include_once 'vista/grado/admin-instruccion/crear-grado.php';
+                break;
+
+            case 'lista-regalo':
+                include_once 'vista/admin/regalo/lista-regalo.php';
+                break;
+
+            case 'crear-regalo':
+                include_once 'vista/admin/regalo/crear-regalo.php';
+                break;
+
             default:
-                include_once 'vista/admin/home/login.php';
+                include_once 'vista/admin/home/admin-area.php';
                 break;
         }
     } else { // Si no hay peticiones ni GET ni POST que cumplan con que el índice se "dashboard"

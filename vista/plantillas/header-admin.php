@@ -1,4 +1,3 @@
-<h1>SOY HEADER</h1>
 <!DOCTYPE html>
 <html>
 
@@ -33,6 +32,8 @@
   <!-- Morris charts -->
   <link rel="stylesheet" href="vista/assets/css/morris.css">
   <link rel="stylesheet" href="vista/assets/css/admin.css">
+  <!-- Material Desing Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Bootstrap 4.5 -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 

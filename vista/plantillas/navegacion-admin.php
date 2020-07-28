@@ -1,4 +1,3 @@
-<h1>SOY BARRA ADMIN</h1>
 <?php
 $sesion = new Sesion();
 ?>
@@ -44,22 +43,63 @@ $sesion = new Sesion();
       <li class="treeview">
         <a href="#">
           <i class="fa fa-book"></i>
-          <span>Categoria-Eventos</span>
+          <span>Eventos</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+          <li class="treeview">
+            <a href="#">
+              <i class="material-icons">category</i>
+              <span>Categoria</span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-calendar"></i>
+              <span>Temas</span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            </ul>
+          </li>
         </ul>
       </li>
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-calendar"></i>
-          <span>Tema-Eventos</span>
+          <i class="fa fa-user-circle"></i>
+          <span>Planes</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+          <li><a href="dashboard?dashboard=lista-plan"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+          <li><a href="dashboard?dashboard=crear-plan"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-user-circle"></i>
+              <span>Beneficios</span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="dashboard?dashboard=lista-beneficio"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-beneficio"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-user"></i>
+          <span>Artículos</span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="dashboard?dashboard=lista-articulo"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+          <li><a href="dashboard?dashboard=crear-articulo"><i class="fa fa-plus-circle"></i> Agregar </a></li>
         </ul>
       </li>
 
@@ -77,8 +117,8 @@ $sesion = new Sesion();
               <span>Grado de Instrucción</span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-invitado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-invitado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+              <li><a href="dashboard?dashboard=lista-grado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-grado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
 
             </ul>
           </li>
@@ -93,9 +133,19 @@ $sesion = new Sesion();
         <ul class="treeview-menu">
           <li><a href="dashboard?dashboard=lista-registrado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
           <li><a href="dashboard?dashboard=crear-registrado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-address-card"></i>
+              <span>Regalos</span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="dashboard?dashboard=lista-regalo"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-regalo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            </ul>
+          </li>
         </ul>
       </li>
+
       <?php
       if ($sesion->leerNivelUsuario() == 1) :
       ?>
@@ -109,6 +159,7 @@ $sesion = new Sesion();
             <li><a href="dashboard?dashboard=crear-admin"><i class="fa fa-plus-circle"></i> Agregar </a></li>
           </ul>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fas fa-print"></i>
