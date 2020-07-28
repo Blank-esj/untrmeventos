@@ -12,6 +12,10 @@ class Admins
 
         $sentencia->execute();
 
-        return ($sentencia->fetchAll(PDO::FETCH_ASSOC))[0];
+        $resultado = ($sentencia->fetchAll(PDO::FETCH_ASSOC))[0];
+
+        $sentencia->closeCursor();
+
+        return $resultado;
     }
 }

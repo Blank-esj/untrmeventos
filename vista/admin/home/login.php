@@ -1,11 +1,6 @@
 <?php
-$cerrar_sesion = $_GET['cerrar_sesion'];
-if ($cerrar_sesion) {
-  session_destroy();
-}
 include_once 'controlador/funciones-admin.php';
 echo 'esto aquí';
-
 ?>
 
 <body class="hold-transition login-page">

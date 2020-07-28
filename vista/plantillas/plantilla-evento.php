@@ -1,9 +1,9 @@
 <?php
 if (isset($_GET['ruta'])) {
   if ($_GET['ruta'] == 'dashboard') {
-    include_once 'vista/plantillas/header-admin.php';
+    include 'vista/plantillas/header-admin.php';
     include 'vista/' . $_GET['ruta'] . '.php';
-    include_once 'vista/plantillas/footer-admin.php';
+    include 'vista/plantillas/footer-admin.php';
   } elseif (
     $_GET['ruta'] == 'home' ||
     $_GET['ruta'] == 'galeria' ||

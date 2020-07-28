@@ -11,7 +11,6 @@ $id = $_GET['id'];
 if (!filter_var($id, FILTER_VALIDATE_INT)) :
   die("Error");
 else :
-  include_once '../../plantillas/cabecera-admin.php';
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -140,6 +139,5 @@ else :
     </div>
   </div> <!-- /.content-wrapper -->
 <?php
-  include_once '../../plantillas/footer-admin.php';
 endif;
 ?>

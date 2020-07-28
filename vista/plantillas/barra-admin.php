@@ -1,10 +1,12 @@
+<h1>SOY BARRA ADMIN</h1>
+
 <body class="hold-transition skin-blue sidebar-mini">
   <!-- Site wrapper -->
   <div class="wrapper">
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="../../index.php" class="logo">
+      <a href="home" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>U</b>-E</span>
         <!-- logo for regular state and mobile devices -->
@@ -24,7 +26,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="hidden-xs">Hola: <?php echo $sesion->leerNombreUsuario(); ?></span>
-              </a> 
+              </a>
               <ul class="dropdown-menu">
                 <!-- Menu Footer-->
                 <li class="user-footer">

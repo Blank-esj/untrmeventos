@@ -1,9 +1,8 @@
 <?php
 $id = $_GET['id'];
-/*if (!filter_var($id, FILTER_VALIDATE_INT)) {
+if (!filter_var($id, FILTER_VALIDATE_INT)) {
   die("Error el id: {$id} no es un entero.");
-}*/
-include_once '../../plantillas/cabecera-admin.php';
+}
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -56,7 +55,7 @@ include_once '../../plantillas/cabecera-admin.php';
                   <label for="email">Apellido Materno: </label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa un email" value="<?php echo $invitado['email']; ?>">
                 </div>
-                
+
                 <!-- Teléfono -->
                 <div class="form-group">
                   <label for="telefono">Apellido Materno: </label>
@@ -68,7 +67,7 @@ include_once '../../plantillas/cabecera-admin.php';
                   <label for="doc_identidad">Documento de Identidad: </label>
                   <input type="number" class="form-control" id="doc_identidad" name="doc_identidad" placeholder="Ingresa un documento" value="<?php echo $invitado['doc_identidad']; ?>">
                 </div>
-                
+
                 <!-- Descripción / Biografía -->
                 <div class="form-group">
                   <label for="biografia_invitado">Biografía: </label>
@@ -97,40 +96,40 @@ include_once '../../plantillas/cabecera-admin.php';
 
                 <!-- Grado Instruccion -->
                 <?php
-                  try {
-                    $sql = "SELECT * FROM grado_instruccion";
-                    $resultado = $conn->query($sql);
-                  } catch (Exception $e) {
-                    $error = $e->getMessage();
-                    echo $error;
-                  }
+                try {
+                  $sql = "SELECT * FROM grado_instruccion";
+                  $resultado = $conn->query($sql);
+                } catch (Exception $e) {
+                  $error = $e->getMessage();
+                  echo $error;
+                }
 
-                  while ($grado = $resultado->fetch_assoc()) {
-                  ?>
-                    <div class="orden">
-                      <label for="grado_instruccion">Seleccione un Grado</label> <br>
-                      <select id="grado_instruccion" name="grado_instruccion">
-                        <option value="">--Seleccione--</option>
-                        <option value="<? echo $grado['idgrado_instruccion'] ?>" >
-                          <? echo $grado['grado'] ?>
-                        </option>
-                      </select>
-                    <?php
-                  }
+                while ($grado = $resultado->fetch_assoc()) {
                 ?>
+                  <div class="orden">
+                    <label for="grado_instruccion">Seleccione un Grado</label> <br>
+                    <select id="grado_instruccion" name="grado_instruccion">
+                      <option value="">--Seleccione--</option>
+                      <option value="<? echo $grado['idgrado_instruccion'] ?>">
+                        <? echo $grado['grado'] ?>
+                      </option>
+                    </select>
+                  <?php
+                }
+                  ?>
 
-                <!-- Fecha de Nacimiento -->
-                <div class="form-group">
-                  <label for="nacimiento">Fecha de Nacimiento: </label>
-                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresa una fecha" value="<?php echo $invitado['nacimiento']; ?>">
-                </div>
-              </div> <!-- /.box-body -->
+                  <!-- Fecha de Nacimiento -->
+                  <div class="form-group">
+                    <label for="nacimiento">Fecha de Nacimiento: </label>
+                    <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresa una fecha" value="<?php echo $invitado['nacimiento']; ?>">
+                  </div>
+                  </div> <!-- /.box-body -->
 
-              <div class="box-footer">
-                <input type="hidden" name="registro" value="actualizar">
-                <input type="hidden" name="id_registro" value="<?php echo $invitado['idpersona']; ?>">
-                <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
-              </div>
+                  <div class="box-footer">
+                    <input type="hidden" name="registro" value="actualizar">
+                    <input type="hidden" name="id_registro" value="<?php echo $invitado['idpersona']; ?>">
+                    <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
+                  </div>
             </form>
           </div> <!-- /.box-body -->
         </div> <!-- /.box -->
@@ -138,6 +137,3 @@ include_once '../../plantillas/cabecera-admin.php';
     </div>
   </div>
 </div> <!-- /.content-wrapper -->
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

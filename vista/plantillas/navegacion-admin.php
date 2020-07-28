@@ -1,3 +1,4 @@
+<h1>SOY BARRA ADMIN</h1>
 <?php
 $sesion = new Sesion();
 ?>
@@ -26,9 +27,11 @@ $sesion = new Sesion();
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header"><a href="dashboard?dashboard=area-admin">MENU DE ADMINISTRACION</a></li>
+
       <li class="treeview">
         <a href="#">
-          <i class="fas fa-tachometer-alt" aria-hidden="true"></i> <span>Dashboard</span>
+          <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+          <span>Dashboard</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
@@ -40,23 +43,23 @@ $sesion = new Sesion();
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-calendar"></i>
-          <span>Eventos</span>
+          <i class="fa fa-book"></i>
+          <span>Categoria-Eventos</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+          <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+          <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
         </ul>
       </li>
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-book"></i>
-          <span>Categoria Eventos</span>
+          <i class="fa fa-calendar"></i>
+          <span>Tema-Eventos</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+          <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+          <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
         </ul>
       </li>
 
@@ -90,7 +93,7 @@ $sesion = new Sesion();
         <ul class="treeview-menu">
           <li><a href="dashboard?dashboard=lista-registrado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
           <li><a href="dashboard?dashboard=crear-registrado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-          
+
         </ul>
       </li>
       <?php

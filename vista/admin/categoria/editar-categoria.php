@@ -4,7 +4,6 @@ $id = $_GET['id'];
 if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Negamos para valida si alguien envia letras
   die("Error!");
 }
-include_once '../../plantillas/cabecera-admin.php';
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -60,6 +59,3 @@ include_once '../../plantillas/cabecera-admin.php';
     </div>
   </div>
 </div> <!-- /.content-wrapper -->
-<?php
-include_once '../../plantillas/footer-admin.php';
-?>

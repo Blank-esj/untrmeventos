@@ -1,8 +1,3 @@
-<?php
-// Modificado: 16/07/2020 16:24
-include_once 'vista/plantillas/cabecera-admin.php';
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -153,6 +148,3 @@ include_once 'vista/plantillas/cabecera-admin.php';
     </div>
   </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
-<?php
-include_once 'vista/plantillas/footer-admin.php';
-?>
