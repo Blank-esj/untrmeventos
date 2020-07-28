@@ -25,14 +25,14 @@
   <script src="vista/assets/js/sweetalert2.all.min.js"></script>
 
   <!-- Admin insert y login -->
-  <script src="vista/../controlador/js/admin-ajax.js"></script>
+  <script src="controlador/js/admin-ajax.js"></script>
 
   <!-- bootstrap datepicker -->
   <script src="vista/assets/js/bootstrap-datepicker.min.js"></script>
   <!-- Select2 -->
   <script src="vista/assets/js/select2.full.min.js"></script>
 
-  <script src="vista/../controlador/js/admin-ajax.js"></script> <!-- Por algo será -->
+  <script src="controlador/js/admin-ajax.js"></script> <!-- Por algo será -->
 
   <!-- bootstrap time picker -->
   <script src="vista/assets/js/bootstrap-timepicker.min.js"></script>
@@ -40,7 +40,7 @@
   <script src="vista/assets/js/raphael.min.js"></script>
 
   <!-- AdminLTE for demo purposes -->
-  <script src="vista/../controlador/js/login-ajax.js"></script>
+  <script src="controlador/js/login-ajax.js"></script>
   <script src="vista/assets/js/demo.js"></script>
 
   <!-- Morris.js charts -->
@@ -49,8 +49,8 @@
   <script src="vista/assets/js/icheck.min.js"></script>
 
   <!-- Scripts controladores -->
-  <script src="vista/../controlador/js/cotizador.js"></script>
-  <script src="vista/../controlador/js/app.js"></script>
+  <script src="controlador/js/cotizador.js"></script>
+  <script src="controlador/js/app.js"></script>
 
   <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
   <script src="vista/assets/js/fontawesome-iconpicker.min.js"></script>

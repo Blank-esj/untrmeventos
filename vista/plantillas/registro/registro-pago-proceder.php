@@ -1,6 +1,6 @@
 <?php
 include_once 'modelo/venta.php';
-include_once 'controlador/util/Sesion.php';
+include_once 'controlador/Sesion.php';
 $venta = json_decode((new Venta())->insertarPreCompra(session_id(), $_POST['email']));
 ?>
 

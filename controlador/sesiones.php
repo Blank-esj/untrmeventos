@@ -1,7 +1,7 @@
 <?php
     function usuario_autenticado() {
         if(!revisar_usuario()) { //Si no se encuentra el usuario en SESSION.
-            header('location:../vista/admin/home/login.php'); //Redirige al login
+            header('location:../untrmeventos/dashboard'); //Redirige al login
             exit();
         }
     }

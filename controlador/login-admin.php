@@ -1,48 +1,35 @@
 <?php
+
+include_once 'Sesion.php';
+include_once 'bd_conexion_pdo.php';
+include_once 'modelo/admins.php';
+
 // Modificado: 16/07/2020 13:08
 //Código para login de los administradores
 if (isset($_POST['login-admin'])) {
     echo 'estoy evaluando el login';
-    
+
     $usuario = $_POST['usuario'];
     $password = $_POST['password'];
 
-    try {
-        include_once 'funciones-admin.php';
-        $stmt = $conn->prepare("SELECT idpersona, usuario, nombre_completo, password, fecha_actualizacion, nivel FROM v_admins WHERE usuario = ?;");
-        $stmt->bind_param("s", $usuario);
-        $stmt->execute();
-        $stmt->bind_result($id_admin, $usuario_admin, $nombre_admin, $password_admin, $fecha_actualizacion, $nivel);
-        if ($stmt->affected_rows) {
-            $existe = $stmt->fetch(); //imprime los resultados y almacena en la variable.
-            if ($existe) { //Validamos si existe contenido de la variable.
-                //Compara el password con el hash
-                if (password_verify($password, $password_admin)) {
-                    //Si es correcto, iniciamos sesión.
-                    $_SESSION['usuario'] = $usuario_admin;
-                    $_SESSION['nombre'] = $nombre_admin;
-                    $_SESSION['nivel'] = $nivel;
-                    $_SESSION['id'] = $id_admin;
-                    //Luego enviamos el array respuesta.
-                    $respuesta = array(
-                        'respuesta' => 'exitoso',
-                        'usuario' => $nombre_admin
-                    );
-                } else {
-                    $respuesta = array(
-                        'respuesta' => 'error'
-                    );
-                }
-            } else {
-                $respuesta = array(
-                    'respuesta' => 'error'
-                );
-            }
+    $conn = (new Conexion())->conectarPDO();
+
+    $admin = ((new Admins())->leerDatosLoginAdmin($conn, $usuario));
+
+    if (count($admin) > 0) {
+
+        if (password_verify($password, $admin['password'])) {
+            $sesion = new Sesion();
+
+            $sesion->agregarUsuario(
+                $admin['idpersona'],
+                $usuario,
+                $password,
+                $admin['nombre_completo'],
+                $admin['nivel']
+            );
+
+            $sesion->eliminarUsuario($admin['idpersona']);
         }
-        $stmt->close();
-        $conn->close();
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
     }
-    die(json_encode($respuesta));
 }

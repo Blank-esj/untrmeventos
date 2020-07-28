@@ -482,4 +482,60 @@ class Sesion
         }
         return $total;
     }
+
+    /**
+     * Retorna true si existe usuario
+     */
+
+    public function existeUsuario()
+    {
+        return isset($_SESSION[SESION][N_USUARIO]);
+    }
+
+    /**
+     * retorna un arreglo con los datos del usuario
+     */
+    public function leerUsuario()
+    {
+        return $_SESSION[SESION][N_USUARIO];
+    }
+
+    public function leerUsuarioUsuario()
+    {
+        return $this->leerUsuario()[N_USUARIO_USUARIO];
+    }
+
+    public function leerNombreUsuario()
+    {
+        return $this->leerUsuario()[N_NOMBRE_USUARIO];
+    }
+
+    public function leerContrasenaUsuario()
+    {
+        return $this->leerUsuario()[N_CONTRASENA_USUARIO];
+    }
+
+    public function leerNivelUsuario()
+    {
+        return $this->leerUsuario()[N_NIVEL_USUARIO];
+    }
+
+    public function leerIdUsuario()
+    {
+        return $this->leerUsuario()[N_ID_USUARIO];
+    }
+
+    public function agregarUsuario($id, $usuario, $contrasena, $nombre, $nivel)
+    {
+        $_SESSION[SESION][N_USUARIO][N_ID_USUARIO] = $id;
+        $_SESSION[SESION][N_USUARIO][N_USUARIO_USUARIO] = $usuario;
+        $_SESSION[SESION][N_USUARIO][N_CONTRASENA_USUARIO] = $contrasena;
+        $_SESSION[SESION][N_USUARIO][N_NOMBRE_USUARIO] = $nombre;
+        $_SESSION[SESION][N_USUARIO][N_NIVEL_USUARIO] = $nivel;
+    }
+
+    public function eliminarUsuario($id)
+    {
+        unset($_SESSION[SESION][N_USUARIO]);
+    }
 }

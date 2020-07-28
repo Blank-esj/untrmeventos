@@ -5,7 +5,8 @@ if ($cerrar_sesion) {
   session_destroy();
 }
 include_once 'controlador/funciones-admin.php';
-include_once 'controlador/login-admin.php';
+echo 'esto aquí';
+
 ?>
 
 <body class="hold-transition login-page">
@@ -40,5 +41,5 @@ include_once 'controlador/login-admin.php';
   </div> <!-- /.login-box -->
 </body>
 <?php
-include_once 'vista/plantillas/footer-admin.php';
+//include_once 'controlador/sesiones.php';
 ?>

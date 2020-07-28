@@ -14,6 +14,13 @@ define("SESION", "untrmeventos");
 // Nombre de los segundos nodos de la Sesión
 define("N_PLANES", "planes");
 define("N_ARTICULOS", "articulos");
+define("N_USUARIO", "usuario");
+// Nombre de los segundos nodos de la Sesión
+define("N_USUARIO_USUARIO", "usuario");
+define("N_CONTRASENA_USUARIO", "contrasena");
+define("N_NOMBRE_USUARIO", "nombre");
+define("N_NIVEL_USUARIO", "nivel");
+define("N_ID_USUARIO", "id");
 // Nodos de planes
 define("N_NOMBRE_PLAN", "nombre");
 define("N_PRECIO_PLAN", "precio");
@@ -35,5 +42,5 @@ define("N_CANTIDAD_ARTICULO", "cantidad");
 
 // PAYPAL SANDBOX
 define("LINKAPI", "https://api.sandbox.paypal.com");
-define("CLIENTID", "");
-define("SECRETID", "");
+define("CLIENTID", "Ad3BzvK8xD2dM0ZsVLJWFjKITqLEYEStaSxe3zGH7eZ8NykLhTlLzR4aaiEHApGyek7TM5pcbfw3zrJj");
+define("SECRETID", "EDXuvb80VgIBqxsh85lyNKdkxCZtqe4eKVFUPrceYuxCADBlI1CB-6oECR74Icm6aQKvO7f_sPtUoK11");

@@ -20,9 +20,9 @@ $(document).ready(function () {
                         'Bienveid@ ' + resultado.usuario + ' !! ',
                         'success'
                     )
-                    /*setTimeout(function () {
-                        window.location.href = '';
-                    }, 2000);*/
+                    setTimeout(function () {
+                        window.location.href = 'dashboard';
+                    }, 2000);
                     Swal.fire(
                         'Error!',
                         'Usuario o Password Incorrecto',
