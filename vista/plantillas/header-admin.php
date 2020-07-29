@@ -8,6 +8,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="vista/assets/css/bootstrap3.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="vista/assets/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -24,7 +26,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="vista/assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the vista/assets/css/skins
-  folder instead of downloading all of them to reduce the load. -->
+        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="vista/assets/css/skins/_all-skins.min.css">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="vista/assets/css/icheck.css">
@@ -32,10 +34,9 @@
   <!-- Morris charts -->
   <link rel="stylesheet" href="vista/assets/css/morris.css">
   <link rel="stylesheet" href="vista/assets/css/admin.css">
+
   <!-- Material Desing Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Bootstrap 4.5 -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
