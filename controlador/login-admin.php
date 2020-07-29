@@ -10,21 +10,27 @@ function verificarUsuarioPassword($usuario, $password)
 {
     $conn = (new Conexion())->conectarPDO();
 
-    $admin = ((new Admins())->leerDatosLoginAdmin($conn, $usuario));
+    $admin = new Admins();
 
-    if (count($admin) > 0) {
+    if ($admin->cuentaAdmins($conn) > 0) {
 
-        if (password_verify($password, $admin['password'])) {
-            $sesion = new Sesion();
+        $admin = ((new Admins())->leerDatosLoginAdmin($conn, $usuario));
 
-            $sesion->agregarUsuario(
-                $admin['idpersona'],
-                $usuario,
-                $password,
-                $admin['nombre_completo'],
-                $admin['nivel']
-            );
-            return true;
+        if (count($admin) > 0) {
+
+            if (password_verify($password, $admin['password'])) {
+                $sesion = new Sesion();
+
+                $sesion->agregarUsuario(
+                    $admin['idpersona'],
+                    $usuario,
+                    $password,
+                    $admin['nombre_completo'],
+                    $admin['nivel']
+                );
+                unset($sesion);
+                return true;
+            } else return false;
         } else return false;
-    } else return false;
+    }else return false;
 }

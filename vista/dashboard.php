@@ -23,9 +23,15 @@ if (isset($_SESSION[SESION][N_USUARIO][N_USUARIO_USUARIO]) && isset($_SESSION[SE
 
 if ($verificador) {
     if (isset($_POST['dashboard'])) { // Si hay alguna petición por POST
-        switch ($_POST['dashboard']) {
+        $dato = openssl_decrypt($_POST['dashboard'], COD, KEY);
+
+        switch ($dato) {
             case 'login':
                 evaluarLogeo();
+                break;
+
+            case 'admin1-crear':
+                include_once 'vista/admin/home/login.php';
                 break;
 
             default:
@@ -147,6 +153,8 @@ if ($verificador) {
     }
 }
 
+$connPDO = null;
+
 function evaluarLogeo()
 {
     $verificado = verificarUsuarioPassword($_POST['usuario'], $_POST['password']);
@@ -158,4 +166,3 @@ function evaluarLogeo()
         include_once 'vista/admin/home/login.php';
     }
 }
-$connPDO = null;
