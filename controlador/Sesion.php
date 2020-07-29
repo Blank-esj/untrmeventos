@@ -148,7 +148,8 @@ class Sesion
      */
     public function leerCantidadArticulo($idArticulo)
     {
-        return $this->leerArticulo($idArticulo)[N_CANTIDAD_ARTICULO];
+        return isset($_SESSION[SESION][N_ARTICULOS][$idArticulo][N_CANTIDAD_ARTICULO]) ?
+            $this->leerArticulo($idArticulo)[N_CANTIDAD_ARTICULO] : 0;
     }
 
     /** lee precio de un articulo pasandole si Id
@@ -326,7 +327,7 @@ class Sesion
      */
     public function existeAsistentesPlan($idPlan)
     {
-        return ($this->leerPlan($idPlan)[N_ASISTENTES_PLAN] !== null) ? true : false;
+        return isset($_SESSION[SESION][N_PLANES][$idPlan][N_ASISTENTES_PLAN]);
     }
 
     /**

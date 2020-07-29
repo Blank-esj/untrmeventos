@@ -139,7 +139,7 @@
                             <?php
                             // Card para mostrar los card con los extras seleccionados
                             // Pregunta si existe algún extra en la sesión
-                            if ($sesion->leerArticulos() !== null && count($sesion->leerArticulos()) > 0) {
+                            if ($sesion->existeArticulos()) {
                                 foreach ($sesion->leerArticulos() as $idArticulo => $arrayArticulo) { ?>
 
                                     <!-- Cards de los planes -->
