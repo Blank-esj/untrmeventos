@@ -158,3 +158,4 @@ function evaluarLogeo()
         include_once 'vista/admin/home/login.php';
     }
 }
+$connPDO = null;

@@ -10,80 +10,40 @@
 
   <!-- Main content -->
   <section class="content">
+
+    <h2 class="page-header">Linea de tiempo de registro de asistentes</h2>
     <div class="row">
       <div class="box-body chart-responsive">
         <div class="chart" id="grafica-registros" style="height: 300px;"></div>
       </div>
     </div>
+
     <h2 class="page-header">Resumen de Registros</h2>
     <div class="row">
       <!-- Total Registrado -->
-      <div class="col-lg-3 col-xs-6">
-        <?php
-        $sql = "SELECT COUNT(*) AS registros FROM persona p, boleto b WHERE b.idpersona = p.idpersona";
-        $resultado = $conn->query($sql);
-        $registrados = $resultado->fetch_assoc();
-        ?>
-        <div class="small-box bg-aqua">
-          <!-- small box -->
-          <div class="inner">
-            <h3><?php echo $registrados['registros']; ?></h3>
-            <p>Total Registrados</p>
+      <?php
+      $sql = "SELECT v.estado, COUNT(b.idventa) total 
+                FROM boleto b, venta v 
+                WHERE b.idventa = v.idventa 
+                GROUP BY v.estado;";
+      $resultado = $conn->query($sql);
+      while ($registrados = $resultado->fetch_assoc()) { ?>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-aqua">
+            <!-- small box -->
+            <div class="inner">
+              <h3><?php echo $registrados['total']; ?></h3>
+              <p><?php echo $registrados['estado']; ?></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-user"></i>
+            </div>
+            <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
+              Más Información <i class="fa fa-arrow-circle-right"></i>
+            </a>
           </div>
-          <div class="icon">
-            <i class="fa fa-user"></i>
-          </div>
-          <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
         </div>
-      </div>
-
-      <!-- Edad Promedio de registrados -->
-      <div class="col-lg-3 col-xs-6">
-        <?php
-        $sql = "SELECT ROUND(AVG(YEAR(CURDATE())-YEAR(nacimiento))) AS `edad_promedio` FROM persona, invitado WHERE persona.idpersona = invitado.idpersona; ";
-        $resultado = $conn->query($sql);
-        $registrados = $resultado->fetch_assoc();
-        ?>
-        <div class="small-box bg-aqua">
-          <!-- small box -->
-          <div class="inner">
-            <h3><?php echo $registrados['edad_promedio']; ?></h3>
-            <p>Edad Promedio de Invitados</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-user"></i>
-          </div>
-          <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Total Pagados -->
-      <div class="col-lg-3 col-xs-6">
-        <?php
-        $sql = "SELECT COUNT(*) AS registros FROM persona p, boleto b WHERE p.idpersona = b.idpersona";
-        $resultado = $conn->query($sql);
-        $registrados = $resultado->fetch_assoc();
-
-        ?>
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-          <div class="inner">
-            <h3><?php echo $registrados['registros']; ?></h3>
-
-            <p>Total Pagados</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-users"></i>
-          </div>
-          <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
-            Más Información <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
+      <?php } ?>
 
       <!-- Total Ganancias -->
       <div class="col-lg-3 col-xs-6">
@@ -114,7 +74,92 @@
     </div>
 
 
-    <h2 class="page-header">Regalos</h2>
+    <h2 class="page-header">Planes más vendidos</h2>
+
+    <!-- Planes más vendidos -->
+    <div class="row">
+      <?php
+      try {
+        $sql = "SELECT p.nombre, p.precio, COUNT(*) total 
+                FROM boleto b, plan p 
+                WHERE b.idplan = p.idplan
+                GROUP BY p.idplan ORDER BY total DESC;";
+        $resultado = $conn->query($sql); //Ejecuta consulta SQL
+      } catch (Exception $e) {
+        $error = $e->getMessage();
+        echo $error;
+      }
+      $numero = 1;
+      while ($plan = $resultado->fetch_assoc()) { ?>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-teal">
+            <div class="inner">
+              <h3><?php echo $plan['total']; ?></h3>
+
+              <p>
+                <?php echo $plan['nombre']; ?>
+                <span class="badge label-success">
+                  <?php echo "$ " . $plan['precio']; ?>
+                </span>
+              </p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-gift"></i>
+            </div>
+            <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
+              Más Información <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      <?php } ?>
+    </div>
+
+
+    <h2 class="page-header">Articulos más vendidos</h2>
+
+    <!-- Total Articulo -->
+    <div class="row">
+      <?php
+      try {
+        $sql = "SELECT a.nombre_articulo, a.precio, sum(va.cantidad) total 
+                FROM venta_articulo va, articulo a 
+                WHERE va.idarticulo = a.idarticulo 
+                GROUP BY a.idarticulo 
+                ORDER BY total DESC;";
+        $resultado = $conn->query($sql); //Ejecuta consulta SQL
+      } catch (Exception $e) {
+        $error = $e->getMessage();
+        echo $error;
+      }
+      $numero = 1;
+      while ($articulo = $resultado->fetch_assoc()) { ?>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-teal">
+            <div class="inner">
+              <h3><?php echo number_format($articulo['total'], 0); ?></h3>
+
+              <p>
+                <?php echo $articulo['nombre_articulo']; ?>
+                <span class="badge label-success">
+                  <?php echo "$ " . $articulo['precio']; ?>
+                </span>
+              </p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-gift"></i>
+            </div>
+            <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
+              Más Información <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      <?php } ?>
+    </div>
+
+
+    <h2 class="page-header">Lo más regalado</h2>
 
     <!-- Total regalos -->
     <div class="row">
@@ -146,5 +191,80 @@
         </div>
       <?php } ?>
     </div>
+
+
+
+    <h2 class="page-header">Resumen Invitados</h2>
+
+    <!-- Resumen Invitados -->
+    <div class="row">
+
+      <!-- Edad Promedio -->
+      <?php
+      try {
+        $sql = "SELECT ROUND(AVG(YEAR(CURDATE())-YEAR(nacimiento))) AS `edad_promedio` 
+              FROM persona, invitado 
+              WHERE persona.idpersona = invitado.idpersona;";
+        $resultado = $conn->query($sql); //Ejecuta consulta SQL
+      } catch (Exception $e) {
+        $error = $e->getMessage();
+        echo $error;
+      }
+      $numero = 1;
+      while ($invitado = $resultado->fetch_assoc()) { ?>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-teal">
+            <div class="inner">
+              <h3><?php echo $invitado['edad_promedio'] != null ? $invitado['edad_promedio'] : "-"; ?></h3>
+              <p>Edad Promedio de Invitados</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-gift"></i>
+            </div>
+            <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
+              Más Información <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      <?php } ?>
+
+
+      <!-- Grados Académicos -->
+      <?php
+      try {
+        $sql = "SELECT grado, COUNT(*) total 
+                FROM v_invitado i 
+                WHERE ISNULL(i.grado) = FALSE 
+                GROUP BY grado 
+                ORDER BY total DESC;";
+        $resultado = $conn->query($sql); //Ejecuta consulta SQL
+      } catch (Exception $e) {
+        $error = $e->getMessage();
+        echo $error;
+      }
+      $numero = 1;
+      while ($invitado = $resultado->fetch_assoc()) { ?>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-teal">
+            <div class="inner">
+              <h3><?php echo $invitado['total'] != null ? $invitado['total'] : "-"; ?></h3>
+              <p><strong>Grado:</strong> <?php echo $invitado['grado'] ?></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="dashboard?dashboard=lista-registrado" class="small-box-footer">
+              Más Información <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      <?php } ?>
+
+
+    </div>
+
+
   </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->

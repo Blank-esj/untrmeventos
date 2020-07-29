@@ -3,12 +3,12 @@
 //include_once 'sesiones.php';
 include_once 'funciones-admin.php';
 
-$sql = "SELECT DAY(fecha_creacion) fecha_registro, COUNT(*) AS resultado FROM boleto GROUP BY DATE(fecha_registro) ORDER BY fecha_registro;";
+$sql = "SELECT fecha_creacion, COUNT(*) AS resultado FROM boleto GROUP BY DATE(fecha_creacion) ORDER BY fecha_creacion;";
 $resultado = $conn->query($sql);
 
 $arreglo_registros = array();
 while ($registro_dia = $resultado->fetch_assoc()) {
-  $fecha = $registro_dia['fecha_registro'];
+  $fecha = $registro_dia['fecha_creacion'];
   $registro['fecha'] = date('Y-m-d', strtotime($fecha));
   $registro['cantidad'] = $registro_dia['resultado'];
 
