@@ -21,9 +21,9 @@
               <thead>
                 <tr>
                   <th>Nº</th>
-                  <th>Grado</th>
                   <th>Nombre de Invitado</th>
                   <th>Insticución de Procedencia</th>
+                  <th>Grado</th>
                   <th>Biografia</th>
                   <th>Imagen</th>
                   <th>Acciones</th>
@@ -44,9 +44,9 @@
                 ?>
                   <tr>
                     <td> <?php echo $numero; ?> </td>
-                    <td><?php echo $invitado['grado_instruccion'] ?></td>
                     <td><?php echo $invitado['nombre_completo'] ?></td>
                     <td><?php echo $invitado['institucion_procedencia'] ?></td>
+                    <td><?php echo $invitado['grado'] ?></td>
                     <td><?php echo $invitado['descripcion']; ?></td>
                     <td><img src="../../assets/img/invitados/<?php echo $invitado['url_imagen']; ?>" width="150"></td>
                     <td>
@@ -66,9 +66,9 @@
               <tfoot>
                 <tr>
                   <th>N°</th>
-                  <th>Grado</th>
                   <th>Nombre de Invitado</th>
                   <th>Insticución de Procedencia</th>
+                  <th>Grado</th>
                   <th>Biografia</th>
                   <th>Imagen</th>
                   <th>Acciones</th>

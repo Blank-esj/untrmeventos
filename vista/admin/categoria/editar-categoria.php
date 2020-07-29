@@ -33,10 +33,14 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Nega
             <!-- form start -->
             <form role="form" name="guardar-registro" id="guardar-registro" method="post" action="../../../modelo/modelo-categoria.php">
               <div class="box-body">
+
+                <!-- Nombre -->
                 <div class="form-group">
                   <label for="usuario">Nombre: </label>
                   <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria" placeholder="Ingresa nombre de categoría" value="<?Php echo $categoria['cat_evento']; ?>">
                 </div>
+
+                <!-- Ícono -->
                 <div class="form-group">
                   <label for="">Ícono: </label>
                   <div class="input-group">
@@ -46,6 +50,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Nega
                     <input type="text" class="form-control pull-right" id="icono" name="icono" placeholder="fa-icon" value="<?Php echo $categoria['icono']; ?>">
                   </div>
                 </div>
+
               </div> <!-- /.box-body -->
               <div class="box-footer">
                 <input type="hidden" name="registro" value="actualizar">

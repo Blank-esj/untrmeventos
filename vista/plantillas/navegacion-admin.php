@@ -48,7 +48,7 @@ $sesion = new Sesion();
         <ul class="treeview-menu">
           <li class="treeview">
             <a href="#">
-              <i class="material-icons">category</i>
+              <i class="fa fa-cubes"></i>
               <span>Categoria</span>
             </a>
             <ul class="treeview-menu">
@@ -72,7 +72,7 @@ $sesion = new Sesion();
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-user-circle"></i>
+          <i class="fa fa-sitemap"></i>
           <span>Planes</span>
         </a>
         <ul class="treeview-menu">
@@ -80,7 +80,7 @@ $sesion = new Sesion();
           <li><a href="dashboard?dashboard=crear-plan"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-user-circle"></i>
+              <i class="fa fa-trophy"></i>
               <span>Beneficios</span>
             </a>
             <ul class="treeview-menu">
@@ -113,7 +113,7 @@ $sesion = new Sesion();
           <li><a href="dashboard?dashboard=crear-invitado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-user-circle"></i>
+              <i class="fa fa-certificate"></i>
               <span>Grado de Instrucción</span>
             </a>
             <ul class="treeview-menu">
@@ -135,7 +135,7 @@ $sesion = new Sesion();
           <li><a href="dashboard?dashboard=crear-registrado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-address-card"></i>
+              <i class="fa fa-gift"></i>
               <span>Regalos</span>
             </a>
             <ul class="treeview-menu">

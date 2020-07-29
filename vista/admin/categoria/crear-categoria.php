@@ -19,12 +19,15 @@
           <div class="box-body">
             <!-- form start -->
             <form role="form" id="guardar-registro" method="post" action="modelo/modelo-categoria.php">
-
               <div class="box-body">
+
+                <!-- Nombre -->
                 <div class="form-group">
                   <label for="usuario">Nombre: </label>
                   <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria" placeholder="Ingresar nombre de categoría">
                 </div>
+
+                <!-- Ícono -->
                 <div class="form-group">
                   <label for="">Ícono: </label>
                   <div class="input-group">
@@ -34,8 +37,8 @@
                     <input type="text" class="form-control pull-right" id="icono" name="icono" placeholder="fa-icon">
                   </div>
                 </div>
-              </div> <!-- /.box-body -->
 
+              </div> <!-- /.box-body -->
               <div class="box-footer">
                 <input type="hidden" name="registro" value="nuevo">
                 <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>

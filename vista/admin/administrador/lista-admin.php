@@ -33,7 +33,7 @@
               <tbody>
                 <?php
                 try {
-                  $sql = "SELECT idpersona, usuario, nombre_completo, nivel FROM v_admins"; //Crea consulta SQL
+                  $sql = "SELECT idpersona, nombre_completo, email, telefono, doc_identidad, usuario, nivel FROM v_admins"; //Crea consulta SQL
                   $resultado = $conn->query($sql); //Ejecuta consulta SQL
                 } catch (Exception $e) {
                   $error = $e->getMessage();
@@ -45,8 +45,11 @@
                 ?>
                     <tr>
                       <td> <?php echo $numero; ?> </td>
-                      <td><?php echo $admin['usuario']; ?></td>
                       <td><?php echo $admin['nombre_completo']; ?></td>
+                      <td><?php echo $admin['email']; ?></td>
+                      <td><?php echo $admin['telefono']; ?></td>
+                      <td><?php echo $admin['doc_identidad']; ?></td>
+                      <td><?php echo $admin['usuario']; ?></td>
                       <td><?php
                           if ($admin['nivel'] == 1) {
                             echo 'Administrador';

@@ -95,11 +95,11 @@ if ($verificador) {
                 break;
 
             case 'lista-beneficio':
-                include_once 'vista/admin/beneficio/lista-beneficio.php';
+                include_once 'vista/admin/plan/beneficio/lista-beneficio.php';
                 break;
 
             case 'crear-beneficio':
-                include_once 'vista/admin/beneficio/crear-beneficio.php';
+                include_once 'vista/admin/plan/beneficio/crear-beneficio.php';
                 break;
 
             case 'lista-articulo':
@@ -111,19 +111,19 @@ if ($verificador) {
                 break;
 
             case 'lista-grado':
-                include_once 'vista/grado/admin-instruccion/lista-grado.php';
+                include_once 'vista/admin/invitado/grado-instruccion/admin-instruccion/lista-grado.php';
                 break;
 
             case 'crear-grado':
-                include_once 'vista/grado/admin-instruccion/crear-grado.php';
+                include_once 'vista/admin/invitado/grado-instruccion/crear-grado.php';
                 break;
 
             case 'lista-regalo':
-                include_once 'vista/admin/regalo/lista-regalo.php';
+                include_once 'vista/admin/registrado/regalo/lista-regalo.php';
                 break;
 
             case 'crear-regalo':
-                include_once 'vista/admin/regalo/crear-regalo.php';
+                include_once 'vista/admin/registrado/regalo/crear-regalo.php';
                 break;
 
             default:

@@ -19,27 +19,31 @@
                     <form method="post" action="">
                         <div class="box-body">
 
+                            <!-- Nombre -->
                             <div class="form-group">
                                 <label for="nombre">Nombre </label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
                             </div>
 
+                            <!-- Precio -->
                             <div class="form-group">
                                 <label for="precio">Precio </label>
                                 <input type="number" class="form-control" name="precio" id="precio" placeholder="Ingrese el precio">
                             </div>
 
+                            <!-- Descripción -->
                             <div class="mb-3">
                                 <label for="btextarea">Descripcion</label>
                                 <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripcion"></textarea>
                             </div>
 
+                            <!-- Beneficio -->
                             <div class="card">
                                 <div class="card-body">
                                     <h6 class="card-subtitle mb-2 text-muted">Beneficio</h6>
                                     <?php
                                     include 'modelo/beneficio.php';
-                                    foreach ((new Beneficio())->leerBeneficios($connPDO) as $indice => $arrayBeneficio) { ?>
+                                    foreach ((new Beneficio())->leerTodos($connPDO) as $indice => $arrayBeneficio) { ?>
 
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="check-beneficio" value="<?php echo openssl_encrypt($arrayBeneficio['idbeneficio'], COD, KEY) ?>" id="check-<?php echo $indice ?>">

@@ -42,14 +42,16 @@
                     <td> <?php echo $numero; ?> </td>
                     <td><?php echo $categoria['cat_evento']; ?></td>
                     <td><i class="fa <?php echo $categoria['icono']; ?>"></i></td>
+
                     <td>
-                      <a href="editar-categoria.php?id=<?php echo $categoria['id_categoria'] ?>" class="btn bg-orange btn-flat margin">
+                      <a href="dashboard?editar-categoria=<?php echo openssl_encrypt($arrayPlan['idplan'], COD, KEY) ?>" class="btn bg-orange btn-flat margin">
                         <i class="fa fa-pencil-alt"></i>
                       </a>
                       <a href="#" data-id="<?php echo $categoria['id_categoria']; ?>" data-tipo="categoria" class="btn bg-maroon btn-flat margin borrar_registro">
                         <i class="fa fa-trash"></i>
                       </a>
                     </td>
+
                   </tr>
                 <?php
                   $numero++;

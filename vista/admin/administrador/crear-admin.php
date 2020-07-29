@@ -19,8 +19,8 @@
           <div class="box-body">
             <!-- form start -->
             <form role="form" id="guardar-registro" method="post" action="modelo/modelo-admin.php">
-
               <div class="box-body">
+
                 <!-- Nombres -->
                 <div class="form-group">
                   <label for="nombre">Nombres: </label>
