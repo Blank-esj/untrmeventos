@@ -50,7 +50,10 @@
                                  * Si es así mostramos un boton desactivado y común
                                  * Sino un botón acivo con su nombre y valor para que pueda realizar peticiones HTTP
                                  */
-                                $cantidadArticuloSesion = $sesion->leerCantidadArticulo($articulo['idarticulo']);
+                                $cantidadArticuloSesion =
+                                    $sesion->existeCantidadArticulo($articulo['idarticulo']) ?
+                                    $sesion->leerCantidadArticulo($articulo['idarticulo']) : 0;
+
                                 if ($cantidadArticuloSesion === null || $cantidadArticuloSesion <= 0) { ?>
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="No puedo quitar más">
                                         <button class="btn" style="padding: 0px; border: 0; pointer-events: none;" type="button" disabled>
@@ -64,14 +67,7 @@
                                 <?php } ?>
 
                                 <span class=" text-nowrap badge badge-light">
-                                    <?php
-                                    /**
-                                     * Si la cantidad del articulo en la sesion es nula o menor o igual a 0 se mostrará 0
-                                     * Sino se imprimirá el valor de la variable
-                                     */
-
-                                    echo ($cantidadArticuloSesion === null || $cantidadArticuloSesion <= 0) ? 0 : $cantidadArticuloSesion
-                                    ?>
+                                    <?php echo $cantidadArticuloSesion; ?>
                                 </span>
 
                                 <?php

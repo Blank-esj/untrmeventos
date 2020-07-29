@@ -303,7 +303,12 @@ class Sesion
      */
     public function existeArticulo($idArticulo)
     {
-        return ($this->leerArticulo($idArticulo) !== null) ? true : false;
+        return isset($_SESSION[SESION][N_ARTICULOS][$idArticulo]);
+    }
+
+    public function existeCantidadArticulo($idArticulo)
+    {
+        return isset($_SESSION[SESION][N_ARTICULOS][$idArticulo][N_CANTIDAD_ARTICULO]);
     }
 
     /**
@@ -431,7 +436,7 @@ class Sesion
         $subtotal = [];
         $indice = 0;
         if ($this->existePlanes()) {
-            foreach ($this->leerPlanes() as $idPlan => $arrayPlan) {
+            foreach ($this->leerPlanes() as $arrayPlan) {
                 $subtotal[$indice] = [
                     "nombre" => $arrayPlan[N_NOMBRE_PLAN],
                     "tipo" => N_PLANES,
@@ -444,7 +449,7 @@ class Sesion
         }
 
         if ($this->existeArticulos()) {
-            foreach ($this->leerArticulos() as $idArticulo => $arrayArticulo) {
+            foreach ($this->leerArticulos() as $arrayArticulo) {
                 $subtotal[$indice] = [
                     "nombre" => $arrayArticulo[N_NOMBRE_ARTICULO],
                     "tipo" => N_ARTICULOS,
@@ -465,7 +470,7 @@ class Sesion
     public function cantidadTotal()
     {
         $total = 0;
-        foreach (array_column($this->subtotal(), "cantidad") as $key => $value) {
+        foreach (array_column($this->subtotal(), "cantidad") as $value) {
             $total += $value;
         }
         return $total;
@@ -478,7 +483,7 @@ class Sesion
     {
         $total = 0;
         // Obtenemos el total
-        foreach ($this->subtotal() as $indice => $subtotales) {
+        foreach ($this->subtotal() as $subtotales) {
             $total += $subtotales['subtotal'];
         }
         return $total;

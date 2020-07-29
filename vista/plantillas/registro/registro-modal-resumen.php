@@ -51,7 +51,7 @@
                             // Card para mostrar los card con los planes seleccionados
                             // Pregunta si existe algún plan en la sesión
                             //$sesion = new Sesion();
-                            if ($sesion->leerPlanes() !== null && count($sesion->leerPlanes()) > 0) {
+                            if ($sesion->existePlanes()) {
                                 foreach ($sesion->leerPlanes() as $idPlan => $arrayPlan) { ?>
 
                                     <!-- Cards de los planes -->
@@ -68,7 +68,7 @@
 
                                         <!-- Asistentes -->
                                         <?php
-                                        if ($sesion->leerAsistentesPlan($idPlan) !== null) {
+                                        if ($sesion->existeAsistentesPlan($idPlan)) {
 
                                             $regalos = $regalo->arrayNombres($conexion); // traemos una array ordenado en clave (idregalo) y valor (nombre_regalo)
 
