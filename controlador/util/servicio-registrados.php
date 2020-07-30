@@ -4,7 +4,12 @@
 include_once '../global/config.php';
 $conn = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
 
-$sql = "SELECT fecha_creacion, COUNT(*) AS resultado FROM boleto GROUP BY DATE(fecha_creacion) ORDER BY fecha_creacion;";
+$sql = "SELECT b.fecha_creacion, COUNT(*) AS resultado 
+        FROM boleto b, venta v
+        WHERE v.idventa = b.idventa
+        AND v.estado = 'completo'
+        GROUP BY DATE (b.fecha_creacion) 
+        ORDER BY b.fecha_creacion;";
 $resultado = $conn->query($sql);
 
 $arreglo_registros = array();
