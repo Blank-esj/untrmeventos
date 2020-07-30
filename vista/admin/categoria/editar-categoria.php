@@ -1,6 +1,6 @@
 <?php
 //Captura de datos para proceder con la consulta SQL y llenar el formulario.
-$id = $_GET['id'];
+$id = openssl_decrypt($_POST['id'], COD, KEY);
 if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Negamos para valida si alguien envia letras
   die("Error!");
 }
@@ -31,7 +31,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Nega
             $categoria = $resultado->fetch_assoc();
             ?>
             <!-- form start -->
-            <form role="form" name="guardar-registro" id="guardar-registro" method="post" action="../../../modelo/modelo-categoria.php">
+            <form method="post" action="dashboard">
               <div class="box-body">
 
                 <!-- Nombre -->
@@ -53,9 +53,8 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Nega
 
               </div> <!-- /.box-body -->
               <div class="box-footer">
-                <input type="hidden" name="registro" value="actualizar">
-                <input type="hidden" name="id_registro" value="<?Php echo $id; ?>">
-                <button type="submit" class="btn btn-primary" id="crear_registro">Guardar</button>
+                <input type="hidden" name="id" value="<?Php echo openssl_encrypt($id, COD, KEY); ?>">
+                <button type="submit" name="dashboard" value="categoria-evento-editar1" class="btn btn-primary">Guardar</button>
               </div>
             </form>
           </div> <!-- /.box-body -->

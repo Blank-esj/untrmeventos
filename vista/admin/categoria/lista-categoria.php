@@ -44,12 +44,23 @@
                     <td><i class="fa <?php echo $categoria['icono']; ?>"></i></td>
 
                     <td>
-                      <a href="dashboard?editar-categoria=<?php echo openssl_encrypt($arrayPlan['idplan'], COD, KEY) ?>" class="btn bg-orange btn-flat margin">
-                        <i class="fa fa-pencil-alt"></i>
-                      </a>
-                      <a href="#" data-id="<?php echo $categoria['id_categoria']; ?>" data-tipo="categoria" class="btn bg-maroon btn-flat margin borrar_registro">
-                        <i class="fa fa-trash"></i>
-                      </a>
+
+                      <?php $idcat = openssl_encrypt($categoria['id_categoria'], COD, KEY); ?>
+
+                      <form action="dashboard" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $idcat ?>">
+                        <button type="submit" name="dashboard" value="categoria-evento-editar0" class="btn btn-warning">
+                          <i class="fa fa-pencil-alt"></i>
+                        </button>
+                      </form>
+
+                      <form action="dashboard" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $idcat ?>">
+                        <button type="submit" name="dashboard" value="categoria-evento-eliminar" class="btn btn-danger">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </form>
+
                     </td>
 
                   </tr>

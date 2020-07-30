@@ -19,17 +19,6 @@
           </div>
           <div class="box-body">
 
-            <?php
-            //Botón para mostrar algún mensaje
-            if ($mensaje != "") { ?>
-              <div class="alert alert-success alert-dismissible fade show" role="alert" style="color: #000000 !important;">
-                <?php echo $mensaje ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            <?php } ?>
-
             <!-- form start -->
             <form method="post" action="dashboard">
               <div class="box-body">
@@ -53,7 +42,7 @@
 
               </div> <!-- /.box-body -->
               <div class="box-footer">
-                <input type="hidden" name="dashboard" value="<?php echo openssl_encrypt("cat-evento-crear", COD, KEY) ?>">
+                <input type="hidden" name="dashboard" value="categoria-evento-crear">
                 <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
               </div>
 

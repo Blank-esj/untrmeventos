@@ -64,7 +64,7 @@ class CategoriaEventoModelo
 
         $sentencia->bindParam(":cat_evento", $cat_evento, PDO::PARAM_STR);
         $sentencia->bindParam(":icono", $icono, PDO::PARAM_STR);
-        $sentencia->bindParam(":id_categoria", $id_categoria, PDO::PARAM_INT);
+        $sentencia->bindParam(":id_categoria", $id, PDO::PARAM_INT);
 
         $sentencia->execute();
 

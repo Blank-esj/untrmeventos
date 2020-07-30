@@ -25,7 +25,8 @@ if (isset($_SESSION[SESION][N_USUARIO][N_USUARIO_USUARIO]) && isset($_SESSION[SE
 
 if ($verificador) {
     if (isset($_POST['dashboard'])) { // Si hay alguna petición por POST
-        $dato = openssl_decrypt($_POST['dashboard'], COD, KEY);
+        //$dato = openssl_decrypt($_POST['dashboard'], COD, KEY);
+        $dato = $_POST['dashboard'];
 
         if ($dato != 'admin1-crear' || $dato != 'login') include_once 'vista/plantillas/cabecera-admin.php';
 
@@ -38,10 +39,26 @@ if ($verificador) {
                 include_once 'vista/admin/home/login.php';
                 break;
 
-            case 'cat-evento-crear':
-                include 'vista/admin/categoria/crear-categoria.php';
+            case 'categoria-evento-crear':
                 include 'controlador/controlador-categoria-evento.php';
                 crear($connPDO, $_POST['nombre_categoria'], $_POST['icono']);
+                include 'vista/admin/categoria/lista-categoria.php';
+                break;
+
+            case 'categoria-evento-editar0':
+                include 'vista/admin/categoria/editar-categoria.php';
+                break;
+
+            case 'categoria-evento-editar1':
+                include 'controlador/controlador-categoria-evento.php';
+                actualizar($connPDO, openssl_decrypt($_POST['id'], COD, KEY), $_POST['nombre_categoria'], $_POST['icono']);
+                include 'vista/admin/categoria/lista-categoria.php';
+                break;
+
+            case 'categoria-evento-eliminar':
+                include 'controlador/controlador-categoria-evento.php';
+                eliminar($connPDO, openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/categoria/lista-categoria.php';
                 break;
 
             default:
