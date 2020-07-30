@@ -1,5 +1,5 @@
 <?php
-    include_once '../controlador/funciones-admin.php';
+    include_once 'controlador/util/funciones-admin.php';
     
     $titulo = $_POST['titulo_evento'];
     $id_categoria = $_POST['categoria_evento'];

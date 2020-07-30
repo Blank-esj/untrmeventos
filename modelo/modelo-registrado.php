@@ -1,8 +1,7 @@
 <?php
-include_once 'controlador/funciones-evento.php';
-include_once 'controlador/bd_conexion_pdo.php';
-include_once 'controlador/Sesion.php';
-include_once 'controlador/debug_to_console.php';
+include_once 'controlador/util/funciones-evento.php';
+include_once 'controlador/util/bd_conexion.php';
+include_once 'controlador/util/Sesion.php';
 
 include_once 'boleto.php'; // Es utilizado por este archivo
 include_once 'regalo.php'; // Es utilizado por este archivo

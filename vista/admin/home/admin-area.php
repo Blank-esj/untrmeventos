@@ -16,8 +16,8 @@
       <div class="box-header with-border">
         <h3 class="box-title">Administrador de Eventos El acceso sólo está permitido a personal autorizado.</h3>
       </div>
-      <div class="box-body">
-        <img class="img-fluid" alt="Responsive image" src="vista/assets/img/admin_fisme.jpg">
+      <div class="box-body row">
+        <img class="col-sm-12 img-fluid" alt="Responsive image" src="vista/assets/img/admin_fisme.jpg">
       </div> <!-- /.box-body -->
       <div class="box-footer">
         FISME - Bagua

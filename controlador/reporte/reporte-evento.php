@@ -35,7 +35,7 @@
         }
     }
 
-    require_once('../bd_conexion.php');
+    require_once('controlador/util/bd_conexion.php');
 
     $consulta = "SELECT e.nombre_evento, e.fecha_evento, e.hora_evento, ce.cat_evento, p.nombres, p.apellidopa, p.apellidoma FROM evento e "; //Crea consulta SQL.
     $consulta .= " INNER JOIN categoria_evento ce ON e.id_cat_evento = ce.id_categoria ";

@@ -1,12 +1,14 @@
 <?php
 
-include_once 'controlador/Sesion.php';
+include_once 'controlador/util/Sesion.php';
 include_once 'controlador/login-admin.php';
 include_once 'controlador/global/config.php';
-include_once 'controlador/bd_conexion_pdo.php';
+include_once 'controlador/util/bd_conexion_pdo.php';
 
 $sesion = new Sesion();
 $connPDO = (new Conexion())->conectarPDO();
+
+$mensaje = "";
 
 // Si hay un usuario legeado evaluamos las peticiones
 // Sino te redirige a la página del login
@@ -25,6 +27,8 @@ if ($verificador) {
     if (isset($_POST['dashboard'])) { // Si hay alguna petición por POST
         $dato = openssl_decrypt($_POST['dashboard'], COD, KEY);
 
+        if ($dato != 'admin1-crear' || $dato != 'login') include_once 'vista/plantillas/cabecera-admin.php';
+
         switch ($dato) {
             case 'login':
                 evaluarLogeo();
@@ -32,6 +36,12 @@ if ($verificador) {
 
             case 'admin1-crear':
                 include_once 'vista/admin/home/login.php';
+                break;
+
+            case 'cat-evento-crear':
+                include 'vista/admin/categoria/crear-categoria.php';
+                include 'controlador/controlador-categoria-evento.php';
+                crear($connPDO, $_POST['nombre_categoria'], $_POST['icono']);
                 break;
 
             default:

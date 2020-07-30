@@ -1,5 +1,7 @@
 <?php
+include_once 'controlador/util/bd_conexion_pdo.php';
 include_once 'modelo/admins.php';
+$connPDO = (new Conexion())->conectarPDO();
 $adminsModelo = new Admins();
 
 include_once 'controlador/admins.php';

@@ -6,10 +6,13 @@
   </footer>
   </div>
 
-  <!-- jQuery 3 -->
-  <script src="vista/assets/js/jquery.min.js"></script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="vista/assets/js/adminlte.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
-  <script src="vista/assets/js/bootstrap3.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <!-- DataTables -->
   <script src="vista/assets/js/jquery.dataTables.min.js"></script>
   <script src="vista/assets/js/dataTables.bootstrap.min.js"></script>
@@ -17,22 +20,11 @@
   <script src="vista/assets/js/jquery.slimscroll.min.js"></script>
   <!-- FastClick -->
   <script src="vista/assets/js/fastclick.js"></script>
-  <!-- AdminLTE App -->
-  <script src="vista/assets/js/adminlte.min.js"></script>
-  <!-- Alerta correct -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="vista/assets/js/sweetalert2.min.js"></script>
-  <script src="vista/assets/js/sweetalert2.all.min.js"></script>
-
-  <!-- Admin insert y login -->
-  <script src="controlador/js/admin-ajax.js"></script>
 
   <!-- bootstrap datepicker -->
   <script src="vista/assets/js/bootstrap-datepicker.min.js"></script>
   <!-- Select2 -->
   <script src="vista/assets/js/select2.full.min.js"></script>
-
-  <script src="controlador/js/admin-ajax.js"></script> <!-- Por algo será -->
 
   <!-- bootstrap time picker -->
   <script src="vista/assets/js/bootstrap-timepicker.min.js"></script>
@@ -40,7 +32,6 @@
   <script src="vista/assets/js/raphael.min.js"></script>
 
   <!-- AdminLTE for demo purposes -->
-  <script src="controlador/js/login-ajax.js"></script>
   <script src="vista/assets/js/demo.js"></script>
 
   <!-- Morris.js charts -->
@@ -48,6 +39,10 @@
   <!-- iCheck 1.0.1 -->
   <script src="vista/assets/js/icheck.min.js"></script>
 
+
+  <!-- Admin insert y login -->
+  <script src="controlador/js/admin-ajax.js"></script>
+  <script src="controlador/js/login-ajax.js"></script>
   <!-- Scripts controladores -->
   <script src="controlador/js/cotizador.js"></script>
   <script src="controlador/js/app.js"></script>

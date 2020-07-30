@@ -1,6 +1,6 @@
 <?php
 try {
-  require_once('controlador/bd_conexion.php');
+  require_once('controlador/util/bd_conexion.php');
   $sql = "SELECT * FROM v_invitado; ";
   $resultado = $conn->query($sql);
 } catch (Exception $e) {

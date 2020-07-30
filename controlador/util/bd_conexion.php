@@ -1,5 +1,5 @@
 <?php
-include_once 'global/config.php';
+include_once 'controlador/global/config.php';
 
 $conn = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
 

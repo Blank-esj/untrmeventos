@@ -1,5 +1,5 @@
 <?php
-include 'controlador/bd_conexion.php';
+include 'controlador/util/bd_conexion_pdo.php';
 include 'modelo/modelo-registrado.php';
 //$sesion = new Sesion(); // Instanciamos la clase Sesion
 ?>

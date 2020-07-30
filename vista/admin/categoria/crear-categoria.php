@@ -12,13 +12,26 @@
       <section class="content">
         <!-- Main content -->
         <div class="box">
+
           <!-- Default box -->
           <div class="box-header with-border">
             <h3 class="box-title">Crear Categoría</h3>
           </div>
           <div class="box-body">
+
+            <?php
+            //Botón para mostrar algún mensaje
+            if ($mensaje != "") { ?>
+              <div class="alert alert-success alert-dismissible fade show" role="alert" style="color: #000000 !important;">
+                <?php echo $mensaje ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <?php } ?>
+
             <!-- form start -->
-            <form role="form" id="guardar-registro" method="post" action="modelo/modelo-categoria.php">
+            <form method="post" action="dashboard">
               <div class="box-body">
 
                 <!-- Nombre -->
@@ -40,7 +53,7 @@
 
               </div> <!-- /.box-body -->
               <div class="box-footer">
-                <input type="hidden" name="registro" value="nuevo">
+                <input type="hidden" name="dashboard" value="<?php echo openssl_encrypt("cat-evento-crear", COD, KEY) ?>">
                 <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
               </div>
 

@@ -1,7 +1,7 @@
 <?php
 include_once 'controlador/global/config.php';
-include_once 'controlador/bd_conexion_pdo.php';
-include_once 'controlador/Sesion.php';
+include_once 'controlador/util/bd_conexion_pdo.php';
+include_once 'controlador/util/Sesion.php';
 include_once 'boleto.php';
 include_once 'venta_articulo.php';
 

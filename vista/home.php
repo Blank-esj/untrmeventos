@@ -17,7 +17,7 @@
                 <h2>Contenido del Evento</h2>
                 <?php
                 try {
-                    require_once('controlador/bd_conexion.php');
+                    require_once('controlador/util/bd_conexion.php');
                     $sql = "SELECT * FROM  v_detalle_evento; ";
                     $resultado = $conn->query($sql);
                 } catch (Exception $e) {
@@ -35,7 +35,7 @@
                 <!--.menu-programa-->
                 <?php
                 try {
-                    require_once('controlador/bd_conexion.php');
+                    require_once('controlador/util/bd_conexion.php');
                     /** guardamos en la variable "row" todos los IDs de categoria*/
                     $sql = "SELECT id_categoria FROM categoria_evento ORDER BY id_categoria; ";
                     $resultado = $conn->query($sql);

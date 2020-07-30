@@ -2,7 +2,7 @@
   <h2>Calendario de Eventos</h2>
   <?php
   try {
-    require_once('controlador/bd_conexion.php');
+    require_once('controlador/util/bd_conexion.php');
     /** Traemos todos los eventos */
     $sql = "SELECT * FROM v_detalle_evento ORDER BY fecha_evento ASC; ";
     /** Y lo guardamos en la variable resultado */

@@ -34,7 +34,7 @@
         }
     }
 
-    require_once('../bd_conexion.php');
+    require_once('controlador/util/bd_conexion.php');
 
     $consulta = "SELECT p.nombres, p.apellidopa, p.apellidoma, p.email, b.fecha_creacion, r.nombre_regalo FROM boleto b ";
     $consulta .= " JOIN regalo r ON b.idregalo = r.idregalo ";

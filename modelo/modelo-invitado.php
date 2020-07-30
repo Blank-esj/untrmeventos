@@ -1,5 +1,5 @@
 <?php
-    include_once '../controlador/funciones-admin.php';
+    include_once 'controlador/util/funciones-admin.php';
     
     $id_registro = $_POST['id_registro'];          // idpersona
     $nombre = $_POST['nombre_invitado'];           // nombres

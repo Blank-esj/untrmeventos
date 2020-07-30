@@ -40,7 +40,7 @@ class PDF extends FPDF
     }
 }
 
-require_once('../bd_conexion.php');
+require_once('controlador/util/bd_conexion.php');
 
 $consulta = "SELECT * FROM v_admins ";
 $resultado = $conn->query($consulta);

@@ -33,7 +33,7 @@
         }
     }
 
-    require_once('../bd_conexion.php');
+    require_once('controlador/util/bd_conexion.php');
 
     $consulta = "SELECT p.nombres, p.apellidopa, p.apellidopa, p.apellidoma, i.descripcion, e.nombre_evento FROM evento e "; 
     $consulta .= " INNER JOIN persona p ON e.id_inv = p.idpersona ";

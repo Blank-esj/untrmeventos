@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['paymentToken']) && isset($_GET['paymentID'])) {
   include_once 'controlador/global/config.php';
-  include_once 'controlador/bd_conexion_pdo.php';
+  include_once 'controlador/util/bd_conexion_pdo.php';
   include_once 'modelo/venta.php';
   include_once 'plantillas/registro/registro-pago-verificador.php';
 } elseif (procederPagar()) {
