@@ -87,7 +87,7 @@ $(document).ready(function () {
       data: data,
       xkey: 'fecha',
       ykeys: ['cantidad'],
-      labels: ['Item 1'],
+      labels: ['Registrados'],
       lineColors: ['#3c8dbc'],
       hideHover: 'auto'
     });
