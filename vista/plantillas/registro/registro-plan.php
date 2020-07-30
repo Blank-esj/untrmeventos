@@ -24,6 +24,7 @@
     <div id="planes" class="row row-cols-1 row-cols-md-4 ">
 
         <?php
+        include 'controlador/util/bd_conexion.php';
         try {
             $sql = "SELECT * FROM plan ORDER BY precio ASC;";
             $resultado = $conn->query($sql);

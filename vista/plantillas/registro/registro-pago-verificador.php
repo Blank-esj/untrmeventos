@@ -1,6 +1,5 @@
 <?php
 
-$conn = (new Conexion())->conectarPDO();
 $ventaModelo = new Venta();
 
 $login = curl_init(LINKAPI . "/v1/oauth2/token");
@@ -37,7 +36,7 @@ $custom = $objDatosTransaccion->transactions[0]->custom;
 $clave = explode("#", $custom);
 
 $clave_transaccion = $clave[0];
-$idventa = openssl_decrypt($clave[1], COD, KEY);
+$idventa = (int)openssl_decrypt($clave[1], COD, KEY);
 
 curl_close($login);
 curl_close($venta);
@@ -45,9 +44,9 @@ curl_close($venta);
 if ($state == "approved") {
     $mensajePaypal = "<h3>Pago aprobado</h3>";
 
-    $ventaModelo->aprobarVenta($conn, $idventa, $paypal_datos);
+    $ventaModelo->aprobarVenta($idventa, $paypal_datos);
 
-    $completado = $ventaModelo->completarVenta($conn, $idventa, $clave_transaccion, $total);
+    $completado = $ventaModelo->completarVenta($idventa, $clave_transaccion, $total);
 
     session_destroy();
 } else {
@@ -62,6 +61,8 @@ if ($state == "approved") {
     <p>
         <?php
         if ($completado > 0) {
+            $completado = null;
+
             echo "<h1> $nombres haz completado tu pago!! </h1>";
         }
         ?>

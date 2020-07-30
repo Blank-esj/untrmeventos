@@ -6,7 +6,7 @@ class Conexion
     {
         try {
             return new PDO("mysql:dbname=" . BASEDATOS . ";host=" . SERVIDOR, USUARIO, CONTRASENA, array(
-                PDO::ATTR_PERSISTENT => true, // conexiones persistentes
+                //PDO::ATTR_PERSISTENT => true, // conexiones persistentes
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
             ));
         } catch (PDOException $e) {

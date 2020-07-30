@@ -70,7 +70,12 @@
                                         <?php
                                         if ($sesion->existeAsistentesPlan($idPlan)) {
 
-                                            $regalos = $regalo->arrayNombres($conexion); // traemos una array ordenado en clave (idregalo) y valor (nombre_regalo)
+                                            $conexion = new Conexion();
+                                            $conn = $conexion->conectarPDO();
+                                            $regalos = $regalo->arrayNombres($conn); // traemos una array ordenado en clave (idregalo) y valor (nombre_regalo)
+
+                                            unset($conexion);
+                                            unset($conn);
 
                                             foreach ($sesion->leerAsistentesPlan($idPlan) as $indice => $arrayAsistente) { ?>
 

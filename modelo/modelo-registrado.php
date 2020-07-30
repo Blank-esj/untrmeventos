@@ -179,6 +179,8 @@ if (isset($_POST['registrarAsistente'])) {
     //print_r($_SESSION);
 }
 
+unset($conexion);
+
 /**
  * Valida que los datos desencriptados sean correctos.
  * Devuelve true si lo son sino devuelve false

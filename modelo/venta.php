@@ -10,7 +10,8 @@ class Venta
 
     public function insertarPreCompra($idSesión, $email)
     {
-        $conn = (new Conexion())->conectarPDO();
+        $conexion = new Conexion();
+        $conn = $conexion->conectarPDO();
         try {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -69,6 +70,7 @@ class Venta
             ));
         }
         $conn = null;
+        $conexion = null;
     }
 
     /**
@@ -109,30 +111,36 @@ class Venta
      * Actualiza el atributo estado de la tabla venta a aprobado.
      * Lo que significaría que el pago ha salido con éxito pero aún falta completarlo
      */
-    public function aprobarVenta(\PDO $conexion, string $idventa, string $paypal_datos, $estado = 'aprobado')
+    public function aprobarVenta(int $idventa, string $paypal_datos, $estado = 'aprobado')
     {
-        $sentencia = $conexion->prepare(
+        $conn = (new Conexion())->conectarPDO();
+        $sentencia = $conn->prepare(
             "UPDATE venta SET 
             paypal_datos = :paypal_datos, 
             estado = :estado 
             WHERE ( idventa = :idventa );"
         );
 
-        $sentencia->bindParam(":idventa", $idventa);
-        $sentencia->bindParam(":paypal_datos", $paypal_datos);
-        $sentencia->bindParam(":estado", $estado);
+        $sentencia->bindParam(":paypal_datos", $paypal_datos, PDO::PARAM_STR);
+        $sentencia->bindParam(":estado", $estado, PDO::PARAM_STR);
+        $sentencia->bindParam(":idventa", $idventa, PDO::PARAM_INT);
         $sentencia->execute();
 
-        $sentencia->closeCursor();
-        return $sentencia->rowCount();
+        $resultado = $sentencia->rowCount();
+
+        $sentencia = null;
+        $conn = null;
+
+        return $resultado;
     }
 
     /**
      * Cambia el estado de la venta dandolo por completado tomando en cuenta a; idventa, clave de transacción y el total
      */
-    public function completarVenta(\PDO $conexion, $idventa, $clave_transaccion, $total_pre, $estado = 'completo')
+    public function completarVenta($idventa, $clave_transaccion, $total_pre, $estado = 'completo')
     {
-        $sentencia = $conexion->prepare(
+        $conn = (new Conexion())->conectarPDO();
+        $sentencia = $conn->prepare(
             "UPDATE venta SET 
             estado = :estado
             WHERE idventa = :idventa
@@ -146,7 +154,11 @@ class Venta
         $sentencia->bindParam(":estado", $estado);
         $sentencia->execute();
 
-        $sentencia->closeCursor();
-        return $sentencia->rowCount();
+        $resultado = $sentencia->rowCount();
+
+        $sentencia = null;
+        $conn = null;
+
+        return $resultado;
     }
 }
