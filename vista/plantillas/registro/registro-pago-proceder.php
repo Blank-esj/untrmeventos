@@ -16,6 +16,11 @@ $venta = json_decode((new Venta())->insertarPreCompra(session_id(), $_POST['emai
     </p>
 </div>
 
+<form style="display: none" id="verificar" action="registro" method="POST">
+    <input type="hidden" id="paymentToken" name="paymentToken" value="">
+    <input type="hidden" id="paymentID" name="paymentID" value="">
+</form>
+
 <script>
     paypal.Button.render({
         env: 'sandbox', // sandbox | production
@@ -55,8 +60,11 @@ $venta = json_decode((new Venta())->insertarPreCompra(session_id(), $_POST['emai
 
         onAuthorize: function(data, actions) {
             return actions.payment.execute().then(function() {
-                console.log(data);
-                window.location = "registro?paymentToken=" + data.paymentToken + "&paymentID=" + data.paymentID;
+
+                $("#paymentToken").val(data.paymentToken);
+                $("#paymentID").val(data.paymentID);
+                $("#verificar").submit();
+
             });
         }
 

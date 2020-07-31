@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET['paymentToken']) && isset($_GET['paymentID'])) {
+if (isset($_POST['paymentToken']) && isset($_POST['paymentID'])) {
   include_once 'controlador/global/config.php';
   include_once 'controlador/util/bd_conexion_pdo.php';
   include_once 'modelo/venta.php';

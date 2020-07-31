@@ -16,7 +16,7 @@ $objRespuesta = json_decode($respuesta);
 
 $accessToken = $objRespuesta->access_token;
 
-$venta = curl_init(LINKAPI . "/v1/payments/payment/" . $_GET['paymentID']);
+$venta = curl_init(LINKAPI . "/v1/payments/payment/" . $_POST['paymentID']); // COnsultamos a Paypal sobre el pago realizado según el paymentID
 curl_setopt($venta, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: Bearer " . $accessToken));
 
 curl_setopt($venta, CURLOPT_RETURNTRANSFER, TRUE);
