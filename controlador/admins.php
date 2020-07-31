@@ -2,7 +2,8 @@
 
 if (isset($_POST['dashboard'])) {
 
-    $dato = openssl_decrypt($_POST['dashboard'], COD, KEY);
+    //$dato = openssl_decrypt($_POST['dashboard'], COD, KEY);
+    $dato = $_POST['dashboard'];
 
     switch ($dato) {
 
@@ -20,7 +21,7 @@ if (isset($_POST['dashboard'])) {
                 $_POST['doc_identidad'],
                 $_POST['usuario'],
                 $contrasena_hasheada
-            );  
+            );
 
             break;
     }

@@ -12,25 +12,31 @@ function verificarUsuarioPassword($usuario, $password)
 
     $admin = new Admins();
 
-    if ($admin->cuentaAdmins($conn) > 0) {
+    if ((int)$admin->cuentaAdmins($conn)[0]['total'] > 0) {
 
         $admin = ((new Admins())->leerDatosLoginAdmin($conn, $usuario));
 
+        $conn = null;
+
         if (count($admin) > 0) {
 
-            if (password_verify($password, $admin['password'])) {
-                $sesion = new Sesion();
 
-                $sesion->agregarUsuario(
-                    $admin['idpersona'],
-                    $usuario,
-                    $password,
-                    $admin['nombre_completo'],
-                    $admin['nivel']
-                );
-                unset($sesion);
-                return true;
+            if (isset($admin[0]['password'])) {
+
+                if (password_verify($password, $admin[0]['password'])) {
+                    $sesion = new Sesion();
+
+                    $sesion->agregarUsuario(
+                        $admin[0]['idpersona'],
+                        $usuario,
+                        $password,
+                        $admin[0]['nombre_completo'],
+                        $admin[0]['nivel']
+                    );
+                    $admin = null;
+                    return true;
+                } else return false;
             } else return false;
         } else return false;
-    }else return false;
+    } else return false;
 }

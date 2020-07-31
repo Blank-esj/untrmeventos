@@ -18,24 +18,25 @@
           </div>
           <div class="box-body">
             <!-- form start -->
-            <form role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="modelo/modelo-invitado.php" enctype="multipart/form-data">
+            <!-- El tipo de codificación de datos, enctype, DEBE especificarse como sigue -->
+            <form method="post" action="dashboard" enctype="multipart/form-data">
               <div class="box-body">
                 <!-- Nombres -->
                 <div class="form-group">
-                  <label for="nombre_invitado">Nombres: </label>
-                  <input type="text" class="form-control" id="nombre_invitado" name="nombre_invitado" placeholder="Ingresar nombres del invitado">
+                  <label for="nombres">Nombres: </label>
+                  <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresar nombres del invitado">
                 </div>
 
                 <!-- Apellido Paterno -->
                 <div class="form-group">
-                  <label for="apellidopa_invitado">Apellido Paterno: </label>
-                  <input type="text" class="form-control" id="apellidopa_invitado" name="apellidopa_invitado" placeholder="Ingresar apellido paterno">
+                  <label for="apellidopa">Apellido Paterno: </label>
+                  <input type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Ingresar apellido paterno">
                 </div>
 
                 <!-- Apellido Materno -->
                 <div class="form-group">
-                  <label for="apellidoma_invitado">Apellido Materno: </label>
-                  <input type="text" class="form-control" id="apellidoma_invitado" name="apellidoma_invitado" placeholder="Ingresar apellido materno">
+                  <label for="apellidoma">Apellido Materno: </label>
+                  <input type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Ingresar apellido materno">
                 </div>
 
                 <!-- Email -->
@@ -58,21 +59,23 @@
 
                 <!-- Descripcion / Biografia -->
                 <div class="form-group">
-                  <label for="biografia_invitado">Biografía: </label>
-                  <textarea class="form-control" name="biografia_invitado" id="biografia_invitado" rows="8" placeholder="Presentación profesional"></textarea>
+                  <label for="descripcion">Biografía: </label>
+                  <textarea class="form-control" name="descripcion" id="descripcion" rows="8" placeholder="Presentación profesional"></textarea>
                 </div>
 
                 <!-- url_imagen / imagen_invitado -->
                 <div class="form-group">
                   <label for="imagen_invitado">Imagen:</label>
+
+                  <!-- El nombre del elemento de entrada determina el nombre en el array $_FILES -->
                   <input type="file" id="imagen_invitado" name="archivo_imagen">
                   <p class="help-block">Agregar la imagen del invitado aquí.</p>
                 </div>
 
                 <!-- Institución de Procedencia -->
                 <div class="form-group">
-                  <label for="institucion_procedencia">Institución de Procedencia: </label>
-                  <input type="text" class="form-control" id="institucion_procedencia" name="institucion_procedencia" placeholder="Ingresar la Institución de Procedencia">
+                  <label for="procedencia">Institución de Procedencia: </label>
+                  <input type="text" class="form-control" id="procedencia" name="procedencia" placeholder="Ingresar la Institución de Procedencia">
                 </div>
 
                 <!-- Grado Instruccion -->
@@ -83,28 +86,30 @@
                 } catch (Exception $e) {
                   $error = $e->getMessage();
                   echo $error;
-                }
+                } ?>
 
-                while ($grado = $resultado->fetch_assoc()) {
-                ?>
-                  <div class="orden">
-                    <label for="grado_instruccion">Seleccione un Grado</label> <br>
-                    <select id="grado_instruccion" name="grado_instruccion">
+                <div class="orden">
+
+                  <div class="form-group">
+                    <label for="grado">Seleccione un Grado</label> <br>
+                    <select id="grado" name="grado">
                       <option value="">--Seleccione--</option>
-                      <option value="<? echo $grado['idgrado_instruccion'] ?>" >
-                        <? echo $grado['grado'] ?>
-                      </option>
+
+                      <?php while ($grado = $resultado->fetch_assoc()) { ?>
+                        <option value="<? echo $grado['idgrado_instruccion'] ?>">
+                          <? echo $grado['grado'] ?>
+                        </option>
+                      <?php } ?>
+
                     </select>
-                  <?php
-                }
-                  ?>
+                  </div>
 
                   <!-- Fecha de Nacimiento -->
                   <div class="form-group">
                     <label for="nacimiento">Fecha de Nacimiento: </label>
                     <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresar un fecha">
                   </div>
-                  
+
                   <!-- Sexo -->
                   <div class="form-group">
                     <label for="sexo">Sexo: </label>
@@ -116,12 +121,11 @@
                     </select>
                   </div>
 
-                  </div> <!-- /.box-body -->
+                </div> <!-- /.box-body -->
 
-                  <div class="box-footer">
-                    <input type="hidden" name="registro" value="nuevo">
-                    <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
-                  </div>
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary" name="dashboard" value="invitado-crear">Agregar</button>
+                </div>
             </form>
           </div> <!-- /.box-body -->
         </div> <!-- /.box -->

@@ -4,6 +4,8 @@ include_once 'modelo/admins.php';
 $connPDO = (new Conexion())->conectarPDO();
 $adminsModelo = new Admins();
 
+// Verifica si hay una petición POST para con clave: dashboard y valor: admin1-crear
+// si es así evalúa que se le envía y dependiendo de los datos guardará estos en la base de datos
 include_once 'controlador/admins.php';
 
 if ((int)$adminsModelo->cuentaAdmins($connPDO)[0]['total'] > 0) { ?>
@@ -100,7 +102,7 @@ if ((int)$adminsModelo->cuentaAdmins($connPDO)[0]['total'] > 0) { ?>
                 </div>
 
                 <div style="margin-top: 5px; text-align: center;">
-                  <button type="submit" name="dashboard" value="<?php echo openssl_encrypt("admin1-crear", COD, KEY) ?>" class="btn btn-success">
+                  <button type="submit" name="dashboard" value="admin1-crear" class="btn btn-success">
                     <i class="fa fa-save"></i>
                     Guardar
                   </button>
@@ -117,4 +119,6 @@ if ((int)$adminsModelo->cuentaAdmins($connPDO)[0]['total'] > 0) { ?>
     </div>
   </body>
 
-<?php } ?>
+<?php }
+$connPDO = null;
+$adminsModelo = null; ?>

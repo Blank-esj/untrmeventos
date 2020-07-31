@@ -12,7 +12,7 @@ class Admins
 
         $sentencia->execute();
 
-        $resultado = ($sentencia->fetchAll(PDO::FETCH_ASSOC))[0];
+        $resultado = ($sentencia->fetchAll(PDO::FETCH_ASSOC));
 
         $sentencia->closeCursor();
 
@@ -26,7 +26,7 @@ class Admins
     {
         $sentencia = $conexion->query("SELECT COUNT(*) total FROM admins");
         $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-        $sentencia->closeCursor();
+        $sentencia = null;
 
         return $resultado;
     }

@@ -39,6 +39,7 @@ if ($verificador) {
                 include_once 'vista/admin/home/login.php';
                 break;
 
+                // CRUD Categoría Evento
             case 'categoria-evento-crear':
                 include 'controlador/controlador-categoria-evento.php';
                 crear($connPDO, $_POST['nombre_categoria'], $_POST['icono']);
@@ -56,6 +57,55 @@ if ($verificador) {
                 break;
 
             case 'categoria-evento-eliminar':
+                include 'controlador/controlador-categoria-evento.php';
+                eliminar($connPDO, openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/categoria/lista-categoria.php';
+                break;
+
+                // CRUD Invitado
+            case 'invitado-crear':
+                include 'controlador/controlador-invitado.php';
+
+                $nombres = $_POST['nombres'];
+                $apellidopa = $_POST['apellidopa'];
+                $apellidoma = $_POST['apellidoma'];
+                $descripcion = $_POST['descripcion'];
+                $procedencia = $_POST['procedencia'];
+                $grado = $_POST['grado'];
+                $email = $_POST['email'];
+                $telefono = $_POST['telefono'];
+                $doc_identidad = $_POST['doc_identidad'];
+                $nacimiento = $_POST['nacimiento'];
+                $sexo = $_POST['sexo'];
+
+                crear(
+                    $nombres,
+                    $apellidopa,
+                    $apellidoma,
+                    $descripcion,
+                    $_FILES,
+                    $procedencia == "" ? null : $procedencia,
+                    $grado == "" ? null : $grado,
+                    $email == "" ? null : $email,
+                    $telefono == "" ? null : $telefono,
+                    $doc_identidad == "" ? null : $doc_identidad,
+                    $nacimiento == "" ? null : $nacimiento,
+                    $sexo == "" ? null : $sexo
+                ) ?
+                    include 'vista/admin/invitado/lista-invitado.php' : include 'vista/admin/invitado/crear-invitado.php';
+                break;
+
+            case 'invitado-editar0':
+                include 'vista/admin/categoria/editar-categoria.php';
+                break;
+
+            case 'invitado-editar1':
+                include 'controlador/controlador-categoria-evento.php';
+                actualizar($connPDO, openssl_decrypt($_POST['id'], COD, KEY), $_POST['nombre_categoria'], $_POST['icono']);
+                include 'vista/admin/categoria/lista-categoria.php';
+                break;
+
+            case 'invitado-eliminar':
                 include 'controlador/controlador-categoria-evento.php';
                 eliminar($connPDO, openssl_decrypt($_POST['id'], COD, KEY));
                 include 'vista/admin/categoria/lista-categoria.php';

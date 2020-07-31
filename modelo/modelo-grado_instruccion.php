@@ -1,5 +1,5 @@
 <?php
-class GradoInstruccion
+class GradoInstruccionModelo
 {
     /**
      * Devuelve un array con todos los registros de grado de instrucción existentes en la base de datos

@@ -1,130 +1,252 @@
 <?php
-    include_once 'controlador/util/funciones-admin.php';
-    
-    $id_registro = $_POST['id_registro'];          // idpersona
-    $nombre = $_POST['nombre_invitado'];           // nombres
-    $apellidopa = $_POST['apellidopa_invitado'];   // apellidopa
-    $apellidoma = $_POST['apellidoma_invitado'];   // apellidoma
-    $email = $_POST['email'];                      // email
-    $direccion = $_POST['direccion'];              // direccion
-    $telefono = $_POST['telefono'];                // telefono
-    $celular = $_POST['celular'];                  // celular
-    $nacimiento = $_POST['nacimiento'];            // nacimiento
-    $biografia = $_POST['biografia_invitado'];
+class InvitadoModelo
+{
+    /**
+     * Lee un Invitado y devuelve un array de resultados
+     */
+    public function leer($id)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
 
-    //Código para insertar evento a la BD.
-    if($_POST['registro'] == 'nuevo') {
-        $directorio = "../vista/assets/img/invitados/";
-        if(!is_dir($directorio)) {
-            mkdir($directorio, 0755, true);
-        }
+        $conn = (new Conexion())->conectarPDO();
 
-        if(move_uploaded_file($_FILES['archivo_imagen']['tmp_name'], $directorio . $_FILES['archivo_imagen']['name'])) {
-            $imagen_url = $_FILES['archivo_imagen']['name'];
-            $imagen_resultado = "Se subio correctamente";
-        } else {
-            $respuesta = array(
-                'respuesta' => error_get_last()
-            );
-        }
+        $sentencia = $conn->prepare("SELECT * FROM v_invitado WHERE idpersona = :id");
 
-        try {
-            $stmt = $conn->prepare("CALL sp_crear_invitado (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW()); ");
-            $stmt->bind_param("ssssssssss", $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $biografia, $imagen_url);
-            $stmt->execute();
-            $id_insertado = $stmt->insert_id;
-            if($stmt->affected_rows) {
-                $respuesta = array(
-                    'respuesta' => 'exito',
-                    'id_insertado' => $id_insertado,
-                    'resultado_imagen' => $imagen_resultado
-                );
-            } else {
-                $respuesta = array(
-                    'respuesta' => 'error'
-                );
-            }
-            $stmt->close();
-            $conn->close();
-        } catch(Exception $e) {
-            $respuesta = array(
-                'respuesta' => $e->getMessage()
-            );
-        }
-        die(json_encode($respuesta));     
+        $sentencia->bindParam(":id", $id);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conn = null;
+
+        return $resultado;
     }
 
-    //Código para insertar un nuevo evento en la BD.
-    if($_POST['registro'] == 'actualizar') { 
+    /**
+     * Devuelve todos los invitados que haya en la base datos
+     */
+    public function leerTodos()
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
 
-        $directorio = "../vista/assets/img/invitados/";
+        $conn = (new Conexion())->conectarPDO();
 
-        if(!is_dir($directorio)) {
-            mkdir($directorio, 0755, true);
-        }
+        $sentencia = $conn->query("SELECT * FROM v_invitado;");
 
-        if(move_uploaded_file($_FILES['archivo_imagen']['tmp_name'], $directorio . $_FILES['archivo_imagen']['name'])) {
-            $imagen_url = $_FILES['archivo_imagen']['name'];
-            $imagen_resultado = "Se subió correctamente";
-        } else {
-            $respuesta = array(
-                'respuesta' => error_get_last()
-            );
-        }
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
+        $sentencia = null;
+        $conn = null;
+
+        return $resultado;
+    }
+    public function crear(
+        $nombres,
+        $apellidopa,
+        $apellidoma,
+        $descripcion,
+        $url_imagen,
+        $institucion_procedencia = null,
+        $idgrado_instruccion = null,
+        $email = null,
+        $telefono = null,
+        $doc_identidad = null,
+        $nacimiento = null,
+        $sexo = null
+    ) {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $resultado = false;
+
+        $conn = (new Conexion())->conectarPDO();
         try {
-            if($_FILES['archivo_imagen']['size'] > 0) {
-                //con imagen
-                $stmt = $conn->prepare("CALL sp_actualizar_invitado(?,?,?,?,?,?,?,?,?,?,?,NOW())");
-                $stmt->bind_param("issssssssss", $id_registro, $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $biografia, $imagen_url);
-            } else {
-                //sin imagen 
-                $stmt = $conn->prepare("CALL sp_actualizar_invitado_simagen(?,?,?,?,?,?,?,?,?,?,NOW())");
-                $stmt->bind_param("isssssssss", $id_registro, $nombre, $apellidopa, $apellidoma, $email, $direccion, $telefono, $celular, $nacimiento, $biografia);
-            }         
-            $estado = $stmt->execute();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            if($estado == true) {
-                $respuesta = array(
-                    'respuesta' => 'exito',
-                    'id_actualizado' => $id_registro
-                );
-            } else {
-                $respuesta = array(
-                'respuesta' => 'error'
-                );
-            }
-            $stmt->close();
-            $conn->close();
-        } catch (Exception $e) {
-            $respuesta = array(
-                'respuesta' => $e->getMessage()
-            );
+            $conn->beginTransaction(); // Comenzar una transacción, desactivando el modo 'autocommit'
+
+            include 'modelo-persona.php';
+
+            $personaModelo = new PersonaModelo();
+
+            $idpersona = $personaModelo->ultimoId() + 1;
+
+            if ($personaModelo->crear($idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) > 0)
+                $resultado = true;
+            else throw new PDOException("No se creó Persona");
+
+            if ($this->insertar($idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) > 0)
+                $resultado = true;
+            else throw new PDOException("No se creó Invitado");
+
+            $personaModelo = null;
+            $idpersona = null;
+
+            $conn->commit(); // Guadamos los cambios
+
+            $resultado = true;
+        } catch (PDOException $e) {
+            $conn->rollBack(); // Revertimos los cambios
+            echo $e->getMessage();
+            $resultado = false;
         }
-        die(json_encode($respuesta));
+        $conn = null;
+        return $resultado;
     }
 
-    //Código para eliminar un evento
-    if($_POST['registro'] == 'eliminar') {
-        $id_borrar = $_POST['id'];
-        try {
-            $stmt = $conn->prepare("DELETE FROM persona WHERE idpersona = ? ");
-            $stmt->bind_param('i', $id_borrar);
-            $stmt->execute();            
-            if($stmt->affected_rows) {
-                $respuesta = array(
-                    'respuesta' => 'exito',
-                    'id_eliminado' => $id_borrar,
-                );
-            } else {
-                $respuesta = array(
-                    'respuesta' => 'error'
-                );
-            }
-        } catch (Exception $e) {
-            $respuesta = array(
-                'respuesta' => $e->getMessage()
-            );
-        }
-        die(json_encode($respuesta));
+    private function insertar(
+        $idpersona,
+        $descripcion,
+        $url_imagen,
+        $institucion_procedencia = null,
+        $idgrado_instruccion = null,
+        $nacimiento = null,
+        $sexo = null
+    ) {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conn = (new Conexion())->conectarPDO();
+        $sentencia = $conn->prepare(
+            "INSERT INTO invitado (
+                idpersona,
+                descripcion,
+                url_imagen,
+                institucion_procedencia,
+                idgrado_instruccion,
+                nacimiento,
+                sexo) VALUES (
+                :idpersona,
+                :descripcion,
+                :url_imagen,
+                :institucion_procedencia,
+                :idgrado_instruccion,
+                :nacimiento,
+                :sexo);"
+        );
+
+        $sentencia->bindParam(":idpersona", $idpersona, PDO::PARAM_INT);
+        $sentencia->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
+        $sentencia->bindParam(":url_imagen", $url_imagen, PDO::PARAM_STR);
+        $sentencia->bindParam(":institucion_procedencia", $institucion_procedencia);
+        $sentencia->bindParam(":idgrado_instruccion", $idgrado_instruccion);
+        $sentencia->bindParam(":nacimiento", $nacimiento);
+        $sentencia->bindParam(":sexo", $sexo);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->rowCount();
+
+        $conn = null;
+        $sentencia = null;
+
+        return $resultado;
     }
+
+    public function actualizar(
+        $idpersona,
+        $nombres,
+        $apellidopa,
+        $apellidoma,
+        $descripcion,
+        $url_imagen,
+        $institucion_procedencia = null,
+        $idgrado_instruccion = null,
+        $email = null,
+        $telefono = null,
+        $doc_identidad = null,
+        $nacimiento = null,
+        $sexo = null
+    ) {
+
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $resultado = false;
+        $conn = (new Conexion())->conectarPDO();
+        try {
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $conn->beginTransaction(); // Comenzar una transacción, desactivando el modo 'autocommit'
+
+            include 'modelo-persona.php';
+
+            $personaModelo = new PersonaModelo();
+
+            if ($personaModelo->actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) > 0)
+                $resultado = true;
+            else throw new PDOException("No se actualizó correctaente");
+
+            if ($this->update($idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) > 0)
+                $resultado = true;
+            else throw new PDOException("No se actualizó correctaente");
+
+            $personaModelo = null;
+            $idpersona = null;
+
+            $conn->commit(); // Guadamos los cambios
+
+            $resultado = true;
+        } catch (PDOException $e) {
+            $conn->rollBack(); // Revertimos los cambios
+            $resultado = false;
+        }
+        $conn = null;
+        return $resultado;
+    }
+
+    private function update($idpersona, $descripcion, $url_imagen, $institucion_procedencia = null, $idgrado_instruccion = null, $nacimiento = null, $sexo = null)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conn = (new Conexion())->conectarPDO();
+
+        $sentencia = $conn->prepare(
+            "UPDATE invitado
+            SET
+            descripcion = :u_descripcion,
+            url_imagen = :u_url_imagen,
+            institucion_procedencia = :u_institucion_procedencia,
+            idgrado_instruccion = :u_idgrado_instruccion,
+            nacimiento = :u_nacimiento,
+            sexo = :u_sexo
+            WHERE idpersona = :u_idpersona;"
+        );
+
+        $sentencia->bindParam(":u_idpersona", $idpersona, PDO::PARAM_INT);
+        $sentencia->bindParam(":u_descripcion", $descripcion, PDO::PARAM_STR);
+        $sentencia->bindParam(":u_url_imagen", $url_imagen, PDO::PARAM_STR);
+        $sentencia->bindParam(":u_institucion_procedencia", $institucion_procedencia);
+        $sentencia->bindParam(":u_idgrado_instruccion", $idgrado_instruccion);
+        $sentencia->bindParam(":u_nacimiento", $nacimiento);
+        $sentencia->bindParam(":u_sexo", $sexo);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->rowCount();
+
+        $conn = null;
+        $sentencia = null;
+
+        return $resultado;
+    }
+
+    public function eliminar($idpersona)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conn = (new Conexion())->conectarPDO();
+
+        $sentencia = $conn->prepare("DELETE FROM invitado WHERE idpersona = :idpersona;");
+
+        $sentencia->bindParam(":idpersona", $idpersona, PDO::PARAM_INT);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->rowCount();
+
+        $conn = null;
+        $sentencia = null;
+
+        return $resultado;
+    }
+}
