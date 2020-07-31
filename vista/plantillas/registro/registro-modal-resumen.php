@@ -103,10 +103,14 @@
                                                                 <?php echo $arrayAsistente[N_DOC_IDENTIDAD_ASISTENTE] ?>
                                                             </li>
 
-                                                            <li class="list-group-item text-muted">
-                                                                <i class="material-icons" style="color: #fe4918;">redeem</i>
-                                                                <?php echo $regalos[(int)$arrayAsistente[N_REGALO_ASISTENTE][N_ID_REGALO]]; ?>
-                                                            </li>
+                                                            <?php if ($sesion->existeRegalo($idPlan, $indice)) { ?>
+
+                                                                <li class="list-group-item text-muted">
+                                                                    <i class="material-icons" style="color: #fe4918;">redeem</i>
+                                                                    <?php echo $regalos[(int)$arrayAsistente[N_REGALO_ASISTENTE][N_ID_REGALO]] ?>
+                                                                </li>
+
+                                                            <?php } ?>
 
                                                         </ul>
                                                     </div>

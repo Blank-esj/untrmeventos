@@ -15,6 +15,7 @@ function crear(
     $sexo = null
 ) {
     include_once 'modelo/modelo-invitado.php';
+    include_once 'controlador/global/config.php';
     include 'util/mensaje.php';
 
     $resultado = false;
@@ -23,14 +24,11 @@ function crear(
 
     try {
 
-        $directorio = "assets/img/invitados/";
-        if (!is_dir($directorio)) {
-            mkdir($directorio, 0755, true); // En caso que no existiera este directorio, lo crea
+        if (!is_dir(DIR_IMG_INVITADO)) {
+            mkdir(DIR_IMG_INVITADO, 0755, true); // En caso que no existiera este DIR_IMG_INVITADO, lo crea
         }
 
-        print_r($archivo);
-
-        if (move_uploaded_file($archivo['archivo_imagen']['tmp_name'], $directorio . $archivo['archivo_imagen']['name'])) {
+        if (move_uploaded_file($archivo['archivo_imagen']['tmp_name'], DIR_IMG_INVITADO . $archivo['archivo_imagen']['name'])) {
             $imagen_url = $archivo['archivo_imagen']['name'];
         } else {
             throw new Exception("Error subir imagen");
@@ -46,4 +44,83 @@ function crear(
         mensaje("Lo siento hubo un error al crear el invitado: <br/>" . $e->getMessage(), "error");
     }
     return $resultado;
+}
+
+function actualizar(
+    $idpersona,
+    $nombres,
+    $apellidopa,
+    $apellidoma,
+    $descripcion,
+    &$archivo,
+    $institucion_procedencia = null,
+    $idgrado_instruccion = null,
+    $email = null,
+    $telefono = null,
+    $doc_identidad = null,
+    $nacimiento = null,
+    $sexo = null
+) {
+
+    include_once 'modelo/modelo-invitado.php';
+    include_once 'controlador/global/config.php';
+    include 'util/mensaje.php';
+
+    $resultado = false;
+
+    $modelo = new InvitadoModelo();
+
+    try {
+
+        if ($archivo['archivo_imagen']['size'] > 0) {
+            //con imagen
+
+            if (!is_dir(DIR_IMG_INVITADO)) {
+                mkdir(DIR_IMG_INVITADO, 0755, true);
+            }
+
+            if (move_uploaded_file($archivo['archivo_imagen']['tmp_name'], DIR_IMG_INVITADO . $archivo['archivo_imagen']['name'])) {
+                $imagen_url = $archivo['archivo_imagen']['name'];
+            } else {
+                throw new Exception("Error subir imagen");
+            }
+
+            if ($modelo->actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $descripcion, $imagen_url, $institucion_procedencia, $idgrado_instruccion, $email, $telefono, $doc_identidad, $nacimiento, $sexo)) {
+                mensaje("<strong>" . $nombres . "</strong> se actualizó satisfactoriamente", "success");
+                $resultado = true;
+            } else
+                throw new PDOException("Error al actualizar <strong>" . $nombres . "</strong>");
+        } else {
+            //sin imagen 
+            if ($modelo->actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $descripcion, null, $institucion_procedencia, $idgrado_instruccion, $email, $telefono, $doc_identidad, $nacimiento, $sexo)) {
+                mensaje("<strong>" . $nombres . "</strong> se actualizó satisfactoriamente", "success");
+                $resultado = true;
+            } else
+                throw new PDOException("Error al actualizar sin imagen <strong>" . $nombres . "</strong>");
+        }
+    } catch (Exception $e) {
+        $resultado = false;
+        mensaje("Lo siento hubo un error al actualizar el invitado: <br/>" . $e->getMessage(), "error");
+    }
+
+    return $resultado;
+}
+
+
+function eliminar($id)
+{
+    include 'modelo/modelo-invitado.php';
+    include 'util/mensaje.php';
+
+    $modelo = new InvitadoModelo();
+
+    try {
+        if ($modelo->eliminar($id) > 0) {
+            mensaje("Eliminado satisfactoriamente", "success");
+        } else {
+            throw new Exception("Error al eliminar este invitado");
+        }
+    } catch (PDOException $th) {
+        mensaje("Lo siento hubo un error al eliminar la categoría", "error");
+    }
 }

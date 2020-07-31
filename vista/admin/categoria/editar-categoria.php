@@ -16,7 +16,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Nega
     </h1>
   </section>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <section class="content">
         <!-- Main content -->
         <div class="box">

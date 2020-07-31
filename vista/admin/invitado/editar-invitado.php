@@ -1,5 +1,5 @@
 <?php
-$id = $_GET['id'];
+$id = openssl_decrypt($_POST['id'], COD, KEY);
 if (!filter_var($id, FILTER_VALIDATE_INT)) {
   die("Error el id: {$id} no es un entero.");
 }
@@ -15,7 +15,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
     </h1>
   </section>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <section class="content">
         <!-- Main content -->
         <div class="box">
@@ -25,73 +25,75 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
           </div>
           <div class="box-body">
             <?php
-            $sql = "SELECT * FROM v_invitado WHERE idpersona = $id ";
-            $resultado = $conn->query($sql);
-            $invitado = $resultado->fetch_assoc();
+            $resul_inv = $conn->query("SELECT * FROM invitado WHERE idpersona = $id");
+            $invitado = $resul_inv->fetch_assoc();
+
+            $resul_per = $conn->query("SELECT * FROM persona WHERE idpersona = $id");
+            $persona = $resul_per->fetch_assoc();
             ?>
             <!-- form start -->
-            <form role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="../../../modelo/modelo-invitado.php" enctype="multipart/form-data">
+            <form method="post" action="dashboard" enctype="multipart/form-data">
               <div class="box-body">
                 <!-- Nombres -->
-                <div class="form-group">
-                  <label for="nombre_invitado">Nombres: </label>
-                  <input type="text" class="form-control" id="nombre_invitado" name="nombre_invitado" placeholder="Ingresa nombre de invitado" value="<?php echo $invitado['nombres']; ?>">
+                <div class="form-group col-md-4">
+                  <label for="nombres">Nombres: </label>
+                  <input required type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresa nombre de invitado" value="<?php echo $persona['nombres']; ?>">
                 </div>
 
                 <!-- Apellido Paterno -->
-                <div class="form-group">
-                  <label for="apellidopa_invitado">Apellido Paterno: </label>
-                  <input type="text" class="form-control" id="apellidopa_invitado" name="apellidopa_invitado" placeholder="Ingresa apellido paterno" value="<?php echo $invitado['apellidopa']; ?>">
+                <div class="form-group col-md-4">
+                  <label for="apellidopa">Apellido Paterno: </label>
+                  <input required type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Ingresa apellido paterno" value="<?php echo $persona['apellidopa']; ?>">
                 </div>
 
                 <!-- Apellido Materno -->
-                <div class="form-group">
-                  <label for="apellidoma_invitado">Apellido Materno: </label>
-                  <input type="text" class="form-control" id="apellidoma_invitado" name="apellidoma_invitado" placeholder="Ingresa apellido materno" value="<?php echo $invitado['apellidoma']; ?>">
+                <div class="form-group col-md-4">
+                  <label for="apellidoma">Apellido Materno: </label>
+                  <input required type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Ingresa apellido materno" value="<?php echo $persona['apellidoma']; ?>">
                 </div>
 
                 <!-- Email -->
-                <div class="form-group">
-                  <label for="email">Apellido Materno: </label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa un email" value="<?php echo $invitado['email']; ?>">
+                <div class="form-group col-md-4">
+                  <label for="email">Email: </label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa un email" value="<?php echo $persona['email']; ?>">
                 </div>
 
                 <!-- Teléfono -->
-                <div class="form-group">
-                  <label for="telefono">Apellido Materno: </label>
-                  <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingresa un teléfono" value="<?php echo $invitado['telefono']; ?>">
+                <div class="form-group col-md-4">
+                  <label for="telefono">Teléfono: </label>
+                  <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingresa un teléfono" value="<?php echo $persona['telefono']; ?>">
                 </div>
 
                 <!-- Documento de Identidad -->
-                <div class="form-group">
+                <div class="form-group col-md-4">
                   <label for="doc_identidad">Documento de Identidad: </label>
-                  <input type="number" class="form-control" id="doc_identidad" name="doc_identidad" placeholder="Ingresa un documento" value="<?php echo $invitado['doc_identidad']; ?>">
-                </div>
-
-                <!-- Descripción / Biografía -->
-                <div class="form-group">
-                  <label for="biografia_invitado">Biografía: </label>
-                  <textarea class="form-control" name="biografia_invitado" id="biografia_invitado" rows="8" placeholder="Presentación profesional"><?php echo $invitado['descripcion']; ?></textarea>
+                  <input type="number" class="form-control" id="doc_identidad" name="doc_identidad" placeholder="Ingresa un documento" value="<?php echo $persona['doc_identidad']; ?>">
                 </div>
 
                 <!-- url_imagen -->
-                <div class="form-group">
+                <div class="form-group col-md-4">
                   <label for="imagen_actual">Imagen Actual:</label>
                   <br>
-                  <img src="../img/invitados/<?php echo $invitado['url_imagen']; ?>" width="200">
+                  <img src="<?php echo DIR_IMG_INVITADO . $invitado['url_imagen']; ?>" width="200">
                 </div>
 
                 <!-- Nueva url_imagen -->
-                <div class="form-group">
+                <div class="form-group col-md-4">
                   <label for="imagen_invitado">Imagen:</label>
                   <input type="file" id="imagen_invitado" name="archivo_imagen">
                   <p class="help-block">Agregue la nueva imagen del invitado aquí.</p>
                 </div>
 
                 <!-- Institucion de Procedencia -->
-                <div class="form-group">
-                  <label for="institucion_procedencia">Institucion de Procedencia: </label>
-                  <input type="date" class="form-control" id="institucion_procedencia" name="institucion_procedencia" placeholder="Ingresa una institución" value="<?php echo $invitado['institucion_procedencia']; ?>">
+                <div class="form-group col-md-4">
+                  <label for="procedencia">Institucion de Procedencia: </label>
+                  <input type="text" class="form-control" id="procedencia" name="procedencia" placeholder="Ingresa una institución" value="<?php echo $invitado['institucion_procedencia']; ?>">
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="form-group col-md-4">
+                  <label for="nacimiento">Fecha de Nacimiento: </label>
+                  <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresa una fecha" value="<?php echo $invitado['nacimiento']; ?>">
                 </div>
 
                 <!-- Grado Instruccion -->
@@ -102,34 +104,42 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
                 } catch (Exception $e) {
                   $error = $e->getMessage();
                   echo $error;
-                }
+                } ?>
 
-                while ($grado = $resultado->fetch_assoc()) {
-                ?>
-                  <div class="orden">
-                    <label for="grado_instruccion">Seleccione un Grado</label> <br>
-                    <select id="grado_instruccion" name="grado_instruccion">
-                      <option value="">--Seleccione--</option>
-                      <option value="<? echo $grado['idgrado_instruccion'] ?>">
+                <div class="form-group col-md-4">
+                  <label for="grado">Seleccione un Grado</label>
+                  <select id="grado" name="grado">
+                    <option value="">--Seleccione--</option>
+
+                    <?php while ($grado = $resultado->fetch_assoc()) { ?>
+                      <option <?php echo $grado['idgrado_instruccion'] == $invitado['idgrado_instruccion'] ? "selected" : "" ?> value="<? echo $grado['idgrado_instruccion'] ?>">
                         <? echo $grado['grado'] ?>
                       </option>
-                    </select>
-                  <?php
-                }
-                  ?>
+                    <?php } ?>
+                  </select>
+                </div>
 
-                  <!-- Fecha de Nacimiento -->
-                  <div class="form-group">
-                    <label for="nacimiento">Fecha de Nacimiento: </label>
-                    <input type="date" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresa una fecha" value="<?php echo $invitado['nacimiento']; ?>">
-                  </div>
-                  </div> <!-- /.box-body -->
+                <!-- Sexo -->
+                <div class="form-group col-md-4">
+                  <label for="sexo">Sexo: </label>
+                  <select id="sexo" name="sexo">
+                    <option value="">--Seleccione--</option>
+                    <option <?php echo "H" == $invitado['sexo'] ? "selected" : "" ?> value="H"> Hombre </option>
+                    <option <?php echo "M" == $invitado['sexo'] ? "selected" : "" ?> value="M"> Mujer </option>
+                    <option <?php echo "P" == $invitado['sexo'] ? "selected" : "" ?> value="P"> Prefiero no decirlo </option>
+                  </select>
+                </div>
 
-                  <div class="box-footer">
-                    <input type="hidden" name="registro" value="actualizar">
-                    <input type="hidden" name="id_registro" value="<?php echo $invitado['idpersona']; ?>">
-                    <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
-                  </div>
+                <!-- Descripción / Biografía -->
+                <div class="form-group col-md-12">
+                  <label for="descripcion">Biografía: </label>
+                  <textarea required class="form-control" name="descripcion" id="descripcion" rows="8" placeholder="Presentación profesional"><?php echo $invitado['descripcion']; ?></textarea>
+                </div>
+
+                <div class="box-footer">
+                  <input type="hidden" name="id" value="<?php echo openssl_encrypt($id, COD, KEY); ?>">
+                  <button type="submit" name="dashboard" value="invitado-editar1" class="btn btn-primary">Actualizar</button>
+                </div>
             </form>
           </div> <!-- /.box-body -->
         </div> <!-- /.box -->

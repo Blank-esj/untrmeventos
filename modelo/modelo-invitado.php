@@ -143,13 +143,18 @@ class InvitadoModelo
         return $resultado;
     }
 
+    /**
+     * Actualiza un invitado.
+     * Si la url de la imagen es null, no se actualiza la imagen.
+     * Devuelve true si se guardó correctamente sino false.
+     */
     public function actualizar(
         $idpersona,
         $nombres,
         $apellidopa,
         $apellidoma,
         $descripcion,
-        $url_imagen,
+        $url_imagen = null,
         $institucion_procedencia = null,
         $idgrado_instruccion = null,
         $email = null,
@@ -172,13 +177,28 @@ class InvitadoModelo
 
             $personaModelo = new PersonaModelo();
 
-            if ($personaModelo->actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) > 0)
-                $resultado = true;
-            else throw new PDOException("No se actualizó correctaente");
+            $actualizoPersona = true;
+            $actualizoInvitado = true;
+            $mensaje = "";
 
-            if ($this->update($idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) > 0)
-                $resultado = true;
-            else throw new PDOException("No se actualizó correctaente");
+            if ($personaModelo->actualizar($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) <= 0) {
+                $actualizoPersona = false;
+                $mensaje = "No se actualizó persona ";
+            }
+
+            if ($this->update($conn, $idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) <= 0) {
+                $actualizoInvitado = false;
+                $mensaje .= "No se actualizó invitado ";
+            }
+
+            /**
+             * Si ni en la tabla persona ni en invitado hay filas afectadas entonces
+             * devuelve un error (esto podría manejarse diferente)
+             * Si las filas de alguna de las tablas ha sido afectada el resultado es true
+             */
+            if (!$actualizoPersona && !$actualizoInvitado) throw new Exception($mensaje);
+            else $resultado = true;
+
 
             $personaModelo = null;
             $idpersona = null;
@@ -186,23 +206,24 @@ class InvitadoModelo
             $conn->commit(); // Guadamos los cambios
 
             $resultado = true;
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             $conn->rollBack(); // Revertimos los cambios
             $resultado = false;
+            echo $e->getMessage();
         }
         $conn = null;
         return $resultado;
     }
 
-    private function update($idpersona, $descripcion, $url_imagen, $institucion_procedencia = null, $idgrado_instruccion = null, $nacimiento = null, $sexo = null)
+    /**
+     * Si le pasamos la url de la imagen como NULL, no se actualiza la imagen.
+     */
+    private function update(\PDO $conn, $idpersona, $descripcion, $url_imagen = null, $institucion_procedencia = null, $idgrado_instruccion = null, $nacimiento = null, $sexo = null)
     {
         include_once 'controlador/util/bd_conexion_pdo.php';
 
-        $conn = (new Conexion())->conectarPDO();
-
-        $sentencia = $conn->prepare(
-            "UPDATE invitado
-            SET
+        $consulta = $url_imagen != null ?
+            "UPDATE invitado SET
             descripcion = :u_descripcion,
             url_imagen = :u_url_imagen,
             institucion_procedencia = :u_institucion_procedencia,
@@ -210,11 +231,23 @@ class InvitadoModelo
             nacimiento = :u_nacimiento,
             sexo = :u_sexo
             WHERE idpersona = :u_idpersona;"
-        );
+            :
+            "UPDATE invitado SET
+            descripcion = :u_descripcion,
+            institucion_procedencia = :u_institucion_procedencia,
+            idgrado_instruccion = :u_idgrado_instruccion,
+            nacimiento = :u_nacimiento,
+            sexo = :u_sexo
+            WHERE idpersona = :u_idpersona;";
+
+        $sentencia = $conn->prepare($consulta);
 
         $sentencia->bindParam(":u_idpersona", $idpersona, PDO::PARAM_INT);
         $sentencia->bindParam(":u_descripcion", $descripcion, PDO::PARAM_STR);
-        $sentencia->bindParam(":u_url_imagen", $url_imagen, PDO::PARAM_STR);
+
+        if ($url_imagen != null)
+            $sentencia->bindParam(":u_url_imagen", $url_imagen);
+
         $sentencia->bindParam(":u_institucion_procedencia", $institucion_procedencia);
         $sentencia->bindParam(":u_idgrado_instruccion", $idgrado_instruccion);
         $sentencia->bindParam(":u_nacimiento", $nacimiento);
@@ -224,7 +257,6 @@ class InvitadoModelo
 
         $resultado = $sentencia->rowCount();
 
-        $conn = null;
         $sentencia = null;
 
         return $resultado;
@@ -236,7 +268,7 @@ class InvitadoModelo
 
         $conn = (new Conexion())->conectarPDO();
 
-        $sentencia = $conn->prepare("DELETE FROM invitado WHERE idpersona = :idpersona;");
+        $sentencia = $conn->prepare("DELETE FROM persona WHERE idpersona = :idpersona;");
 
         $sentencia->bindParam(":idpersona", $idpersona, PDO::PARAM_INT);
 

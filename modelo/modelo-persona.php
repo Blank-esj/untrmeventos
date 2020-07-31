@@ -98,10 +98,8 @@ class PersonaModelo
      * Actualizaun registro de persona de acuerdo los datos que le pases.
      * Devuelve el número de filas afectadas
      */
-    public function actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $email = null, $telefono = null, $doc_identidad = null)
+    public function actualizar(\PDO $conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email = null, $telefono = null, $doc_identidad = null)
     {
-        $conn = (new Conexion())->conectarPDO();
-
         $sentencia = $conn->prepare(
             "UPDATE persona
             SET
@@ -126,7 +124,6 @@ class PersonaModelo
 
         $resultado = $sentencia->rowCount();
 
-        $conn = null;
         $sentencia = null;
 
         return $resultado;
