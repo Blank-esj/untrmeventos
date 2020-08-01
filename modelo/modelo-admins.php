@@ -1,12 +1,16 @@
 <?php
-class Admins
+class AdminsModelo
 {
     /**
      * Hace una consulta a la base de datos comparando el usuario que le pases por parámetro con el usuario que haya en la base de datos
      * y devuelve un array con los usuario; idpersona, usuario, nombre_completo, password y nivel del admin
      */
-    public function leerDatosLoginAdmin(\PDO $conexion, string $usuario)
+    public function leerDatosLoginAdmin(string $usuario)
     {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+        
         $sentencia = $conexion->prepare('SELECT idpersona, usuario, nombre_completo, password, nivel FROM v_admins WHERE usuario = :usuario;');
         $sentencia->bindParam(':usuario', $usuario);
 
@@ -14,7 +18,8 @@ class Admins
 
         $resultado = ($sentencia->fetchAll(PDO::FETCH_ASSOC));
 
-        $sentencia->closeCursor();
+        $sentencia = null;
+        $conexion = null;
 
         return $resultado;
     }
@@ -22,11 +27,17 @@ class Admins
     /**
      * Devuelve el total de adminsitradores que hay en la base de datos
      */
-    public function cuentaAdmins(\PDO $conexion)
+    public function cuentaAdmins()
     {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+        
         $sentencia = $conexion->query("SELECT COUNT(*) total FROM admins");
         $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        
         $sentencia = null;
+        $conexion = null;
 
         return $resultado;
     }
@@ -35,7 +46,6 @@ class Admins
      * Crea un nuevo administrador
      */
     public function crear(
-        \PDO $conexion,
         $nombres,
         $apellidopa,
         $apellidoma,
@@ -46,6 +56,10 @@ class Admins
         $contrasena,
         $nivel = 1
     ) {
+
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
 
         $sentencia = $conexion->prepare("CALL sp_crear_administrador (
             :nombres,
@@ -70,16 +84,25 @@ class Admins
 
         $sentencia->execute();
 
-        $sentencia->closeCursor();
+        $resultado['filas'] = $sentencia->rowCount();
+        $resultado['id'] = $conexion->lastInsertId();
 
-        $resultado = $sentencia->rowCount();
+        $sentencia = null;
+        $conexion = null;
 
         return $resultado;
     }
 
-    public function leerTodos(\PDO $conexion)
+    public function leerTodos()
     {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
         $sentencia = $conexion->query("SELECT * total FROM admins");
+
+        $sentencia = null;
+        $conexion = null;
 
         return $sentencia;
     }

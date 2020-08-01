@@ -1,9 +1,9 @@
 <?php
 
 include_once 'controlador/util/Sesion.php';
-include_once 'controlador/login-admin.php';
 include_once 'controlador/global/config.php';
 include_once 'controlador/util/bd_conexion_pdo.php';
+include_once 'controlador/controlador-admins.php';
 
 $sesion = new Sesion();
 $connPDO = (new Conexion())->conectarPDO();
@@ -318,6 +318,18 @@ if ($verificador) {
     if (isset($_POST['dashboard'])) {
         if ($_POST['dashboard'] == 'login') {
             evaluarLogeo();
+        } elseif ($_POST['dashboard'] == 'admin1-crear') {
+            crearAdmins(
+                $_POST['nombres'],
+                $_POST['apellidopa'],
+                $_POST['apellidoma'],
+                $_POST['email'],
+                $_POST['telefono'],
+                $_POST['doc_identidad'],
+                $_POST['usuario'],
+                $_POST['contrasena']
+            );
+            evaluarLogeo();
         } else {
             include_once 'vista/admin/home/login.php';
         }
@@ -330,7 +342,7 @@ $connPDO = null;
 
 function evaluarLogeo()
 {
-    $verificado = verificarUsuarioPassword($_POST['usuario'], $_POST['password']);
+    $verificado = verificarUsuarioPassword($_POST['usuario'], $_POST['contrasena']);
     $sesion = new Sesion(); // Se intancia otra vez la sesion para que pueda verlo cabecera
     if ($verificado) {
         include_once 'vista/plantillas/cabecera-admin.php';
