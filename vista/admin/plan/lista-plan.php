@@ -26,12 +26,14 @@
                                         <th>Nombre</th>
                                         <th>Precio</th>
                                         <th>Descripción</th>
+                                        <th>Beneficios</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    include 'modelo/plan.php';
+                                    include 'modelo/modelo-plan.php';
+                                    include 'modelo/modelo-plan-beneficio.php';
                                     foreach ((new Plan())->leerPlanes($connPDO) as $indice => $arrayPlan) { ?>
 
                                         <tr>
@@ -39,6 +41,13 @@
                                             <td><?php echo $arrayPlan['nombre']; ?></td>
                                             <td><?php echo $arrayPlan['precio']; ?></td>
                                             <td><?php echo $arrayPlan['descripcion']; ?> </td>
+                                            <td>
+                                                <?php
+                                                foreach ((new PlanBeneficioModelo())->beneficioPlan($arrayPlan['idplan']) as $indice => $arraybeneficio) {
+
+                                                    echo $arraybeneficio['nombre'] . "<br/>";
+                                                } ?>
+                                            </td>
                                             <td>
                                                 <a href=" dashboard?plan-editar=<?php echo openssl_encrypt($arrayPlan['idplan'], COD, KEY) ?>" class="btn bg-orange btn-flat margin">
                                                     <i class="fa fa-pencil-alt"></i>
@@ -58,6 +67,7 @@
                                         <th>Nombre</th>
                                         <th>Precio</th>
                                         <th>Descripción</th>
+                                        <th>Beneficios</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
