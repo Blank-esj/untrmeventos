@@ -178,6 +178,35 @@ if ($verificador) {
                 include 'vista/admin/evento/lista-evento.php';
                 break;
 
+                // CRUD Beneficio
+            case 'beneficio-crear':
+                include 'controlador/controlador-beneficio.php';
+
+                crear($_POST['nombre']) ?
+                    include 'vista/admin/plan/beneficio/lista-beneficio.php' :
+                    include 'vista/admin/plan/beneficio/crear-beneficio.php';
+                break;
+
+            case 'beneficio-editar0':
+                include 'vista/admin/plan/beneficio/editar-beneficio.php';
+                break;
+
+            case 'beneficio-editar1':
+                include 'controlador/controlador-beneficio.php';
+
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre']
+                );
+                include 'vista/admin/plan/beneficio/lista-beneficio.php';
+                break;
+
+            case 'beneficio-eliminar':
+                include 'controlador/controlador-beneficio.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/plan/beneficio/lista-beneficio.php';
+                break;
+
             default:
                 include_once 'vista/admin/home/admin-area.php';
                 break;
