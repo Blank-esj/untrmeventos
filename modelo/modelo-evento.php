@@ -1,95 +1,150 @@
 <?php
-    include_once 'controlador/util/funciones-admin.php';
-    
-    $titulo = $_POST['titulo_evento'];
-    $id_categoria = $_POST['categoria_evento'];
-    $id_invitado = $_POST['invitado'];
-    //optenemos la fecha y cambiamos formato
-    $fecha = $_POST['fecha_evento'];
-    $fecha_formateada = date('Y-m-d', strtotime($fecha));
-    //optenemos la hora
-    $hora = $_POST['hora_evento'];
-    $hora_formateada = date('H:i', strtotime($hora));
-        
-    $id_registro = $_POST['id_registro'];
+class EventoModelo
+{
 
-    //Código para insertar evento a la BD.
-    if($_POST['registro'] == 'nuevo') {
-        try {
-            $stmt = $conn->prepare("INSERT INTO evento (nombre_evento, fecha_evento, hora_evento, id_cat_evento, id_inv) VALUES (?, ?, ?, ?, ?) ");
-            $stmt->bind_param("sssii", $titulo, $fecha_formateada, $hora_formateada, $id_categoria, $id_invitado);
-            $stmt->execute();
+    /**
+     * Se hace una consulta y se trae los resultados con fetchAll
+     */
+    public function leer($idevento)
+    {
+        include 'controlador/util/bd_conexion_pdo.php';
 
-            $id_insertado = $stmt->insert_id;
-            if($stmt->affected_rows) {
-                $respuesta = array(
-                    'respuesta' => 'exito',
-                    'id_insertado' => $id_insertado,
-                );
-            } else {
-                $respuesta = array(
-                    'respuesta' => 'Error'
-                );
-            }
-            $stmt->close();
-            $conn->close();
-        } catch(Exception $e) {
-            $respuesta = array(
-                'respuesta' => $e->getMessage()
-            );
-        }
-        die(json_encode($respuesta));     
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare("SELECT * FROM evento WHERE id_evento = :id_evento");
+
+        $sentencia->bindParam(":id_evento", $idevento, PDO::PARAM_INT);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
     }
 
-    //Código para insertar un nuevo evento en la BD.
-    if($_POST['registro'] == 'actualizar') { //Si existe.
-        try {
-            $stmt = $conn->prepare("UPDATE evento SET nombre_evento = ?, fecha_evento = ?, hora_evento = ?, id_cat_evento = ?, id_inv = ?, editado = NOW() WHERE id_evento = ? ");
-            $stmt->bind_param("sssiii", $titulo, $fecha_formateada, $hora_formateada, $id_categoria, $id_invitado, $id_registro);         
-            $stmt->execute();
-            if($stmt->affected_rows) {
-                $respuesta = array(
-                    'respuesta' => 'exito',
-                    'id_actualizado' => $id_registro
-                );
-            } else {
-                $respuesta = array(
-                'respuesta' => 'error'
-                );
-            }
-            $stmt->close();
-            $conn->close();
-        } catch (Exception $e) {
-            $respuesta = array(
-                'respuesta' => $e->getMessage()
-            );
-        }
-        die(json_encode($respuesta));
+    /**
+     * Se hace una consulta y se trae los resultados con fetchAll
+     */
+    public function leerTodos()
+    {
+        include 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->query("SELECT * FROM evento");
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
     }
 
-    //Código para eliminar un evento
-    if($_POST['registro'] == 'eliminar') {
-        $id_borrar = $_POST['id'];
-        try {
-            $stmt = $conn->prepare("DELETE FROM evento WHERE id_evento = ? ");
-            $stmt->bind_param('i', $id_borrar);
-            $stmt->execute();            
-            if($stmt->affected_rows) {
-                $respuesta = array(
-                    'respuesta' => 'exito',
-                    'id_eliminado' => $id_borrar
-                );
-            } else {
-                $respuesta = array(
-                    'respuesta' => 'error'
-                );
-            }
-            $stmt->close();
-            $conn->close();
-        } catch (Exception $e) {
-            $respuesta = array(
-                'respuesta' => $e->getMessage()
-            );
-        }
-        die(json_encode($respuesta));
+    /**
+     * Devuelve un array con el id "id_evento" del evento creado y el número de filas afectadas "filas"
+     */
+    public function crear($nombre_evento, $fecha_evento, $hora_evento, $id_cat_evento, $id_inv, $clave)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare(
+            "INSERT INTO evento (
+            nombre_evento, 
+            fecha_evento, 
+            hora_evento, 
+            id_cat_evento, 
+            id_inv, 
+            clave) VALUES (
+                :nombre_evento,
+                :fecha_evento,
+                :hora_evento,
+                :id_cat_evento,
+                :id_inv,
+                :clave );"
+        );
+
+        $sentencia->bindParam(":nombre_evento", $nombre_evento);
+        $sentencia->bindParam(":fecha_evento", $fecha_evento);
+        $sentencia->bindParam(":hora_evento", $hora_evento);
+        $sentencia->bindParam(":id_cat_evento", $id_cat_evento);
+        $sentencia->bindParam(":id_inv", $id_inv);
+        $sentencia->bindParam(":clave", $clave);
+
+        $sentencia->execute();
+
+        $resultado['id_evento'] = $conexion->lastInsertId();
+        $resultado['filas'] = $sentencia->rowCount();
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
     }
+
+    /**
+     * Devuelve el número de filas afectadas
+     */
+    public function actualizar($id_evento, $nombre_evento, $fecha_evento, $hora_evento, $id_cat_evento, $id_inv, $clave)
+    {
+        include 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare(
+            "UPDATE evento SET 
+                nombre_evento = :nombre_evento, 
+                fecha_evento = :fecha_evento, 
+                hora_evento = :hora_evento, 
+                id_cat_evento = :id_cat_evento, 
+                id_inv = :id_inv, 
+                clave = :clave 
+            WHERE id_evento = :id_evento;"
+        );
+
+        $sentencia->bindParam(":id_evento", $id_evento, PDO::PARAM_INT);
+        $sentencia->bindParam(":nombre_evento", $nombre_evento, PDO::PARAM_STR);
+        $sentencia->bindParam(":fecha_evento", $fecha_evento, PDO::PARAM_STR);
+        $sentencia->bindParam(":hora_evento", $hora_evento, PDO::PARAM_STR);
+        $sentencia->bindParam(":id_cat_evento", $id_cat_evento, PDO::PARAM_INT);
+        $sentencia->bindParam(":id_inv", $id_inv, PDO::PARAM_INT);
+        $sentencia->bindParam(":clave", $clave, PDO::PARAM_STR);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->rowCount();
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
+
+    /**
+     * Devuelve el número filas afectadas
+     */
+    public function eliminar($id_evento)
+    {
+        include 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare("DELETE FROM evento WHERE id_evento = :id_evento");
+
+        $sentencia->bindParam(":id_evento", $id_evento, PDO::PARAM_INT);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->rowCount();
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
+}

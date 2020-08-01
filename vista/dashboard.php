@@ -138,6 +138,71 @@ if ($verificador) {
                 include 'vista/admin/invitado/lista-invitado.php';
                 break;
 
+                // CRUD Evento
+            case 'evento-crear':
+                include 'controlador/controlador-evento.php';
+
+                echo var_dump($_POST['nombre_evento']) . "<br/>";
+                echo var_dump($_POST['fecha_evento']) . "<br/>";
+                echo var_dump($_POST['hora_evento']) . "<br/>";
+                echo var_dump((int)$_POST['categoria_evento']) . "<br/>";
+                echo var_dump((int)$_POST['invitado']) . "<br/>";
+                echo var_dump($_POST['clave']) . "<br/>";
+
+                crear(
+                    $_POST['nombre_evento'],
+                    $_POST['fecha_evento'],
+                    $_POST['hora_evento'],
+                    (int)$_POST['categoria_evento'],
+                    (int)$_POST['invitado'],
+                    $_POST['clave'],
+                ) ?
+                    include 'vista/admin/evento/lista-evento.php' : include 'vista/admin/evento/crear-evento.php';
+                break;
+
+            case 'invitado-editar0':
+                include 'vista/admin/invitado/editar-invitado.php';
+                break;
+
+            case 'invitado-editar1':
+                include 'controlador/controlador-invitado.php';
+
+                $nombres = $_POST['nombres'];
+                $apellidopa = $_POST['apellidopa'];
+                $apellidoma = $_POST['apellidoma'];
+                $descripcion = $_POST['descripcion'];
+                $procedencia = $_POST['procedencia'];
+                $grado = $_POST['grado'];
+                $email = $_POST['email'];
+                $telefono = $_POST['telefono'];
+                $doc_identidad = $_POST['doc_identidad'];
+                $nacimiento = $_POST['nacimiento'];
+                $sexo = $_POST['sexo'];
+
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $nombres,
+                    $apellidopa,
+                    $apellidoma,
+                    $descripcion,
+                    $_FILES,
+                    $procedencia == "" ? null : $procedencia,
+                    $grado == "" ? null : $grado,
+                    $email == "" ? null : $email,
+                    $telefono == "" ? null : $telefono,
+                    $doc_identidad == "" ? null : $doc_identidad,
+                    $nacimiento == "" ? null : $nacimiento,
+                    $sexo == "" ? null : $sexo
+                );
+                include 'vista/admin/invitado/lista-invitado.php';
+                break;
+
+            case 'invitado-eliminar':
+                include 'controlador/controlador-invitado.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/invitado/lista-invitado.php';
+                break;
+
             default:
                 include_once 'vista/admin/home/admin-area.php';
                 break;
