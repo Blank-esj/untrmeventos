@@ -27,16 +27,14 @@
                   <th>Hora</th>
                   <th>Categoría</th>
                   <th>Invitado</th>
+                  <th>Clave</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 try {
-                  $sql = "SELECT id_evento, nombre_evento, fecha_evento, hora_evento, cat_evento, CONCAT(nombres, ' ', apellidopa, ' ', apellidoma) AS nombre_completo_invitado FROM evento "; //Crea consulta SQL.
-                  $sql .= " INNER JOIN categoria_evento ON evento.id_cat_evento = categoria_evento.id_categoria ";
-                  $sql .= " INNER JOIN persona ON evento.id_inv = persona.idpersona ";
-                  $sql .= " ORDER BY id_evento ";
+                  $sql = "SELECT * FROM v_evento;";
                   $resultado = $conn->query($sql); //Ejecuta consulta SQL
                 } catch (Exception $e) {
                   $error = $e->getMessage();
@@ -47,18 +45,30 @@
                 ?>
                   <tr>
                     <td><?php echo $numero; ?> </td>
-                    <td><?php echo $evento['nombre_evento']; ?></td>
-                    <td><?php echo $evento['fecha_evento']; ?></td>
-                    <td><?php echo $evento['hora_evento']; ?> </td>
-                    <td><?php echo $evento['cat_evento']; ?> </td>
-                    <td><?php echo $evento['nombre_completo_invitado']; ?> </td>
+                    <td><?php echo $evento['evento']; ?></td>
+                    <td><?php echo $evento['fecha']; ?></td>
+                    <td><?php echo $evento['hora']; ?> </td>
+                    <td><?php echo $evento['categoria']; ?> </td>
+                    <td><?php echo $evento['invitado']; ?> </td>
+                    <td><?php echo $evento['clave']; ?> </td>
                     <td>
-                      <a href="editar-evento.php?id=<?php echo $evento['id_evento']; ?>" class="btn bg-orange btn-flat margin">
-                        <i class="fa fa-pencil-alt"></i>
-                      </a>
-                      <a href="#" data-id="<?php echo $evento['id_evento']; ?>" data-tipo="evento" class="btn bg-maroon btn-flat margin borrar_registro">
-                        <i class="fa fa-trash"></i>
-                      </a>
+
+                      <?php $id = openssl_encrypt($evento['id_evento'], COD, KEY); ?>
+
+                      <form action="dashboard" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                        <button type="submit" name="dashboard" value="evento-editar0" class="btn btn-warning">
+                          <i class="fa fa-pencil-alt"></i>
+                        </button>
+                      </form>
+
+                      <form action="dashboard" method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                        <button type="submit" name="dashboard" value="evento-eliminar" class="btn btn-danger">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </form>
+
                     </td>
                   </tr>
                 <?php
@@ -74,6 +84,7 @@
                   <th>Hora</th>
                   <th>Categoría</th>
                   <th>Invitado</th>
+                  <th>Clave</th>
                   <th>Acciones</th>
                 </tr>
               </tfoot>

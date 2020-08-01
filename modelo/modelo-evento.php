@@ -7,7 +7,7 @@ class EventoModelo
      */
     public function leer($idevento)
     {
-        include 'controlador/util/bd_conexion_pdo.php';
+        include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conexion = (new Conexion())->conectarPDO();
 
@@ -30,7 +30,7 @@ class EventoModelo
      */
     public function leerTodos()
     {
-        include 'controlador/util/bd_conexion_pdo.php';
+        include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conexion = (new Conexion())->conectarPDO();
 
@@ -92,7 +92,7 @@ class EventoModelo
      */
     public function actualizar($id_evento, $nombre_evento, $fecha_evento, $hora_evento, $id_cat_evento, $id_inv, $clave)
     {
-        include 'controlador/util/bd_conexion_pdo.php';
+        include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conexion = (new Conexion())->conectarPDO();
 
@@ -130,7 +130,7 @@ class EventoModelo
      */
     public function eliminar($id_evento)
     {
-        include 'controlador/util/bd_conexion_pdo.php';
+        include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conexion = (new Conexion())->conectarPDO();
 

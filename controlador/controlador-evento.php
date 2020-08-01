@@ -37,7 +37,7 @@ function actualizar($id_evento, $nombre_evento, $fecha_evento, $hora_evento, $id
     try {
         $modelo = new EventoModelo();
 
-        if ($modelo->actualizar($id_evento, $nombre_evento, date('Y-m-d', strtotime($fecha_evento)), date('H:i', strtotime($hora_evento)), $id_cat_evento, $id_inv, $clave) > 0) {
+        if ($modelo->actualizar($id_evento, $nombre_evento, date('Y-m-d', strtotime($fecha_evento)), date('H:i:s', strtotime($hora_evento)), $id_cat_evento, $id_inv, $clave) > 0) {
             $modelo = null;
             mensaje("Evento <strong>" . $nombre_evento . "</strong> actualizado correctamente", "success");
         } else throw new Exception("No se actualizó el evento");
