@@ -87,7 +87,7 @@
                                     <?php if ($i == count($row) - 1) : ?>
                                 </div>
                                 <!-- boton ver todos -->
-                                <a href="calendario.php" class="button float-right">Ver todos</a>
+                                <a href="calendario" class="button float-right">Ver todos</a>
                             <?php endif; ?>
                                 </div>
                                 <!--#talleres-->

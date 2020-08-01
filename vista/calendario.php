@@ -39,7 +39,7 @@
           </p>
           <p>
             <i class="fa fa-user" aria-hidden="true"></i>
-            <?php echo $evento['nombres'] . " " . $evento['apellidopa'] . " " . $evento['apellidoma']; ?>
+            <?php echo $evento['nombre_invitado']; ?>
           </p>
         </div>
         <?php $fechaAnterior = $fecha ?>

@@ -5,6 +5,7 @@ $(function () {
   }
 
   //Agregar clase a Menu
+  $('body.home .navegacion-principal a:contains("Inicio")').addClass("activo");
   $('body.galeria .navegacion-principal a:contains("Galería")').addClass(
     "activo"
   );

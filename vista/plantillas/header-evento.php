@@ -109,6 +109,7 @@
       </div>
       <!--.menu-movil-->
       <nav class="navegacion-principal clearfix">
+        <a class="rounded" href="home">Inicio</a>
         <a class="rounded" href="galeria">Galería</a>
         <a class="rounded" href="calendario">Calendario</a>
         <a class="rounded" href="invitados">Invitados</a>
