@@ -41,13 +41,30 @@ class PlanBeneficioModelo
     }
 
     /**
-     * Crea un plan_beneficio y devuelve su id y el número de filas afectadas
+     * Leer un registro de plan_beneficio de acuerdo al idplan_beneficio que le pases
      */
-    public function crear(\PDO $conexion, $idplan, $idbeneficio)
+    public function leerUnoPorPlan($idplan)
     {
         include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare("SELECT * FROM plan_beneficio WHERE idplan = :idplan");
+        $sentencia->bindParam(":idplan", $idplan, PDO::PARAM_INT);
+        $sentencia->execute();
+
+        $resutado = ($sentencia->fetchAll(PDO::FETCH_ASSOC));
+
+        $sentencia = null;
+        $conexion = null;
+        return $resutado;
+    }
+
+    /**
+     * Crea un plan_beneficio y devuelve su id y el número de filas afectadas
+     */
+    public function crear(\PDO $conexion, $idplan, $idbeneficio)
+    {
 
         $sentencia = $conexion->prepare("INSERT INTO plan_beneficio (idplan, idbeneficio) VALUES (:idplan, :idbeneficio);");
         $sentencia->bindParam(":idplan", $idplan, PDO::PARAM_INT);
@@ -58,7 +75,7 @@ class PlanBeneficioModelo
         $resutado['id'] = $conexion->lastInsertId();
 
         $sentencia = null;
-        $conexion = null;
+        
         return $resutado;
     }
 
@@ -107,6 +124,26 @@ class PlanBeneficioModelo
 
         $sentencia = null;
         $conexion = null;
+        return $resutado;
+    }
+
+    /**
+     * Elimina el registro de acuerdo al id del plan que le pasemos y devuelve el numero de filas afectadas
+     */
+    public function eliminarPorPlan(\PDO $conexion, $idplan)
+    {
+        $sentencia = $conexion->prepare("DELETE FROM plan_beneficio WHERE idplan = :idplan ;");
+        $sentencia->bindParam(':idplan', $idplan);
+
+        $sentencia->execute();
+
+        $resutado = $sentencia->rowCount();
+
+        echo var_dump($resutado);
+        echo var_dump($idplan);
+
+        $sentencia = null;
+
         return $resutado;
     }
 

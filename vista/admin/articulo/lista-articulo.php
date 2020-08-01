@@ -40,6 +40,7 @@
                                 }
 
                                 $numero = 1;
+                                include_once 'controlador/global/config.php';
                                 while ($articulo = $resultado->fetch_assoc()) {
                                 ?>
                                     <tr>
@@ -48,14 +49,25 @@
                                         <td><?php echo $articulo['precio'] ?></td>
                                         <td><?php echo $articulo['stock']; ?></td>
                                         <td><?php echo $articulo['descripcion']; ?></td>
-                                        <td><img src="../../assets/img/invitados/<?php echo $articulo['url_imagen']; ?>" width="150"></td>
+                                        <td><img src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen']; ?>" width="150"></td>
                                         <td>
-                                            <a href="editar-articulo.php?id=<?php echo $articulo['idarticulo'] ?>" data-id="<?php echo $articulo['idarticulo']; ?>" class="btn bg-orange btn-flat margin">
-                                                <i class="fa fa-pencil-alt"></i>
-                                            </a>
-                                            <a href="#" data-id="<?php echo $articulo['idarticulo']; ?>" data-tipo="articulo" class="btn bg-maroon btn-flat margin borrar_registro">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
+
+                                            <?php $idcat = openssl_encrypt($articulo['idarticulo'], COD, KEY); ?>
+
+                                            <form action="dashboard" method="post" style="display: inline;">
+                                                <input type="hidden" name="id" value="<?php echo $idcat ?>">
+                                                <button type="submit" name="dashboard" value="articulo-editar0" class="btn btn-warning">
+                                                    <i class="fa fa-pencil-alt"></i>
+                                                </button>
+                                            </form>
+
+                                            <form action="dashboard" method="post" style="display: inline;">
+                                                <input type="hidden" name="id" value="<?php echo $idcat ?>">
+                                                <button type="submit" name="dashboard" value="articulo-eliminar" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 <?php

@@ -207,6 +207,70 @@ if ($verificador) {
                 include 'vista/admin/plan/beneficio/lista-beneficio.php';
                 break;
 
+                // CRUD Plan
+            case 'plan-crear':
+                include 'controlador/controlador-plan.php';
+
+                crear($_POST['nombre'], $_POST['precio'], $_POST['descripcion'], $_POST['check-beneficio']) ?
+                    include 'vista/admin/plan/lista-plan.php' :
+                    include 'vista/admin/plan/crear-plan.php';
+                break;
+
+            case 'plan-editar0':
+                include 'vista/admin/plan/editar-plan.php';
+                break;
+
+            case 'plan-editar1':
+                include 'controlador/controlador-plan.php';
+                
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre'],
+                    $_POST['precio'],
+                    $_POST['descripcion'],
+                    isset($_POST['check-beneficio']) ? $_POST['check-beneficio'] : []
+                );
+                include 'vista/admin/plan/lista-plan.php';
+                break;
+
+            case 'plan-eliminar':
+                include 'controlador/controlador-plan.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/plan/lista-plan.php';
+                break;
+
+                // CRUD Articulo
+            case 'articulo-crear':
+                include 'controlador/controlador-articulo.php';
+
+                crear($_POST['nombre'], $_POST['precio'], $_POST['descripcion'], $_POST['check-beneficio']) ?
+                    include 'vista/admin/articulo/lista-articulo.php' :
+                    include 'vista/admin/articulo/crear-articulo.php';
+                break;
+
+            case 'articulo-editar0':
+                include 'vista/admin/articulo/editar-articulo.php';
+                break;
+
+            case 'articulo-editar1':
+                include 'controlador/controlador-articulo.php';
+                
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre'],
+                    $_POST['precio'],
+                    $_POST['descripcion'],
+                    isset($_POST['check-beneficio']) ? $_POST['check-beneficio'] : []
+                );
+                include 'vista/admin/articulo/lista-articulo.php';
+                break;
+
+            case 'plan-eliminar':
+                include 'controlador/controlador-plan.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/plan/lista-plan.php';
+                break;
+
             default:
                 include_once 'vista/admin/home/admin-area.php';
                 break;

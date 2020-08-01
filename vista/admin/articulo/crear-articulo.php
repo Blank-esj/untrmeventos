@@ -8,7 +8,7 @@
         </h1>
     </section>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <section class="content">
                 <!-- Main content -->
                 <div class="box">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="box-body">
                         <!-- form start -->
-                        <form role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="modelo/modelo-articulo.php" enctype="multipart/form-data">
+                        <form method="post" action="dashboard" enctype="multipart/form-data">
                             <div class="box-body">
 
                                 <!-- Nombre -->

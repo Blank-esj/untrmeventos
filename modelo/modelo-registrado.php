@@ -4,7 +4,7 @@ include_once 'controlador/util/bd_conexion.php';
 include_once 'controlador/util/Sesion.php';
 
 include_once 'boleto.php'; // Es utilizado por este archivo
-include_once 'regalo.php'; // Es utilizado por este archivo
+include_once 'modelo-regalo.php'; // Es utilizado por este archivo
 
 $conexion = (new Conexion())->conectarPDO();    // Conexión a la base de datos
 $sesion = new Sesion();        // Instanciamos la sesión

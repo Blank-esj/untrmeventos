@@ -45,8 +45,13 @@ define("LINKAPI", "https://api.sandbox.paypal.com");
 define("CLIENTID", "Ad3BzvK8xD2dM0ZsVLJWFjKITqLEYEStaSxe3zGH7eZ8NykLhTlLzR4aaiEHApGyek7TM5pcbfw3zrJj");
 define("SECRETID", "EDXuvb80VgIBqxsh85lyNKdkxCZtqe4eKVFUPrceYuxCADBlI1CB-6oECR74Icm6aQKvO7f_sPtUoK11");
 
-// DIRECTORIOS  DE IMAGENES
+// DIRECTORIOS DE IMAGENES
 /**
  * Directorio donde se guardan las imagenes de los invitados
  */
 define("DIR_IMG_INVITADO", "vista/assets/img/invitados/");
+
+/**
+ * Directorio de imagenes de articulos
+ */
+define("DIR_IMG_ARTICULO", "vista/assets/img/articulos/");

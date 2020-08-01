@@ -32,9 +32,9 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    include 'modelo/modelo-plan.php';
-                                    include 'modelo/modelo-plan-beneficio.php';
-                                    foreach ((new Plan())->leerPlanes($connPDO) as $indice => $arrayPlan) { ?>
+                                    include_once 'modelo/modelo-plan.php';
+                                    include_once 'modelo/modelo-plan-beneficio.php';
+                                    foreach ((new PlanModelo())->leerPlanes($connPDO) as $indice => $arrayPlan) { ?>
 
                                         <tr>
                                             <td><?php echo $indice + 1; ?> </td>
@@ -42,19 +42,31 @@
                                             <td><?php echo $arrayPlan['precio']; ?></td>
                                             <td><?php echo $arrayPlan['descripcion']; ?> </td>
                                             <td>
-                                                <?php
-                                                foreach ((new PlanBeneficioModelo())->beneficioPlan($arrayPlan['idplan']) as $indice => $arraybeneficio) {
-
-                                                    echo $arraybeneficio['nombre'] . "<br/>";
-                                                } ?>
+                                                <ul>
+                                                    <?php
+                                                    foreach ((new PlanBeneficioModelo())->beneficioPlan($arrayPlan['idplan']) as $indice => $arraybeneficio) { ?>
+                                                        <li> <?php echo $arraybeneficio['nombre']; ?> </li>
+                                                    <?php } ?>
+                                                </ul>
                                             </td>
                                             <td>
-                                                <a href=" dashboard?plan-editar=<?php echo openssl_encrypt($arrayPlan['idplan'], COD, KEY) ?>" class="btn bg-orange btn-flat margin">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="dashboard?plan-eliminar=<?php echo $arrayPlan['idplan']; ?>" class="btn bg-maroon btn-flat margin borrar_registro">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+
+                                                <?php $id = openssl_encrypt($arrayPlan['idplan'], COD, KEY); ?>
+
+                                                <form action="dashboard" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <button type="submit" name="dashboard" value="plan-editar0" class="btn btn-warning">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </button>
+                                                </form>
+
+                                                <form action="dashboard" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <button type="submit" name="dashboard" value="plan-eliminar" class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+
                                             </td>
                                         </tr>
 
