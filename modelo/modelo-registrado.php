@@ -9,7 +9,7 @@ include_once 'modelo-regalo.php'; // Es utilizado por este archivo
 $conexion = (new Conexion())->conectarPDO();    // Conexión a la base de datos
 $sesion = new Sesion();        // Instanciamos la sesión
 $boleto = new Boleto();  // Modelo boleto
-$regalo = new Regalo();  // Modelo regalo
+$regalo = new RegaloModelo();  // Modelo regalo
 $mensaje = "";
 
 if (isset($_POST['registrarAsistente'])) {

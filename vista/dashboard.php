@@ -272,6 +272,36 @@ if ($verificador) {
                 include 'vista/admin/articulo/lista-articulo.php';
                 break;
 
+                // CRUD Regalo
+            case 'regalo-crear':
+                include 'controlador/controlador-regalo.php';
+
+                crear($_POST['nombre'], $_POST['stock']) ?
+                    include 'vista/admin/registrado/regalo/lista-regalo.php' :
+                    include 'vista/admin/registrado/regalo/crear-regalo.php';
+                break;
+
+            case 'regalo-editar0':
+                include 'vista/admin/registrado/regalo/editar-regalo.php';
+                break;
+
+            case 'regalo-editar1':
+                include 'controlador/controlador-regalo.php';
+
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre'],
+                    $_POST['stock']
+                );
+                include 'vista/admin/registrado/regalo/lista-regalo.php';
+                break;
+
+            case 'regalo-eliminar':
+                include 'controlador/controlador-regalo.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/registrado/regalo/lista-regalo.php';
+                break;
+
             default:
                 include_once 'vista/admin/home/admin-area.php';
                 break;
