@@ -104,8 +104,6 @@ class PlanModelo
 
     public function actualizar(int $idplan, string $nombre, float $precio, string $descripcion, array $beneficios = [])
     {
-        echo var_dump($beneficios);
-
         include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conn = (new Conexion())->conectarPDO();
@@ -138,8 +136,6 @@ class PlanModelo
                     }
                 }
 
-                echo var_dump($beneficios);
-
                 foreach ($beneficios as $id_cryp_beneficio) {
                     $idbeneficio = openssl_decrypt($id_cryp_beneficio, COD, KEY);
 
@@ -156,7 +152,6 @@ class PlanModelo
             }
         } catch (\Throwable $th) {
             $conn->rollBack(); // Revertimos los cambios
-            echo $th;
             $conn = null;
             return false;
         }
@@ -177,11 +172,6 @@ class PlanModelo
             descripcion = :descripcion 
             WHERE ( idplan = :idplan );"
         );
-
-        echo var_dump($idplan);
-        echo var_dump($nombre);
-        echo var_dump($precio);
-        echo var_dump($descripcion);
 
         $sentencia->bindParam(":idplan", $idplan, PDO::PARAM_INT);
         $sentencia->bindParam(":nombre", $nombre, PDO::PARAM_STR);

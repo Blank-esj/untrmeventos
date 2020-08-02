@@ -20,13 +20,15 @@
             echo $error;
         }
 
+        include_once 'controlador/global/config.php';
+
         while ($articulo = $resul->fetch_assoc()) {
         ?>
             <div class="col mb-2">
 
                 <div class="card h-100 tabla-precio" style="padding: 0;">
 
-                    <img title="<?php echo $articulo['nombre_articulo'] ?>" alt="<?php echo $articulo['nombre_articulo'] ?>" class="card-img-top" src="https://http2.mlstatic.com/pc-gamer-i7-8-nucleos-16gb-video-4gb-ggdr6-480ssd-D_NQ_NP_861621-MPE42305674906_062020-V.webp" data-toggle="popover" data-trigger="hover" data-content="<?php echo $articulo['descripcion'] ?>">
+                    <img title="<?php echo $articulo['nombre_articulo'] ?>" alt="<?php echo $articulo['nombre_articulo'] ?>" class="card-img-top" src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen'] ?>" data-toggle="popover" data-trigger="hover" data-content="<?php echo $articulo['descripcion'] ?>">
 
                     <div class="card-body">
 

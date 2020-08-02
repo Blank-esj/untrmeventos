@@ -16,7 +16,7 @@ class InvitadoModelo
 
         $sentencia->execute();
 
-        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
         $sentencia = null;
         $conn = null;
@@ -35,7 +35,7 @@ class InvitadoModelo
 
         $sentencia = $conn->query("SELECT * FROM v_invitado;");
 
-        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
         $sentencia = null;
         $conn = null;
@@ -58,8 +58,6 @@ class InvitadoModelo
     ) {
         include_once 'controlador/util/bd_conexion_pdo.php';
 
-        $resultado = false;
-
         $conn = (new Conexion())->conectarPDO();
         try {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -73,11 +71,11 @@ class InvitadoModelo
             $idpersona = $personaModelo->ultimoId() + 1;
 
             if ($personaModelo->crear($idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) > 0)
-                $resultado = true;
+                return true;
             else throw new PDOException("No se creó Persona");
 
             if ($this->insertar($idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) > 0)
-                $resultado = true;
+                return true;
             else throw new PDOException("No se creó Invitado");
 
             $personaModelo = null;
@@ -85,14 +83,13 @@ class InvitadoModelo
 
             $conn->commit(); // Guadamos los cambios
 
-            $resultado = true;
+            return true;
         } catch (PDOException $e) {
             $conn->rollBack(); // Revertimos los cambios
-            echo $e->getMessage();
-            $resultado = false;
+            return false;
         }
         $conn = null;
-        return $resultado;
+        return false;
     }
 
     private function insertar(
@@ -135,7 +132,7 @@ class InvitadoModelo
 
         $sentencia->execute();
 
-        $resultado = $sentencia->rowCount();
+        return $sentencia->rowCount();
 
         $conn = null;
         $sentencia = null;
@@ -166,7 +163,7 @@ class InvitadoModelo
 
         include_once 'controlador/util/bd_conexion_pdo.php';
 
-        $resultado = false;
+        return false;
         $conn = (new Conexion())->conectarPDO();
         try {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -197,7 +194,7 @@ class InvitadoModelo
              * Si las filas de alguna de las tablas ha sido afectada el resultado es true
              */
             if (!$actualizoPersona && !$actualizoInvitado) throw new Exception($mensaje);
-            else $resultado = true;
+            else return true;
 
 
             $personaModelo = null;
@@ -205,11 +202,10 @@ class InvitadoModelo
 
             $conn->commit(); // Guadamos los cambios
 
-            $resultado = true;
+            return true;
         } catch (Exception $e) {
             $conn->rollBack(); // Revertimos los cambios
-            $resultado = false;
-            echo $e->getMessage();
+            return false;
         }
         $conn = null;
         return $resultado;
@@ -222,22 +218,14 @@ class InvitadoModelo
     {
         include_once 'controlador/util/bd_conexion_pdo.php';
 
-        $consulta = $url_imagen != null ?
+        $consulta =
             "UPDATE invitado SET
-            descripcion = :u_descripcion,
-            url_imagen = :u_url_imagen,
-            institucion_procedencia = :u_institucion_procedencia,
-            idgrado_instruccion = :u_idgrado_instruccion,
-            nacimiento = :u_nacimiento,
-            sexo = :u_sexo
-            WHERE idpersona = :u_idpersona;"
-            :
-            "UPDATE invitado SET
-            descripcion = :u_descripcion,
-            institucion_procedencia = :u_institucion_procedencia,
-            idgrado_instruccion = :u_idgrado_instruccion,
-            nacimiento = :u_nacimiento,
-            sexo = :u_sexo
+            descripcion = :u_descripcion, "
+            . $url_imagen != null ? "url_imagen = :u_url_imagen, " : "" .
+            "institucion_procedencia = :u_institucion_procedencia, 
+            idgrado_instruccion = :u_idgrado_instruccion, 
+            nacimiento = :u_nacimiento, 
+            sexo = :u_sexo 
             WHERE idpersona = :u_idpersona;";
 
         $sentencia = $conn->prepare($consulta);
@@ -255,7 +243,7 @@ class InvitadoModelo
 
         $sentencia->execute();
 
-        $resultado = $sentencia->rowCount();
+        return $sentencia->rowCount();
 
         $sentencia = null;
 
@@ -274,7 +262,7 @@ class InvitadoModelo
 
         $sentencia->execute();
 
-        $resultado = $sentencia->rowCount();
+        return $sentencia->rowCount();
 
         $conn = null;
         $sentencia = null;

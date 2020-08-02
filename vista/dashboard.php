@@ -222,7 +222,7 @@ if ($verificador) {
 
             case 'plan-editar1':
                 include 'controlador/controlador-plan.php';
-                
+
                 actualizar(
                     openssl_decrypt($_POST['id'], COD, KEY),
                     $_POST['nombre'],
@@ -243,7 +243,7 @@ if ($verificador) {
             case 'articulo-crear':
                 include 'controlador/controlador-articulo.php';
 
-                crear($_POST['nombre'], $_POST['precio'], $_POST['descripcion'], $_POST['check-beneficio']) ?
+                crear($_POST['nombre'], $_POST['precio'], $_POST['stock'], $_POST['descripcion'], $_FILES) ?
                     include 'vista/admin/articulo/lista-articulo.php' :
                     include 'vista/admin/articulo/crear-articulo.php';
                 break;
@@ -254,21 +254,22 @@ if ($verificador) {
 
             case 'articulo-editar1':
                 include 'controlador/controlador-articulo.php';
-                
+
                 actualizar(
                     openssl_decrypt($_POST['id'], COD, KEY),
                     $_POST['nombre'],
                     $_POST['precio'],
+                    $_POST['stock'],
                     $_POST['descripcion'],
-                    isset($_POST['check-beneficio']) ? $_POST['check-beneficio'] : []
+                    $_FILES
                 );
                 include 'vista/admin/articulo/lista-articulo.php';
                 break;
 
-            case 'plan-eliminar':
-                include 'controlador/controlador-plan.php';
+            case 'articulo-eliminar':
+                include 'controlador/controlador-articulo.php';
                 eliminar(openssl_decrypt($_POST['id'], COD, KEY));
-                include 'vista/admin/plan/lista-plan.php';
+                include 'vista/admin/articulo/lista-articulo.php';
                 break;
 
             default:

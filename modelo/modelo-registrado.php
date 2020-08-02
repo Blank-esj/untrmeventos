@@ -95,7 +95,7 @@ if (isset($_POST['registrarAsistente'])) {
                             $sesion->sumarCantidadArticulo($id, -1);
                             $mensaje = "Ha disminuido un <strong>" . $nombre . "</strong> de su carrito";
                         } else {
-                            $sesion->eliminarArticulo($id);
+                            count($sesion->leerArticulos()) == 1 ? $sesion->eliminarArticulos() : $sesion->eliminarArticulo($id);
                             $mensaje = "Se ha borrado <strong>" . $nombre . "</strong> de su carrito";
                         }
                     } else {
