@@ -30,20 +30,31 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    include 'modelo/plan.php';
-                                    foreach ((new Plan())->leerPlanes($connPDO) as $indice => $arrayPlan) { ?>
+                                    include_once 'modelo/modelo-regalo.php';
+                                    foreach ((new RegaloModelo())->leerRegalos() as $indice => $arrayRegalo) { ?>
 
                                         <tr>
                                             <td><?php echo $indice + 1; ?> </td>
-                                            <td><?php echo $arrayPlan['nombre']; ?></td>
-                                            <td><?php echo $arrayPlan['stock']; ?></td>
+                                            <td><?php echo $arrayRegalo['nombre_regalo']; ?></td>
+                                            <td><?php echo $arrayRegalo['stock']; ?></td>
                                             <td>
-                                                <a href=" dashboard?plan-editar=<?php echo openssl_encrypt($arrayPlan['idplan'], COD, KEY) ?>" class="btn bg-orange btn-flat margin">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="dashboard?plan-eliminar=<?php echo $arrayPlan['idplan']; ?>" class="btn bg-maroon btn-flat margin borrar_registro">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+
+                                                <?php $id = openssl_encrypt($arrayRegalo['idregalo'], COD, KEY); ?>
+
+                                                <form action="dashboard" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <button type="submit" name="dashboard" value="regalo-editar0" class="btn btn-warning">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </button>
+                                                </form>
+
+                                                <form action="dashboard" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <button type="submit" name="dashboard" value="regalo-eliminar" class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     <?php } ?>

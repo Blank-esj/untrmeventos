@@ -1,5 +1,5 @@
 <?php
-$id = $_GET['id'];
+$id = openssl_decrypt($_POST['id'], COD, KEY);
 if (!filter_var($id, FILTER_VALIDATE_INT)) {
     die("Error el id: {$id} no es un entero.");
 }
@@ -15,68 +15,74 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
         </h1>
     </section>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <section class="content">
                 <!-- Main content -->
                 <div class="box">
                     <!-- Default box -->
                     <div class="box-header with-border">
-                        <h3 class="box-title">Editar Artículo</h3>
+                        <h3 class="box-title">Crear Artículo</h3>
                     </div>
                     <div class="box-body">
-                        <?php
-                        $sql = "SELECT * FROM articulo WHERE idarticulo = $id ";
-                        $resultado = $conn->query($sql);
-                        $articulo = $resultado->fetch_assoc();
-                        ?>
                         <!-- form start -->
-                        <form role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="modelo/modelo-articulo.php" enctype="multipart/form-data">
+                        <form method="post" action="dashboard" enctype="multipart/form-data">
                             <div class="box-body">
 
-                                <!-- Nombre -->
-                                <div class="form-group">
-                                    <label for="nombre_articulo">Nombres: </label>
-                                    <input type="text" class="form-control" id="nombre_articulo" name="nombre_articulo" placeholder="Ingresa nombre de articulo" value="<?php echo $articulo['nombre_articulo']; ?>">
-                                </div>
+                                <?php
+                                $sql = "SELECT * FROM articulo WHERE idarticulo = $id ";
+                                $resultado = $conn->query($sql);
+                                $articulo = $resultado->fetch_assoc();
+                                ?>
 
-                                <!-- Precio -->
-                                <div class="form-group">
-                                    <label for="precio">Precio: </label>
-                                    <input type="number" class="form-control" id="precio" name="precio" placeholder="Ingresa un precio" value="<?php echo $articulo['precio']; ?>">
-                                </div>
+                                <div class="row">
 
-                                <!-- Stock -->
-                                <div class="form-group">
-                                    <label for="stock">Stock: </label>
-                                    <input type="number" class="form-control" id="stock" name="stock" placeholder="Ingrese el stock" value="<?php echo $articulo['stock']; ?>">
-                                </div>
+                                    <!-- Nombre -->
+                                    <div class="form-group col-md-6">
+                                        <label for="nombre">Nombre </label>
+                                        <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" value="<?php echo $articulo['nombre_articulo']; ?>">
+                                    </div>
 
-                                <!-- Descripción -->
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción: </label>
-                                    <textarea class="form-control" name="descripcion" id="descripcion" rows="8" placeholder="Presentación del articulo"><?php echo $articulo['descripcion']; ?></textarea>
-                                </div>
+                                    <!-- url_imagen -->
+                                    <div class="form-group col-md-3">
+                                        <label for="imagen_actual">Imagen Actual:</label>
+                                        <br>
+                                        <img src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen']; ?>" width="100">
+                                    </div>
 
-                                <!-- url_imagen -->
-                                <div class="form-group">
-                                    <label for="imagen_actual">Imagen Actual:</label>
-                                    <br>
-                                    <img src="../img/invitados/<?php echo $articulo['url_imagen']; ?>" width="200">
-                                </div>
+                                    <!-- url_imagen / imagen_articulo -->
+                                    <div class="form-group col-md-3">
+                                        <label for="imagen_articulo">Imagen:</label>
+                                        <input type="file" id="imagen_articulo" name="archivo_imagen">
+                                        <p class="help-block">Agregar la imagen del articulo aquí.</p>
+                                    </div>
 
-                                <!-- Nueva url_imagen -->
-                                <div class="form-group">
-                                    <label for="imagen_articulo">Imagen:</label>
-                                    <input type="file" id="imagen_articulo" name="archivo_imagen">
-                                    <p class="help-block">Agregue la nueva imagen del articulo aquí.</p>
+                                    <!-- Precio -->
+                                    <div class="form-group col-md-6">
+                                        <label for="precio">Precio </label>
+                                        <input required type="number" class="form-control" name="precio" id="precio" placeholder="Ingrese el precio" value="<?php echo $articulo['precio']; ?>">
+                                    </div>
+
+                                    <!-- Stock -->
+                                    <div class="form-group col-md-6">
+                                        <label for="stock">Stock </label>
+                                        <input required type="number" class="form-control" name="stock" id="stock" placeholder="Ingrese el stock" value="<?php echo $articulo['stock']; ?>">
+                                    </div>
+
+                                    <!-- Descripción -->
+                                    <div class="mb-3 col-md-12">
+                                        <label for="btextarea">Descripcion</label>
+                                        <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripcion"><?php echo $articulo['descripcion']; ?></textarea>
+                                    </div>
+
                                 </div>
 
                             </div> <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <input type="hidden" name="registro" value="actualizar">
-                                <input type="hidden" name="id_registro" value="<?php echo $invitado['idpersona']; ?>">
-                                <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
+
+                                <input type="hidden" name="id" value="<?Php echo openssl_encrypt($id, COD, KEY); ?>">
+                                <button type="submit" name="dashboard" value="articulo-editar1" class="btn btn-primary">Actualizar</button>
+
                             </div>
                         </form>
                     </div> <!-- /.box-body -->

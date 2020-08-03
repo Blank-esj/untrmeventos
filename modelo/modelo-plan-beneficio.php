@@ -139,9 +139,6 @@ class PlanBeneficioModelo
 
         $resutado = $sentencia->rowCount();
 
-        echo var_dump($resutado);
-        echo var_dump($idplan);
-
         $sentencia = null;
 
         return $resutado;

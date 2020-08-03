@@ -72,7 +72,7 @@
 
                                             $conexion = new Conexion();
                                             $conn = $conexion->conectarPDO();
-                                            $regalos = $regalo->arrayNombres($conn); // traemos una array ordenado en clave (idregalo) y valor (nombre_regalo)
+                                            $regalos = $regalo->arrayNombres(); // traemos una array ordenado en clave (idregalo) y valor (nombre_regalo)
 
                                             unset($conexion);
                                             unset($conn);

@@ -52,17 +52,17 @@
                                         <td><img src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen']; ?>" width="150"></td>
                                         <td>
 
-                                            <?php $idcat = openssl_encrypt($articulo['idarticulo'], COD, KEY); ?>
+                                            <?php $id = openssl_encrypt($articulo['idarticulo'], COD, KEY); ?>
 
                                             <form action="dashboard" method="post" style="display: inline;">
-                                                <input type="hidden" name="id" value="<?php echo $idcat ?>">
+                                                <input type="hidden" name="id" value="<?php echo $id ?>">
                                                 <button type="submit" name="dashboard" value="articulo-editar0" class="btn btn-warning">
                                                     <i class="fa fa-pencil-alt"></i>
                                                 </button>
                                             </form>
 
                                             <form action="dashboard" method="post" style="display: inline;">
-                                                <input type="hidden" name="id" value="<?php echo $idcat ?>">
+                                                <input type="hidden" name="id" value="<?php echo $id ?>">
                                                 <button type="submit" name="dashboard" value="articulo-eliminar" class="btn btn-danger">
                                                     <i class="fa fa-trash"></i>
                                                 </button>

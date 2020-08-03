@@ -391,7 +391,7 @@ class Sesion
 
     /**
      * Elimina un regalo del array asistente del plan según el idPlan que le pases por parámetro
-     * @param mixed $idPlan id del plan a elimnar
+     * @param mixed $idPlan id del plan a eliminar
      * @param mixed $indice indice que contiene al array asistente
      */
     public function eliminarRegalo($idPlan, $indice)
@@ -407,6 +407,11 @@ class Sesion
     public function eliminarArticulo($idArticulo)
     {
         unset($_SESSION[SESION][N_ARTICULOS][$idArticulo]);
+    }
+
+    public function eliminarArticulos()
+    {
+        unset($_SESSION[SESION][N_ARTICULOS]);
     }
 
 

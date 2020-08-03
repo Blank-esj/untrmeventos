@@ -21,42 +21,45 @@
                         <form method="post" action="dashboard" enctype="multipart/form-data">
                             <div class="box-body">
 
-                                <!-- Nombre -->
-                                <div class="form-group">
-                                    <label for="nombre">Nombre </label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
-                                </div>
+                                <div class="row">
 
-                                <!-- Precio -->
-                                <div class="form-group">
-                                    <label for="precio">Precio </label>
-                                    <input type="number" class="form-control" name="precio" id="precio" placeholder="Ingrese el precio">
-                                </div>
+                                    <!-- Nombre -->
+                                    <div class="form-group col-md-8">
+                                        <label for="nombre">Nombre </label>
+                                        <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
+                                    </div>
 
-                                <!-- Stock -->
-                                <div class="form-group">
-                                    <label for="stock">Stock </label>
-                                    <input type="number" class="form-control" name="stock" id="stock" placeholder="Ingrese el stock">
-                                </div>
+                                    <!-- url_imagen / imagen_articulo -->
+                                    <div class="form-group col-md-4">
+                                        <label for="imagen_articulo">Imagen:</label>
+                                        <input type="file" id="imagen_articulo" name="archivo_imagen">
+                                        <p class="help-block">Agregar la imagen del articulo aquí.</p>
+                                    </div>
 
-                                <!-- Descripción -->
-                                <div class="mb-3">
-                                    <label for="btextarea">Descripcion</label>
-                                    <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripcion"></textarea>
-                                </div>
+                                    <!-- Precio -->
+                                    <div class="form-group col-md-6">
+                                        <label for="precio">Precio </label>
+                                        <input required type="number" class="form-control" name="precio" id="precio" placeholder="Ingrese el precio">
+                                    </div>
 
-                                <!-- url_imagen / imagen_invitado -->
-                                <div class="form-group">
-                                    <label for="imagen_invitado">Imagen:</label>
-                                    <input type="file" id="imagen_invitado" name="archivo_imagen">
-                                    <p class="help-block">Agregar la imagen del invitado aquí.</p>
+                                    <!-- Stock -->
+                                    <div class="form-group col-md-6">
+                                        <label for="stock">Stock </label>
+                                        <input required type="number" class="form-control" name="stock" id="stock" placeholder="Ingrese el stock">
+                                    </div>
+
+                                    <!-- Descripción -->
+                                    <div class="mb-3 col-md-12">
+                                        <label for="btextarea">Descripcion</label>
+                                        <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripcion"></textarea>
+                                    </div>
+
                                 </div>
 
                             </div> <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <input type="hidden" name="registro" value="nuevo">
-                                <button type="submit" class="btn btn-primary" id="crear_registro">Agregar</button>
+                                <button type="submit" class="btn btn-primary" name="dashboard" value="articulo-crear">Agregar</button>
                             </div>
                         </form>
                     </div> <!-- /.box-body -->

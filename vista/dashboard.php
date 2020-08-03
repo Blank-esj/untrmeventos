@@ -272,7 +272,7 @@ if ($verificador) {
             case 'articulo-crear':
                 include 'controlador/controlador-articulo.php';
 
-                crear($_POST['nombre'], $_POST['precio'], $_POST['descripcion'], $_POST['check-beneficio']) ?
+                crear($_POST['nombre'], $_POST['precio'], $_POST['stock'], $_POST['descripcion'], $_FILES) ?
                     include 'vista/admin/articulo/lista-articulo.php' :
                     include 'vista/admin/articulo/crear-articulo.php';
                 break;
@@ -288,16 +288,47 @@ if ($verificador) {
                     openssl_decrypt($_POST['id'], COD, KEY),
                     $_POST['nombre'],
                     $_POST['precio'],
+                    $_POST['stock'],
                     $_POST['descripcion'],
-                    isset($_POST['check-beneficio']) ? $_POST['check-beneficio'] : []
+                    $_FILES
                 );
                 include 'vista/admin/articulo/lista-articulo.php';
                 break;
 
-            case 'plan-eliminar':
-                include 'controlador/controlador-plan.php';
+            case 'articulo-eliminar':
+                include 'controlador/controlador-articulo.php';
                 eliminar(openssl_decrypt($_POST['id'], COD, KEY));
-                include 'vista/admin/plan/lista-plan.php';
+                include 'vista/admin/articulo/lista-articulo.php';
+                break;
+
+                // CRUD Regalo
+            case 'regalo-crear':
+                include 'controlador/controlador-regalo.php';
+
+                crear($_POST['nombre'], $_POST['stock']) ?
+                    include 'vista/admin/registrado/regalo/lista-regalo.php' :
+                    include 'vista/admin/registrado/regalo/crear-regalo.php';
+                break;
+
+            case 'regalo-editar0':
+                include 'vista/admin/registrado/regalo/editar-regalo.php';
+                break;
+
+            case 'regalo-editar1':
+                include 'controlador/controlador-regalo.php';
+
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre'],
+                    $_POST['stock']
+                );
+                include 'vista/admin/registrado/regalo/lista-regalo.php';
+                break;
+
+            case 'regalo-eliminar':
+                include 'controlador/controlador-regalo.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/registrado/regalo/lista-regalo.php';
                 break;
 
             default:

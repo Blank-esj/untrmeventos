@@ -18,8 +18,6 @@ function crear(
     include_once 'controlador/global/config.php';
     include 'util/mensaje.php';
 
-    $resultado = false;
-
     $modelo = new InvitadoModelo();
 
     try {
@@ -36,14 +34,14 @@ function crear(
 
         if ($modelo->crear($nombres, $apellidopa, $apellidoma, $descripcion, $imagen_url, $institucion_procedencia, $idgrado_instruccion, $email, $telefono, $doc_identidad, $nacimiento, $sexo)) {
             mensaje("<strong>" . $nombres . "</strong> se guardó satisfactoriamente", "success");
-            $resultado = true;
+            return true;
         } else
             throw new PDOException("Error al crear");
     } catch (Exception $e) {
-        $resultado = false;
+        return false;
         mensaje("Lo siento hubo un error al crear el invitado: <br/>" . $e->getMessage(), "error");
     }
-    return $resultado;
+    return false;
 }
 
 function actualizar(
@@ -66,15 +64,13 @@ function actualizar(
     include_once 'controlador/global/config.php';
     include 'util/mensaje.php';
 
-    $resultado = false;
-
     $modelo = new InvitadoModelo();
 
     try {
 
-        if ($archivo['archivo_imagen']['size'] > 0) {
-            //con imagen
+        $tengo_imagen = $archivo['archivo_imagen']['size'] > 0;
 
+        if ($tengo_imagen) {
             if (!is_dir(DIR_IMG_INVITADO)) {
                 mkdir(DIR_IMG_INVITADO, 0755, true);
             }
@@ -84,26 +80,18 @@ function actualizar(
             } else {
                 throw new Exception("Error subir imagen");
             }
-
-            if ($modelo->actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $descripcion, $imagen_url, $institucion_procedencia, $idgrado_instruccion, $email, $telefono, $doc_identidad, $nacimiento, $sexo)) {
-                mensaje("<strong>" . $nombres . "</strong> se actualizó satisfactoriamente", "success");
-                $resultado = true;
-            } else
-                throw new PDOException("Error al actualizar <strong>" . $nombres . "</strong>");
-        } else {
-            //sin imagen 
-            if ($modelo->actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $descripcion, null, $institucion_procedencia, $idgrado_instruccion, $email, $telefono, $doc_identidad, $nacimiento, $sexo)) {
-                mensaje("<strong>" . $nombres . "</strong> se actualizó satisfactoriamente", "success");
-                $resultado = true;
-            } else
-                throw new PDOException("Error al actualizar sin imagen <strong>" . $nombres . "</strong>");
         }
-    } catch (Exception $e) {
-        $resultado = false;
-        mensaje("Lo siento hubo un error al actualizar el invitado: <br/>" . $e->getMessage(), "error");
-    }
 
-    return $resultado;
+        if ($modelo->actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $descripcion, $tengo_imagen ? $imagen_url : null, $institucion_procedencia, $idgrado_instruccion, $email, $telefono, $doc_identidad, $nacimiento, $sexo)) {
+            mensaje("<strong>" . $nombres . "</strong> se actualizó satisfactoriamente", "success");
+            return true;
+        } else
+            throw new PDOException("Error al actualizar <strong>" . $nombres . "</strong>");
+    } catch (Exception $e) {
+        mensaje("Lo siento hubo un error al actualizar el invitado: <br/>" . $e->getMessage(), "error");
+        return false;
+    }
+    return false;
 }
 
 
@@ -120,7 +108,7 @@ function eliminar($id)
         } else {
             throw new Exception("Error al eliminar este invitado");
         }
-    } catch (PDOException $th) {
-        mensaje("Lo siento hubo un error al eliminar la categoría", "error");
+    } catch (Throwable $th) {
+        mensaje("Lo siento hubo un error al eliminar el invitado: <br/>" . $th->getMessage(), "error");
     }
 }

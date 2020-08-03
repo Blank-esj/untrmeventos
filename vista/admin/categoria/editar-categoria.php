@@ -54,7 +54,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) { //Valida que el id sea entero. Nega
               </div> <!-- /.box-body -->
               <div class="box-footer">
                 <input type="hidden" name="id" value="<?Php echo openssl_encrypt($id, COD, KEY); ?>">
-                <button type="submit" name="dashboard" value="categoria-evento-editar1" class="btn btn-primary">Guardar</button>
+                <button type="submit" name="dashboard" value="categoria-evento-editar1" class="btn btn-primary">Actualizar</button>
               </div>
             </form>
           </div> <!-- /.box-body -->
