@@ -138,6 +138,35 @@ if ($verificador) {
                 include 'vista/admin/invitado/lista-invitado.php';
                 break;
 
+                // CRUD Grado de Instrucción
+            case 'grado-crear':
+                include 'controlador/controlador-grado_instruccion.php';
+
+                crear($_POST['nombre']) ?
+                    include 'vista/admin/invitado/grado-instruccion/lista-grado.php' :
+                    include 'vista/admin/invitado/grado-instruccion/crear-grado.php';
+                break;
+
+            case 'grado-editar0':
+                include 'vista/admin/invitado/grado-instruccion/editar-grado.php';
+                break;
+
+            case 'grado-editar1':
+                include 'controlador/controlador-grado_instruccion.php';
+
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre']
+                );
+                include 'vista/admin/invitado/grado-instruccion/lista-grado.php';
+                break;
+
+            case 'grado-eliminar':
+                include 'controlador/controlador-grado_instruccion.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/invitado/grado-instruccion/lista-grado.php';
+                break;
+
                 // CRUD Evento
             case 'evento-crear':
                 include 'controlador/controlador-evento.php';
@@ -148,7 +177,7 @@ if ($verificador) {
                     $_POST['hora_evento'],
                     (int)$_POST['categoria_evento'],
                     (int)$_POST['invitado'],
-                    $_POST['clave'],
+                    $_POST['clave']
                 ) ?
                     include 'vista/admin/evento/lista-evento.php' : include 'vista/admin/evento/crear-evento.php';
                 break;
@@ -167,7 +196,7 @@ if ($verificador) {
                     $_POST['hora_evento'],
                     (int)$_POST['categoria_evento'],
                     (int)$_POST['invitado'],
-                    $_POST['clave'],
+                    $_POST['clave']
                 );
                 include 'vista/admin/evento/lista-evento.php';
                 break;
@@ -222,7 +251,7 @@ if ($verificador) {
 
             case 'plan-editar1':
                 include 'controlador/controlador-plan.php';
-                
+
                 actualizar(
                     openssl_decrypt($_POST['id'], COD, KEY),
                     $_POST['nombre'],
@@ -254,7 +283,7 @@ if ($verificador) {
 
             case 'articulo-editar1':
                 include 'controlador/controlador-articulo.php';
-                
+
                 actualizar(
                     openssl_decrypt($_POST['id'], COD, KEY),
                     $_POST['nombre'],
@@ -354,7 +383,7 @@ if ($verificador) {
                 break;
 
             case 'lista-grado':
-                include_once 'vista/admin/invitado/grado-instruccion/admin-instruccion/lista-grado.php';
+                include_once 'vista/admin/invitado/grado-instruccion/lista-grado.php';
                 break;
 
             case 'crear-grado':

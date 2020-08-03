@@ -2,63 +2,104 @@
 class GradoInstruccionModelo
 {
     /**
-     * Devuelve un array con todos los registros de grado de instrucción existentes en la base de datos
+     * Leer un registro de Grado_instruccion de acuerdo al idgrado_instruccion que le pases
      */
-    public function leerGradoInstrucciones($conexion): array
+    public function leerUno($idgrado_instruccion)
     {
-        $sentencia = $conexion->prepare('SELECT * FROM grado_instruccion;');
-        $sentencia->execute();
-        $resutado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-        $sentencia->closeCursor();
-        return $resutado;
-    }
+        include_once 'controlador/util/bd_conexion_pdo.php';
 
-    /**
-     * Leer un registro de grado_instruccion de acuerdo al idgrado_instruccion que le pases
-     */
-    public function leerUno(\PDO $conexion, $idgrado_instruccion)
-    {
+        $conexion = (new Conexion())->conectarPDO();
+
         $sentencia = $conexion->prepare("SELECT * FROM grado_instruccion WHERE idgrado_instruccion = :idgrado_instruccion");
         $sentencia->bindParam(":idgrado_instruccion", $idgrado_instruccion, PDO::PARAM_INT);
         $sentencia->execute();
-        $sentencia->closeCursor();
-        return ($sentencia->fetchAll(PDO::FETCH_ASSOC))[0];
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
     }
 
     /**
-     * Crea un grado_instruccion y devuelve su id
+     * Devuelve todos los grados_instruccion que haya en la base de datos
      */
-    public function crear(\PDO $conexion, $grado)
+    public function leerTodos()
     {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->query('SELECT * FROM grado_instruccion;');
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
+
+    /**
+     * Crea un grado_instruccion y devuelve un array con el id "id" y las filas afectadas "filas"
+     */
+    public function crear($grado)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+        $conexion = (new Conexion())->conectarPDO();
+
         $sentencia = $conexion->prepare("INSERT INTO grado_instruccion (grado) VALUES (:grado);");
         $sentencia->bindParam(":grado", $grado, PDO::PARAM_STR);
         $sentencia->execute();
-        $sentencia->closeCursor();
-        return $conexion->lastInsertId();
+
+        $resultado['id'] = $conexion->lastInsertId();
+        $resultado['filas'] = $sentencia->rowCount();
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
     }
 
     /**
      * Actualiza un grado_instruccion y devuelve el numero de filas afectadas
      */
-    public function actualizar(\PDO $conexion, $idgrado_instruccion, $grado)
+    public function actualizar($idgrado_instruccion, $grado)
     {
-        $sentencia = $conexion->prepare("UPDATE grado_instruccion SET grado = :grado WHERE ( idgrado_instruccion = :idgrado_instruccion);");
+        include_once 'controlador/util/bd_conexion_pdo.php';
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare("UPDATE grado_instruccion SET grado = :grado WHERE idgrado_instruccion = :idgrado_instruccion");
         $sentencia->bindParam(":idgrado_instruccion", $idgrado_instruccion, PDO::PARAM_INT);
         $sentencia->bindParam(":grado", $grado, PDO::PARAM_STR);
         $sentencia->execute();
-        $sentencia->closeCursor();
-        return $sentencia->rowCount();
+
+        $resultado = $sentencia->rowCount();
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
     }
 
     /**
      * Elimina el registro de acuerdo al id del grado_instruccion que le pasemos y devuelve el numero de filas afectadas
      */
-    public function eliminar(\PDO $conexion, $idgrado_instruccion)
+    public function eliminar($idgrado_instruccion)
     {
-        $sentencia = $conexion->prepare("DELETE FROM grado_instruccion WHERE idgrado_instruccion = :idgrado_instruccion);");
+        include_once 'controlador/util/bd_conexion_pdo.php';
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare("DELETE FROM grado_instruccion WHERE idgrado_instruccion = :idgrado_instruccion");
         $sentencia->bindParam(':idgrado_instruccion', $idgrado_instruccion);
+
+        $sentencia->execute();
+
         $resultado = $sentencia->rowCount();
-        $sentencia->closeCursor();
+
+        $sentencia = null;
+        $conexion = null;
+
         return $resultado;
     }
 }

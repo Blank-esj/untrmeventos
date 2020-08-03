@@ -7,6 +7,7 @@ class BeneficioModelo
     public function leerUno($idbeneficio)
     {
         include_once 'controlador/util/bd_conexion_pdo.php';
+
         $conexion = (new Conexion())->conectarPDO();
 
         $sentencia = $conexion->prepare("SELECT * FROM beneficio WHERE idbeneficio = :idbeneficio");

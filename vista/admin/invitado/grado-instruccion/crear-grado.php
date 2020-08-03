@@ -28,7 +28,7 @@
                         </div> <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <input type="hidden" name="dashboard" value="plan-crear">
+                            <input type="hidden" name="dashboard" value="grado-crear">
                             <button type="submit" class="btn btn-primary">Agregar</button>
                         </div>
 

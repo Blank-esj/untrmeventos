@@ -29,19 +29,30 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    include 'modelo/plan.php';
-                                    foreach ((new Plan())->leerPlanes($connPDO) as $indice => $arrayPlan) { ?>
+                                    include_once 'modelo/modelo-grado_instruccion.php';
+                                    foreach ((new GradoInstruccionModelo())->leerTodos() as $indice => $arrayInvitado) { ?>
 
                                         <tr>
                                             <td><?php echo $indice + 1; ?> </td>
-                                            <td><?php echo $arrayPlan['nombre']; ?></td>
+                                            <td><?php echo $arrayInvitado['grado']; ?></td>
                                             <td>
-                                                <a href=" dashboard?plan-editar=<?php echo openssl_encrypt($arrayPlan['idplan'], COD, KEY) ?>" class="btn bg-orange btn-flat margin">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="dashboard?plan-eliminar=<?php echo $arrayPlan['idplan']; ?>" class="btn bg-maroon btn-flat margin borrar_registro">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+
+                                                <?php $id = openssl_encrypt($arrayInvitado['idgrado_instruccion'], COD, KEY); ?>
+
+                                                <form action="dashboard" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <button type="submit" name="dashboard" value="grado-editar0" class="btn btn-warning">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </button>
+                                                </form>
+
+                                                <form action="dashboard" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                                    <button type="submit" name="dashboard" value="grado-eliminar" class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     <?php } ?>
