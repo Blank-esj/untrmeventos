@@ -37,36 +37,7 @@ $sesion = new Sesion();
         </a>
         <ul class="treeview-menu">
           <li><a href="dashboard?dashboard=dashboard"><i class="fas fa-chart-line" aria-hidden="true"></i> Dashboard </a></li>
-        </ul>
-      </li>
-
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-book"></i>
-          <span>Eventos</span>
-        </a>
-        <ul class="treeview-menu">
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-cubes"></i>
-              <span>Categoria</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-            </ul>
-          </li>
-
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-calendar"></i>
-              <span>Temas</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-            </ul>
-          </li>
+          <li><a href="dashboard?dashboard=lista-venta"><i class="fas fa-chart-line" aria-hidden="true"></i> Ventas </a></li>
         </ul>
       </li>
 
@@ -120,6 +91,36 @@ $sesion = new Sesion();
               <li><a href="dashboard?dashboard=lista-grado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
               <li><a href="dashboard?dashboard=crear-grado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
 
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-book"></i>
+          <span>Eventos</span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-cubes"></i>
+              <span>Categoria</span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-calendar"></i>
+              <span>Temas</span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+              <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
             </ul>
           </li>
         </ul>

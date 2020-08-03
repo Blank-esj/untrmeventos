@@ -1,5 +1,5 @@
 <?php
-class VentaArticulo
+class VentaArticuloModelo
 {
 
     /**
@@ -21,6 +21,28 @@ class VentaArticulo
         $sentencia->bindParam(":cantidad", $cantidad);
         $sentencia->execute();
 
+        $sentencia->closeCursor();
+
         return $conexion->lastInsertId();
+    }
+
+    public function leerPorVenta($idventa)
+    {
+        include_once 'modelo/modelo-venta_articulo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare("SELECT * FROM v_venta_articulo WHERE idventa = :idventa");
+
+        $sentencia->bindParam(":idventa", $idventa);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
     }
 }

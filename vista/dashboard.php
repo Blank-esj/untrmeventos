@@ -240,7 +240,12 @@ if ($verificador) {
             case 'plan-crear':
                 include 'controlador/controlador-plan.php';
 
-                crear($_POST['nombre'], $_POST['precio'], $_POST['descripcion'], $_POST['check-beneficio']) ?
+                crear(
+                    $_POST['nombre'],
+                    $_POST['precio'],
+                    $_POST['descripcion'],
+                    isset($_POST['check-beneficio']) ? $_POST['check-beneficio'] : []
+                ) ?
                     include 'vista/admin/plan/lista-plan.php' :
                     include 'vista/admin/plan/crear-plan.php';
                 break;
@@ -427,6 +432,10 @@ if ($verificador) {
 
             case 'crear-regalo':
                 include_once 'vista/admin/registrado/regalo/crear-regalo.php';
+                break;
+
+            case 'lista-venta':
+                include_once 'vista/admin/venta/lista-venta.php';
                 break;
 
             default:

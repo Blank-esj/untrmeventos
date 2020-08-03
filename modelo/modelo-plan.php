@@ -209,4 +209,27 @@ class PlanModelo
 
         return $resultado;
     }
+
+    /**
+     * Devuelve los articulos [idboleto, idplan, nombre, precio, cantidad] que haya en una venta
+     */
+    public function leerPorVenta($idventa)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare("CALL sp_plan_por_venta ( :idventa );");
+        $sentencia->bindParam(':idventa', $idventa, PDO::PARAM_INT);
+
+        $sentencia->execute();
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
+    
 }

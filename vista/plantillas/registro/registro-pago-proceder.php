@@ -1,9 +1,3 @@
-<?php
-include_once 'modelo/venta.php';
-include_once 'controlador/util/Sesion.php';
-$venta = json_decode((new Venta())->insertarPreCompra(session_id(), $_POST['email']));
-?>
-
 <div class="jumbotron text-center jumbotron-fluid">
     <h1 class="display-4">¡Paso final!</h1>
     <hr class="my-4">

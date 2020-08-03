@@ -2,10 +2,23 @@
 if (isset($_POST['paymentToken']) && isset($_POST['paymentID'])) {
   include_once 'controlador/global/config.php';
   include_once 'controlador/util/bd_conexion_pdo.php';
-  include_once 'modelo/venta.php';
+  include_once 'modelo/modelo-venta.php';
   include_once 'plantillas/registro/registro-pago-verificador.php';
 } elseif (procederPagar()) {
-  include_once 'plantillas/registro/registro-pago-proceder.php'; // Proceder el pago
+  include_once 'controlador/util/mensaje.php';
+  try {
+    include_once 'controlador/controlador-venta.php';
+    include_once 'controlador/util/Sesion.php';
+    $venta = json_decode((new VentaControlador())->insertarPreCompra(session_id(), $_POST['email']));
+    if ($venta->respuesta == 'error') {
+      throw new Exception($venta->mensaje);
+    } else {
+      include_once 'plantillas/registro/registro-pago-proceder.php'; // Proceder el pago
+    }
+  } catch (\Throwable $th) {
+    mensaje("Hubo un error al procesar su pago: <br/>" . $th->getMessage(), "error");
+    include_once 'plantillas/registro/registro-inicio.php'; // Página de inicio de Registro
+  }
 } else {
   include_once 'plantillas/registro/registro-inicio.php'; // Página de inicio de Registro
 }

@@ -86,7 +86,13 @@
 
                                                 while ($regalo = $resul->fetch_assoc()) { ?>
 
-                                                    <option <?php echo ($sesion->leerIdRegalo($idPlan, $indice) == $regalo['idregalo']) ? "selected" : "" ?> value="<?php echo openssl_encrypt($regalo['idregalo'], COD, KEY) ?>">
+                                                    <?php
+                                                    $mismos = false;
+                                                    if ($sesion->existeRegalo($idPlan, $indice))
+                                                        $mismos = $sesion->leerIdRegalo($idPlan, $indice) == $regalo['idregalo'];
+                                                    ?>
+
+                                                    <option <?php echo  $mismos ? "selected" : "" ?> value="<?php echo openssl_encrypt($regalo['idregalo'], COD, KEY) ?>">
                                                         <?php echo $regalo['nombre_regalo'] ?>
                                                     </option>
 
