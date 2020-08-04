@@ -171,4 +171,16 @@ class RegaloModelo
 
         return $nombres;
     }
+
+    private function quitarBoleto()
+    {
+    }
+
+    private function agregarBoleto()
+    {
+    }
+
+    private function actualizarBoleto()
+    {
+    }
 }

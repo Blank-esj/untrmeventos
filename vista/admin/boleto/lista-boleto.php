@@ -21,7 +21,8 @@
               <thead>
                 <tr>
                   <th>Nº</th>
-                  <th>Compra</th>
+                  <th>Boleto</th>
+                  <th>Venta</th>
                   <th>Comprador</th>
                   <th>Asistente</th>
                   <th>Plan</th>
@@ -48,6 +49,7 @@
                 ?>
                     <tr>
                       <td> <?php echo $numero; ?> </td>
+                      <td> <?php echo $registrado['boleto'] ?> </td>
                       <td> <?php echo $registrado['estado_venta'] ?> </td>
                       <td> <?php echo $registrado['comprador']; ?> </td>
                       <td> <?php echo $registrado['asistente']; ?> </td>
@@ -57,12 +59,23 @@
                       <td> <?php echo $registrado['telefono']; ?> </td>
                       <td> <?php echo $registrado['doc_identidad']; ?> </td>
                       <td>
-                        <a href="editar-registrado.php?id=<?php echo $registrado['id_registrado'] ?>" class="btn bg-orange btn-flat margin">
-                          <i class="fa fa-pencil-alt"></i>
-                        </a>
-                        <a href="#" data-id="<?php echo $registrado['id_registrado']; ?>" data-tipo="registrado" class="btn bg-maroon btn-flat margin borrar_registro">
-                          <i class="fa fa-trash"></i>
-                        </a>
+
+                        <?php $id = openssl_encrypt($registrado['idpersona'], COD, KEY); ?>
+
+                        <form action="dashboard" method="post" style="display: inline;">
+                          <input type="hidden" name="id" value="<?php echo $id ?>">
+                          <button type="submit" name="dashboard" value="plan-editar0" class="btn btn-warning">
+                            <i class="fa fa-pencil-alt"></i>
+                          </button>
+                        </form>
+
+                        <form action="dashboard" method="post" style="display: inline;">
+                          <input type="hidden" name="id" value="<?php echo $id ?>">
+                          <button type="submit" name="dashboard" value="plan-eliminar" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </form>
+
                       </td>
                     </tr>
                 <?php
@@ -73,7 +86,8 @@
               <tfoot>
                 <tr>
                   <th>Nº</th>
-                  <th>Compra</th>
+                  <th>Boleto</th>
+                  <th>Venta</th>
                   <th>Comprador</th>
                   <th>Asistente</th>
                   <th>Plan</th>

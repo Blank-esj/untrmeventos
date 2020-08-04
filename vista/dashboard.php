@@ -358,12 +358,12 @@ if ($verificador) {
                 include 'controlador/controlador-regalo.php';
 
                 crear($_POST['nombre'], $_POST['stock']) ?
-                    include 'vista/admin/registrado/regalo/lista-regalo.php' :
-                    include 'vista/admin/registrado/regalo/crear-regalo.php';
+                    include 'vista/admin/boleto/regalo/lista-regalo.php' :
+                    include 'vista/admin/boleto/regalo/crear-regalo.php';
                 break;
 
             case 'regalo-editar0':
-                include 'vista/admin/registrado/regalo/editar-regalo.php';
+                include 'vista/admin/boleto/regalo/editar-regalo.php';
                 break;
 
             case 'regalo-editar1':
@@ -374,13 +374,43 @@ if ($verificador) {
                     $_POST['nombre'],
                     $_POST['stock']
                 );
-                include 'vista/admin/registrado/regalo/lista-regalo.php';
+                include 'vista/admin/boleto/regalo/lista-regalo.php';
                 break;
 
             case 'regalo-eliminar':
                 include 'controlador/controlador-regalo.php';
                 eliminar(openssl_decrypt($_POST['id'], COD, KEY));
-                include 'vista/admin/registrado/regalo/lista-regalo.php';
+                include 'vista/admin/boleto/regalo/lista-regalo.php';
+                break;
+
+                // CRUD Boletos
+            case 'boleto-crear':
+                include 'controlador/controlador-boleto.php';
+
+                crear($_POST['nombre'], $_POST['stock']) ?
+                    include 'vista/admin/boleto/regalo/lista-regalo.php' :
+                    include 'vista/admin/boleto/regalo/crear-regalo.php';
+                break;
+
+            case 'boleto-editar0':
+                include 'vista/admin/boleto/regalo/editar-regalo.php';
+                break;
+
+            case 'boleto-editar1':
+                include 'controlador/controlador-regalo.php';
+
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre'],
+                    $_POST['stock']
+                );
+                include 'vista/admin/boleto/regalo/lista-regalo.php';
+                break;
+
+            case 'boleto-eliminar':
+                include 'controlador/controlador-regalo.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/boleto/regalo/lista-regalo.php';
                 break;
 
             default:
@@ -401,40 +431,20 @@ if ($verificador) {
                 include_once 'vista/admin/evento/lista-evento.php';
                 break;
 
-            case 'crear-evento':
-                include_once 'vista/admin/evento/crear-evento.php';
-                break;
-
             case 'lista-categoria':
                 include_once 'vista/admin/categoria/lista-categoria.php';
-                break;
-
-            case 'crear-categoria':
-                include_once 'vista/admin/categoria/crear-categoria.php';
                 break;
 
             case 'lista-invitado':
                 include_once 'vista/admin/invitado/lista-invitado.php';
                 break;
 
-            case 'crear-invitado':
-                include_once 'vista/admin/invitado/crear-invitado.php';
-                break;
-
-            case 'lista-registrado':
-                include_once 'vista/admin/registrado/lista-registrado.php';
-                break;
-
-            case 'crear-registrado':
-                include_once 'vista/admin/registrado/crear-registrado.php';
+            case 'lista-boleto':
+                include_once 'vista/admin/boleto/lista-boleto.php';
                 break;
 
             case 'lista-admin':
                 include_once 'vista/admin/administrador/lista-admin.php';
-                break;
-
-            case 'crear-admin':
-                include_once 'vista/admin/administrador/crear-admin.php';
                 break;
 
             case 'generar-reportes':
@@ -445,40 +455,20 @@ if ($verificador) {
                 include_once 'vista/admin/plan/lista-plan.php';
                 break;
 
-            case 'crear-plan':
-                include_once 'vista/admin/plan/crear-plan.php';
-                break;
-
             case 'lista-beneficio':
                 include_once 'vista/admin/plan/beneficio/lista-beneficio.php';
-                break;
-
-            case 'crear-beneficio':
-                include_once 'vista/admin/plan/beneficio/crear-beneficio.php';
                 break;
 
             case 'lista-articulo':
                 include_once 'vista/admin/articulo/lista-articulo.php';
                 break;
 
-            case 'crear-articulo':
-                include_once 'vista/admin/articulo/crear-articulo.php';
-                break;
-
             case 'lista-grado':
                 include_once 'vista/admin/invitado/grado-instruccion/lista-grado.php';
                 break;
 
-            case 'crear-grado':
-                include_once 'vista/admin/invitado/grado-instruccion/crear-grado.php';
-                break;
-
             case 'lista-regalo':
-                include_once 'vista/admin/registrado/regalo/lista-regalo.php';
-                break;
-
-            case 'crear-regalo':
-                include_once 'vista/admin/registrado/regalo/crear-regalo.php';
+                include_once 'vista/admin/boleto/regalo/lista-regalo.php';
                 break;
 
             case 'lista-venta':
@@ -499,7 +489,7 @@ if ($verificador) {
         if ($_POST['dashboard'] == 'login') {
             evaluarLogeo();
         } elseif ($_POST['dashboard'] == 'admin1-crear') {
-            crearAdmins(
+            crear(
                 $_POST['nombres'],
                 $_POST['apellidopa'],
                 $_POST['apellidoma'],

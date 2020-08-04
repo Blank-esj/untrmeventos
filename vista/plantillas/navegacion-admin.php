@@ -132,8 +132,8 @@ $sesion = new Sesion();
           <span>Asistentes</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-registrado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-registrado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+          <li><a href="dashboard?dashboard=lista-boleto"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+          <li><a href="dashboard?dashboard=crear-boleto"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
           <li class="treeview">
             <a href="#">
               <i class="fa fa-gift"></i>

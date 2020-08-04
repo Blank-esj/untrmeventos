@@ -32,7 +32,7 @@
                     <a href="dashboard?id=<?php echo $sesion->leerIdUsuario(); ?>" class="btn btn-success btn-flat">Ajustes</a>
                   </div>
                   <div class="pull-right">
-                    <a href="dashboard?cerrar_sesion=true" class="btn btn-success btn-flat">Cerrar Sesión</a>
+                    <a href="dashboard?dashboard=salir" class="btn btn-success btn-flat">Cerrar Sesión</a>
                   </div>
                 </li>
               </ul>

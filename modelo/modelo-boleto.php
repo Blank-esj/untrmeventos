@@ -52,6 +52,61 @@ class BoletoModelo
 
         $sentencia->execute();
 
+        $resultado['id'] = $conexion->lastInsertId();
+        $resultado['filas'] = $sentencia->rowCount();
+
+        $sentencia->closeCursor();
+    }
+
+    public function crearAceptandoNulos(
+        string $nombres,
+        string $apellidopa,
+        string $apellidoma,
+        string $email,
+        string $telefono,
+        string $doc_identidad,
+        int $idventa,
+        int $idplan,
+        int $idregalo = null
+    ) {
+
+        include_once 'controlador/util/bd_conexion_pdo.php';
+        
+        $conexion = (new Conexion())->conectarPDO();
+
+        $consulta =
+            ($idregalo == null ? "CALL sp_crear_boleto_sinregalo( " : "CALL sp_crear_boleto( ") .
+            ":nombres,
+            :apellidopa,
+            :apellidoma,
+            :email,
+            :telefono,
+            :doc_identidad,
+            :idventa,
+            :idplan"
+            . ($idregalo == null ? "" : ", :idregalo") .
+            ")";
+
+        $sentencia = $conexion->prepare($consulta);
+
+        $sentencia->bindParam(":nombres", $nombres);
+        $sentencia->bindParam(":apellidopa", $apellidopa);
+        $sentencia->bindParam(":apellidoma", $apellidoma);
+        $sentencia->bindParam(":email", $email);
+        $sentencia->bindParam(":telefono", $telefono);
+        $sentencia->bindParam(":doc_identidad", $doc_identidad);
+        $sentencia->bindParam(":idventa", $idventa);
+        $sentencia->bindParam(":idplan", $idplan);
+
+        if ($idregalo != null)
+            $sentencia->bindParam(":idregalo", $idregalo);
+
+
+        $sentencia->execute();
+
+        $resultado['id'] = $conexion->lastInsertId();
+        $resultado['filas'] = $sentencia->rowCount();
+
         $sentencia->closeCursor();
     }
 
@@ -111,5 +166,16 @@ class BoletoModelo
 
         return $resultado;
     }
-    
+
+    public function actualizarSinVentaRegalo(
+        int $idboleto,
+        string $nombres,
+        string $apellidopa,
+        string $apellidoma,
+        string $email,
+        string $telefono,
+        string $doc_identidad,
+        int $idplan
+    ) {
+    }
 }
