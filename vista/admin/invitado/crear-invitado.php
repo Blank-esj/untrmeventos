@@ -22,6 +22,7 @@
             <form method="post" action="dashboard" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="row">
+
                   <!-- Nombres -->
                   <div class="form-group col-md-4">
                     <label for="nombres">Nombres: </label>
@@ -91,11 +92,11 @@
 
                   <div class="form-group col-md-4">
                     <label for="grado">Seleccione un Grado</label>
-                    <select id="grado" name="grado">
-                      <option value="">--Seleccione--</option>
+                    <select id="grado" name="grado" class="form-control">
+                      <option value="">-- Seleccione --</option>
 
                       <?php while ($grado = $resultado->fetch_assoc()) { ?>
-                        <option value="<? echo $grado['idgrado_instruccion'] ?>">
+                        <option value=" <? echo $grado['idgrado_instruccion'] ?>">
                           <? echo $grado['grado'] ?>
                         </option>
                       <?php } ?>
@@ -106,9 +107,9 @@
                   <!-- Sexo -->
                   <div class="form-group col-md-4">
                     <label for="sexo">Sexo: </label>
-                    <select id="sexo" name="sexo">
-                      <option value="">--Seleccione--</option>
-                      <option value="H"> Hombre </option>
+                    <select id="sexo" name="sexo" class="form-control">
+                      <option value="">-- Seleccione --</option>
+                      <option value=" H"> Hombre </option>
                       <option value="M"> Mujer </option>
                       <option value="P"> Prefiero no decirlo </option>
                     </select>

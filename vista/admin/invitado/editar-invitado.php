@@ -16,10 +16,10 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
   </section>
   <div class="row">
     <div class="col-md-12">
+      <!-- Main content -->
       <section class="content">
-        <!-- Main content -->
+        <!-- Default box -->
         <div class="box">
-          <!-- Default box -->
           <div class="box-header with-border">
             <h3 class="box-title">Editar Invitado</h3>
           </div>
@@ -34,6 +34,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
             <!-- form start -->
             <form method="post" action="dashboard" enctype="multipart/form-data">
               <div class="box-body">
+
                 <!-- Nombres -->
                 <div class="form-group col-md-4">
                   <label for="nombres">Nombres: </label>
@@ -108,7 +109,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
 
                 <div class="form-group col-md-4">
                   <label for="grado">Seleccione un Grado</label>
-                  <select id="grado" name="grado">
+                  <select id="grado" name="grado" class="form-control">
                     <option value="">--Seleccione--</option>
 
                     <?php while ($grado = $resultado->fetch_assoc()) { ?>
@@ -122,7 +123,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
                 <!-- Sexo -->
                 <div class="form-group col-md-4">
                   <label for="sexo">Sexo: </label>
-                  <select id="sexo" name="sexo">
+                  <select id="sexo" name="sexo" class="form-control">
                     <option value="">--Seleccione--</option>
                     <option <?php echo "H" == $invitado['sexo'] ? "selected" : "" ?> value="H"> Hombre </option>
                     <option <?php echo "M" == $invitado['sexo'] ? "selected" : "" ?> value="M"> Mujer </option>
