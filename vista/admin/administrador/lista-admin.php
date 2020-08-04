@@ -21,7 +21,7 @@
               <thead>
                 <tr>
                   <th>Nº</th>
-                  <th>Nombre</th>
+                  <th>Nombre de Administrador</th>
                   <th>Email</th>
                   <th>Teléfono</th>
                   <th>Doc. de Identidad</th>
@@ -59,26 +59,34 @@
                           ?>
                       </td>
                       <td>
-                        <a href="editar-admin.php?id=<?php echo $admin['idpersona']; ?>" class="btn bg-orange btn-flat margin">
-                          <i class="fa fa-pencil-alt"></i>
-                        </a>
-                        <a href="#" data-id="<?php echo $admin['idpersona']; ?>" data-tipo="admin" class="btn bg-maroon btn-flat margin borrar_registro">
-                          <i class="fa fa-trash"></i>
-                        </a>
+                        <?php $id = openssl_encrypt($admin['idpersona'], COD, KEY); ?>
+
+                        <form action="dashboard" method="post" style="display: inline;">
+                          <input type="hidden" name="id" value="<?php echo $id ?>">
+                          <button type="submit" name="dashboard" value="administrador-editar0" class="btn btn-warning margin">
+                            <i class="fa fa-pencil-alt"></i>
+                          </button>
+                        </form>
+
+                        <form action="dashboard" method="post" style="display: inline;">
+                          <input type="hidden" name="id" value="<?php echo $id ?>">
+                          <button type="submit" name="dashboard" value="administrador-eliminar" class="btn btn-danger margin">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </form>
                       </td>
                     </tr>
                   <?php
                     $numero++;
                   }
                 } else { ?>
-
                   <h1>No hay administradores</h1>
                 <?php } ?>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Nº</th>
-                  <th>Nombre</th>
+                  <th>Nombre de Administrador</th>
                   <th>Email</th>
                   <th>Teléfono</th>
                   <th>Doc. de Identidad</th>

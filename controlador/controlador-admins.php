@@ -1,6 +1,6 @@
 <?php
 
-function crearAdmins(
+function crear(
     $nombres,
     $apellidopa,
     $apellidoma,
@@ -11,22 +11,22 @@ function crearAdmins(
     $contrasena
 ) {
 
-    include_once 'modelo/modelo-admins.php';
+    include 'modelo/modelo-admins.php';
     include 'util/mensaje.php';
 
-    try {
-        $modelo = new AdminsModelo();
+    $modelo = new AdminsModelo();
 
+    try {
         $contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, array('cost' => 12));
 
         if ($modelo->crear($nombres, $apellidopa, $apellidoma,  $email, $telefono, $doc_identidad, $usuario, $contrasena_hasheada)['filas'] > 0) {
-            mensaje($nombres . " creado correctamente.", "success");
+            mensaje("<strong>" . $nombres . "</strong> se guardó satisfactoriamente", "success");
             return true;
         } else {
-            throw new Exception("Creación fallida del administrador " . $nombres);
+            throw new Exception("No se pudo crear administrador ");
         }
-    } catch (Exception $e) {
-        mensaje("Lo siento hubo un error al crear el administrador: " . $e->getMessage(), "error");
+    } catch (PDOException $th) {
+        mensaje("Lo siento hubo un error al crear administrador", "error");
         return false;
     }
     return false;

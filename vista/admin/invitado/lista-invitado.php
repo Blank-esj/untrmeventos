@@ -44,46 +44,48 @@
                     $error = $e->getMessage();
                     echo $error;
                   }
-
                   $numero = 1;
-                  while ($invitado = $resultado->fetch_assoc()) {
+                  if ($resultado != false) {
+                    while ($invitado = $resultado->fetch_assoc()) {
                   ?>
-                    <tr>
-                      <td style="vertical-align: middle;"> <?php echo $numero; ?> </td>
-                      <td style="vertical-align: middle;"><img style="border-radius: 50%;" src="<?php echo DIR_IMG_INVITADO . $invitado['url_imagen']; ?>" width="100" height="100"></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['nombre_completo'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['email'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['telefono'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['doc_identidad'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['institucion_procedencia'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['grado'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['nacimiento'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['sexo'] ?></td>
-                      <td style="vertical-align: middle;"><?php echo $invitado['descripcion']; ?></td>
-                      <td style="vertical-align: middle;">
+                      <tr>
+                        <td style="vertical-align: middle;"> <?php echo $numero; ?> </td>
+                        <td style="vertical-align: middle;"><img style="border-radius: 50%;" src="<?php echo DIR_IMG_INVITADO . $invitado['url_imagen']; ?>" width="70" height="70"></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['nombre_completo'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['email'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['telefono'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['doc_identidad'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['institucion_procedencia'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['grado'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['nacimiento'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['sexo'] ?></td>
+                        <td style="vertical-align: middle;"><?php echo $invitado['descripcion']; ?></td>
+                        <td style="vertical-align: middle;">
 
-                        <?php $id = openssl_encrypt($invitado['idpersona'], COD, KEY); ?>
+                          <?php $id = openssl_encrypt($invitado['idpersona'], COD, KEY); ?>
 
-                        <form action="dashboard" method="post" style="display: inline;">
-                          <input type="hidden" name="id" value="<?php echo $id ?>">
-                          <button type="submit" name="dashboard" value="invitado-editar0" class="btn btn-warning margin">
-                            <i class="fa fa-pencil-alt"></i>
-                          </button>
-                        </form>
+                          <form action="dashboard" method="post" style="display: inline;">
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
+                            <button type="submit" name="dashboard" value="invitado-editar0" class="btn btn-warning margin">
+                              <i class="fa fa-pencil-alt"></i>
+                            </button>
+                          </form>
 
-                        <form action="dashboard" method="post" style="display: inline;">
-                          <input type="hidden" name="id" value="<?php echo $id ?>">
-                          <button type="submit" name="dashboard" value="invitado-eliminar" class="btn btn-danger margin">
-                            <i class="fa fa-trash"></i>
-                          </button>
-                        </form>
+                          <form action="dashboard" method="post" style="display: inline;">
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
+                            <button type="submit" name="dashboard" value="invitado-eliminar" class="btn btn-danger margin">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </form>
 
-                      </td>
-                    </tr>
-                  <?php
-                    $numero++;
-                  }
-                  ?>
+                        </td>
+                      </tr>
+                    <?php
+                      $numero++;
+                    }
+                  } else { ?>
+                    <h1>No hay iinvitados</h1>
+                  <?php } ?>
                 </tbody>
                 <tfoot>
                   <tr>

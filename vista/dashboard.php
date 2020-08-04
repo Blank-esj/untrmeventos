@@ -10,7 +10,7 @@ $connPDO = (new Conexion())->conectarPDO();
 
 $mensaje = "";
 
-// Si hay un usuario legeado evaluamos las peticiones
+// Si hay un usuario logueado evaluamos las peticiones
 // Sino te redirige a la página del login
 
 $verificador = false;
@@ -304,6 +304,53 @@ if ($verificador) {
                 include 'controlador/controlador-articulo.php';
                 eliminar(openssl_decrypt($_POST['id'], COD, KEY));
                 include 'vista/admin/articulo/lista-articulo.php';
+                break;
+
+                // CRUD Administrador
+            case 'administrador-crear':
+                include 'controlador/controlador-admins.php';
+
+                crear(
+                    $_POST['nombre'],
+                    $_POST['apellidopa'],
+                    $_POST['apellidoma'],
+                    $_POST['email'],
+                    $_POST['telefono'],
+                    $_POST['doc_ident'],
+                    $_POST['usuario'],
+                    $_POST['password'],
+                    $_POST['nivel']
+                ) ?
+                    include 'vista/admin/administrador/lista-admin.php' :
+                    include 'vista/admin/administrador/crear-admin.php';
+                break;
+
+            case 'administrador-editar0':
+                include 'vista/admin/administrador/editar-admin.php';
+                break;
+
+            case 'administrador-editar1':
+                include 'controlador/controlador-admins.php';
+
+                actualizar(
+                    openssl_decrypt($_POST['id'], COD, KEY),
+                    $_POST['nombre'],
+                    $_POST['apellidopa'],
+                    $_POST['apellidoma'],
+                    $_POST['email'],
+                    $_POST['telefono'],
+                    $_POST['doc_ident'],
+                    $_POST['usuario'],
+                    $_POST['password'],
+                    $_POST['nivel']
+                );
+                include 'vista/admin/administrador/lista-admin.php';
+                break;
+
+            case 'administrador-eliminar':
+                include 'controlador/controlador-admins.php';
+                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+                include 'vista/admin/administrador/lista-admin.php';
                 break;
 
                 // CRUD Regalo
