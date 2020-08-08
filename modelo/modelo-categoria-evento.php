@@ -4,7 +4,7 @@ class CategoriaEventoModelo
     /**
      * Retona un conjunto de resultados de acuerdo al id que le pases
      */
-    public function leer(\PDO $conexion, int $id)
+    public function leer(\PDO &$conexion, int $id)
     {
         $sentencia = $conexion->prepare("SELECT * FROM categoria_evento WHERE id_categoria = :id_categoria");
 
@@ -22,7 +22,7 @@ class CategoriaEventoModelo
     /**
      * Retorna un array conteniendo a todos los registros
      */
-    public function leerTodos(\PDO $conexion)
+    public function leerTodos(\PDO &$conexion)
     {
         $sentencia = $conexion->query("SELECT * FROM categoria_evento");
 
@@ -36,7 +36,7 @@ class CategoriaEventoModelo
     /**
      * Crea un nuevo registro de acuerdo de acuerdo lo que le pases
      */
-    public function crear(\PDO $conexion, string $cat_evento, string $icono)
+    public function crear(\PDO &$conexion, string $cat_evento, string $icono)
     {
         $sentencia = $conexion->prepare("INSERT INTO categoria_evento (cat_evento, icono) VALUES (:cat_evento, :icono);");
 
@@ -53,7 +53,7 @@ class CategoriaEventoModelo
     /**
      * Actualiza un determinado registro de acuerdo a las variables que le pases
      */
-    public function actualizar(\PDO $conexion, int $id, string $cat_evento, string $icono)
+    public function actualizar(\PDO &$conexion, int $id, string $cat_evento, string $icono)
     {
         $sentencia = $conexion->prepare(
             "UPDATE categoria_evento 
@@ -78,7 +78,7 @@ class CategoriaEventoModelo
     /**
      * Elimina un registro de la base de datos de acuerdo al id que le pases
      */
-    public function eliminar(\PDO $conexion, int $id)
+    public function eliminar(\PDO &$conexion, int $id)
     {
         $sentencia = $conexion->prepare("DELETE FROM categoria_evento WHERE (id_categoria = :id_categoria);");
 

@@ -178,7 +178,7 @@ class InvitadoModelo
             $actualizoInvitado = true;
             $mensaje = "";
 
-            if ($personaModelo->actualizar($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) <= 0) {
+            if ($personaModelo->actualizarVincular($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) <= 0) {
                 $actualizoPersona = false;
                 $mensaje = "No se actualizó persona ";
             }
@@ -214,7 +214,7 @@ class InvitadoModelo
     /**
      * Si le pasamos la url de la imagen como NULL, no se actualiza la imagen.
      */
-    private function update(\PDO $conn, $idpersona, $descripcion, $url_imagen = null, $institucion_procedencia = null, $idgrado_instruccion = null, $nacimiento = null, $sexo = null)
+    private function update(\PDO &$conn, $idpersona, $descripcion, $url_imagen = null, $institucion_procedencia = null, $idgrado_instruccion = null, $nacimiento = null, $sexo = null)
     {
         include_once 'controlador/util/bd_conexion_pdo.php';
 

@@ -10,7 +10,7 @@
     </p>
 </div>
 
-<form style="display: none" id="verificar" action="registro" method="POST">
+<form style="display: none" id="verificar" action="" method="POST">
     <input type="hidden" id="paymentToken" name="paymentToken" value="">
     <input type="hidden" id="paymentID" name="paymentID" value="">
 </form>

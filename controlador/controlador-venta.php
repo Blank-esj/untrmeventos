@@ -42,21 +42,19 @@ class VentaControlador
             if ($sesion->existePlanes()) {
                 foreach ($sesion->leerPlanes() as $idPlan => $arrayPlan) {
                     foreach ($arrayPlan[N_ASISTENTES_PLAN] as $indice => $arrayAsistente) {
-                        try {
-                            $boleto->crear(
-                                $conn,
-                                $arrayAsistente[N_NOMBRE_ASISTENTE],
-                                $arrayAsistente[N_APELLIDOPA_ASISTENTE],
-                                $arrayAsistente[N_APELLIDOMA_ASISTENTE],
-                                $arrayAsistente[N_EMAIL_ASISTENTE],
-                                $arrayAsistente[N_TELEFONO_ASISTENTE],
-                                $arrayAsistente[N_DOC_IDENTIDAD_ASISTENTE],
-                                $idventa,
-                                $idPlan,
-                                $sesion->existeRegalo($idPlan, $indice) ? $arrayAsistente[N_REGALO_ASISTENTE][N_ID_REGALO] : null
-                            );
-                        } catch (\Throwable $th) {
-                            throw new Exception("No se insertó el boleto: <br/>" . $th);
+                        if (!$boleto->crearVincular(
+                            $conn,
+                            $arrayAsistente[N_NOMBRE_ASISTENTE],
+                            $arrayAsistente[N_APELLIDOPA_ASISTENTE],
+                            $arrayAsistente[N_APELLIDOMA_ASISTENTE],
+                            $arrayAsistente[N_EMAIL_ASISTENTE],
+                            $arrayAsistente[N_TELEFONO_ASISTENTE],
+                            $arrayAsistente[N_DOC_IDENTIDAD_ASISTENTE],
+                            $idventa,
+                            $idPlan,
+                            $sesion->existeRegalo($idPlan, $indice) ? $arrayAsistente[N_REGALO_ASISTENTE][N_ID_REGALO] : null
+                        )) {
+                            throw new Exception("No se insertó el boleto");
                         }
                     }
                 }
@@ -93,7 +91,7 @@ class VentaControlador
         $venta = curl_init(LINKAPI . "/v1/payments/payment/" . $paymentID); // COnsultamos a Paypal sobre el pago realizado según el paymentID
         curl_setopt($venta, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: Bearer " . $accessToken));
 
-        curl_setopt($venta, CURLOPT_RETURNTRANSFER, TRUE); // Si trae los resultados devuelvelos
+        curl_setopt($venta, CURLOPT_RETURNTRANSFER, TRUE);
 
         $paypal_datos = curl_exec($venta);
 

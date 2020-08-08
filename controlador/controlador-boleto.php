@@ -7,22 +7,21 @@ class BoletoControlador
         string $apellidoma,
         string $email = null,
         string $telefono = null,
-        string $doc_identidad,
+        string $doc_identidad = null,
         int $idventa = null,
         int $idplan,
         int $idregalo = null
     ) {
         include 'modelo/modelo-boleto.php';
-        include 'util/bd_conexion_pdo.php';
         include 'util/mensaje.php';
 
-        $conexion = (new Conexion())->conectarPDO();
+        echo var_dump($idventa);
+        echo var_dump($idregalo);
 
         $boleto = new BoletoModelo();
 
         try {
             if ($boleto->crear(
-                $conexion,
                 $nombres,
                 $apellidopa,
                 $apellidoma,
@@ -32,7 +31,7 @@ class BoletoControlador
                 $idventa,
                 $idplan,
                 $idregalo
-            )['filas'] > 0) {
+            )) {
                 mensaje("<strong>" . $nombres . "</strong> se guardó satisfactoriamente", "success");
                 return true;
             }

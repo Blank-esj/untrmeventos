@@ -1,11 +1,3 @@
-<?php
-
-/**
- * Descripción
- * 
- */
-?>
-
 <h3 class="box-title text-center">Puedes elejir...</h3>
 <div class="clearfix">
     <div class="container-fluid">
@@ -29,7 +21,7 @@
 
                     <div class="card h-100 tabla-precio" style="padding: 0;">
 
-                        <img height="100px" title="<?php echo $articulo['nombre_articulo'] ?>" alt="<?php echo $articulo['nombre_articulo'] ?>" class="card-img-top" src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen'] ?>" data-toggle="popover" data-trigger="hover" data-content="<?php echo $articulo['descripcion'] ?>">
+                        <img title="<?php echo $articulo['nombre_articulo'] ?>" alt="<?php echo $articulo['nombre_articulo'] ?>" class="card-img-top" src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen'] ?>" data-toggle="popover" data-trigger="hover" data-content="<?php echo $articulo['descripcion'] ?>">
 
                         <div class="card-body">
 
@@ -98,9 +90,7 @@
                         </div>
                     </div>
                 </div>
-            <?php
-            }
-            ?>
+            <?php } ?>
         </div>
     </div>
 </div>

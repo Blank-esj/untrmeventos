@@ -39,6 +39,26 @@ class PlanModelo
 
         return $resultado;
     }
+    /**
+     * Leer todos los registros de planes odenados descendente o ascendente según el precio.
+     * @param bool $descendente Si esta variable es true retornará los planes ordenados
+     * descendentemente de acuerdo al precio si es false lo ordenará ascendentemente
+     */
+    public function leerOrdenadoPrecio(bool $descendente = true)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->query("SELECT * FROM plan ORDER BY precio " . ($descendente ? "DESC" : "ASC"));
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
 
     /**
      * Crea un plan y devuelve true en caso se haya ejecutado con éxito sino devuelve false
@@ -86,7 +106,7 @@ class PlanModelo
         return false;
     }
 
-    private function insertar(\PDO $conexion, $nombre, $precio, $descripcion)
+    private function insertar(\PDO &$conexion, $nombre, $precio, $descripcion)
     {
         $sentencia = $conexion->prepare("INSERT INTO plan (nombre, precio, descripcion) VALUES (:nombre, :precio, :descripcion);");
         $sentencia->bindParam(":nombre", $nombre, PDO::PARAM_STR);
@@ -163,7 +183,7 @@ class PlanModelo
     /**
      * Actualiza un plan y devuelve el numero de filas afectadas
      */
-    private function update(\PDO $conexion, $idplan, $nombre, $precio, $descripcion)
+    private function update(\PDO &$conexion, $idplan, $nombre, $precio, $descripcion)
     {
         $sentencia = $conexion->prepare(
             "UPDATE plan 
@@ -231,5 +251,4 @@ class PlanModelo
 
         return $resultado;
     }
-    
 }

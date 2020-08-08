@@ -63,7 +63,7 @@ class PlanBeneficioModelo
     /**
      * Crea un plan_beneficio y devuelve su id y el número de filas afectadas
      */
-    public function crear(\PDO $conexion, $idplan, $idbeneficio)
+    public function crear(\PDO &$conexion, $idplan, $idbeneficio)
     {
 
         $sentencia = $conexion->prepare("INSERT INTO plan_beneficio (idplan, idbeneficio) VALUES (:idplan, :idbeneficio);");
@@ -130,7 +130,7 @@ class PlanBeneficioModelo
     /**
      * Elimina el registro de acuerdo al id del plan que le pasemos y devuelve el numero de filas afectadas
      */
-    public function eliminarPorPlan(\PDO $conexion, $idplan)
+    public function eliminarPorPlan(\PDO &$conexion, $idplan)
     {
         $sentencia = $conexion->prepare("DELETE FROM plan_beneficio WHERE idplan = :idplan ;");
         $sentencia->bindParam(':idplan', $idplan);

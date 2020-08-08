@@ -47,11 +47,25 @@ class PersonaModelo
     {
         $conn = (new Conexion())->conectarPDO();
 
+        $resultado = $this->ultimoIdVincular($conn);
+
+        $conn = null;
+
+        return $resultado;
+    }
+
+    /**
+     * Es una funcion dependiente de la conexión de base de datos porque se le tiene que pasar por
+     * parámetro esta conexión.
+     */
+    public function ultimoIdVincular(\PDO &$conn): int
+    {
         $sentencia = $conn->query("SELECT IFNULL((SELECT MAX(idpersona) FROM persona), 0) idpersona;");
 
         $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC)[0]['idpersona'];
 
-        $conn = null;
+        $sentencia->closeCursor();
+
         $sentencia = null;
 
         return $resultado;
@@ -65,6 +79,19 @@ class PersonaModelo
     {
         $conn = (new Conexion())->conectarPDO();
 
+        $resultado = $this->crearVincular($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad);
+
+        $conn = null;
+
+        return $resultado;
+    }
+
+    /**
+     * Crea una persona pero pasándole la conexión en este caso el método que llame a este tendrá que cerrar la conexión.
+     * Devuelve las filas afectadas
+     */
+    public function crearVincular(\PDO &$conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email = null, $telefono = null, $doc_identidad = null)
+    {
         $sentencia = $conn->prepare(
             "INSERT INTO persona VALUES (
             :idpersona,
@@ -88,17 +115,32 @@ class PersonaModelo
 
         $resultado = $sentencia->rowCount();
 
-        $conn = null;
+        $sentencia->closeCursor();
+
         $sentencia = null;
 
         return $resultado;
     }
 
     /**
-     * Actualizaun registro de persona de acuerdo los datos que le pases.
+     * Es una actualización en la que no se le pasa la conexión
+     */
+    public function actualizar($idpersona, $nombres, $apellidopa, $apellidoma, $email = null, $telefono = null, $doc_identidad = null)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conn = (new Conexion())->conectarPDO();
+
+        $resultado = $this->actualizarVincular($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad);
+
+        return $resultado;
+    }
+
+    /**
+     * Actualiza un registro de persona de acuerdo los datos que le pases.
      * Devuelve el número de filas afectadas
      */
-    public function actualizar(\PDO $conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email = null, $telefono = null, $doc_identidad = null)
+    public function actualizarVincular(\PDO &$conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email = null, $telefono = null, $doc_identidad = null)
     {
         $sentencia = $conn->prepare(
             "UPDATE persona

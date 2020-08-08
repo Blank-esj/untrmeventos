@@ -172,6 +172,22 @@ class RegaloModelo
         return $nombres;
     }
 
+    public function regaloConStock()
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->query('SELECT * FROM regalo WHERE stock > 0;');
+
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
+
     private function quitarBoleto()
     {
     }

@@ -1,6 +1,6 @@
 <?php
 
-function crear(
+function crearAdmins(
     $nombres,
     $apellidopa,
     $apellidoma,
@@ -32,8 +32,6 @@ function crear(
     return false;
 }
 
-// Modificado: 16/07/2020 13:08
-//Código para login de los administradores
 function verificarUsuarioPassword($usuario, $password)
 {
     include_once 'util/Sesion.php';
@@ -51,7 +49,6 @@ function verificarUsuarioPassword($usuario, $password)
         $conn = null;
 
         if (count($admin) > 0) {
-
 
             if (isset($admin[0]['password'])) {
 

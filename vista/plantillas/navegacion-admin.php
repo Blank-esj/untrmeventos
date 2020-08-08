@@ -129,7 +129,7 @@ $sesion = new Sesion();
       <li class="treeview">
         <a href="#">
           <i class="fa fa-address-card"></i>
-          <span>Asistentes</span>
+          <span>Boletos</span>
         </a>
         <ul class="treeview-menu">
           <li><a href="dashboard?dashboard=lista-boleto"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>

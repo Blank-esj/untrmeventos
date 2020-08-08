@@ -1,6 +1,6 @@
 <?php
 
-function crear(\PDO $conexion, $nombre, $icono)
+function crear(\PDO &$conexion, $nombre, $icono)
 {
     include 'modelo/modelo-categoria-evento.php';
     include 'util/mensaje.php';
@@ -15,7 +15,7 @@ function crear(\PDO $conexion, $nombre, $icono)
     }
 }
 
-function actualizar(\PDO $conexion, $id, $nombre, $icono)
+function actualizar(\PDO &$conexion, $id, $nombre, $icono)
 {
     include 'modelo/modelo-categoria-evento.php';
     include 'util/mensaje.php';
@@ -32,7 +32,7 @@ function actualizar(\PDO $conexion, $id, $nombre, $icono)
     }
 }
 
-function eliminar(\PDO $conexion, $id)
+function eliminar(\PDO &$conexion, $id)
 {
     include 'modelo/modelo-categoria-evento.php';
     include 'util/mensaje.php';
