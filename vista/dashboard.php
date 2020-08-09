@@ -404,24 +404,34 @@ if ($verificador) {
                 break;
 
             case 'boleto-editar0':
-                include 'vista/admin/boleto/regalo/editar-regalo.php';
+                include 'vista/admin/boleto/editar-boleto.php';
                 break;
 
             case 'boleto-editar1':
-                include 'controlador/controlador-regalo.php';
+                include 'controlador/controlador-boleto.php';
 
-                actualizar(
-                    openssl_decrypt($_POST['id'], COD, KEY),
+                $boleto = new BoletoControlador();
+
+                $boleto->actualizar(
+                    $_POST['idboleto'],
                     $_POST['nombre'],
-                    $_POST['stock']
+                    $_POST['apellidopa'],
+                    $_POST['apellidoma'],
+                    $_POST['email'],
+                    $_POST['telefono'],
+                    $_POST['doc_identidad'],
+                    $_POST['venta'],
+                    $_POST['plan'],
+                    $_POST['regalo']
                 );
-                include 'vista/admin/boleto/regalo/lista-regalo.php';
+                include 'vista/admin/boleto/lista-boleto.php';
                 break;
 
             case 'boleto-eliminar':
-                include 'controlador/controlador-regalo.php';
-                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
-                include 'vista/admin/boleto/regalo/lista-regalo.php';
+                include 'controlador/controlador-boleto.php';
+                $boleto = new BoletoControlador();
+                $boleto->eliminar($_POST['id']);
+                include 'vista/admin/boleto/lista-boleto.php';
                 break;
 
             default:

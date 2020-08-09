@@ -192,4 +192,20 @@ class PersonaModelo
 
         return $resultado;
     }
+
+    /**
+     * Compara todos los campos que le pasemos por parámetro y un registro de persona
+     * @return bool devuelve true si TODOS son iguales sino devuelve false
+     */
+    public function esIgual($idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad)
+    {
+        $persona = $this->leer($idpersona)[0];
+        if ($persona['nombres'] != $nombres) return false;
+        if ($persona['apellidopa'] != $apellidopa) return false;
+        if ($persona['apellidoma'] != $apellidoma) return false;
+        if ($persona['email'] != $email) return false;
+        if ($persona['telefono'] != $telefono) return false;
+        if ($persona['doc_identidad'] != $doc_identidad) return false;
+        return true;
+    }
 }

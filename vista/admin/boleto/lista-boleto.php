@@ -60,18 +60,18 @@
                       <td> <?php echo $registrado['doc_identidad']; ?> </td>
                       <td>
 
-                        <?php $id = openssl_encrypt($registrado['idpersona'], COD, KEY); ?>
+                        <?php $id = openssl_encrypt($registrado['idboleto'], COD, KEY); ?>
 
                         <form action="dashboard" method="post" style="display: inline;">
                           <input type="hidden" name="id" value="<?php echo $id ?>">
-                          <button type="submit" name="dashboard" value="plan-editar0" class="btn btn-warning">
+                          <button type="submit" name="dashboard" value="boleto-editar0" class="btn btn-warning">
                             <i class="fa fa-pencil-alt"></i>
                           </button>
                         </form>
 
                         <form action="dashboard" method="post" style="display: inline;">
                           <input type="hidden" name="id" value="<?php echo $id ?>">
-                          <button type="submit" name="dashboard" value="plan-eliminar" class="btn btn-danger">
+                          <button type="submit" name="dashboard" value="boleto-eliminar" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                           </button>
                         </form>

@@ -1,8 +1,13 @@
 <?php
-$id = $_GET['id'];
+$id = openssl_decrypt($_POST['id'], COD, KEY);
 if (!filter_var($id, FILTER_VALIDATE_INT)) {
   die("Error");
 }
+include_once 'modelo/modelo-boleto.php';
+include_once 'modelo/modelo-persona.php';
+
+$boleto = (new BoletoModelo())->leerTabla((int)$id)[0];
+$persona = (new PersonaModelo())->leer($boleto['idpersona'])[0];
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -10,240 +15,112 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Editar Registro de Usuario Manual
-      <small>llena el formulario para editar un usuario registrado</small>
+      Editar Boleto
+      <small>Llena el formulario para editar un Boleto manualmente.</small>
     </h1>
   </section>
 
   <div class="row">
-    <div class="col-md-8">
-      <!-- Main content -->
+    <div class="container-fluid">
       <section class="content">
-        <!-- Default box -->
+        <!-- Main content -->
         <div class="box">
+          <!-- Default box -->
           <div class="box-header with-border">
-            <h3 class="box-title">Editar Usuario</h3>
+            <h3 class="box-title">Editar Boleto</h3>
           </div>
           <div class="box-body">
-            <?php
-            $sql = "SELECT * FROM registrado WHERE id_registrado = $id ";
-            $resultado = $conn->query($sql);
-            $registrado = $resultado->fetch_assoc();
-            ?>
             <!-- form start -->
-            <form class="editar-registrado" role="form" name="guardar-registro" id="guardar-registro" method="post" action="../../../modelo/modelo-registrado.php">
+            <form method="post" action="dashboard">
               <div class="box-body">
-                <div class="form-group">
-                  <label for="nombre_registrado">Nombres:</label>
-                  <input value="<?php echo $registrado['nombre_registrado']; ?>" type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                  <label for="apellidopa">Apellido Paterno:</label>
-                  <input value="<?php echo $registrado['apellidopa_registrado']; ?>" type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Apellido paterno">
-                </div>
-                <div class="form-group">
-                  <label for="apellidoma">Apellido Materno:</label>
-                  <input value="<?php echo $registrado['apellidoma_registrado']; ?>" type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Apellido materno">
-                </div>
-                <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input value="<?php echo $registrado['email_registrado']; ?>" type="email" class="form-control" id="email" name="email" placeholder="Email">
-                </div>
-                <?php
-                $pedido = $registrado['pases_articulos'];
-                $boletos = json_decode($pedido, true);
-                ?>
+                <div class="row">
 
-                <div class="form-group">
-                  <div id="paquetes" class="paquetes">
-                    <div class="box-header with-border">
-                      <h3 class="box-title">Elige el número de boletos</h3>
-                    </div>
-                    <ul class="lista-precios clearfix row">
-                      <li class="col-md-4">
-                        <div class="tabla-precio text-center">
-                          <h3>Pase por día (viernes)</h3>
-                          <p class="numero">S/ 20</p>
-                          <ul>
-                            <li>Material de trabajo</li>
-                            <li>No Certificado</li>
-                            <li>Regalo</li>
-                          </ul>
-                          <div class="orden">
-                            <label for="pase_dia">Boletos deseados:</label>
-                            <input value="<?php echo $boletos['un_dia']['cantidad']; ?>" type="number" class="form-control" min="0" id="pase_dia" size="3" name="boletos[un_dia][cantidad]" placeholder="0">
-                            <input type="hidden" value="30" name="boletos[un_dia][precio]">
-                          </div>
-                        </div>
-                      </li>
-
-                      <li class="col-md-4">
-                        <div class="tabla-precio text-center">
-                          <h3>Todos los días</h3>
-                          <p class="numero">S/ 60</p>
-                          <ul>
-                            <li>Material de trabajo</li>
-                            <li>Certificado</li>
-                            <li>Regalo</li>
-                          </ul>
-                          <div class="orden">
-                            <label for="pase_completo">Boletos deseados:</label>
-                            <input value="<?php echo $boletos['pase_completo']['cantidad']; ?>" type="number" class="form-control" min="0" id="pase_completo" size="3" name="boletos[completo][cantidad]" placeholder="0">
-                            <input type="hidden" value="50" name="boletos[completo][precio]">
-                          </div>
-                        </div>
-                      </li>
-
-                      <li class="col-md-4">
-                        <div class="tabla-precio text-center">
-                          <h3>Pase por 2 días (viernes y sábado)</h3>
-                          <p class="numero">S/ 40</p>
-                          <ul>
-                            <li>Material de trabajo</li>
-                            <li>No Certificado</li>
-                            <li>Regalo</li>
-                          </ul>
-                          <div class="orden">
-                            <label for="pase_dosdias">Boletos deseados:</label>
-                            <input value="<?php echo $boletos['pase_2dias']['cantidad']; ?>" type="number" class="form-control" min="0" id="pase_dosdias" size="3" name="boletos[2dias][cantidad]" placeholder="0">
-                            <input type="hidden" value="45" name="boletos[2dias][precio]">
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <!--#paquetes-->
-                </div>
-                <!--.form-group-->
-
-                <div class="form-group">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">Elige los talleres</h3>
-                  </div>
-                  <div id="eventos" class="eventos clearfix">
-                    <div class="caja ">
+                  <!--.Venta -->
+                  <div class="form-group col-md-6">
+                    <label for="venta">Puede seleccionar una venta</label> <br>
+                    <select id="venta" name="venta" class="form-control m-6">
+                      <option value="">-- Seleccione una venta --</option>
                       <?php
-                      $eventos = $registrado['taller_registrado'];
-                      $id_eventos_registrados = json_decode($eventos, true);
-
-                      try {
-                        $sql = "SELECT evento.*, categoria_evento.cat_evento, invitado.nombre_invitado, invitado.apellidopa_invitado ";
-                        $sql .= " FROM evento ";
-                        $sql .= " JOIN categoria_evento ";
-                        $sql .= " ON evento.id_cat_evento = categoria_evento.id_categoria ";
-                        $sql .= " JOIN invitado ";
-                        $sql .= " ON evento.id_inv = invitado.id_invitado ";
-                        $sql .= " ORDER BY evento.fecha_evento, evento.id_cat_evento, evento.hora_evento ";
-                        //echo $sql;
-                        $resultado = $conn->query($sql);
-                      } catch (Exception $e) {
-                        echo $e->getMessage();
-                      }
-
-                      $eventos_dias = array();
-                      while ($evento = $resultado->fetch_assoc()) {
-
-                        $fecha = $evento['fecha_evento'];
-                        setlocale(LC_ALL, 'Spanish');
-                        $dia_semana = utf8_encode(strftime("%A", strtotime($fecha)));
-                        $categoria = $evento['cat_evento'];
-                        $dia = array(
-                          'nombre_evento' => $evento['nombre_evento'],
-                          'hora' => $evento['hora_evento'],
-                          'id' => $evento['id_evento'],
-                          'nombre_invitado' => $evento['nombre_invitado'],
-                          'apellido_invitado' => $evento['apellidopa_invitado']
-                        );
-
-                        $eventos_dias[$dia_semana]['eventos'][$categoria][] = $dia;
-                      }
-                      ?>
-
-                      <?php foreach ($eventos_dias as $dia => $eventos) { ?>
-                        <div id="<?php echo str_replace('á', 'a', $dia); ?>" class="contenido-dia clearfix row">
-                          <h4 class="text-center nombre_dia"><?php echo $dia; ?></h4>
-
-                          <?php foreach ($eventos['eventos'] as $tipo => $evento_dia) : ?>
-                            <div class="col-md-4">
-                              <p><?php echo $tipo; ?></p>
-
-                              <?php foreach ($evento_dia as $evento) { ?>
-                                <label>
-                                  <input <?php echo (in_array($evento['id'], $id_eventos_registrados['eventos']) ? 'checked' : ''); ?> type="checkbox" class="minimal" name="registro_evento[]" id="<?php echo $evento['id']; ?>" value="<?php echo $evento['id']; ?>">
-                                  <time><?php echo $evento['hora']; ?></time> <?php echo $evento['nombre_evento']; ?>
-                                  <br>
-                                  <span class="autor"><?php echo $evento['nombre_invitado'] . " "  . $evento['apellido_invitado']; ?></span>
-                                </label>
-                              <?php } //foreach 
-                              ?>
-                            </div>
-                          <?php endforeach; ?>
-                        </div>
-                        <!--.contenido-dia -->
-                      <?php  } ?>
-                    </div>
-                    <!--.caja-->
+                      include_once 'modelo/modelo-venta.php';
+                      foreach ((new VentaModelo)->leerTodos() as $venta) {
+                        if ($venta['estado'] == 'completo') { ?>
+                          <option <?php echo $boleto['idventa'] == $venta['idventa'] ? "selected" : "" ?> value="<?php echo openssl_encrypt($venta['idventa'], COD, KEY) ?>"> <?php echo $venta['nombres']; ?> &nbsp <?php echo $venta['apellidos']; ?> &nbsp <?php echo "inicio: ($ " . $venta['total_paypal'] . ")"; ?> &nbsp <?php echo "ahora: ($ " . $venta['total'] . ")"; ?> </option>
+                      <?php }
+                      } ?>
+                    </select>
                   </div>
-                  <!--#eventos-->
 
-                  <div id="resumen" class="resumen ">
-                    <div class="box-header with-border">
-                      <h3 class="box-title">Pagos y Extras</h3>
-                    </div>
-                    <br>
-                    <div class="caja clearfix row">
-                      <div class="extras col-md-6">
-                        <div class="orden">
-                          <label for="camisa_evento">Camisa del evento $10 <small>(promocion 7% dto.)</small></label>
-                          <input value="<?php echo $boletos['camisas']; ?>" type="number" class="form-control" min="0" id="camisa_evento" name="pedido_extra[camisas][cantidad]" size="3" placeholder="0">
-                          <input type="hidden" value="10" name="pedido_extra[camisas][precio]">
-                        </div>
-                        <!--.orden-->
-                        <div class="orden">
-                          <label for="etiquetas">Paquete de 10 etiquetas $2 <small>(HTML5, CSS3, JavaScript, Chrome)</small></label>
-                          <input value="<?php echo $boletos['etiquetas']; ?>" type="number" class="form-control" min="0" id="etiquetas" name="pedido_extra[etiquetas][cantidad]" size="3" placeholder="0">
-                          <input type="hidden" value="2" name="pedido_extra[etiquetas][precio]">
-                        </div>
-                        <!--.orden-->
-                        <div class="orden">
-                          <label for="regalo">Seleccione un regalo</label> <br>
-                          <select id="regalo" name="regalo" required class="form-control seleccionar">
-                            <option value="">- Seleccione un regalo --</option>
-                            <option value="2" <?php echo ($registrado['regalo'] == 2) ? 'selected' : '' ?>>Etiquetas</option>
-                            <option value="1" <?php echo ($registrado['regalo'] == 1) ? 'selected' : '' ?>>Pulsera</option>
-                            <option value="3" <?php echo ($registrado['regalo'] == 3) ? 'selected' : '' ?>>Plumas</option>
-                          </select>
-                        </div>
-                        <!--.orden-->
-                        <br>
-                        <input type="button" id="calcular" class="btn btn-success" value="Calcular">
-                      </div>
-                      <!--.extras-->
-
-                      <div class="total col-md-6">
-                        <p>Resumen:</p>
-                        <div id="lista-productos"></div>
-                        <p>Total Ya Pagado: <?php echo (float) $registrado['total_pagado']; ?></p>
-                        <p>Total:</p>
-                        <div id="suma-total">
-                        </div>
-                      </div>
-                      <!--.total-->
-                    </div>
-                    <!--.caja-->
+                  <!--.Planes -->
+                  <div class="form-group col-md-6">
+                    <label for="plan">Seleccione un plan</label> <br>
+                    <select required id="plan" name="plan" class="form-control m-6">
+                      <option value="">-- Seleccione un plan --</option>
+                      <?php
+                      include_once 'modelo/modelo-plan.php';
+                      foreach ((new PlanModelo)->leerOrdenadoPrecio() as $plan) { ?>
+                        <option <?php echo $boleto['idplan'] == $plan['idplan'] ? "selected" : "" ?> value="<?php echo openssl_encrypt($plan['idplan'], COD, KEY) ?>"> <?php echo $plan['nombre']; ?> &nbsp <?php echo "($ " . $plan['precio'] . ")"; ?> </option>
+                      <?php } ?>
+                    </select>
                   </div>
-                  <!--#resumen-->
+
+                  <!-- Nombres -->
+                  <div class="form-group col-md-6">
+                    <label for="nombre_registrado">Nombres</label>
+                    <input required type="text" class="form-control m6" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo $persona['nombres'] ?>">
+                  </div>
+                  <!-- Apellido Paterno -->
+                  <div class="form-group col-md-6">
+                    <label for="apellidopa">Apellido Paterno</label>
+                    <input required type="text" class="form-control m6" id="apellidopa" name="apellidopa" placeholder="Apellido paterno" value="<?php echo $persona['apellidopa'] ?>">
+                  </div>
+
+                  <!-- Apellido Materno -->
+                  <div class="form-group col-md-6">
+                    <label for="apellidoma">Apellido Materno</label>
+                    <input required type="text" class="form-control m6" id="apellidoma" name="apellidoma" placeholder="Apellido materno" value="<?php echo $persona['apellidoma'] ?>">
+                  </div>
+
+                  <!-- Email -->
+                  <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control m6" id="email" name="email" placeholder="Email" value="<?php echo $persona['email'] ?>">
+                  </div>
+
+                  <!-- Teléfono -->
+                  <div class="form-group col-md-6">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" class="form-control m6" id="telefono" name="telefono" placeholder="Teléfono" value="<?php echo $persona['telefono'] ?>">
+                  </div>
+
+                  <!-- Documento de Identidad -->
+                  <div class="form-group col-md-6">
+                    <label for="doc_identidad">Documento de Identidad</label>
+                    <input data-toggle="tooltip" data-placement="top" title="Tooltip on top" type="text" class="form-control m6" id="doc_identidad" name="doc_identidad" placeholder="Documento de Identidad" value="<?php echo $persona['doc_identidad'] ?>">
+                  </div>
+
+                  <!--.Regalos -->
+                  <div class="form-group col-md-6">
+                    <label for="regalo">Seleccione un regalo</label> <br>
+                    <select id="regalo" name="regalo" class="form-control m-6">
+                      <option value="">-- Seleccione un regalo --</option>
+                      <?php
+                      include_once 'modelo/modelo-regalo.php';
+                      foreach ((new RegaloModelo())->leerRegalos() as $regalo) { ?>
+                        <option <?php echo $boleto['idregalo'] == $regalo['idregalo'] ? "selected" : "" ?> value="<?php echo openssl_encrypt($regalo['idregalo'], COD, KEY) ?>"><?php echo $regalo['nombre_regalo'] ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+
+                  <div id="error"></div>
                 </div>
+
               </div> <!-- /.box-body -->
 
               <div class="box-footer">
-                <input type="hidden" name="total_pedido" id="total_pedido">
-                <input type="hidden" name="total_descuento" id="total_descuento" value="total_descuento">
-                <input type="hidden" name="registro" value="actualizar">
-                <input type="hidden" name="id_registro" value="<?php echo $registrado['id_registrado']; ?>">
-                <input type="hidden" name="fecha_registro" value="<?php echo $registrado['fecha_registro']; ?>">
-                <button type="submit" class="btn btn-primary" id="btnRegistro">Guardar</button>
+                <input type="hidden" name="idboleto" value="<?php echo $_POST['id'] ?>">
+                <button type="submit" name="dashboard" value="boleto-editar1" class="btn btn-primary">Actualizar</button>
               </div>
+
             </form>
           </div> <!-- /.box-body -->
         </div> <!-- /.box -->
