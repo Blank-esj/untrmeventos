@@ -48,7 +48,7 @@
       <!-- Total Ganancias -->
       <div class="col-lg-3 col-xs-6">
         <?php
-        $sql = "SELECT SUM(total) AS ganancias FROM v_boleto";
+        $sql = "SELECT SUM(total) AS ganancias FROM v_venta WHERE estado = 'completo'";
         $resultado = $conn->query($sql);
         if ($resultado != false) {
 
@@ -81,8 +81,10 @@
       <?php
       try {
         $sql = "SELECT p.nombre, p.precio, COUNT(*) total 
-                FROM boleto b, plan p 
-                WHERE b.idplan = p.idplan
+                FROM boleto b, plan p, venta v
+                WHERE b.idplan = p.idplan AND
+                b.idventa = v.idventa AND
+                v.estado = 'completo'
                 GROUP BY p.idplan ORDER BY total DESC;";
         $resultado = $conn->query($sql); //Ejecuta consulta SQL
       } catch (Exception $e) {
@@ -123,9 +125,11 @@
       <?php
       try {
         $sql = "SELECT a.nombre_articulo, a.precio, sum(va.cantidad) total 
-                FROM venta_articulo va, articulo a 
-                WHERE va.idarticulo = a.idarticulo 
-                GROUP BY a.idarticulo 
+                FROM venta_articulo va, articulo a, venta v
+                WHERE va.idarticulo = a.idarticulo AND
+                va.idventa = v.idventa AND
+                v.estado = 'completo'
+                GROUP BY a.idarticulo
                 ORDER BY total DESC;";
         $resultado = $conn->query($sql); //Ejecuta consulta SQL
       } catch (Exception $e) {
@@ -165,7 +169,13 @@
     <div class="row">
       <?php
       try {
-        $sql = "SELECT r.nombre_regalo regalo, COUNT(*) total FROM v_boleto vb, boleto b, regalo r WHERE b.idregalo = r.idregalo AND b.idboleto = vb.idboleto GROUP BY r.idregalo ORDER BY total DESC;";
+        $sql = "SELECT r.nombre_regalo regalo, COUNT(*) total
+                FROM boleto b, regalo r, venta v
+                WHERE b.idregalo = r.idregalo
+                AND b.idventa = v.idventa
+                AND v.estado = 'completo'
+                GROUP BY r.idregalo 
+                ORDER BY total DESC;";
         $resultado = $conn->query($sql); //Ejecuta consulta SQL
       } catch (Exception $e) {
         $error = $e->getMessage();
