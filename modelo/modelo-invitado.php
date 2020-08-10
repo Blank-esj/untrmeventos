@@ -160,7 +160,7 @@ class InvitadoModelo
 
         include_once 'controlador/util/bd_conexion_pdo.php';
 
-        return false;
+        $resultado = false;
         $conn = (new Conexion())->conectarPDO();
         try {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -191,18 +191,17 @@ class InvitadoModelo
              * Si las filas de alguna de las tablas ha sido afectada el resultado es true
              */
             if (!$actualizoPersona && !$actualizoInvitado) throw new Exception($mensaje);
-            else return true;
+            else $resultado = true;
 
 
             $personaModelo = null;
             $idpersona = null;
 
             $conn->commit(); // Guadamos los cambios
-
-            return true;
         } catch (Exception $e) {
             $conn->rollBack(); // Revertimos los cambios
-            return false;
+            echo "mensaje Error: " . var_dump($e) . "<br/>";
+            $resultado = false;
         }
         $conn = null;
         return $resultado;
@@ -213,12 +212,10 @@ class InvitadoModelo
      */
     private function update(\PDO &$conn, $idpersona, $descripcion, $url_imagen = null, $institucion_procedencia = null, $idgrado_instruccion = null, $nacimiento = null, $sexo = null)
     {
-        include_once 'controlador/util/bd_conexion_pdo.php';
-
         $consulta =
             "UPDATE invitado SET
             descripcion = :u_descripcion, "
-            . $url_imagen != null ? "url_imagen = :u_url_imagen, " : "" .
+            . ($url_imagen != null ? "url_imagen = :u_url_imagen, " : "") .
             "institucion_procedencia = :u_institucion_procedencia, 
             idgrado_instruccion = :u_idgrado_instruccion, 
             nacimiento = :u_nacimiento, 
@@ -240,8 +237,9 @@ class InvitadoModelo
 
         $sentencia->execute();
 
-        return $sentencia->rowCount();
+        $resultado = $sentencia->rowCount();
 
+        $sentencia->closeCursor();
         $sentencia = null;
 
         return $resultado;

@@ -166,6 +166,7 @@ class PersonaModelo
 
         $resultado = $sentencia->rowCount();
 
+        $sentencia->closeCursor();
         $sentencia = null;
 
         return $resultado;
