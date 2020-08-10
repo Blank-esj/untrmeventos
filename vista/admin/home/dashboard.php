@@ -29,7 +29,18 @@
       $resultado = $conn->query($sql);
       while ($registrados = $resultado->fetch_assoc()) { ?>
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-aqua">
+          <div class="small-box bg-<?php
+                                    switch ($registrados['estado']) {
+                                      case 'completo':
+                                        echo "aqua";
+                                        break;
+                                      case 'aprobado':
+                                        echo "yellow";
+                                        break;
+                                      default:
+                                        echo "red";
+                                        break;
+                                    } ?>">
             <!-- small box -->
             <div class="inner">
               <h3><?php echo $registrados['total']; ?></h3>
@@ -95,7 +106,7 @@
       while ($plan = $resultado->fetch_assoc()) { ?>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-teal">
+          <div class="small-box bg-blue">
             <div class="inner">
               <h3><?php echo $plan['total']; ?></h3>
 
@@ -107,7 +118,7 @@
               </p>
             </div>
             <div class="icon">
-              <i class="fa fa-gift"></i>
+              <i class="fa fa-university"></i>
             </div>
             <a href="dashboard?dashboard=lista-boleto" class="small-box-footer">
               Más Información <i class="fa fa-arrow-circle-right"></i>
@@ -140,7 +151,7 @@
       while ($articulo = $resultado->fetch_assoc()) { ?>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-teal">
+          <div class="small-box bg-olive">
             <div class="inner">
               <h3><?php echo number_format($articulo['total'], 0); ?></h3>
 
@@ -152,7 +163,7 @@
               </p>
             </div>
             <div class="icon">
-              <i class="fa fa-gift"></i>
+              <i class="fa fa-tags"></i>
             </div>
             <a href="dashboard?dashboard=lista-boleto" class="small-box-footer">
               Más Información <i class="fa fa-arrow-circle-right"></i>
@@ -185,7 +196,7 @@
       while ($regalo = $resultado->fetch_assoc()) { ?>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-teal">
+          <div class="small-box bg-maroon">
             <div class="inner">
               <h3><?php echo $regalo['total']; ?></h3>
 
@@ -224,13 +235,13 @@
       while ($invitado = $resultado->fetch_assoc()) { ?>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-teal">
+          <div class="small-box bg-orange">
             <div class="inner">
               <h3><?php echo $invitado['edad_promedio'] != null ? $invitado['edad_promedio'] : "-"; ?></h3>
               <p>Edad Promedio de Invitados</p>
             </div>
             <div class="icon">
-              <i class="fa fa-gift"></i>
+              <i class="fa fa-users"></i>
             </div>
             <a href="dashboard?dashboard=lista-boleto" class="small-box-footer">
               Más Información <i class="fa fa-arrow-circle-right"></i>
@@ -257,7 +268,7 @@
       while ($invitado = $resultado->fetch_assoc()) { ?>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-teal">
+          <div class="small-box bg-orange">
             <div class="inner">
               <h3><?php echo $invitado['total'] != null ? $invitado['total'] : "-"; ?></h3>
               <p><strong>Grado:</strong> <?php echo $invitado['grado'] ?></p>
