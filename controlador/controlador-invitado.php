@@ -15,7 +15,6 @@ function crear(
     $sexo = null
 ) {
     include_once 'modelo/modelo-invitado.php';
-    include_once 'controlador/global/config.php';
     include 'util/mensaje.php';
 
     $modelo = new InvitadoModelo();

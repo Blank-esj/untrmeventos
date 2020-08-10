@@ -58,6 +58,7 @@ class InvitadoModelo
     ) {
         include_once 'controlador/util/bd_conexion_pdo.php';
 
+        $rpta = false;
         $conn = (new Conexion())->conectarPDO();
         try {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -70,29 +71,28 @@ class InvitadoModelo
 
             $idpersona = $personaModelo->ultimoId() + 1;
 
-            if ($personaModelo->crear($idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) > 0)
-                return true;
+            if ($personaModelo->crearVincular($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) > 0)
+                $rpta = true;
             else throw new PDOException("No se creó Persona");
 
-            if ($this->insertar($idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) > 0)
-                return true;
+            if ($this->insertar($conn, $idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) > 0)
+                $rpta = true;
             else throw new PDOException("No se creó Invitado");
 
             $personaModelo = null;
             $idpersona = null;
 
             $conn->commit(); // Guadamos los cambios
-
-            return true;
         } catch (PDOException $e) {
             $conn->rollBack(); // Revertimos los cambios
-            return false;
+            $rpta = false;
         }
         $conn = null;
-        return false;
+        return $rpta;
     }
 
     private function insertar(
+        \PDO $conn,
         $idpersona,
         $descripcion,
         $url_imagen,
@@ -101,9 +101,6 @@ class InvitadoModelo
         $nacimiento = null,
         $sexo = null
     ) {
-        include_once 'controlador/util/bd_conexion_pdo.php';
-
-        $conn = (new Conexion())->conectarPDO();
         $sentencia = $conn->prepare(
             "INSERT INTO invitado (
                 idpersona,
@@ -132,9 +129,9 @@ class InvitadoModelo
 
         $sentencia->execute();
 
-        return $sentencia->rowCount();
+        $resultado = $sentencia->rowCount();
 
-        $conn = null;
+        $sentencia->closeCursor();
         $sentencia = null;
 
         return $resultado;
