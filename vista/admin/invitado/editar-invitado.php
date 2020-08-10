@@ -113,8 +113,8 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
                     <option value="">--Seleccione--</option>
 
                     <?php while ($grado = $resultado->fetch_assoc()) { ?>
-                      <option <?php echo $grado['idgrado_instruccion'] == $invitado['idgrado_instruccion'] ? "selected" : "" ?> value="<? echo $grado['idgrado_instruccion'] ?>">
-                        <? echo $grado['grado'] ?>
+                      <option <?php echo $grado['idgrado_instruccion'] == $invitado['idgrado_instruccion'] ? "selected" : "" ?> value="<?php echo $grado['idgrado_instruccion'] ?>">
+                        <?php echo $grado['grado'] ?>
                       </option>
                     <?php } ?>
                   </select>

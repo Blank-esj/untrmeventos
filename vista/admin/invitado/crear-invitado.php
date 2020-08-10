@@ -96,8 +96,8 @@
                       <option value="">-- Seleccione --</option>
 
                       <?php while ($grado = $resultado->fetch_assoc()) { ?>
-                        <option value=" <? echo $grado['idgrado_instruccion'] ?>">
-                          <? echo $grado['grado'] ?>
+                        <option value="<?php echo $grado['idgrado_instruccion'] ?>">
+                          <?php echo $grado['grado'] ?>
                         </option>
                       <?php } ?>
 
