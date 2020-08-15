@@ -18,7 +18,7 @@
                 <?php
                 try {
                     require_once('controlador/util/bd_conexion.php');
-                    $sql = "SELECT * FROM  v_detalle_evento; ";
+                    $sql = "SELECT * FROM categoria_evento ORDER BY id_categoria; ";
                     $resultado = $conn->query($sql);
                 } catch (Exception $e) {
                     $error = $e->getMessage();
