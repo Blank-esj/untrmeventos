@@ -16,7 +16,7 @@ try {
       <li>
         <div class="invitado">
           <a class="invitado-info" href="#invitado<?php echo $invitado['idpersona']; ?>">
-            <img src="vista/assets/img/invitados/<?php echo $invitado['url_imagen']; ?>" alt="imagen invitado">
+            <img height="300" width="450" src="vista/assets/img/invitados/<?php echo $invitado['url_imagen']; ?>" alt="imagen invitado">
             <p><?php echo $invitado['nombre_completo']; ?></p>
           </a>
         </div>
