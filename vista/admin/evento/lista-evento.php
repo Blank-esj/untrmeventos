@@ -3,8 +3,8 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Lista de Eventos
-      <small> Aquí podrás editar y eliminar los Eventos registrados. </small>
+      Lista de Temas
+      <small> Aquí podrás editar y eliminar los temas registrados. </small>
     </h1>
   </section>
 
@@ -14,7 +14,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Administra los eventos</h3>
+            <h3 class="box-title">Gestionar Temas</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">

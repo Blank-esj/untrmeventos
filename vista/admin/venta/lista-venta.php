@@ -10,7 +10,7 @@ $ventaModelo = new VentaModelo();
     <section class="content-header">
         <h1>
             Lista de las Ventas
-            <small>Aquí podrás visualizar las ventas. </small>
+            <small>Aquí podrás visualizar las ventas realizadas. </small>
         </h1>
     </section>
     <section class="content">
@@ -19,7 +19,7 @@ $ventaModelo = new VentaModelo();
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Administra a las ventas</h3>
+                        <h3 class="box-title">Gestionar Ventas</h3>
                     </div>
                     <div class="box-body">
                         <!-- /.box-header -->
@@ -30,7 +30,7 @@ $ventaModelo = new VentaModelo();
                                     <th>Estado</th>
                                     <th>Comprador</th>
                                     <th>Moneda</th>
-                                    <th>Tarifa</th>
+                                    <th>Compra</th>
                                     <th>Detalle</th>
                                 </tr>
                             </thead>
@@ -138,7 +138,7 @@ $ventaModelo = new VentaModelo();
                                                     <div class="modal-dialog modal-dialog-scrollable container-fluid">
                                                         <div class="row">
                                                             <div class="col-sm-2"><strong>Imagen</strong></div>
-                                                            <div class="col-sm-4"><strong>Nombre</strong></div>
+                                                            <div class="col-sm-3"><strong>Nombre</strong></div>
                                                             <div class="col-sm-2 text-right"><strong>Precio</strong></div>
                                                             <div class="col-sm-2 text-right"><strong>Cantidad</strong></div>
                                                             <div class="col-sm-2 text-right"><strong>Subtotal</strong></div>
@@ -155,14 +155,14 @@ $ventaModelo = new VentaModelo();
                                                             $subtotal += $sub; ?>
                                                             <div class="row">
                                                                 <div class="col-sm-2"><img src="<?php echo DIR_IMG_ARTICULO . $arrayArticulo['url_imagen'] ?>" alt="imagen" height="50px"></div>
-                                                                <div class="col-sm-4"><span><?php echo $arrayArticulo['articulo'] ?></span></div>
+                                                                <div class="col-sm-3"><span><?php echo $arrayArticulo['articulo'] ?></span></div>
                                                                 <div class="col-sm-2 text-right"><span>$ <?php echo $arrayArticulo['precio'] ?></span></div>
                                                                 <div class="col-sm-2 text-right"><span><?php echo $arrayArticulo['cantidad'] ?></span></div>
                                                                 <div class="col-sm-2 text-right"><span>$ <?php echo number_format($sub, 2) ?></span></div>
                                                             </div>
                                                         <?php } ?>
                                                         <div class="row">
-                                                            <div class="col-sm-10 text-right"><strong>Subtotal</strong></div>
+                                                            <div class="col-sm-9 text-right"><strong>Subtotal</strong></div>
                                                             <div class="col-sm-2 text-right"><span>$ <?php echo number_format($subtotal, 2) ?></span></div>
                                                         </div>
                                                     </div>
@@ -187,7 +187,7 @@ $ventaModelo = new VentaModelo();
                                                     <div class="modal-dialog modal-dialog-scrollable">
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <div class="col-sm-6"><strong>Nombre</strong></div>
+                                                                <div class="col-sm-5"><strong>Nombre</strong></div>
                                                                 <div class="col-sm-2 text-right"><strong>Precio</strong></div>
                                                                 <div class="col-sm-2 text-right"><strong>Cantidad</strong></div>
                                                                 <div class="col-sm-2 text-right"><strong>Subtotal</strong></div>
@@ -202,14 +202,14 @@ $ventaModelo = new VentaModelo();
                                                                 $sub = $arrayPlan['precio'] * $arrayPlan['cantidad'];
                                                                 $subtotal += $sub; ?>
                                                                 <div class="row">
-                                                                    <div class="col-sm-6"><?php echo $arrayPlan['nombre'] ?></div>
+                                                                    <div class="col-sm-5"><?php echo $arrayPlan['nombre'] ?></div>
                                                                     <div class="col-sm-2 text-right"><span>$ <?php echo $arrayPlan['precio'] ?></span></div>
                                                                     <div class="col-sm-2 text-right"><span><?php echo $arrayPlan['cantidad'] ?></span></div>
                                                                     <div class="col-sm-2 text-right"><span>$ <?php echo number_format($sub, 2) ?></span></div>
                                                                 </div>
                                                             <?php } ?>
                                                             <div class="row">
-                                                                <div class="col-sm-10 text-right"><strong>Subtotal</strong></div>
+                                                                <div class="col-sm-9 text-right"><strong>Subtotal</strong></div>
                                                                 <div class="col-sm-2 text-right"><span>$ <?php echo number_format($subtotal, 2) ?></span></div>
                                                             </div>
                                                         </div>
@@ -227,13 +227,15 @@ $ventaModelo = new VentaModelo();
                             </tbody>
                             <tfoot>
                                 <tr>
-
-                                    <th>Tarifa</th>
+                                    <th>Nº</th>
+                                    <th>Estado</th>
+                                    <th>Comprador</th>
+                                    <th>Moneda</th>
+                                    <th>Compra</th>
                                     <th>Detalle</th>
                                 </tr>
                             </tfoot>
                         </table>
-
                     </div> <!-- /.box-body -->
                 </div> <!-- /.box -->
             </div> <!-- /.col -->

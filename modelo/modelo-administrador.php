@@ -1,8 +1,8 @@
 <?php
-class InvitadoModelo
+class AdministradorModelo
 {
     /**
-     * Lee un Invitado y devuelve un array de resultados
+     * Lee un Administrador y devuelve un array de resultado
      */
     public function leer($id)
     {
@@ -10,7 +10,7 @@ class InvitadoModelo
 
         $conn = (new Conexion())->conectarPDO();
 
-        $sentencia = $conn->prepare("SELECT * FROM v_invitado WHERE idpersona = :id");
+        $sentencia = $conn->prepare("SELECT * FROM v_admins WHERE idpersona = :id");
 
         $sentencia->bindParam(":id", $id);
 
@@ -25,7 +25,7 @@ class InvitadoModelo
     }
 
     /**
-     * Devuelve todos los invitados que haya en la base datos
+     * Devuelve todos los Administradores que haya en la bd
      */
     public function leerTodos()
     {
@@ -33,7 +33,7 @@ class InvitadoModelo
 
         $conn = (new Conexion())->conectarPDO();
 
-        $sentencia = $conn->query("SELECT * FROM v_invitado;");
+        $sentencia = $conn->query("SELECT * FROM v_admins;");
 
         return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -47,15 +47,12 @@ class InvitadoModelo
         $nombres,
         $apellidopa,
         $apellidoma,
-        $descripcion,
-        $url_imagen,
-        $institucion_procedencia = null,
-        $idgrado_instruccion = null,
         $email = null,
         $telefono = null,
         $doc_identidad = null,
-        $nacimiento = null,
-        $sexo = null
+        $usuario,
+        $contrasena,
+        $nivel
     ) {
         include_once 'controlador/util/bd_conexion_pdo.php';
 
@@ -76,9 +73,9 @@ class InvitadoModelo
                 $rpta = true;
             else throw new PDOException("No se creó Persona");
 
-            if ($this->insertar($conn, $idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) > 0)
+            if ($this->insertar($conn, $idpersona, $usuario, $contrasena, $nivel) > 0)
                 $rpta = true;
-            else throw new PDOException("No se creó Invitado");
+            else throw new PDOException("No se creó Administrador");
 
             $personaModelo = null;
             $idpersona = null;
@@ -93,40 +90,28 @@ class InvitadoModelo
     }
 
     private function insertar(
-        \PDO $conn,
+        \PDO &$conn,
         $idpersona,
-        $descripcion,
-        $url_imagen,
-        $institucion_procedencia = null,
-        $idgrado_instruccion = null,
-        $nacimiento = null,
-        $sexo = null
+        $usuario,
+        $contrasena,
+        $nivel
     ) {
         $sentencia = $conn->prepare(
-            "INSERT INTO invitado (
+            "INSERT INTO admins (
                 idpersona,
-                descripcion,
-                url_imagen,
-                institucion_procedencia,
-                idgrado_instruccion,
-                nacimiento,
-                sexo) VALUES (
+                usuario,
+                password,
+                nivel) VALUES (
                 :idpersona,
-                :descripcion,
-                :url_imagen,
-                :institucion_procedencia,
-                :idgrado_instruccion,
-                :nacimiento,
-                :sexo);"
+                :usuario,
+                :password,
+                :nivel);"
         );
 
         $sentencia->bindParam(":idpersona", $idpersona, PDO::PARAM_INT);
-        $sentencia->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
-        $sentencia->bindParam(":url_imagen", $url_imagen, PDO::PARAM_STR);
-        $sentencia->bindParam(":institucion_procedencia", $institucion_procedencia);
-        $sentencia->bindParam(":idgrado_instruccion", $idgrado_instruccion);
-        $sentencia->bindParam(":nacimiento", $nacimiento);
-        $sentencia->bindParam(":sexo", $sexo);
+        $sentencia->bindParam(":usuario", $usuario, PDO::PARAM_STR);
+        $sentencia->bindParam(":password", $contrasena, PDO::PARAM_STR);
+        $sentencia->bindParam(":nivel", $nivel);
 
         $sentencia->execute();
 
@@ -139,8 +124,7 @@ class InvitadoModelo
     }
 
     /**
-     * Actualiza un invitado.
-     * Si la url de la imagen es null, no se actualiza la imagen.
+     * Actualiza un administrador.
      * Devuelve true si se guardó correctamente sino false.
      */
     public function actualizar(
@@ -148,15 +132,12 @@ class InvitadoModelo
         $nombres,
         $apellidopa,
         $apellidoma,
-        $descripcion,
-        $url_imagen = null,
-        $institucion_procedencia = null,
-        $idgrado_instruccion = null,
         $email = null,
         $telefono = null,
         $doc_identidad = null,
-        $nacimiento = null,
-        $sexo = null
+        $usuario,
+        $contrasena,
+        $nivel
     ) {
 
         include_once 'controlador/util/bd_conexion_pdo.php';
@@ -173,25 +154,29 @@ class InvitadoModelo
             $personaModelo = new PersonaModelo();
 
             $actualizoPersona = true;
-            $actualizoInvitado = true;
+            $actualizoAdministrador = true;
             $mensaje = "";
 
-            if ($personaModelo->actualizarVincular($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) <= 0) {
+            $noCambioPersona = $personaModelo->esIgual($idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad);
+
+            if (!$noCambioPersona && $personaModelo->actualizarVincular($conn, $idpersona, $nombres, $apellidopa, $apellidoma, $email, $telefono, $doc_identidad) <= 0) {
                 $actualizoPersona = false;
                 $mensaje = "No se actualizó persona ";
             }
 
-            if ($this->update($conn, $idpersona, $descripcion, $url_imagen, $institucion_procedencia, $idgrado_instruccion, $nacimiento, $sexo) <= 0) {
-                $actualizoInvitado = false;
-                $mensaje .= "No se actualizó invitado ";
+            $cambioAmdin = $this->esIgual($idpersona, $usuario, $contrasena, $nivel);
+
+            if (!$cambioAmdin && $this->update($conn, $idpersona, $usuario, $contrasena, $nivel) <= 0) {
+                $actualizoAdministrador = false;
+                $mensaje .= "No se actualizó Administrador ";
             }
 
             /**
-             * Si ni en la tabla persona ni en invitado hay filas afectadas entonces
+             * Si ni en la tabla persona ni en Administrador hay filas afectadas entonces
              * devuelve un error (esto podría manejarse diferente)
              * Si las filas de alguna de las tablas ha sido afectada el resultado es true
              */
-            if (!$actualizoPersona && !$actualizoInvitado) throw new Exception($mensaje);
+            if (!$actualizoPersona && !$actualizoAdministrador) throw new Exception($mensaje);
             else $resultado = true;
 
             $personaModelo = null;
@@ -201,39 +186,29 @@ class InvitadoModelo
         } catch (Exception $e) {
             $conn->rollBack(); // Revertimos los cambios
             echo "mensaje Error: " . var_dump($e) . "<br/>";
+            //echo var_dump($e);
             $resultado = false;
         }
         $conn = null;
         return $resultado;
     }
 
-    /**
-     * Si le pasamos la url de la imagen como NULL, no se actualiza la imagen.
-     */
-    private function update(\PDO &$conn, $idpersona, $descripcion, $url_imagen = null, $institucion_procedencia = null, $idgrado_instruccion = null, $nacimiento = null, $sexo = null)
+    private function update(\PDO &$conn, $idpersona, $usuario, $contrasena, $nivel)
     {
         $consulta =
-            "UPDATE invitado SET
-            descripcion = :u_descripcion, "
-            . ($url_imagen != null ? "url_imagen = :u_url_imagen, " : "") .
-            "institucion_procedencia = :u_institucion_procedencia, 
-            idgrado_instruccion = :u_idgrado_instruccion, 
-            nacimiento = :u_nacimiento, 
-            sexo = :u_sexo 
+            "UPDATE admins SET
+            usuario = :u_usuario, "
+            . ($contrasena != null ? "password = :u_password, " : "") .
+            "nivel = :u_nivel 
             WHERE idpersona = :u_idpersona;";
 
         $sentencia = $conn->prepare($consulta);
 
         $sentencia->bindParam(":u_idpersona", $idpersona, PDO::PARAM_INT);
-        $sentencia->bindParam(":u_descripcion", $descripcion, PDO::PARAM_STR);
-
-        if ($url_imagen != null)
-            $sentencia->bindParam(":u_url_imagen", $url_imagen);
-
-        $sentencia->bindParam(":u_institucion_procedencia", $institucion_procedencia);
-        $sentencia->bindParam(":u_idgrado_instruccion", $idgrado_instruccion);
-        $sentencia->bindParam(":u_nacimiento", $nacimiento);
-        $sentencia->bindParam(":u_sexo", $sexo);
+        $sentencia->bindParam(":u_usuario", $usuario, PDO::PARAM_STR);
+        if ($contrasena != null)
+            $sentencia->bindParam(":u_password", $contrasena);
+        $sentencia->bindParam(":u_nivel", $nivel);
 
         $sentencia->execute();
 
@@ -263,5 +238,18 @@ class InvitadoModelo
         $sentencia = null;
 
         return $resultado;
+    }
+
+    /**
+     * 
+     */
+
+    public function esIgual($idpersona, $usuario, $contrasena, $nivel)
+    {
+        $admins = $this->leer($idpersona)[0];
+        if ($admins['usuario'] != $usuario) return false;
+        if ($contrasena != null) return false;
+        if ($admins['nivel'] != $nivel) return false;
+        return true;
     }
 }

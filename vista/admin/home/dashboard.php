@@ -129,7 +129,7 @@
     </div>
 
 
-    <h2 class="page-header">Articulos más vendidos</h2>
+    <h2 class="page-header">Artículos más vendidos</h2>
 
     <!-- Total Articulo -->
     <div class="row">
@@ -174,7 +174,7 @@
     </div>
 
 
-    <h2 class="page-header">Lo más regalado</h2>
+    <h2 class="page-header">Regalos más solicitados</h2>
 
     <!-- Total regalos -->
     <div class="row">
@@ -215,7 +215,7 @@
 
 
 
-    <h2 class="page-header">Resumen Invitados</h2>
+    <h2 class="page-header">Resumen de Invitados</h2>
 
     <!-- Resumen Invitados -->
     <div class="row">

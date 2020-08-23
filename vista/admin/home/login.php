@@ -1,5 +1,6 @@
 <?php
 include_once 'modelo/modelo-admins.php';
+
 $adminsModelo = new AdminsModelo();
 
 if ((int)$adminsModelo->cuentaAdmins()[0]['total'] > 0) { ?>

@@ -14,43 +14,43 @@
               <div class="row">
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="nombres">Nombres</label>
-                  <input required type="text" class="form-control" id="nombres" name="nombres">
+                  <label for="nombres">Nombres: </label>
+                  <input required type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese el nombre (es)">
                 </div>
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="apellidopa">Apellido Paterno</label>
-                  <input required type="text" class="form-control" id="apellidopa" name="apellidopa">
+                  <label for="apellidopa">Apellido Paterno: </label>
+                  <input required type="text" class="form-control" id="apellidopa" name="apellidopa" placeholder="Ingrese el apellido paterno">
                 </div>
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="apellidoma">Apellido Materno</label>
-                  <input required type="text" class="form-control" id="apellidoma" name="apellidoma">
+                  <label for="apellidoma">Apellido Materno: </label>
+                  <input required type="text" class="form-control" id="apellidoma" name="apellidoma" placeholder="Ingrese el apellido materno">
                 </div>
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="email">Email</label>
-                  <input required type="email" class="form-control" id="email" name="email">
+                  <label for="email">Email: </label>
+                  <input required type="email" class="form-control" id="email" name="email" placeholder="Ingrese un email">
                 </div>
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="telefono">Teléfono</label>
-                  <input required type="text" class="form-control" id="telefono" name="telefono">
+                  <label for="telefono">Teléfono: </label>
+                  <input required type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un teléfono">
                 </div>
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="doc_identidad">Documento de Identidad</label>
-                  <input required type="text" class="form-control" id="doc_identidad" name="doc_identidad">
+                  <label for="doc_identidad">Documento de Identidad: </label>
+                  <input required type="text" class="form-control" id="doc_identidad" name="doc_identidad" placeholder="Ingrese un documento de identidad">
                 </div>
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="usuario">Usuario</label>
-                  <input required type="text" class="form-control" id="usuario" name="usuario">
+                  <label for="usuario">Usuario: </label>
+                  <input required type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese el usuario">
                 </div>
 
                 <div class="col-lg-6" style="margin: 5px 0;">
-                  <label for="contrasena">Contraseña</label>
-                  <input required type="password" class="form-control" id="contrasena" name="contrasena">
+                  <label for="contrasena">Contraseña: </label>
+                  <input required type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese la Contraseña">
                 </div>
 
               </div>

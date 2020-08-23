@@ -308,18 +308,27 @@ if ($verificador) {
 
                 // CRUD Administrador
             case 'administrador-crear':
-                include 'controlador/controlador-admins.php';
 
-                crear(
-                    $_POST['nombre'],
-                    $_POST['apellidopa'],
-                    $_POST['apellidoma'],
-                    $_POST['email'],
-                    $_POST['telefono'],
-                    $_POST['doc_ident'],
-                    $_POST['usuario'],
-                    $_POST['password'],
-                    $_POST['nivel']
+                $nombres = $_POST['nombres'];
+                $apellidopa = $_POST['apellidopa'];
+                $apellidoma = $_POST['apellidoma'];
+                $email = $_POST['email'];
+                $telefono = $_POST['telefono'];
+                $doc_identidad = $_POST['doc_identidad'];
+                $usuario = $_POST['usuario'];
+                $contrasena = $_POST['password'];
+                $nivel = $_POST['nivel'];
+
+                crearA(
+                    $nombres,
+                    $apellidopa,
+                    $apellidoma,
+                    $email == "" ? null : $email,
+                    $telefono == "" ? null : $telefono,
+                    $doc_identidad == "" ? null : $doc_identidad,
+                    $usuario,
+                    $contrasena,
+                    $nivel
                 ) ?
                     include 'vista/admin/administrador/lista-admin.php' :
                     include 'vista/admin/administrador/crear-admin.php';
@@ -330,26 +339,35 @@ if ($verificador) {
                 break;
 
             case 'administrador-editar1':
-                include 'controlador/controlador-admins.php';
 
-                actualizar(
+                $nombres = $_POST['nombres'];
+                $apellidopa = $_POST['apellidopa'];
+                $apellidoma = $_POST['apellidoma'];
+                $email = $_POST['email'];
+                $telefono = $_POST['telefono'];
+                $doc_identidad = $_POST['doc_identidad'];
+                $usuario = $_POST['usuario'];
+                $contrasena = $_POST['password'];
+                $nivel = $_POST['nivel'];
+
+                actualizarA(
                     openssl_decrypt($_POST['id'], COD, KEY),
-                    $_POST['nombre'],
-                    $_POST['apellidopa'],
-                    $_POST['apellidoma'],
-                    $_POST['email'],
-                    $_POST['telefono'],
-                    $_POST['doc_ident'],
-                    $_POST['usuario'],
-                    $_POST['password'],
-                    $_POST['nivel']
+                    $nombres,
+                    $apellidopa,
+                    $apellidoma,
+                    $email == "" ? null : $email,
+                    $telefono == "" ? null : $telefono,
+                    $doc_identidad == "" ? null : $doc_identidad,
+                    $usuario,
+                    $contrasena,
+                    $nivel
                 );
                 include 'vista/admin/administrador/lista-admin.php';
                 break;
 
             case 'administrador-eliminar':
-                include 'controlador/controlador-admins.php';
-                eliminar(openssl_decrypt($_POST['id'], COD, KEY));
+
+                eliminarA(openssl_decrypt($_POST['id'], COD, KEY));
                 include 'vista/admin/administrador/lista-admin.php';
                 break;
 
@@ -550,7 +568,8 @@ if ($verificador) {
         if ($_POST['dashboard'] == 'login') {
             evaluarLogeo();
         } elseif ($_POST['dashboard'] == 'admin1-crear') {
-            crear(
+
+            crearAdmins(
                 $_POST['nombres'],
                 $_POST['apellidopa'],
                 $_POST['apellidoma'],
@@ -574,7 +593,7 @@ $connPDO = null;
 function evaluarLogeo()
 {
     $verificado = verificarUsuarioPassword($_POST['usuario'], $_POST['contrasena']);
-    $sesion = new Sesion(); // Se intancia otra vez la sesion para que pueda verlo cabecera
+    $sesion = new Sesion(); // Se intancia otra vez la sesion para que pueda ver la cabecera
     if ($verificado) {
         include_once 'vista/plantillas/cabecera-admin.php';
         include_once 'vista/admin/home/admin-area.php';

@@ -1,7 +1,20 @@
+<?php
+
+/**
+ * Permite cerrar sesion
+ */
+if (isset($_POST)) {
+    if (isset($_POST['cerrar'])) {
+        if ($_POST['cerrar'] == 'true')
+            session_destroy();
+    }
+}
+?>
+
 <section class="seccion contenedor">
-    <h2>Curso Taller - Objetivo</h2>
+    <h2>Objetivo</h2>
     <p>
-        Capacitar a los participantes en el desarrollo de tesis en ingeniería, a fin de incrementar el número de graduados y titulados por tesis.
+        Capacitar a los participantes sobre la Automatización Inteligente y las ventajas de mejorar la experiencia de los clientes de principio a fin y mejorar la productividad de los empleados, consiguiendo liberarles de tareas repetitivas y permitiendo que se enfoquen en añadir valor a una empresa.
     </p>
 </section>
 <!--.seccion contenedor-->
@@ -144,26 +157,20 @@
             </li>
 
             <!-- Eventos -->
-            <?php
-            try {
-                $sql = "SELECT * FROM v_categoria_cantidad_evento;";
-                $resultado = $conn->query($sql);
-            } catch (Exception $e) {
-                $error = $e->getMessage();
-            }
-            $row = $resultado->fetch_all(MYSQLI_ASSOC);
-            ?>
-            <?php foreach ($row as $catego) : ?>
-                <?php if ($catego['categoria_evento'] > 0) : ?>
-                    <li>
-                        <p class="numero">
-                            <?php echo $catego['cantidad'] ?>
-                        </p> <?php echo $catego['categoria_evento'] ?>
-                    </li>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            <?php $conn->close(); // Cerramos la conexion a la base de datos
-            ?>
+            <li>
+                <p class="numero">
+                    <?php
+                    try {
+                        $sql = "SELECT count(*) AS cantidad FROM evento";
+                        $resultado = $conn->query($sql);
+                    } catch (Exception $e) {
+                        $error = $e->getMessage();
+                    }
+                    $row = $resultado->fetch_all(MYSQLI_ASSOC);
+                    ?>
+                    <?php echo $row[0]['cantidad'] ?>
+                </p> Temas
+            </li>
         </ul>
         <!--.resumen-evento-->
     </div>

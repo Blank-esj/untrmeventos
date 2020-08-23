@@ -199,7 +199,7 @@ ul {
 
 /** Header **/
 div.hero {
-  background: rgba(229, 232, 233, 0.55);
+  background-image: url(../../assets/img/congreso.jpg);
   height: 65vh;
   background-position: top center;
   background-size: cover;
@@ -226,6 +226,7 @@ nav.redes-sociales a:last-child {
 div.informacion-evento {
   text-align: center;
   color: #0c0d18;
+  filter: drop-shadow(5px 5px 10px rgb(255, 255, 255));
   font-weight: bold;
 }
 @media only screen and (min-width: 768px) {
@@ -264,7 +265,7 @@ h1.nombre-sitio {
   text-transform: uppercase;
   padding-top: 100px;
   font-family: "PT Sans", sans-serif;
-  filter: drop-shadow(5px 5px 10px rgba(30, 58, 94, 0.55));
+  filter: drop-shadow(5px 5px 10px rgb(255, 255, 255));
 }
 @media only screen and (min-width: 768px) {
   h1.nombre-sitio {

@@ -3,8 +3,8 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Lista de Registrados
-      <small>Aquí podrás editar y eliminar a los Registrados. </small>
+      Lista de Boletos
+      <small>Aquí podrás editar y eliminar a los boletos registrados. </small>
     </h1>
   </section>
   <section class="content">
@@ -13,7 +13,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Administra a los registrados</h3>
+            <h3 class="box-title">Gestionar Boletos</h3>
           </div>
           <div class="box-body">
             <!-- /.box-header -->
@@ -29,7 +29,7 @@
                   <th>Regalo</th>
                   <th>Email</th>
                   <th>Teléfono</th>
-                  <th>N° Documento</th>
+                  <th>Documento de Identidad</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -94,7 +94,7 @@
                   <th>Regalo</th>
                   <th>Email</th>
                   <th>Teléfono</th>
-                  <th>N° Documento</th>
+                  <th>Documento de Identidad</th>
                   <th>Acciones</th>
                 </tr>
               </tfoot>

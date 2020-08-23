@@ -3,8 +3,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Crear Plan
-            <small>Llena el formulario para crear un Plan.</small>
+            Crear Planes
+            <small>Aquí podrás agregar un nuevo plan.</small>
         </h1>
     </section>
     <div class="row">
@@ -20,42 +20,43 @@
                         <div class="box-body">
 
                             <!-- Nombre -->
-                            <div class="form-group">
-                                <label for="nombre">Nombre </label>
+                            <div class="form-group col-md-6">
+                                <label for="nombre">Nombre: </label>
                                 <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
                             </div>
 
                             <!-- Precio -->
-                            <div class="form-group">
-                                <label for="precio">Precio </label>
+                            <div class="form-group col-md-6">
+                                <label for="precio">Precio: </label>
                                 <input required type="number" class="form-control" name="precio" id="precio" placeholder="Ingrese el precio">
                             </div>
 
                             <!-- Descripción -->
-                            <div class="mb-3">
-                                <label for="btextarea">Descripcion</label>
-                                <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripcion"></textarea>
+                            <div class="form-group col-md-12"">
+                                <label for=" btextarea">Descripcion: </label>
+                                <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripción"></textarea>
                             </div>
 
                             <!-- Beneficio -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Beneficio</h6>
-                                    <?php
-                                    include 'modelo/modelo-beneficio.php';
-                                    foreach ((new BeneficioModelo())->leerTodos($connPDO) as $indice => $arrayBeneficio) { ?>
+                            <div class="form-group col-md-12">
+                                <div class="card">
+                                    <div class="card-body class=" form-group">
+                                        <label class="card-subtitle mb-2 text-muted">Beneficios: </label>
+                                        <?php
+                                        include 'modelo/modelo-beneficio.php';
+                                        foreach ((new BeneficioModelo())->leerTodos($connPDO) as $indice => $arrayBeneficio) { ?>
 
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="check-beneficio[]" value="<?php echo openssl_encrypt($arrayBeneficio['idbeneficio'], COD, KEY) ?>" id="check-<?php echo $indice ?>">
-                                            <label class="form-check-label" for="check-<?php echo $indice ?>">
-                                                <?php echo $arrayBeneficio['nombre'] ?>
-                                            </label>
-                                        </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="check-beneficio[]" value="<?php echo openssl_encrypt($arrayBeneficio['idbeneficio'], COD, KEY) ?>" id="check-<?php echo $indice ?>">
+                                                <label class="form-check-label" for="check-<?php echo $indice ?>">
+                                                    <?php echo $arrayBeneficio['nombre'] ?>
+                                                </label>
+                                            </div>
 
-                                    <?php } ?>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
-
                         </div> <!-- /.box-body -->
 
                         <div class="box-footer">
@@ -64,8 +65,8 @@
                         </div>
 
                     </form>
-                </div> <!-- /.box-body -->
+                </div> <!-- /.box -->
+            </section> <!-- /.content -->
         </div> <!-- /.box -->
-        </section> <!-- /.content -->
     </div>
 </div> <!-- /.content-wrapper -->

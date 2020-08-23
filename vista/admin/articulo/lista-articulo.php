@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Lista de Artículos
-            <small>Aquí podrás editar y eliminar a los Artículos registrados. </small>
+            <small>Aquí podrás editar y eliminar los artículos registrados. </small>
         </h1>
     </section>
     <section class="content">
@@ -13,7 +13,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Administra a los artículos</h3>
+                        <h3 class="box-title">Gestionar Artículos</h3>
                     </div>
                     <div class="box-body">
                         <!-- /.box-header -->
@@ -49,7 +49,7 @@
                                         <td><?php echo $articulo['precio'] ?></td>
                                         <td><?php echo $articulo['stock']; ?></td>
                                         <td><?php echo $articulo['descripcion']; ?></td>
-                                        <td><img src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen']; ?>" width="150"></td>
+                                        <td style="vertical-align: middle;"><img style="border-radius: 50%;" src="<?php echo DIR_IMG_ARTICULO . $articulo['url_imagen']; ?>" width="70" height="70"></td>
                                         <td>
 
                                             <?php $id = openssl_encrypt($articulo['idarticulo'], COD, KEY); ?>
@@ -67,7 +67,6 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
-
                                         </td>
                                     </tr>
                                 <?php

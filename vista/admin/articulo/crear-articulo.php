@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Crear Artículos
-            <small>Llena el formulario para crear un Artículo.</small>
+            <small>Aquí podrás agregar un nuevo artículo.</small>
         </h1>
     </section>
     <div class="row">
@@ -16,53 +16,47 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Crear Artículo</h3>
                     </div>
-                    <div class="box-body">
-                        <!-- form start -->
-                        <form method="post" action="dashboard" enctype="multipart/form-data">
-                            <div class="box-body">
+                    <!-- form start -->
+                    <form method="post" action="dashboard" enctype="multipart/form-data">
+                        <div class="box-body">
 
-                                <div class="row">
-
-                                    <!-- Nombre -->
-                                    <div class="form-group col-md-8">
-                                        <label for="nombre">Nombre </label>
-                                        <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
-                                    </div>
-
-                                    <!-- url_imagen / imagen_articulo -->
-                                    <div class="form-group col-md-4">
-                                        <label for="imagen_articulo">Imagen:</label>
-                                        <input type="file" id="imagen_articulo" name="archivo_imagen">
-                                        <p class="help-block">Agregar la imagen del articulo aquí.</p>
-                                    </div>
-
-                                    <!-- Precio -->
-                                    <div class="form-group col-md-6">
-                                        <label for="precio">Precio </label>
-                                        <input required type="number" class="form-control" name="precio" id="precio" placeholder="Ingrese el precio">
-                                    </div>
-
-                                    <!-- Stock -->
-                                    <div class="form-group col-md-6">
-                                        <label for="stock">Stock </label>
-                                        <input required type="number" class="form-control" name="stock" id="stock" placeholder="Ingrese el stock">
-                                    </div>
-
-                                    <!-- Descripción -->
-                                    <div class="mb-3 col-md-12">
-                                        <label for="btextarea">Descripcion</label>
-                                        <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripcion"></textarea>
-                                    </div>
-
-                                </div>
-
-                            </div> <!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary" name="dashboard" value="articulo-crear">Agregar</button>
+                            <!-- Nombre -->
+                            <div class="form-group col-md-6">
+                                <label for="nombre">Nombre: </label>
+                                <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
                             </div>
-                        </form>
-                    </div> <!-- /.box-body -->
+
+                            <!-- url_imagen / imagen_articulo -->
+                            <div class="form-group col-md-6">
+                                <label for="imagen_articulo">Imagen:</label>
+                                <input type="file" id="imagen_articulo" name="archivo_imagen">
+                                <h6 class="help-block">Agregar la imagen del artículo aquí.</h6>
+                            </div>
+
+                            <!-- Precio -->
+                            <div class="form-group col-md-6">
+                                <label for="precio">Precio: </label>
+                                <input required type="number" class="form-control" name="precio" id="precio" placeholder="Ingrese el precio">
+                            </div>
+
+                            <!-- Stock -->
+                            <div class="form-group col-md-6">
+                                <label for="stock">Stock: </label>
+                                <input required type="number" class="form-control" name="stock" id="stock" placeholder="Ingrese el stock">
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="form-group col-md-12">
+                                <label for="btextarea">Descripción: </label>
+                                <textarea class="form-control" id="btextarea" name="descripcion" placeholder="Ingrese una descripción"></textarea>
+                            </div>
+
+                        </div> <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary" name="dashboard" value="articulo-crear">Agregar</button>
+                        </div>
+                    </form>
                 </div> <!-- /.box -->
             </section> <!-- /.content -->
         </div>

@@ -10,7 +10,7 @@ class AdminsModelo
         include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conexion = (new Conexion())->conectarPDO();
-        
+
         $sentencia = $conexion->prepare('SELECT idpersona, usuario, nombre_completo, password, nivel FROM v_admins WHERE usuario = :usuario;');
         $sentencia->bindParam(':usuario', $usuario);
 
@@ -32,10 +32,10 @@ class AdminsModelo
         include_once 'controlador/util/bd_conexion_pdo.php';
 
         $conexion = (new Conexion())->conectarPDO();
-        
+
         $sentencia = $conexion->query("SELECT COUNT(*) total FROM admins");
         $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $sentencia = null;
         $conexion = null;
 
@@ -93,7 +93,7 @@ class AdminsModelo
         return $resultado;
     }
 
-    public function leerTodos()
+    /**public function leerTodos()
     {
         include_once 'controlador/util/bd_conexion_pdo.php';
 
@@ -105,5 +105,5 @@ class AdminsModelo
         $conexion = null;
 
         return $sentencia;
-    }
+    }**/
 }

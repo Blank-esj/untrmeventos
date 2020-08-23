@@ -29,10 +29,19 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="dashboard?id=<?php echo $sesion->leerIdUsuario(); ?>" class="btn btn-success btn-flat">Ajustes</a>
+                    <form action="dashboard" method="post" style="display: inline;">
+                      <input type="hidden" name="id" value="<?php echo openssl_encrypt($sesion->leerIdUsuario(), COD, KEY) ?>">
+                      <button type="submit" name="dashboard" value="administrador-editar0" class="btn btn-warning">
+                        Ajustes
+                      </button>
+                    </form>
                   </div>
                   <div class="pull-right">
-                    <a href="dashboard?dashboard=salir" class="btn btn-success btn-flat">Cerrar Sesión</a>
+                    <form action="home" method="post" style="display: inline;">
+                      <button type="submit" name="cerrar" value="true" class="btn btn-warning">
+                        Salir
+                      </button>
+                    </form>
                   </div>
                 </li>
               </ul>

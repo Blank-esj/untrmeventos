@@ -1,7 +1,7 @@
 <?php
 // Modificado: 16/07/2020 13:19
 // Modificado: 17/07/2020 10:32
-require('../fpdf/fpdf.php');
+include('fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
@@ -15,17 +15,17 @@ class PDF extends FPDF
         // Move to the right
         $this->Cell(55);
         // Title
-        $this->Cell(80, 12, 'REPORTE DE ADMINISTRADORES', 0, 0, 'C');
+        $this->Cell(162, 12, 'ADMINISTRADORES', 0, 0, 'C');
         // Line break
         $this->Ln(12);
         $this->SetFillColor(240, 240, 240);
-        $this->Cell(10, 12, utf8_decode('Nº'), 1, 0, 'C', 1);
-        $this->Cell(40, 12, 'USUARIO', 1, 0, 'C', 1);
-        $this->Cell(80, 12, 'NOMBRES Y APELLIDOS', 1, 0, 'C', 1);
-        $this->Cell(60, 12, 'E-MAIL', 1, 0, 'C', 1);
-        $this->Cell(30, 12, 'TELÉFONO', 1, 0, 'C', 1);
-        $this->Cell(30, 12, 'DOC. DE IDENTIDAD', 1, 0, 'C', 1);
-        $this->Cell(50, 12, 'NIVEL DE USUARIO', 1, 1, 'C', 1);
+        $this->Cell(10, 11, utf8_decode('Nº'), 1, 0, 'C', 1);
+        $this->Cell(25, 11, 'USUARIO', 1, 0, 'C', 1);
+        $this->Cell(65, 11, 'NOMBRES Y APELLIDOS', 1, 0, 'C', 1);
+        $this->Cell(60, 11, 'E-MAIL', 1, 0, 'C', 1);
+        $this->Cell(30, 11, utf8_decode('TELÉFONO'), 1, 0, 'C', 1);
+        $this->Cell(30, 11, 'DOC. ID', 1, 0, 'C', 1);
+        $this->Cell(50, 11, 'NIVEL DE USUARIO', 1, 1, 'C', 1);
     }
 
     // Page footer
@@ -40,14 +40,21 @@ class PDF extends FPDF
     }
 }
 
-require_once('controlador/util/bd_conexion.php');
+include_once '../../global/config.php';
+
+$conn = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
+
+if ($conn->connect_error) {
+    echo $error->$conn->connect_error;
+}
+$conn->set_charset("utf8");
 
 $consulta = "SELECT * FROM v_admins ";
 $resultado = $conn->query($consulta);
 
 // Instanciation of inherited class
 //'L', 'mm', 'A4'
-$pdf = new PDF('P', 'mm', 'A4');
+$pdf = new PDF('L', 'mm', 'A4');
 $pdf->SetMargins(15, 15, 15);
 $pdf->SetAutoPageBreak(true, 15);
 $pdf->AliasNbPages();
@@ -63,12 +70,14 @@ while ($row = $resultado->fetch_assoc()) {
         $nivel = utf8_decode('Usuario Estándar');
     }
     $pdf->Cell(10, 10, $numero, 1, 0, 'C', 0);
-    $pdf->Cell(40, 10, $row['usuario'], 1, 0, 'C', 0);
-    $pdf->Cell(80, 10, utf8_decode($row['nombres'] . " " . $row['apellidopa'] . " " . $row['apellidoma']), 1, 0, 'J', 0);
+    $pdf->Cell(25, 10, $row['usuario'], 1, 0, 'C', 0);
+    $pdf->Cell(65, 10, utf8_decode($row['nombre_completo']), 1, 0, 'J', 0);
     $pdf->Cell(60, 10, $row['email'], 1, 0, 'J', 0);
-    $pdf->Cell(30, 10, $row['telefono'], 1, 0, 'J', 0);
-    $pdf->Cell(30, 10, $row['doc_identidad'], 1, 0, 'J', 0);
+    $pdf->Cell(30, 10, $row['telefono'], 1, 0, 'C', 0);
+    $pdf->Cell(30, 10, $row['doc_identidad'], 1, 0, 'C', 0);
     $pdf->Cell(50, 10, $nivel, 1, 1, 'C', 0);
     $numero++;
 }
 $pdf->Output();
+
+$conn->close();

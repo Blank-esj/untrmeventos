@@ -4,7 +4,7 @@
   <section class="content-header">
     <h1>
       Lista de Invitados
-      <small>Aquí podrás editar y eliminar a los Invitados registrados. </small>
+      <small>Aquí podrás editar y eliminar los invitados registrados. </small>
     </h1>
   </section>
   <section class="content">
@@ -13,7 +13,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Administra a los invitados</h3>
+            <h3 class="box-title">Gestionar Invitados</h3>
           </div>
           <div class="box-body">
             <!-- /.box-header -->
@@ -23,15 +23,15 @@
                   <tr>
                     <th>Nº</th>
                     <th>Imagen</th>
-                    <th>Nombre de Invitado</th>
+                    <th>Nombres y Apellidos</th>
                     <th>Email</th>
                     <th>Teléfono</th>
-                    <th>Documento ID</th>
+                    <th>Documento de Identidad</th>
                     <th>Insticución de Procedencia</th>
-                    <th>Grado</th>
-                    <th>Fecha Nacimiento</th>
+                    <th>Grado Académico</th>
+                    <th>Fecha de Nacimiento</th>
                     <th>Sexo</th>
-                    <th>Biografia</th>
+                    <th>Biografía</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -89,17 +89,17 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>N°</th>
+                    <th>Nº</th>
                     <th>Imagen</th>
-                    <th>Nombre de Invitado</th>
+                    <th>Nombres y Apellidos</th>
                     <th>Email</th>
                     <th>Teléfono</th>
-                    <th>Documento ID</th>
+                    <th>Documento de Identidad</th>
                     <th>Insticución de Procedencia</th>
-                    <th>Grado</th>
-                    <th>Fecha Nacimiento</th>
+                    <th>Grado Académico</th>
+                    <th>Fecha de Nacimiento</th>
                     <th>Sexo</th>
-                    <th>Biografia</th>
+                    <th>Biografía</th>
                     <th>Acciones</th>
                   </tr>
                 </tfoot>

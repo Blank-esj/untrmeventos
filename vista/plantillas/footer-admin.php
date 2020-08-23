@@ -39,10 +39,6 @@
   <!-- iCheck 1.0.1 -->
   <script src="vista/assets/js/icheck.min.js"></script>
 
-
-  <!-- Admin insert y login -->
-  <script src="controlador/js/admin-ajax.js"></script>
-  <script src="controlador/js/login-ajax.js"></script>
   <!-- Scripts controladores -->
   <script src="controlador/js/cotizador.js"></script>
   <script src="controlador/js/app.js"></script>

@@ -3,8 +3,8 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Lista de Categorias de Eventos
-      <small>Aquí podrás editar y eliminar las Categorías de los Eventos registrados. </small>
+      Lista de Categorías
+      <small>Aquí podrás editar y eliminar las categorías registradas. </small>
     </h1>
   </section>
   <section class="content">
@@ -13,7 +13,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Administra las categorías</h3>
+            <h3 class="box-title">Gestionar Categorías</h3>
           </div>
           <div class="box-body">
             <!-- /.box-header -->
@@ -21,8 +21,8 @@
               <thead>
                 <tr>
                   <th>Nº</th>
-                  <th>Nombre de Categoria</th>
-                  <th>Icono</th>
+                  <th>Nombre</th>
+                  <th>Ícono</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -72,8 +72,8 @@
               <tfoot>
                 <tr>
                   <th>Nº</th>
-                  <th>Nombre de Categoria</th>
-                  <th>Icono</th>
+                  <th>Nombre</th>
+                  <th>Ícono</th>
                   <th>Acciones</th>
                 </tr>
               </tfoot>

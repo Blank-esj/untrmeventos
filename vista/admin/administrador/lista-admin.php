@@ -4,7 +4,7 @@
   <section class="content-header">
     <h1>
       Lista de Administradores
-      <small> Aquí podrás editar o eliminar a los Usuarios registrados. </small>
+      <small> Aquí podrás editar o eliminar los administradores registrados. </small>
     </h1>
   </section>
   <section class="content">
@@ -13,7 +13,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Administrar a los Usuarios</h3>
+            <h3 class="box-title">Gestionar Administradores</h3>
           </div>
           <div class="box-body">
             <!-- /.box-header -->
@@ -21,10 +21,10 @@
               <thead>
                 <tr>
                   <th>Nº</th>
-                  <th>Nombre de Administrador</th>
+                  <th>Nombres y Apellidos </th>
                   <th>Email</th>
                   <th>Teléfono</th>
-                  <th>Doc. de Identidad</th>
+                  <th>Documento de Identidad</th>
                   <th>Usuario</th>
                   <th>Nivel de Usuario</th>
                   <th>Acciones</th>
@@ -86,10 +86,10 @@
               <tfoot>
                 <tr>
                   <th>Nº</th>
-                  <th>Nombre de Administrador</th>
+                  <th>Nombres y Apellidos</th>
                   <th>Email</th>
                   <th>Teléfono</th>
-                  <th>Doc. de Identidad</th>
+                  <th>Documento de Identidad</th>
                   <th>Usuario</th>
                   <th>Nivel de Usuario</th>
                   <th>Acciones</th>

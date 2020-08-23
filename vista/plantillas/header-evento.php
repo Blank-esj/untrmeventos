@@ -76,11 +76,11 @@
       <!--.contenido-header-->
       <div class="informacion-evento">
         <div class="clearfix">
-          <p class="fecha"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 11-15 May</p>
+          <p class="fecha"><i class="fas fa-calendar-alt" aria-hidden="true"></i> 27-28 Nov</p>
           <p class="ciudad"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bagua, Peru</p>
         </div>
         <h1 class="nombre-sitio">UNTRM-Eventos</h1>
-        <p class="slogan">Curso Taller: DESARROLLO DE TESIS EN <spam> INGENIERÍA</spam>
+        <p class="slogan">II CONGRESO INTERNACIONAL: RUMBO A UNA TRANSFORMACIÓN DIGITAL <spam> PROCESOS INTELIGENTES</spam>
         </p>
       </div>
       <!--.informacion-evento-->

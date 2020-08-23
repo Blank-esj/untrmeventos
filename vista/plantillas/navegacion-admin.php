@@ -85,7 +85,7 @@ $sesion = new Sesion();
           <li class="treeview">
             <a href="#">
               <i class="fa fa-certificate"></i>
-              <span>Grado de Instrucción</span>
+              <span>Grados de Instrucción</span>
             </a>
             <ul class="treeview-menu">
               <li><a href="dashboard?dashboard=lista-grado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
@@ -105,7 +105,7 @@ $sesion = new Sesion();
           <li class="treeview">
             <a href="#">
               <i class="fa fa-cubes"></i>
-              <span>Categoria</span>
+              <span>Categorías</span>
             </a>
             <ul class="treeview-menu">
               <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
