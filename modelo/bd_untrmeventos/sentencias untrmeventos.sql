@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `untrmeventos`.`admins` (
   `nivel` INT NOT NULL,
   `fecha_actualizacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idpersona`),
-  UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC) VISIBLE,
+  UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC) ,
   CONSTRAINT `fk_admins_persona1`
     FOREIGN KEY (`idpersona`)
     REFERENCES `untrmeventos`.`persona` (`idpersona`)
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `untrmeventos`.`invitado` (
   `nacimiento` DATE NULL,
   `sexo` CHAR(1) NULL,
   `fecha_actualizacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX `fk_invitado_grado_instruccion1_idx` (`idgrado_instruccion` ASC) VISIBLE,
+  INDEX `fk_invitado_grado_instruccion1_idx` (`idgrado_instruccion` ASC) ,
   PRIMARY KEY (`idpersona`),
   CONSTRAINT `fk_invitado_grado_instruccion1`
     FOREIGN KEY (`idgrado_instruccion`)
@@ -110,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `untrmeventos`.`evento` (
   `clave` VARCHAR(10) NOT NULL,
   `fecha_actualizacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_evento`),
-  INDEX `id_cat_evento` (`id_cat_evento` ASC) VISIBLE,
-  INDEX `invitado_eventofk_idx` (`id_inv` ASC) VISIBLE,
+  INDEX `id_cat_evento` (`id_cat_evento` ASC) ,
+  INDEX `invitado_eventofk_idx` (`id_inv` ASC) ,
   CONSTRAINT `evento_ibfk_1`
     FOREIGN KEY (`id_cat_evento`)
     REFERENCES `untrmeventos`.`categoria_evento` (`id_categoria`)
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `untrmeventos`.`venta` (
   `fecha_creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_actualizacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idventa`),
-  UNIQUE INDEX `idventa_UNIQUE` (`idventa` ASC) VISIBLE)
+  UNIQUE INDEX `idventa_UNIQUE` (`idventa` ASC) )
 ENGINE = InnoDB;
 
 
@@ -177,10 +177,10 @@ CREATE TABLE IF NOT EXISTS `untrmeventos`.`boleto` (
   `fecha_creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_actualizacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idboleto`, `idpersona`),
-  INDEX `fk_registro_boleto1_idx` (`idplan` ASC) VISIBLE,
-  INDEX `fk_boleto_regalo1_idx` (`idregalo` ASC) VISIBLE,
-  INDEX `fk_boleto_persona_idx` (`idpersona` ASC) VISIBLE,
-  INDEX `fk_boleto_venta1_idx` (`idventa` ASC) VISIBLE,
+  INDEX `fk_registro_boleto1_idx` (`idplan` ASC) ,
+  INDEX `fk_boleto_regalo1_idx` (`idregalo` ASC) ,
+  INDEX `fk_boleto_persona_idx` (`idpersona` ASC) ,
+  INDEX `fk_boleto_venta1_idx` (`idventa` ASC) ,
   CONSTRAINT `fk_registro_boleto1`
     FOREIGN KEY (`idplan`)
     REFERENCES `untrmeventos`.`plan` (`idplan`)
@@ -235,8 +235,8 @@ CREATE TABLE IF NOT EXISTS `untrmeventos`.`plan_beneficio` (
   `idplan_beneficio` INT NOT NULL AUTO_INCREMENT,
   `idplan` INT NOT NULL,
   `idbeneficio` INT NOT NULL,
-  INDEX `fk_table1_boleto1_idx` (`idplan` ASC) VISIBLE,
-  INDEX `fk_table1_beneficio1_idx` (`idbeneficio` ASC) VISIBLE,
+  INDEX `fk_table1_boleto1_idx` (`idplan` ASC) ,
+  INDEX `fk_table1_beneficio1_idx` (`idbeneficio` ASC) ,
   PRIMARY KEY (`idplan_beneficio`),
   CONSTRAINT `fk_table1_boleto1`
     FOREIGN KEY (`idplan`)
@@ -259,9 +259,9 @@ CREATE TABLE IF NOT EXISTS `untrmeventos`.`venta_articulo` (
   `idventa` INT NOT NULL,
   `idarticulo` INT NOT NULL,
   `cantidad` DECIMAL(14,2) NOT NULL,
-  INDEX `fk_articulo_compra_articulo1_idx` (`idarticulo` ASC) VISIBLE,
+  INDEX `fk_articulo_compra_articulo1_idx` (`idarticulo` ASC) ,
   PRIMARY KEY (`idventa_articulo`),
-  INDEX `fk_articulo_boleto_venta1_idx` (`idventa` ASC) VISIBLE,
+  INDEX `fk_articulo_boleto_venta1_idx` (`idventa` ASC) ,
   CONSTRAINT `fk_articulo_compra_articulo1`
     FOREIGN KEY (`idarticulo`)
     REFERENCES `untrmeventos`.`articulo` (`idarticulo`)

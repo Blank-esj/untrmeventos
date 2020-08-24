@@ -42,8 +42,8 @@ define("N_CANTIDAD_ARTICULO", "cantidad");
 
 // PAYPAL SANDBOX
 define("LINKAPI", "https://api.sandbox.paypal.com");
-define("CLIENTID", "Ad3BzvK8xD2dM0ZsVLJWFjKITqLEYEStaSxe3zGH7eZ8NykLhTlLzR4aaiEHApGyek7TM5pcbfw3zrJj");
-define("SECRETID", "EDXuvb80VgIBqxsh85lyNKdkxCZtqe4eKVFUPrceYuxCADBlI1CB-6oECR74Icm6aQKvO7f_sPtUoK11");
+define("CLIENTID", "");
+define("SECRETID", "");
 
 // DIRECTORIOS DE IMAGENES
 /**

@@ -92,18 +92,4 @@ class AdminsModelo
 
         return $resultado;
     }
-
-    /**public function leerTodos()
-    {
-        include_once 'controlador/util/bd_conexion_pdo.php';
-
-        $conexion = (new Conexion())->conectarPDO();
-
-        $sentencia = $conexion->query("SELECT * total FROM admins");
-
-        $sentencia = null;
-        $conexion = null;
-
-        return $sentencia;
-    }**/
 }

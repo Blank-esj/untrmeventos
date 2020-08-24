@@ -569,7 +569,7 @@ if ($verificador) {
             evaluarLogeo();
         } elseif ($_POST['dashboard'] == 'admin1-crear') {
 
-            crearAdmins(
+            crearA(
                 $_POST['nombres'],
                 $_POST['apellidopa'],
                 $_POST['apellidoma'],
@@ -577,7 +577,8 @@ if ($verificador) {
                 $_POST['telefono'],
                 $_POST['doc_identidad'],
                 $_POST['usuario'],
-                $_POST['contrasena']
+                $_POST['contrasena'],
+                1
             );
             evaluarLogeo();
         } else {
