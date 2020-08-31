@@ -1,5 +1,5 @@
 <?php
-// Contantes para la conexión a la base de datos
+// Constantes para la conexión a la base de datos
 define("SERVIDOR", "localhost");
 define("BASEDATOS", "untrmeventos");
 define("USUARIO", "root");
@@ -42,8 +42,8 @@ define("N_CANTIDAD_ARTICULO", "cantidad");
 
 // PAYPAL SANDBOX
 define("LINKAPI", "https://api.sandbox.paypal.com");
-define("CLIENTID", "");
-define("SECRETID", "");
+define("CLIENTID", "Acw6JKOkE9XtSjX3J4sqkwIjHjMCiE93-a_f5Pek11wumC8v4gnfnAu6djkG8UZ-fxHvctvKl3-8ug2B");
+define("SECRETID", "EKEen4RxNW4ZlbcBwZ_Ca_Elf_hJoQ50x6IG5RyDOzqBBY71BLXIDzwUyzto4V0902mqwpHC4-G1FAWh");
 
 // DIRECTORIOS DE IMAGENES
 /**

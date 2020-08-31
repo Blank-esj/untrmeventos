@@ -16,6 +16,7 @@
           <div class="box-header with-border">
             <h3 class="box-title">Crear Invitado</h3>
           </div>
+
           <!-- form start -->
           <!-- El tipo de codificación de datos, enctype, DEBE especificarse como sigue -->
           <form method="post" action="dashboard" enctype="multipart/form-data">
@@ -107,7 +108,7 @@
                 <label for="sexo">Sexo: </label>
                 <select id="sexo" name="sexo" class="form-control">
                   <option value="">-- Seleccione --</option>
-                  <option value=" H"> Hombre </option>
+                  <option value="H"> Hombre </option>
                   <option value="M"> Mujer </option>
                   <option value="P"> Prefiero no decirlo </option>
                 </select>

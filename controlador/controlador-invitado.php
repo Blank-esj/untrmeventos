@@ -32,13 +32,15 @@ function crear(
         }
 
         if ($modelo->crear($nombres, $apellidopa, $apellidoma, $descripcion, $imagen_url, $institucion_procedencia, $idgrado_instruccion, $email, $telefono, $doc_identidad, $nacimiento, $sexo)) {
+
             mensaje("<strong>" . $nombres . "</strong> se guardó satisfactoriamente", "success");
             return true;
         } else
             throw new PDOException("Error al crear");
     } catch (Exception $e) {
-        return false;
+
         mensaje("Lo siento hubo un error al crear el invitado: <br/>" . $e->getMessage(), "error");
+        return false;
     }
     return false;
 }

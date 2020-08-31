@@ -294,7 +294,7 @@ if ($verificador) {
                     $_POST['nombre'],
                     $_POST['precio'],
                     $_POST['stock'],
-                    $_POST['descripcion'],
+                    $_POST['descripción'],
                     $_FILES
                 );
                 include 'vista/admin/articulo/lista-articulo.php';

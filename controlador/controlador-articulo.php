@@ -59,7 +59,7 @@ function actualizar(int $id, string $nombre, float $precio, float $stock, string
                 throw new Exception("Error subir imagen");
             }
         }
-        
+
         if ($modelo->actualizar($id, $nombre, $precio, $stock, $descripción, $tengo_imagen ? $imagen_url : null) > 0) {
             mensaje("<strong>" . $nombre . "</strong> se actualizó satisfactoriamente", "success");
             return true;

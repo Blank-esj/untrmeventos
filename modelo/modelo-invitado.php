@@ -85,6 +85,7 @@ class InvitadoModelo
 
             $conn->commit(); // Guadamos los cambios
         } catch (PDOException $e) {
+            var_dump($e);
             $conn->rollBack(); // Revertimos los cambios
             $rpta = false;
         }
@@ -93,7 +94,7 @@ class InvitadoModelo
     }
 
     private function insertar(
-        \PDO $conn,
+        \PDO &$conn,
         $idpersona,
         $descripcion,
         $url_imagen,
