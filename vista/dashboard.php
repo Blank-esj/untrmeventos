@@ -3,7 +3,7 @@
 include_once 'controlador/util/Sesion.php';
 include_once 'controlador/global/config.php';
 include_once 'controlador/util/bd_conexion_pdo.php';
-include_once 'controlador/controlador-admins.php';
+include_once 'controlador/controlador-login.php';
 
 $sesion = new Sesion();
 $connPDO = (new Conexion())->conectarPDO();
@@ -308,6 +308,7 @@ if ($verificador) {
 
                 // CRUD Administrador
             case 'administrador-crear':
+                include 'controlador/controlador-admins.php';
 
                 $nombres = $_POST['nombres'];
                 $apellidopa = $_POST['apellidopa'];
@@ -339,6 +340,7 @@ if ($verificador) {
                 break;
 
             case 'administrador-editar1':
+                include 'controlador/controlador-admins.php';
 
                 $nombres = $_POST['nombres'];
                 $apellidopa = $_POST['apellidopa'];
@@ -366,7 +368,7 @@ if ($verificador) {
                 break;
 
             case 'administrador-eliminar':
-
+                include 'controlador/controlador-admins.php';
                 eliminarA(openssl_decrypt($_POST['id'], COD, KEY));
                 include 'vista/admin/administrador/lista-admin.php';
                 break;

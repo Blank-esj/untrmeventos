@@ -24,9 +24,6 @@ $(document).ready(function () {
     },
   });
 
-  //Deshabilita el botón Añadir en CREAR ADMINISTRADOR.
-  $("#crear_registro_admin").attr("disabled", true);
-
   //Código para validar la SIMILITUD de contraseñas al crear un usuario administrador.
   $("#repetir_password").on("input", function () {
     var password_nuevo = $("#password").val(); //Accede al valor del input.
@@ -75,9 +72,6 @@ $(document).ready(function () {
   $("#fecha").datepicker({
     autoclose: true,
   });
-
-  /*//Código para inicializar la libreria de select. 
-  $('.seleccionar').select2();*/
 
   // Código para inicializar Timepicker
   $(".timepicker").timepicker({

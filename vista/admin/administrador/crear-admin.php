@@ -85,7 +85,7 @@
                   <option value="0">Usuario estándar</option>
                   <option value="1">Administrador</option>
                 </select>
-                <span id="resultado_nivel_usuario" class="help-block"></span>
+                <span id="resultado_nivel_usuario" class="help-block" style="font-style: italic; font-size: 1.2rem;"></span>
               </div>
 
             </div> <!-- /.box-body -->

@@ -252,4 +252,45 @@ class AdministradorModelo
         if ($admins['nivel'] != $nivel) return false;
         return true;
     }
+
+    /**
+     * Hace una consulta a la base de datos comparando el usuario que le pases por parámetro con el usuario que haya en la base de datos
+     * y devuelve un array con los usuario; idpersona, usuario, nombre_completo, password y nivel del admin
+     */
+    public function leerDatosLoginAdmin(string $usuario)
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->prepare('SELECT idpersona, usuario, nombre_completo, password, nivel FROM v_admins WHERE usuario = :usuario;');
+        $sentencia->bindParam(':usuario', $usuario);
+
+        $sentencia->execute();
+
+        $resultado = ($sentencia->fetchAll(PDO::FETCH_ASSOC));
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
+
+    /**
+     * Devuelve el total de adminsitradores que hay en la base de datos
+     */
+    public function cuentaAdmins()
+    {
+        include_once 'controlador/util/bd_conexion_pdo.php';
+
+        $conexion = (new Conexion())->conectarPDO();
+
+        $sentencia = $conexion->query("SELECT COUNT(*) total FROM admins");
+        $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        $sentencia = null;
+        $conexion = null;
+
+        return $resultado;
+    }
 }

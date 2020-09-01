@@ -1,5 +1,4 @@
 <?php
-include_once 'controlador/util/funciones-evento.php';
 include_once 'controlador/util/bd_conexion.php';
 include_once 'controlador/util/Sesion.php';
 

@@ -41,115 +41,95 @@ $sesion = new Sesion();
         </ul>
       </li>
 
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-sitemap"></i>
-          <span>Planes</span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-plan"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-plan"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-trophy"></i>
-              <span>Beneficios</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-beneficio"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-beneficio"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-user"></i>
-          <span>Artículos</span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-articulo"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-articulo"><i class="fa fa-plus-circle"></i> Agregar </a></li>
-        </ul>
-      </li>
-
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-user-circle"></i>
-          <span>Invitados</span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-invitado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-invitado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-certificate"></i>
-              <span>Grados de Instrucción</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-grado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-grado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-book"></i>
-          <span>Eventos</span>
-        </a>
-        <ul class="treeview-menu">
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-cubes"></i>
-              <span>Categorías</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-            </ul>
-          </li>
-
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-calendar"></i>
-              <span>Temas</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-address-card"></i>
-          <span>Boletos</span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="dashboard?dashboard=lista-boleto"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-          <li><a href="dashboard?dashboard=crear-boleto"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-gift"></i>
-              <span>Regalos</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="dashboard?dashboard=lista-regalo"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
-              <li><a href="dashboard?dashboard=crear-regalo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
       <?php
       if ($sesion->leerNivelUsuario() == 1) :
       ?>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-sitemap"></i>
+            <span>Planes</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="dashboard?dashboard=lista-plan"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-plan"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-trophy"></i>
+                <span>Beneficios</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="dashboard?dashboard=lista-beneficio"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+                <li><a href="dashboard?dashboard=crear-beneficio"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Artículos</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="dashboard?dashboard=lista-articulo"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-articulo"><i class="fa fa-plus-circle"></i> Agregar </a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user-circle"></i>
+            <span>Invitados</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="dashboard?dashboard=lista-invitado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-invitado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-certificate"></i>
+                <span>Grados de Instrucción</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="dashboard?dashboard=lista-grado"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+                <li><a href="dashboard?dashboard=crear-grado"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Eventos</span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-cubes"></i>
+                <span>Categorías</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="dashboard?dashboard=lista-categoria"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+                <li><a href="dashboard?dashboard=crear-categoria"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-calendar"></i>
+                <span>Temas</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="dashboard?dashboard=lista-evento"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+                <li><a href="dashboard?dashboard=crear-evento"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i>
@@ -161,17 +141,46 @@ $sesion = new Sesion();
           </ul>
         </li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fas fa-print"></i>
-            <span>Reportes</span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="dashboard?dashboard=generar-reportes"><i class="far fa-file-pdf"></i> Generar</a></li>
-          </ul>
-        </li>
       <?php endif;
       ?>
+
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-address-card"></i>
+          <span>Boletos</span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="dashboard?dashboard=lista-boleto"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+
+          <?php
+          if ($sesion->leerNivelUsuario() == 1) :
+          ?>
+            <li><a href="dashboard?dashboard=crear-boleto"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-gift"></i>
+                <span>Regalos</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="dashboard?dashboard=lista-regalo"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
+                <li><a href="dashboard?dashboard=crear-regalo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
+              </ul>
+            </li>
+          <?php endif;
+          ?>
+
+        </ul>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
+          <i class="fas fa-print"></i>
+          <span>Reportes</span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="dashboard?dashboard=generar-reportes"><i class="far fa-file-pdf"></i> Generar</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

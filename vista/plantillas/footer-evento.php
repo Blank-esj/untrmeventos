@@ -91,16 +91,6 @@
   </div>
 </footer>
 
-
-
-
-
-
-
-
-
-
-
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>
   window.jQuery || document.write('<script src="vista/assets/js/vendor/jquery-3.4.1.min.js"><\/script>')
@@ -116,7 +106,7 @@ if ($pagina == 'invitados' || $pagina == 'home') {
   echo '<script src="vista/assets/js/jquery.waypoints.min.js"></script>';
 }
 ?>
-<script src="controlador/js/cotizador.js"></script>
+<script src="vista/assets/js/renderizar-mapa.js"></script>
 <script src="vista/assets/js/main.js"></script>
 
 <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>

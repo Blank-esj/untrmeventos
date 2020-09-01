@@ -30,7 +30,9 @@
                   <th>Email</th>
                   <th>Teléfono</th>
                   <th>Documento de Identidad</th>
-                  <th>Acciones</th>
+                  <?php if ($sesion->leerNivelUsuario() == 1) { ?>
+                    <th>Acciones</th>
+                  <?php } ?>
                 </tr>
               </thead>
               <tbody>
@@ -58,25 +60,28 @@
                       <td> <?php echo $registrado['email']; ?> </td>
                       <td> <?php echo $registrado['telefono']; ?> </td>
                       <td> <?php echo $registrado['doc_identidad']; ?> </td>
-                      <td>
+                      <?php if ($sesion->leerNivelUsuario() == 1) : ?>
+                        <td>
 
-                        <?php $id = openssl_encrypt($registrado['idboleto'], COD, KEY); ?>
+                          <?php $id = openssl_encrypt($registrado['idboleto'], COD, KEY); ?>
 
-                        <form action="dashboard" method="post" style="display: inline;">
-                          <input type="hidden" name="id" value="<?php echo $id ?>">
-                          <button type="submit" name="dashboard" value="boleto-editar0" class="btn btn-warning">
-                            <i class="fa fa-pencil-alt"></i>
-                          </button>
-                        </form>
+                          <form action="dashboard" method="post" style="display: inline;">
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
+                            <button type="submit" name="dashboard" value="boleto-editar0" class="btn btn-warning">
+                              <i class="fa fa-pencil-alt"></i>
+                            </button>
+                          </form>
 
-                        <form action="dashboard" method="post" style="display: inline;">
-                          <input type="hidden" name="id" value="<?php echo $id ?>">
-                          <button type="submit" name="dashboard" value="boleto-eliminar" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                          </button>
-                        </form>
+                          <form action="dashboard" method="post" style="display: inline;">
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
+                            <button type="submit" name="dashboard" value="boleto-eliminar" class="btn btn-danger">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </form>
 
-                      </td>
+                        </td>
+                      <?php endif; ?>
+
                     </tr>
                 <?php
                     $numero++;
@@ -95,7 +100,9 @@
                   <th>Email</th>
                   <th>Teléfono</th>
                   <th>Documento de Identidad</th>
-                  <th>Acciones</th>
+                  <?php if ($sesion->leerNivelUsuario() == 1) { ?>
+                    <th>Acciones</th>
+                  <?php } ?>
                 </tr>
               </tfoot>
             </table>
