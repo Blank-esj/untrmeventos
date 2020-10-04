@@ -1,7 +1,7 @@
 <?php
-include_once 'modelo/modelo-admins.php';
+include_once 'modelo/modelo-administrador.php';
 
-$adminsModelo = new AdminsModelo();
+$adminsModelo = new AdministradorModelo();
 
 if ((int)$adminsModelo->cuentaAdmins()[0]['total'] > 0) { ?>
 

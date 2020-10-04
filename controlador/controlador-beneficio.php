@@ -12,7 +12,7 @@ function crear($nombre)
             mensaje("<strong>" . $nombre . "</strong> se guardó satisfactoriamente", "success");
             return true;
         } else {
-            throw new Exception("No se pudo crear Beneicio");
+            throw new Exception("No se pudo crear Beneficio");
         }
     } catch (PDOException $th) {
         mensaje("Lo siento hubo un error al crear beneficio", "error");

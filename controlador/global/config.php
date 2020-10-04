@@ -33,7 +33,7 @@ define("N_APELLIDOMA_ASISTENTE", "apellidoma");
 define("N_EMAIL_ASISTENTE", "email");
 define("N_TELEFONO_ASISTENTE", "telefono");
 define("N_REGALO_ASISTENTE", "regalo");
-// Nombre del ID del regalo de un asistente a un plan
+// Nombre del ID del regalo de un asistente a un plan               
 define("N_ID_REGALO", "id");
 // Nombre del nodos de articulos
 define("N_NOMBRE_ARTICULO", "nombre");
@@ -42,8 +42,8 @@ define("N_CANTIDAD_ARTICULO", "cantidad");
 
 // PAYPAL SANDBOX
 define("LINKAPI", "https://api.sandbox.paypal.com");
-define("CLIENTID", "Acw6JKOkE9XtSjX3J4sqkwIjHjMCiE93-a_f5Pek11wumC8v4gnfnAu6djkG8UZ-fxHvctvKl3-8ug2B");
-define("SECRETID", "EKEen4RxNW4ZlbcBwZ_Ca_Elf_hJoQ50x6IG5RyDOzqBBY71BLXIDzwUyzto4V0902mqwpHC4-G1FAWh");
+define("CLIENTID", "xxxxx");
+define("SECRETID", "xxxxx");
 
 // DIRECTORIOS DE IMAGENES
 /**

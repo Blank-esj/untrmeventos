@@ -41,9 +41,7 @@ $sesion = new Sesion();
         </ul>
       </li>
 
-      <?php
-      if ($sesion->leerNivelUsuario() == 1) :
-      ?>
+      <?php if ($sesion->leerNivelUsuario() == 1) : ?>
 
         <li class="treeview">
           <a href="#">
@@ -129,20 +127,7 @@ $sesion = new Sesion();
             </li>
           </ul>
         </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>Administradores</span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="dashboard?dashboard=lista-admin"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
-            <li><a href="dashboard?dashboard=crear-admin"><i class="fa fa-plus-circle"></i> Agregar </a></li>
-          </ul>
-        </li>
-
-      <?php endif;
-      ?>
+      <?php endif; ?>
 
       <li class="treeview">
         <a href="#">
@@ -152,9 +137,7 @@ $sesion = new Sesion();
         <ul class="treeview-menu">
           <li><a href="dashboard?dashboard=lista-boleto"><i class="fa fa-list-ul" aria-hidden="true"></i> Ver Todos</a></li>
 
-          <?php
-          if ($sesion->leerNivelUsuario() == 1) :
-          ?>
+          <?php if ($sesion->leerNivelUsuario() == 1) : ?>
             <li><a href="dashboard?dashboard=crear-boleto"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a></li>
             <li class="treeview">
               <a href="#">
@@ -171,6 +154,21 @@ $sesion = new Sesion();
 
         </ul>
       </li>
+
+      <?php if ($sesion->leerNivelUsuario() == 1) : ?>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Administradores</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="dashboard?dashboard=lista-admin"><i class="fa fa-list-ul"></i> Ver Todos</a></li>
+            <li><a href="dashboard?dashboard=crear-admin"><i class="fa fa-plus-circle"></i> Agregar </a></li>
+          </ul>
+        </li>
+      <?php endif; ?>
+
+
 
       <li class="treeview">
         <a href="#">
